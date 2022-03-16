@@ -1,14 +1,30 @@
+<script src="<?php echo base_url('vendors/@popperjs/popper.min.js') ?>"></script>
+<script src="<?php echo base_url('vendors/bootstrap/bootstrap.min.js') ?>"></script>
+<script src="<?php echo base_url('vendors/is/is.min.js') ?>"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="<?php echo base_url('vendors/fontawesome/all.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/theme.js') ?>"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url('assets/img/favicons/apple-touch-icon.png') ?>">
+<link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url('assets/img/favicons/favicon-32x32.png') ?>">
+<link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets/img/favicons/favicon-16x16.png') ?>">
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('assets/img/favicons/favicon.ico') ?>">
+<link rel="manifest" href="<?php echo base_url('assets/img/favicons/manifest.json') ?>">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="<?php echo base_url('assets/css/theme.css') ?>" rel="stylesheet" />
+<meta name="msapplication-TileImage" content="<?php echo base_url('assets/img/favicons/mstile-150x150.png') ?>">
+<meta name="theme-color" content="#ffffff">
+
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-4 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
-	<div class="container"><a class="navbar-brand" href=""><img src="<?php echo base_url('assets/img/ubs.png') ?>" height="50" alt="..." /></a>
+	<div class="container"><a class="navbar-brand" href="<?php echo site_url('Master/index') ?>"><img src="<?php echo base_url('assets/img/ubs.png') ?>" height="50" alt="..." /></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
 		<div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
 			<ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-				<li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="asd">Rumah Dinas</a></li>
-				<li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#team">Gedung</a></li>
-				<li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#pricingTable">Kendaraan</a></li>
-				<li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#help">Asrama</a></li>
-				<li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#help">Fasilitas</a></li>
-				<li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#help">Admin</a></li>
+				<a class="nav-link" href="<?php echo site_url('Master/listrumah') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Rumah Dinas</li></a>
+				<a class="nav-link" href="<?php echo site_url('Master/listgedung') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Gedung</li></a>
+				<a class="nav-link" href="<?php echo site_url('Master/listkendaraan') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Kendaraan</li></a>
+				<a class="nav-link" href="<?php echo site_url('Master/listasrama') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Asrama</li></a>
+				<a class="nav-link" href="<?php echo site_url('Master/listfasilitas') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Fasilitas</li></a>
+				<a class="nav-link" href="<?php echo site_url('Master/admin') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Admin</li></a>
 			</ul>
 		</div>
 	</div>
