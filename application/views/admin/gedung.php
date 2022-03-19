@@ -47,7 +47,7 @@
 												<td><?= $listgedung[$i]->KODE_ASSET?></td>
 												<td><?= $listgedung[$i]->INFO_1?></td>
 												<td><?= $listgedung[$i]->INFO_2?></td>
-												<td><?= $listgedung[$i]->TGL_PENGADAAN?></td>
+												<td><?= date('d F Y', strtotime($listgedung[$i]->TGL_PENGADAAN))?></td>
 												<td><button class="btn btn-sm btn-dark">View</button></td>
 												<td>
 													<?php 
@@ -60,7 +60,7 @@
 													else{
 														echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
 													}
-												?>
+													?>
 												</td>
 											</tr>
 									<?php

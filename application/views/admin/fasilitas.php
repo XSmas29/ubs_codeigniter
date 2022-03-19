@@ -21,6 +21,52 @@
 						<h3 class="text-light">Database Fasilitas</h3>
 					</div>
 				</div>
+				<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3">
+						<table id="myTable" class="table table-striped table-bordered table-light">
+							<thead>
+								<tr>
+									<th>Nama Aset</th>
+									<th>Kode Aset</th>
+									<th>Lokasi</th>
+									<th>Tanggal Pengadaan</th>
+									<th>User</th>
+									<th>Departemen</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<?php 
+										for ($i=0; $i < count($listFasilitas); $i++) {
+									?>
+										<tr>
+										<td><?= $listFasilitas[$i]->NAMA_ASSET?></td>
+										<td><?= $listFasilitas[$i]->KODE_ASSET?></td>
+										<td><?= $listFasilitas[$i]->INFO_1?></td>
+										<td><?= date('d F Y', strtotime($listFasilitas[$i]->TGL_PENGADAAN)) ?></td>
+										<td><?= $listFasilitas[$i]->INFO_2?></td>
+										<td><?= $listFasilitas[$i]->INFO_3?></td>
+										<td>
+											<?php 
+											if ($listFasilitas[$i]->STATUS == 0){
+												echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+											}
+											else if ($listFasilitas[$i]->STATUS == 1){
+												echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+											}
+											else{
+												echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+											}
+											?>
+										</td>
+										</tr>
+									<?php
+										}
+									?>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 			</div>
 		</section>
 	</main>

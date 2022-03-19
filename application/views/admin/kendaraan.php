@@ -48,7 +48,7 @@
 												<td><?= $listkendaraan[$i]->KODE_ASSET?></td>
 												<td><?= $listkendaraan[$i]->INFO_1?></td>
 												<td><?= $listkendaraan[$i]->INFO_2?></td>
-												<td><?= $listkendaraan[$i]->TGL_PENGADAAN?></td>
+												<td><?= date('d F Y', strtotime($listkendaraan[$i]->TGL_PENGADAAN))?></td>
 												<td><!-- JIKA ADA YG PINJAM, AMBIL NAMA USER --></td>
 												<td><!-- JIKA ADA YG PINJAM, AMBIL DEPARTEMEN USER --></td>
 												<td>
