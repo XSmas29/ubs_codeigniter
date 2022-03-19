@@ -11,13 +11,21 @@
 <link rel="manifest" href="<?php echo base_url('assets/img/favicons/manifest.json') ?>">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&amp;display=swap" rel="stylesheet">
 <link href="<?php echo base_url('assets/css/theme.css') ?>" rel="stylesheet" />
+ 
+<!-- link datatables -->
+<script src="<?php echo base_url('assets/js/jquery-3.6.0.js') ?>"></script>
+<script src="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"></script>
+<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/r-2.2.9/datatables.min.js"></script>
+
 <meta name="msapplication-TileImage" content="<?php echo base_url('assets/img/favicons/mstile-150x150.png') ?>">
 <meta name="theme-color" content="#ffffff">
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-4 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
 	<div class="container"><a class="navbar-brand" href="<?php echo site_url('Master/index') ?>"><img src="<?php echo base_url('assets/img/ubs.png') ?>" height="50" alt="..." /></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
-		<div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+		<div class="collapse navbar-collapse border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
 			<ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
 				<a class="nav-link" href="<?php echo site_url('Master/listrumah') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Rumah Dinas</li></a>
 				<a class="nav-link" href="<?php echo site_url('Master/listgedung') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Gedung</li></a>

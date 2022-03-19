@@ -12,6 +12,7 @@ class Master extends CI_Controller
 		$this->load->library('session');
 		$this->load->helper('cookie');
 		$this->load->helper('url');
+		$this->load->model('Asset');
 	}
 
 	public function index()
@@ -21,7 +22,8 @@ class Master extends CI_Controller
 
 	public function listrumah()
 	{
-		$this->load->view('admin/rumahdinas');
+		$data['listrumah'] = $this->Asset->getRumahDinas();
+		$this->load->view('admin/rumahdinas', $data);
 	}
 	public function listgedung()
 	{
