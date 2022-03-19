@@ -8,8 +8,8 @@ class Asset extends CI_Model
 	}
 	
 	public function getRumahDinas() {
-		$query = $this->db->query("select * from asset where fk_kategori=1")->result(); 
-		return $query;
+		$query = $this->db->query("select * from asset where fk_kategori=1"); 
+		return $query->result();
 	}
 }
 ?>

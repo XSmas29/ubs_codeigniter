@@ -41,13 +41,21 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
 									<?php 
-										foreach($listrumah as $row){
-											echo $row;
+										for ($i=0; $i < count($listrumah); $i++) {
+									?>
+									    	<tr>
+											<td><?= $listrumah[$i]->NAMA_ASSET?></td>
+											<td><?= $listrumah[$i]->KODE_ASSET?></td>
+											<td><?= $listrumah[$i]->INFO_1?></td>
+											<td><?= $listrumah[$i]->TGL_PENGADAAN?></td>
+											<td><!-- JIKA ADA YG PINJAM, AMBIL NAMA USER --></td>
+											<td><!-- JIKA ADA YG PINJAM, AMBIL DEPARTEMEN USER --></td>
+											<td><?= $listrumah[$i]->STATUS?></td>
+											</tr>
+									<?php
 										}
 									?>
-								</tr>
 							</tbody>
 						</table>
 					</div>
