@@ -27,11 +27,13 @@ class Master extends CI_Controller
 	}
 	public function listgedung()
 	{
-		$this->load->view('admin/gedung');
+		$data['listgedung'] = $this->Asset->getGedung();
+		$this->load->view('admin/gedung', $data);
 	}
 	public function listkendaraan()
 	{
-		$this->load->view('admin/kendaraan');
+		$data['listkendaraan'] = $this->Asset->getKendaraan();
+		$this->load->view('admin/kendaraan', $data);
 	}
 	public function listasrama()
 	{

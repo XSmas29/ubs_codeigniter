@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
@@ -28,7 +26,7 @@
 					</div>
 				</div>
 				<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3">
-						<table id="myTable" class="table table-striped table-bordered table-light">
+						<table id="myTable" class="table table-striped table-bordered rounded text-center">
 							<thead>
 								<tr>
 									<th>Nama Aset</th>
@@ -51,7 +49,19 @@
 											<td><?= $listrumah[$i]->TGL_PENGADAAN?></td>
 											<td><!-- JIKA ADA YG PINJAM, AMBIL NAMA USER --></td>
 											<td><!-- JIKA ADA YG PINJAM, AMBIL DEPARTEMEN USER --></td>
-											<td><?= $listrumah[$i]->STATUS?></td>
+											<td>
+												<?php 
+												if ($listrumah[$i]->STATUS == 0){
+													echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+												}
+												else if ($listrumah[$i]->STATUS == 1){
+													echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+												}
+												else{
+													echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+												}
+												?>
+											</td>
 											</tr>
 									<?php
 										}
