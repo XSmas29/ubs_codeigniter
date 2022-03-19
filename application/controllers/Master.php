@@ -37,10 +37,12 @@ class Master extends CI_Controller
 	}
 	public function listasrama()
 	{
-		$this->load->view('admin/asrama');
+		$data['listAsrama'] = $this->Asset->getAsrama();
+		$this->load->view('admin/asrama', $data);
 	}
 	public function listfasilitas()
 	{
-		$this->load->view('admin/fasilitas');
+		$data['listFasilitas'] = $this->Asset->getFasilitas();
+		$this->load->view('admin/fasilitas', $data);
 	}
 }
