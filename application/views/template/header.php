@@ -19,8 +19,17 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/r-2.2.9/datatables.min.js"></script>
 
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
 <meta name="msapplication-TileImage" content="<?php echo base_url('assets/img/favicons/mstile-150x150.png') ?>">
 <meta name="theme-color" content="#ffffff">
+
+<style>
+	.modal-xl{
+		min-width: 80% !important;
+	}
+</style>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-4 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
 	<div class="container"><a class="navbar-brand" href="<?php echo site_url('Master/index') ?>"><img src="<?php echo base_url('assets/img/ubs.png') ?>" height="50" alt="..." /></a>
