@@ -45,4 +45,12 @@ class Master extends CI_Controller
 		$data['listFasilitas'] = $this->Asset->getFasilitas();
 		$this->load->view('admin/fasilitas', $data);
 	}
+	public function detailAsset()
+	{
+		$key = $this->input->post('key');
+		$data["asset"] = $this->Asset->getAssetbyKey($key);
+		$data["fasilitas"] = $this->Asset->getFasilitasofAsset($key);
+		$data["transaksi"] = $this->Asset->getTransaksiofAsset($key);
+		echo json_encode($data);
+	}
 }

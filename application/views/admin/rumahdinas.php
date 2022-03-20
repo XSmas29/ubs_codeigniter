@@ -66,7 +66,7 @@
 												}
 												?>
 											</td>
-											<td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#exampleModalToggle" role="button">View</a></td>
+											<td><a class="btn btn-primary btn-sm btn-detail" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listrumah[$i]->KODE_ASSET?>'>View</a></td>
 											</tr>
 									<?php
 										}
@@ -142,48 +142,48 @@
 						<div class="col-6">
 						<div class="card border" style="border-radius: 20px">
 						
-							<h5 class="card-header text-center fw-bold bg-dark text-light py-4" style="border-radius: 20px 20px 0 0">Rumah Dinas 6 X 20</h5>
+							<h5 class="card-header text-center fw-bold bg-dark text-light py-4" style="border-radius: 20px 20px 0 0" id="nama_asset"></h5>
 							<div class="card-body mx-3">
 								<div class="row mb-4">
 									<div class="col-4">
 										Kode Aset
-										<div class="fw-bold">01/01/2007/UBS/050</div>
+										<div class="fw-bold" id="kode_asset"></div>
 									</div>
 									<div class="col-4">
 										Jenis Aset
-										<div class="fw-bold">Tetap</div>
+										<div class="fw-bold" id="jenis_asset"></div>
 									</div>
 									<div class="col-4">
 										Kamar Tidur
-										<div class="fw-bold">4</div>
+										<div class="fw-bold" id="jumlah_kamar"></div>
 									</div>
 								</div>
 								<div class="row mb-4">
 									<div class="col-4">
 										Lokasi
-										<div class="fw-bold">Lebak Jaya no 20</div>
+										<div class="fw-bold" id="lokasi_asset"></div>
 									</div>
 									<div class="col-4">
 										Kondisi Awal
-										<div class="fw-bold">Baik</div>
+										<div class="fw-bold" id="kondisi_asset"></div>
 									</div>
 									<div class="col-4">
 										Kamar Mandi
-										<div class="fw-bold">2</div>
+										<div class="fw-bold" id="jumlah_toilet"></div>
 									</div>
 								</div>
 								<div class="row mb-4">
 									<div class="col-4">
 										Tanggal Pengadaan
-										<div class="fw-bold">15 March 2022</div>
+										<div class="fw-bold" id="tgl_pengadaan"></div>
 									</div>
 									<div class="col-4">
 										Carport
-										<div class="fw-bold">Ada</div>
+										<div class="fw-bold" id="carport"></div>
 									</div>
 									<div class="col-4">
 										Fasilitas
-										<div class="fw-bold">Pompa Air</div>
+										<div class="fw-bold" id="fasilitas"></div>
 									</div>
 								</div>
 							</div>
@@ -230,14 +230,7 @@
 								<th>Keterangan</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>3 Maret 2022</td>
-								<td>Pengadaan</td>
-								<td>SYSTEM ADMIN</td>
-								<td></td>
-							</tr>
+						<tbody id="bodyhistory">
 						</tbody>
 					</table>
 					<!-- tabel history end -->
@@ -261,11 +254,58 @@
 				responsive: true
 			} 
 		);
-		$('#tabelhistory').DataTable( 
-			{
-				responsive: false
-			} 
-		);
 		$('#carouselExampleIndicators').carousel();
-});
+
+		$('.btn-detail').click(function(){
+			
+			let kode = $(this).attr('value');
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url(); ?>"+"/Master/detailAsset",
+				data: {key: kode},
+				cache: false,
+				success: function(response){
+					let data = JSON.parse(response);
+					$("#kode_asset").text(data["asset"][0].KODE_ASSET);
+					$("#nama_asset").text(data["asset"][0].NAMA_ASSET);
+					$("#lokasi_asset").text(data["asset"][0].INFO_1);
+					$("#jenis_asset").text(data["asset"][0].INFO_2);
+					$("#kondisi_asset").text(data["asset"][0].INFO_3);
+					$("#jumlah_kamar").text(data["asset"][0].INFO_4);
+					$("#jumlah_toilet").text(data["asset"][0].INFO_5);
+					$("#carport").text(data["asset"][0].INFO_6);
+					$("#tgl_pengadaan").text(data["asset"][0].TGL_PENGADAAN);
+
+					let arrfasilitas = [];
+					for (let i = 0; i < data["fasilitas"].length; i++) {
+						arrfasilitas.push(data["fasilitas"][i].NAMA);
+					}
+					$("#fasilitas").text(arrfasilitas.join(", "));
+
+					$('#tabelhistory').DataTable().clear().destroy();
+					
+					$("#bodyhistory").html("");
+					data["transaksi"].forEach(function(item){
+						$("#bodyhistory").append(
+						"<tr>" +
+							"<td>" + item.KODE_TRANSAKSI + "</td>" +
+							"<td>" + item.TGL_TRANSAKSI + "</td>" +
+							"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
+							"<td>" + item.USER_TRANSAKSI + "</td>" +
+							"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
+						"</tr>"
+						);
+					});
+					
+					$('#tabelhistory').DataTable( 
+						{
+							responsive: false
+						} 
+					);
+				}, error: function(){
+					console.log("Error when loading asset!")
+				}
+			});
+		});
+	});
 </script>
