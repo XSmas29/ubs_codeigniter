@@ -35,6 +35,7 @@
 									<th>Kapasitas</th>
 									<th>Penghuni</th>
 									<th>Status</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -60,6 +61,8 @@
 											}
 											?>
 										</td>
+										<td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#exampleModalToggle" role="button">View</a></td>
+											</tr>
 										</tr>
 									<?php
 										}
@@ -70,6 +73,151 @@
 			</div>
 		</section>
 	</main>
+	<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-header py-0 mb-4 border-bottom-0">
+					<div class="row text-center w-100">
+						<div class="col-6 py-3 border-bottom border-2 border-dark">
+							<a class="text-dark fw-bold" style="text-decoration: none" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								Details
+							</a>
+						</div>
+						<div class="col-6 py-3">
+							<a class="text-dark" style="text-decoration: none" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								History
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
+				
+					<div class="row">
+						<div class="col-6">
+							<div class="card border" style="border-radius: 20px">
+								<h5 class="text-center mt-3">Daftar Penghuni</h5>
+								<div class="card-body mx-3">
+									<table id="" class="table text-center">
+										<thead>
+											<tr>
+												<th class="bg-dark text-white">NIK</th>
+												<th class="bg-dark text-white">NAMA</th>
+												<th class="bg-dark text-white">DEPARTEMEN</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>003540</td>
+												<td>Sun</td>
+												<td>FC</td>
+											</tr>
+											<tr>
+												<td>015890</td>
+												<td>Emi</td>
+												<td>Hollow</td>
+											</tr>
+											<!-- FOREACH -->
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-6">
+							<div class="card border" style="border-radius: 20px">
+								<h5 class="text-center mt-3">Fasilitas</h5>
+								<div class="card-body mx-3">
+									<table id="" class="table text-center">
+										<thead>
+											<tr>
+												<th class="bg-dark text-white">NAMA BARANG</th>
+												<th class="bg-dark text-white">JUMLAH</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Lemari</td>
+												<td>3</td>
+											</tr>
+											<tr>
+												<td>Kasur</td>
+												<td>6</td>
+											</tr>
+											<tr>
+												<td>Meja Kayu</td>
+												<td>2</td>
+											</tr>
+											<!-- FOREACH -->
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-header py-0 mb-4 border-bottom-0">
+					<div class="row text-center w-100">
+						<div class="col-6 py-3">
+							<a class="text-dark" style="text-decoration: none" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								Details
+							</a>
+						</div>
+						<div class="col-6 py-3 border-bottom border-2 border-dark">
+							<a class="text-dark fw-bold" style="text-decoration: none" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								History
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
+
+					<!-- tabel history start-->
+					<table id="tabelhistory" class="table table-striped table-bordered rounded text-center">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Tanggal</th>
+								<th>Kegiatan</th>
+								<th>User</th>
+								<th>Keterangan</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>3 Maret 2022</td>
+								<td>Pengadaan</td>
+								<td>SYSTEM ADMIN</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- tabel history end -->
+					
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
