@@ -27,11 +27,7 @@
 						<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5">
 							<div class="row">
 								<div class="col-2">
-									<div class="mb-2">Rumah Dinas</div>
-									<div class="mb-2">Gedung UBS</div>
-									<div class="mb-2">Kendaraan</div>
-									<div class="mb-2">Asrama UBS</div>
-									<div class="mb-2">Fasilitas</div>
+									<?php require_once(APPPATH . 'views\template\navbar.php') ?>
 								</div>
 								<div class="col-10">
 									
