@@ -37,12 +37,17 @@ class Asset extends CI_Model
 		return $query->result();
 	}
 
-	public function getFasilitasofAsset($key) {
+	public function getFasilitasAsset($key) {
 		$query = $this->db->query("select * from fasilitas where fk_asset='$key'"); 
 		return $query->result();
 	}
-	public function getTransaksiofAsset($key) {
+	public function getTransaksiAsset($key) {
 		$query = $this->db->query("select * from transaksi where fk_asset='$key'"); 
+		return $query->result();
+	}
+
+	public function getImageAsset($key) {
+		$query = $this->db->query("select * from gambar where fk_asset='$key'"); 
 		return $query->result();
 	}
 }

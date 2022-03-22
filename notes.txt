@@ -1,0 +1,3 @@
+permasalahan :
+1. Search datatable di bagian gedung
+2. tabel responsive masih error

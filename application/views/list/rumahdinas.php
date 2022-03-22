@@ -107,22 +107,22 @@
 							<div class="card border" style="border-radius: 20px">
 								<div class="card-body">
 									<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-										<div class="carousel-indicators">
-											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+										<div class="carousel-indicators" id="indicator">
+											<!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
 											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
 										</div>
 										
-										<div class="carousel-inner">
-											<div class="carousel-item active">
-												<img src="<?php echo base_url(); ?>assets/img/gallery/hero.png" class="d-block w-100" alt="...">
+										<div class="carousel-inner" id="listgambar">
+											<!-- <div class="carousel-item active">
+												<img src="assets/img/gallery/hero.png" class="d-block w-100" alt="...">
 											</div>
 											<div class="carousel-item">
-												<img src="<?php echo base_url(); ?>assets/img/gallery/hero.png" class="d-block w-100" alt="...">
+												<img src="assets/img/gallery/hero.png" class="d-block w-100" alt="...">
 											</div>
 											<div class="carousel-item">
-												<img src="<?php echo base_url(); ?>assets/img/gallery/hero.png" class="d-block w-100" alt="...">
-											</div>
+												<img src="assets/img/gallery/hero.png" class="d-block w-100" alt="...">
+											</div> -->
 										</div>
 										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -296,6 +296,35 @@
 						"</tr>"
 						);
 					});
+				
+					$("#listgambar").html("");
+					$("#indicator").html("");
+					if (data["gambar"].length > 0){
+						let i = 0;
+
+						data["gambar"].forEach(function(item){
+							$("#listgambar").append(
+								'<div class="carousel-item">' +
+									'<img src="<?php echo base_url(); ?>assets/img/asset/' + item.KODE_GAMBAR + '" class="d-block w-100" alt="...">' +
+								'</div>'
+							);
+							$("#indicator").append(
+								'<button type="button" class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" aria-current="true" aria-label="Slide ' + i + '"></button>'
+							);
+
+							i += 1;
+						});
+						$('#listgambar div:first-child').addClass('active');
+						$('#indicator button:first-child').addClass('active');
+					}
+					else{
+						console.log("asd");
+						$("#listgambar").append(
+							'<div class="carousel-item active">' +
+								'<img src="<?php echo base_url(); ?>assets/img/placeholder.jpg" class="d-block w-100" alt="...">' +
+							'</div>'
+						);
+					}
 					
 					$('#tabelhistory').DataTable( 
 						{
