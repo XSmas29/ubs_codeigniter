@@ -41,7 +41,7 @@
 				<a class="nav-link" href="<?php echo site_url('Master/listkendaraan') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Kendaraan</li></a>
 				<a class="nav-link" href="<?php echo site_url('Master/listasrama') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Asrama</li></a>
 				<a class="nav-link" href="<?php echo site_url('Master/listfasilitas') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Fasilitas</li></a>
-				<a class="nav-link" href="<?php echo site_url('Master/admin') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Admin</li></a>
+				<a class="nav-link" href="<?php echo site_url('Master/master') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Admin</li></a>
 			</ul>
 		</div>
 	</div>

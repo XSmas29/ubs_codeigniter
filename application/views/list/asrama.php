@@ -62,8 +62,7 @@
 											?>
 										</td>
 										<td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#exampleModalToggle" role="button">View</a></td>
-											</tr>
-										</tr>
+									</tr>
 									<?php
 										}
 									?>

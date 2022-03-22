@@ -54,4 +54,28 @@ class Master extends CI_Controller
 		$data["gambar"] = $this->Asset->getImageAsset($key);
 		echo json_encode($data);
 	}
+
+	public function master(){
+		$this->load->view('master/home');
+	}
+
+	public function masterRumah(){
+		$this->load->view('master/rumahdinas');
+	}
+	
+	public function masterGedung(){
+		$this->load->view('master/gedung');
+	}
+
+	public function masterKendaraan(){
+		$this->load->view('master/kendaraan');
+	}
+
+	public function masterAsrama(){
+		$this->load->view('master/asrama');
+	}
+
+	public function masterFasilitas(){
+		$this->load->view('master/fasilitas');
+	}
 }
