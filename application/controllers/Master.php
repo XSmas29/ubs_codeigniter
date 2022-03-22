@@ -61,22 +61,27 @@ class Master extends CI_Controller
 	}
 
 	public function masterRumah(){
-		$this->load->view('master/rumahdinas');
+		$data['listrumah'] = $this->Asset->getRumahDinas();
+		$this->load->view('master/rumahdinas', $data);
 	}
 	
 	public function masterGedung(){
-		$this->load->view('master/gedung');
+		$data['listgedung'] = $this->Asset->getGedung();
+		$this->load->view('master/gedung',$data);
 	}
 
 	public function masterKendaraan(){
-		$this->load->view('master/kendaraan');
+		$data['listkendaraan'] = $this->Asset->getKendaraan();
+		$this->load->view('master/kendaraan', $data);
 	}
 
 	public function masterAsrama(){
-		$this->load->view('master/asrama');
+		$data['listAsrama'] = $this->Asset->getAsrama();
+		$this->load->view('master/asrama', $data);
 	}
 
 	public function masterFasilitas(){
-		$this->load->view('master/fasilitas');
+		$data['listFasilitas'] = $this->Asset->getFasilitas();
+		$this->load->view('master/fasilitas', $data);
 	}
 }

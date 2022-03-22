@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Master | Home</title>
+	<title>Master | Kendaraan</title>
 </head>
 
 <body>
@@ -20,9 +20,8 @@
 			</div>
 
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-1"></div>
-					<div class="col-10">
+				<div class="row mx-5">
+					<div class="col-12">
 						<h3 class="text-light">Master Data</h3>
 						<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5">
 							<div class="row">
@@ -30,17 +29,66 @@
 									<?php require_once(APPPATH . 'views\template\navbar.php') ?>
 								</div>
 								<div class="col-10">
-									
+									<div class="row align-items-start">
+										<div>
+											<h3 class="text-dark">Kendaraan</h3>
+										</div>
+									</div>
+
+									<div class="d-flex justify-content-end">
+										<button	utton type="button" class="btn btn-sm btn-primary my-2">+ NEW ASSET</button>
+									</div>
+									<table id="myTable" class="table table-striped table-bordered rounded text-center">
+										<thead>
+											<tr>
+												<th>Nama Aset</th>
+												<th>Kode Aset</th>
+												<th>No Pol</th>
+												<th>Kategori</th>
+												<th>Date</th>
+												<th>Status</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+												<?php 
+													for ($i=0; $i < count($listkendaraan); $i++) {
+												?>
+														<tr>
+															<td><?= $listkendaraan[$i]->NAMA_ASSET?></td>
+															<td><?= $listkendaraan[$i]->KODE_ASSET?></td>
+															<td><?= $listkendaraan[$i]->INFO_1?></td>
+															<td><?= $listkendaraan[$i]->INFO_2?></td>
+															<td><?= date('d F Y', strtotime($listkendaraan[$i]->TGL_PENGADAAN))?></td>
+															<td>
+																<?php 
+																if ($listkendaraan[$i]->STATUS == 0){
+																	echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+																}
+																else if ($listkendaraan[$i]->STATUS == 1){
+																	echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+																}
+																else{
+																	echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+																}
+															?>
+															</td>
+														<td>
+															<button type="button" class="btn btn-sm btn-info">EDIT</button>
+															<button type="button" class="btn btn-sm btn-secondary">FIX</button>
+															<button type="button" class="btn btn-sm btn-danger">DELETE</button>
+														</td>
+														</tr>
+												<?php
+													}
+												?>
+										</tbody>
+									</table>
 								</div>
 							</div>
-							
 						</div>
-						
 					</div>
-						
-					<div class="col-1"></div>
 				</div>
-				
 			</div>
 		</section>
 	</main>
@@ -48,4 +96,12 @@
 
 </html>
 <script type="text/javascript">
+	$(document).ready( function () 
+	{
+		$('#myTable').DataTable( 
+			{
+				responsive: true
+			} 
+		);
+	});
 </script>
