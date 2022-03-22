@@ -50,5 +50,10 @@ class Asset extends CI_Model
 		$query = $this->db->query("select * from gambar where fk_asset='$key'"); 
 		return $query->result();
 	}
+
+	public function getUserAsset($key) {
+		$query = $this->db->query("select * from user where fk_asset='$key'"); 
+		return $query->result();
+	}
 }
 ?>

@@ -61,7 +61,7 @@
 											}
 											?>
 										</td>
-										<td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#exampleModalToggle" role="button">View</a></td>
+										<td><a class="btn btn-primary btn-sm btn-detail" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listAsrama[$i]->KODE_ASSET?>'>View</a></td>
 									</tr>
 									<?php
 										}
@@ -99,7 +99,7 @@
 							<div class="card border" style="border-radius: 20px">
 								<h5 class="text-center mt-3">Daftar Penghuni</h5>
 								<div class="card-body mx-3">
-									<table id="" class="table text-center">
+									<table id="tabeluser" class="table text-center">
 										<thead>
 											<tr>
 												<th class="bg-dark text-white">NIK</th>
@@ -107,18 +107,8 @@
 												<th class="bg-dark text-white">DEPARTEMEN</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>003540</td>
-												<td>Sun</td>
-												<td>FC</td>
-											</tr>
-											<tr>
-												<td>015890</td>
-												<td>Emi</td>
-												<td>Hollow</td>
-											</tr>
-											<!-- FOREACH -->
+										<tbody id="bodyuser">
+											
 										</tbody>
 									</table>
 								</div>
@@ -130,27 +120,14 @@
 							<div class="card border" style="border-radius: 20px">
 								<h5 class="text-center mt-3">Fasilitas</h5>
 								<div class="card-body mx-3">
-									<table id="" class="table text-center">
+									<table id="tabelfasilitas" class="table text-center">
 										<thead>
 											<tr>
 												<th class="bg-dark text-white">NAMA BARANG</th>
 												<th class="bg-dark text-white">JUMLAH</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>Lemari</td>
-												<td>3</td>
-											</tr>
-											<tr>
-												<td>Kasur</td>
-												<td>6</td>
-											</tr>
-											<tr>
-												<td>Meja Kayu</td>
-												<td>2</td>
-											</tr>
-											<!-- FOREACH -->
+										<tbody id="bodyfasilitas">
 										</tbody>
 									</table>
 								</div>
@@ -198,14 +175,7 @@
 								<th>Keterangan</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>3 Maret 2022</td>
-								<td>Pengadaan</td>
-								<td>SYSTEM ADMIN</td>
-								<td></td>
-							</tr>
+						<tbody id='bodyhistory'>
 						</tbody>
 					</table>
 					<!-- tabel history end -->
@@ -224,4 +194,94 @@
 	$(document).ready( function () {
 		$('#myTable').DataTable();
 	} );
+
+	$('.btn-detail').click(function(){
+			
+			let kode = $(this).attr('value');
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url(); ?>"+"/Master/detailAsset",
+				data: {key: kode},
+				cache: false,
+				success: function(response){
+					let data = JSON.parse(response);
+					console.log(data);
+
+					$("#bodyfasilitas").html("");
+					data["fasilitas"].forEach(function(item){
+						$("#bodyfasilitas").append(
+						"<tr>" +
+							"<td>" + item.NAMA + "</td>" +
+							"<td>" + item.JUMLAH + "</td>" +
+						"</tr>"
+						);
+					});
+
+					$("#bodyuser").html("");
+					data["user"].forEach(function(item){
+						$("#bodyuser").append(
+						"<tr>" +
+							"<td>" + item.NIK + "</td>" +
+							"<td>" + item.NAMA + "</td>" +
+							"<td>" + item.DEPARTEMEN + "</td>" +
+						"</tr>"
+						);
+					});
+
+					$('#tabelhistory').DataTable().clear().destroy();
+					
+					$("#bodyhistory").html("");
+					let ctr = 1;
+					data["transaksi"].forEach(function(item){
+						$("#bodyhistory").append(
+						"<tr>" +
+							"<td>" + ctr + "</td>" +
+							"<td>" + item.TGL_TRANSAKSI + "</td>" +
+							"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
+							"<td>" + item.USER_TRANSAKSI + "</td>" +
+							"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
+						"</tr>"
+						);
+						ctr += 1;
+					});
+				
+					$("#listgambar").html("");
+					$("#indicator").html("");
+					if (data["gambar"].length > 0){
+						let i = 0;
+
+						data["gambar"].forEach(function(item){
+							$("#listgambar").append(
+								'<div class="carousel-item">' +
+									'<img src="<?php echo base_url(); ?>assets/img/asset/' + item.KODE_GAMBAR + '" class="d-block w-100" alt="...">' +
+								'</div>'
+							);
+							$("#indicator").append(
+								'<button type="button" class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" aria-current="true" aria-label="Slide ' + i + '"></button>'
+							);
+
+							i += 1;
+						});
+						$('#listgambar div:first-child').addClass('active');
+						$('#indicator button:first-child').addClass('active');
+					}
+					else{
+						console.log("asd");
+						$("#listgambar").append(
+							'<div class="carousel-item active">' +
+								'<img src="<?php echo base_url(); ?>assets/img/placeholder.jpg" class="d-block w-100" alt="...">' +
+							'</div>'
+						);
+					}
+					
+					$('#tabelhistory').DataTable( 
+						{
+							responsive: false
+						} 
+					);
+				}, error: function(){
+					console.log("Error when loading asset!")
+				}
+			});
+		});
 </script>

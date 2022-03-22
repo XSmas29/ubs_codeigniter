@@ -285,16 +285,18 @@
 					$('#tabelhistory').DataTable().clear().destroy();
 					
 					$("#bodyhistory").html("");
+					let ctr = 1;
 					data["transaksi"].forEach(function(item){
 						$("#bodyhistory").append(
 						"<tr>" +
-							"<td>" + item.KODE_TRANSAKSI + "</td>" +
+							"<td>" + ctr + "</td>" +
 							"<td>" + item.TGL_TRANSAKSI + "</td>" +
 							"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
 							"<td>" + item.USER_TRANSAKSI + "</td>" +
 							"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
 						"</tr>"
 						);
+						ctr += 1;
 					});
 				
 					$("#listgambar").html("");

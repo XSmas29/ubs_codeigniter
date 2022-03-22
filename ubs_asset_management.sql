@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 12:41 PM
+-- Generation Time: Mar 22, 2022 at 03:55 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -81,7 +81,8 @@ CREATE TABLE `fasilitas` (
 --
 
 INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
-(1, '19/03/2022/R/UBS/001', 'pompa air', 1);
+(1, '19/03/2022/R/UBS/001', 'pompa air', 1),
+(2, '01/03/2022/A/UBS/001/1/15', 'Ranjang Susun', 3);
 
 -- --------------------------------------------------------
 
@@ -92,9 +93,17 @@ INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
 DROP TABLE IF EXISTS `gambar`;
 CREATE TABLE `gambar` (
   `KODE_GAMBAR` varchar(50) NOT NULL,
-  `FK_ASSET` varchar(50) NOT NULL,
-  `GAMBAR` varchar(100) NOT NULL
+  `FK_ASSET` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gambar`
+--
+
+INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
+('19032022RUBS001_1.jpg', '19/03/2022/R/UBS/001'),
+('19032022RUBS001_2.jpg', '19/03/2022/R/UBS/001'),
+('19032022RUBS001_3.jpg', '19/03/2022/R/UBS/001');
 
 -- --------------------------------------------------------
 
@@ -152,7 +161,9 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TRANSAKSI`, `AKTIVITAS_TRANSAKSI`, `KETERANGAN_TRANSAKSI`) VALUES
-(1, '19/03/2022/R/UBS/001', '2022-03-03', 'SYSTEM ADMIN', 'pengadaan', '');
+(1, '19/03/2022/R/UBS/001', '2022-03-03', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan rumah dinas 001'),
+(4, '6640/IMB/e/2021', '2022-02-16', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan gedung A lt. 1'),
+(5, '01/03/2022/A/UBS/001/1/15', '2022-03-08', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan asrama glory lama lantai 1 nomor 15');
 
 -- --------------------------------------------------------
 
@@ -167,6 +178,14 @@ CREATE TABLE `user` (
   `NAMA` varchar(50) NOT NULL,
   `DEPARTEMEN` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`NIK`, `FK_ASSET`, `NAMA`, `DEPARTEMEN`) VALUES
+('000001', '01/03/2022/A/UBS/001/1/15', 'Surya Bumantara', 'FC'),
+('000002', '01/03/2022/A/UBS/001/1/15', 'Edsel Hans Wijaya', 'Hollow');
 
 --
 -- Indexes for dumped tables
@@ -222,7 +241,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
-  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -234,7 +253,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `KODE_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `KODE_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -30,7 +30,9 @@
 									<?php require_once(APPPATH . 'views\template\navbar.php') ?>
 								</div>
 								<div class="col-10">
-									
+									<h2 class="d-flex justify-content-center align-self-center">
+										Welcome, Admin
+									</h2>
 								</div>
 							</div>
 							
