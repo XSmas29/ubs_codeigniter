@@ -14,6 +14,7 @@
 		
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/>
+		<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
 		<section id="home">
 			<div class="bg-holder" style="background-image:url(<?php echo base_url(); ?>assets/img/gallery/hero.png);background-position:center;background-size:cover;">
@@ -48,7 +49,7 @@
 												<td><?= $listgedung[$i]->INFO_1?></td>
 												<td><?= $listgedung[$i]->INFO_2?></td>
 												<td><?= date('d F Y', strtotime($listgedung[$i]->TGL_PENGADAAN))?></td>
-												<td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#exampleModalToggle" role="button">View</a></td>
+												<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listgedung[$i]->KODE_ASSET?>'>View</a></td>
 												<td>
 													<?php 
 													if ($listgedung[$i]->STATUS == 0){
@@ -82,9 +83,9 @@
 				<div class="modal-header py-0 mb-4 border-bottom-0">
 					<div class="row text-center w-100">
 						<div class="py-3 border-bottom border-2 border-dark">
-							<a class="text-dark" style="text-decoration: none" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">
+							<div class="text-dark" style="text-decoration: none">
 								<b>History</b>
-							</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -101,14 +102,8 @@
 									<th>Keterangan</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>21 Februari 2022</td>
-									<td>Pengadaan</td>
-									<td>SYSTEM ADMIN</td>
-									<td></td>
-								</tr>
+							<tbody id="bodyhistory">
+
 							</tbody>
 						</table>
 					</div>
@@ -130,6 +125,44 @@
 				responsive:true
 			}
 		);
-
 	} );
+
+	$('.btn-history').click(function(){
+			
+		let kode = $(this).attr('value');
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/detailAsset",
+			data: {key: kode},
+			cache: false,
+			success: function(response){
+				let data = JSON.parse(response);
+
+				$('#tabelhistory').DataTable().clear().destroy();
+				$("#bodyhistory").html("");
+
+				let ctr = 1;
+				data["transaksi"].forEach(function(item){
+					$("#bodyhistory").append(
+					"<tr>" +
+						"<td>" + ctr + "</td>" +
+						"<td>" + item.TGL_TRANSAKSI + "</td>" +
+						"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
+						"<td>" + item.USER_TRANSAKSI + "</td>" +
+						"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
+					"</tr>"
+					);
+					ctr += 1;
+				});
+
+				$('#tabelhistory').DataTable( 
+					{
+						responsive: false
+					} 
+				);
+			}, error: function(){
+				console.log("Error when loading asset!")
+			}
+		});
+	});
 </script>

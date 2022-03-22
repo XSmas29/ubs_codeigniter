@@ -52,6 +52,7 @@ class Master extends CI_Controller
 		$data["fasilitas"] = $this->Asset->getFasilitasAsset($key);
 		$data["transaksi"] = $this->Asset->getTransaksiAsset($key);
 		$data["gambar"] = $this->Asset->getImageAsset($key);
+		$data["user"] = $this->Asset->getUserAsset($key);
 		echo json_encode($data);
 	}
 
