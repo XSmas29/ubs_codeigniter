@@ -48,7 +48,7 @@
 												<td><?= $listgedung[$i]->INFO_1?></td>
 												<td><?= $listgedung[$i]->INFO_2?></td>
 												<td><?= date('d F Y', strtotime($listgedung[$i]->TGL_PENGADAAN))?></td>
-												<td><button class="btn btn-sm btn-dark">View</button></td>
+												<td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#exampleModalToggle" role="button">View</a></td>
 												<td>
 													<?php 
 													if ($listgedung[$i]->STATUS == 0){
@@ -73,12 +73,63 @@
 			
 		</section>
 	</main>
+	<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-header py-0 mb-4 border-bottom-0">
+					<div class="row text-center w-100">
+						<div class="py-3 border-bottom border-2 border-dark">
+							<a class="text-dark" style="text-decoration: none" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">
+								<b>History</b>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
+				
+					<div class="row">
+						<table id="tabelhistory" class="table table-striped table-bordered rounded text-center">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Tanggal</th>
+									<th>Kegiatan</th>
+									<th>User</th>
+									<th>Keterangan</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>21 Februari 2022</td>
+									<td>Pengadaan</td>
+									<td>SYSTEM ADMIN</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
 
 <script type="text/javascript">
 	$(document).ready( function () {
-		$('#myTable').DataTable();
+		$('#myTable').DataTable(
+			{
+				responsive:true
+			}
+		);
+
 	} );
 </script>
