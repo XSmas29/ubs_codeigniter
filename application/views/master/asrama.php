@@ -20,11 +20,11 @@
 			</div>
 
 			<div class="container-fluid">
-				<div class="row">
+				<div class="row mx-5">
 					<div class="col-12">
 						<h3 class="text-light">Master Data</h3>
 						<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5">
-							<div class="row mx-5">
+							<div class="row">
 								<div class="col-2">
 									<?php require_once(APPPATH . 'views\template\navbar.php') ?>
 								</div>
