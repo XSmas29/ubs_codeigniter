@@ -71,9 +71,15 @@
 														?>
 													</td>
 													<td>
-														<button type="button" class="btn btn-sm btn-info">EDIT</button>
-														<button type="button" class="btn btn-sm btn-secondary">FIX</button>
-														<button type="button" class="btn btn-sm btn-danger">DELETE</button>
+														<button type="button" class="btn btn-sm btn-info">
+															<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
+														</button>
+														<button type="button" class="btn btn-sm btn-secondary">
+															<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
+														</button>
+														<button type="button" class="btn btn-sm btn-danger">
+															<img src="<?php echo base_url(); ?>assets/img/icons/delete.png" width="16" height="16">
+														</button>
 													</td>
 													</tr>
 												<?php

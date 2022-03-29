@@ -36,6 +36,7 @@
 									<th>Tanggal Pengadaan</th>
 									<th>User</th>
 									<th>Departemen</th>
+									<th>History</th>
 									<th>Status</th>
 								</tr>
 							</thead>
@@ -51,6 +52,7 @@
 												<td><?= date('d F Y', strtotime($listkendaraan[$i]->TGL_PENGADAAN))?></td>
 												<td><!-- JIKA ADA YG PINJAM, AMBIL NAMA USER --></td>
 												<td><!-- JIKA ADA YG PINJAM, AMBIL DEPARTEMEN USER --></td>
+												<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listkendaraan[$i]->KODE_ASSET?>'>View</a></td>
 												<td>
 													<?php 
 													if ($listkendaraan[$i]->STATUS == 0){
@@ -75,6 +77,47 @@
 			
 		</section>
 	</main>
+
+	<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-header py-0 mb-4 border-bottom-0">
+					<div class="row text-center w-100">
+						<div class="py-3 border-bottom border-2 border-dark">
+							<div class="text-dark" style="text-decoration: none">
+								<b>History</b>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
+				
+					<div class="row">
+						<table id="tabelhistory" class="table table-striped table-bordered rounded text-center">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Tanggal</th>
+									<th>Kegiatan</th>
+									<th>User</th>
+									<th>Keterangan</th>
+								</tr>
+							</thead>
+							<tbody id="bodyhistory">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
@@ -83,4 +126,42 @@
 	$(document).ready( function () {
 		$('#myTable').DataTable();
 	} );
+
+	$('.btn-history').click(function(){
+		let kode = $(this).attr('value');
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/detailAsset",
+			data: {key: kode},
+			cache: false,
+			success: function(response){
+				let data = JSON.parse(response);
+
+				$('#tabelhistory').DataTable().clear().destroy();
+				$("#bodyhistory").html("");
+
+				let ctr = 1;
+				data["transaksi"].forEach(function(item){
+					$("#bodyhistory").append(
+					"<tr>" +
+						"<td>" + ctr + "</td>" +
+						"<td>" + item.TGL_TRANSAKSI + "</td>" +
+						"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
+						"<td>" + item.USER_TRANSAKSI + "</td>" +
+						"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
+					"</tr>"
+					);
+					ctr += 1;
+				});
+
+				$('#tabelhistory').DataTable( 
+					{
+						responsive: false
+					} 
+				);
+			}, error: function(){
+				console.log("Error when loading asset!")
+			}
+		});
+	});
 </script>
