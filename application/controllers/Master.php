@@ -97,7 +97,7 @@ class Master extends CI_Controller
 
 	public function addRumah(){
 		$this->form_validation->set_rules('nama', 'Nama Aset', 'required');
-		$this->form_validation->set_rules('kode', 'Kode Aset', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode Aset', 'required');
 		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
 		$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
 		$this->form_validation->set_rules('jenis', 'Jenis Aset', 'required');
@@ -105,9 +105,10 @@ class Master extends CI_Controller
 		$this->form_validation->set_rules('kamar', 'Kamar Tidur', 'required');
 		$this->form_validation->set_rules('toilet', 'Kamar Mandi', 'required');
 		$this->form_validation->set_rules('carport', 'Carport', 'required');
+		// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
 
 		$data['nama'] = $this->input->post('nama');
-		$data['kode'] = $this->input->post('kode');
+		$data['kode'] = $this->input->post('kodeaset');
 		$data['lokasi'] = $this->input->post('lokasi');
 		$data['tanggal'] = $this->input->post('tanggal');
 		$data['jenis'] = $this->input->post('jenis');
@@ -115,17 +116,26 @@ class Master extends CI_Controller
 		$data['kamar'] = $this->input->post('kamar');
 		$data['toilet'] = $this->input->post('toilet');
 		$data['carport'] = $this->input->post('carport');
-		$data['namafasilitas'] = $this->input->post('namafasilitas');
-		$data['jumlahfasilitas'] = $this->input->post('jumlahfasilitas');
+		$data['namafasilitas'] = explode(",",$this->input->post('namafasilitas'));
+		$data['jumlahfasilitas'] = explode(",",$this->input->post('jumlahfasilitas'));
+		$data['gambar'] = $this->input->post('gambar');
 
+		// if (isset($_FILES["files"])) {
+		// 	print_r($_FILES["files"]);
+		// }
 		
+		//print_r('-'.$data['jumlahfasilitas'][0].'-');
+
 		if ($this->form_validation->run() == FALSE)
 		{	
-			echo validation_errors();
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
 		}
 		else
 		{
-			$response["message"] = $this->Asset->addRumah($data);
+			$key = $data["kode"];
+			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
+			$response["message"] = $this->Asset->addRumah($data, $ctr);
 			echo json_encode($response);
 		}
 	}

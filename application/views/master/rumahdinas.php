@@ -96,6 +96,16 @@
 		min-width: 100px;
 		border-radius: 12px;
 		border: 3px solid black;
+		cursor: pointer;
+	}
+
+	.form-error{
+		margin-left: 10px;
+		background: #FF4859;
+		border-radius: 12px;
+		color: white;
+		transition: 0.4s;
+		opacity: 0;
 	}
 
 	.file-upload-wrapper:hover{
@@ -145,7 +155,7 @@
 		position: absolute;
 		top: 0;
 		display: block;
-		transition: 0.2s;;
+		transition: 0.4s;
 		color: black;
 	}
 
@@ -159,9 +169,8 @@
 		position: absolute;
 		top: 0;
 		display: block;
-		transition: 0.2s;
+		transition: 0.4s;
 		color: black;
-		font-size: 17px;
 	}
 
 	/* reset input */
@@ -271,54 +280,57 @@
 					<div class="row text-center">
 						<div class="col-4">
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="nama" id="nama" placeholder="Nama Aset"  />
-								<label class="form__label">Nama Aset</label>
+								<input type="text" class="form__field" name="nama" id="nama" placeholder="Nama Aset"/>
+								<label class="form__label">Nama Aset<small class="form-error" id="error-nama"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="text" id="kodeaset" class="form__field" name="kode" id="kode" placeholder="Kode Aset"  disabled/>
-								<label class="form__label">Kode Aset</label>
+								<input type="text" id="kodeaset" class="form__field" name="kode" id="kode" placeholder="Kode Aset" disabled/>
+								<label class="form__label">Kode Aset<small class="form-error" id="error-kode"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="lokasi" id="lokasi" placeholder="Lokasi" />
-								<label class="form__label">Lokasi</label>
+								
+								<input type="text" class="form__field" name="lokasi" id="lokasi" placeholder="Lokasi"/>
+								<label class="form__label">Lokasi<small class="form-error" id="error-lokasi"></small></label>
 							</div>
 							<div class="form__group field mb-5">
 								<input type="date" class="form__field" name="tanggal" id="tanggal" placeholder="Tanggal Pengadaan"  disabled/>
-								<label class="form__label">Tanggal Pengadaan</label>
+								<label class="form__label">Tanggal Pengadaan<small class="form-error" id="error-tanggal"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<select class="form__field" name="jenis" id="jenis" placeholder="Jenis Aset" >
+								<select class="form__field" name="jenis" id="jenis" placeholder="Jenis Aset">
 									<option value="" selected></option>
 									<option value="tetap">Tetap</option>
 									<option value="bergerak">Bergerak</option>
 								</select>
-								<label class="form__label">Jenis Aset</label>
+								<label class="form__label">Jenis Aset<small class="form-error" id="error-jenis"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="kondisi" id="kondisi" placeholder="Kondisi Awal" />
-								<label class="form__label">Kondisi Awal</label>
+								<input type="text" class="form__field" name="kondisi" id="kondisi" placeholder="Kondisi Awal"/>
+								<label class="form__label">Kondisi Awal<small class="form-error"" id="error-kondisi"></small></label>
 							</div>
 						</div>
 						<div class="col-4">
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="kamar" id="kamar" placeholder="Kamar Tidur"  />
-								<label class="form__label">Kamar Tidur</label>
+								<input type="text" class="form__field" name="kamar" id="kamar" placeholder="Kamar Tidur"/>
+								<label class="form__label">Kamar Tidur<small class="form-error" id="error-kamar"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="toilet" id="toilet" placeholder="Kamar Mandi"  />
-								<label class="form__label">Kamar Mandi</label>
+								<input type="text" class="form__field" name="toilet" id="toilet" placeholder="Kamar Mandi"/>
+								<label class="form__label">Kamar Mandi<small class="form-error" id="error-toilet"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<select class="form__field" name="carport" id="carport" placeholder="Carport" >
+								
+								<select class="form__field" name="carport" id="carport" placeholder="Carport">
 									<option value="" selected></option>
 									<option value="true">Ada</option>
 									<option value="false">Tidak Ada</option>
 								</select>
-								<label class="form__label">Carport</label>
+								<label class="form__label">Carport<small class="form-error" id="error-carport"></small></label>
 							</div>
-							<div class="row">
+							<div class="row" id="rowfasilitas">
 								<div class="col-7">
 									<div class="form__group field mb-5" id="listnamafasilitas">
+										<small class="form-error" id="error-namafas"></small>
 										<label class="form__label">Fasilitas</label>
 										<input type="text" class="form__field" name="namafas[]" id="fasilitas" placeholder="Fasilitas"/>
 										
@@ -326,6 +338,7 @@
 								</div>
 								<div class="col-5">
 									<div class="form__group mb-5" id="listjumlahfasilitas">
+										<small class="form-error" id="error-jumlahfas"></small>
 										<label class="form__label">Jumlah</label>
 										<div class="d-flex justify-content-start align-items-center">
 											<input type="text" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>
@@ -338,16 +351,13 @@
 						</div>
 						<div class="col-4">
 							<h3 class="my-4">Upload Foto</h3>
-							<div class="d-flex flex-wrap justify-content-start" id="image-upload-wrapper">
+							<div class="d-flex flex-wrap justify-content-center" id="image-upload-wrapper">
 								<div class="image-upload-wrap mx-1">
 									<input class="file-upload-input" type='file' id='imagefasilitas[]' onchange="readURL(this);" accept="image/*" />
 									<div class="drag-text">
 										<h3>Drag and drop or select an Image</h3>
 									</div>
 								</div>
-							</div>
-							
-							<div class="file-upload-content d-flex flex-wrap justify-content-center" id="listimage">
 							</div>
 						</div>
 						<div class="d-flex justify-content-end">
@@ -398,7 +408,7 @@
 				let next = (parseInt(jumlah) + 1).toString();
 				kode = date + "/R/UBS/" + next.padStart(3, "0");
 				$("#kodeaset").val(kode);
-				console.log(kode);
+				//console.log(kode);
 			}, error: function(){
 				console.log("Error when counting asset!")
 			}
@@ -407,10 +417,16 @@
 
 	$('#btnsubmit').click(function(){
 		
-		var image_data = new FormData();
-        for (var x = 0; x < $(".file-upload-input"); x++) {
-            form_data.append("files[]", document.getElementById('multiFiles').files[x]);
+		var form_data = new FormData();
+
+        for (var x = 0; x < $(".file-upload-input").length - 1; x++) {
+			//console.log($('.file-upload-input').eq(x).prop('files')[0]);
+            form_data.append("files[]", $('.file-upload-input').eq(x).prop('files')[0]);
         }
+
+		// for (var key of form_data.entries()) {
+		// 	console.log(key[0] + ', ' + key[1]);
+		// }
 
 		let listnama = [];
 		$('input[name="namafas[]"]').each( function() {
@@ -421,29 +437,31 @@
 		$('input[name="jumlahfas[]"]').each( function() {
 			listjumlah.push(this.value);
 		});
+
+		form_data.append("nama", $("#nama").val());
+		form_data.append("kodeaset", $("#kodeaset").val());
+		form_data.append("lokasi", $("#lokasi").val());
+		form_data.append("tanggal", $("#tanggal").val());
+		form_data.append("jenis", $("#jenis").val());
+		form_data.append("kondisi", $("#kondisi").val());
+		form_data.append("kamar", $("#kamar").val());
+		form_data.append("toilet", $("#toilet").val());
+		form_data.append("carport", $("#carport").val());
+		form_data.append("namafasilitas", listnama);
+		form_data.append("jumlahfasilitas", listjumlah);
 		
 		$.ajax({
 			type: "POST",
 			url: "<?php echo site_url(); ?>"+"/Master/addrumah",
-			data: {
-				nama: $("#nama").val(),
-				kode: $("#kodeaset").val(),
-				lokasi: $("#lokasi").val(),
-				tanggal: $("#tanggal").val(),
-				jenis: $("#jenis").val(),
-				kondisi: $("#kondisi").val(),
-				kamar: $("#kamar").val(),
-				toilet: $("#toilet").val(),
-				carport: $("#carport").val(),
-				namafasilitas: listnama,
-				jumlahfasilitas: listjumlah,
-				gambar: $("#nama").val(),//
-			},
+			data: form_data,
 			cache: false,
+			processData: false,
+			contentType: false,
 			success: function(response){
-				console.log(response);
+				var errors = JSON.parse(response);
+				raiseErrors(errors);
 			}, error: function(xhr, status, error) {
-				alert(xhr.responseText);
+				console.log(xhr.responseText);
 			},
 		});
 
@@ -451,32 +469,61 @@
 		
 	});
 
+	function raiseErrors(errors){
+		$("#error-nama").html("");
+		$("#error-kode").html("");
+		$("#error-lokasi").html("");
+		$("#error-tanggal").html("");
+		$("#error-jenis").html("");
+		$("#error-kondisi").html("");
+		$("#error-kamar").html("");
+		$("#error-toilet").html("");
+		$("#error-carport").html("");
+		$("#error-namafas").html("");
+		$("#error-jumlahfas").html("");
+
+		$("#error-nama").html(errors["nama"]).css("opacity", 1);
+		$("#error-kode").html(errors["kode"]).css("opacity", 1);
+		$("#error-lokasi").html(errors["lokasi"]).css("opacity", 1);
+		$("#error-tanggal").html(errors["tanggal"]).css("opacity", 1);
+		$("#error-jenis").html(errors["jenis"]).css("opacity", 1);
+		$("#error-kondisi").html(errors["kondisi"]).css("opacity", 1);
+		$("#error-kamar").html(errors["kamar"]).css("opacity", 1);
+		$("#error-toilet").html(errors["toilet"]).css("opacity", 1);
+		$("#error-carport").html(errors["carport"]).css("opacity", 1);
+		$("#error-namafas").html(errors["namafas"]).css("opacity", 1);
+		$("#error-jumlahfas").html(errors["jumlahfas"]).css("opacity", 1);
+	}
+
 	function readURL(input) {
 		if (input.files && input.files[0]) {
-			$(".file-upload-input").hide();
+			var fileExtension = ['jpeg', 'jpg', 'png'];
+			if ($.inArray($(input).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+				alert("Only formats are allowed : "+fileExtension.join(', '));
+			}
+			else{
+				$(".file-upload-input").hide();
+				var reader = new FileReader();
 
-			var reader = new FileReader();
+				reader.onload = function(e) {
+					$("#image-upload-wrapper").append(
+						"<div class='file-upload-wrapper mx-1 mb-1 bg-light d-flex align-items-center' onclick='removeImage(this)'>" + 
+							"<img class='file-upload-image' src='" + e.target.result + "'>" +
+							'<div class="file-upload-remove cursor-pointer d-flex align-items-center justify-content-center">' +
+								"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
+							'</div>' + 
+						"</div>"
+					);
+					$('.file-upload-content').show();
 
-			reader.onload = function(e) {
-				$("#image-upload-wrapper").prepend(
-					"<div class='file-upload-wrapper mx-1 mb-1 bg-light d-flex align-items-center'>" + 
-						"<img class='file-upload-image' src='" + e.target.result + "'>" +
-						'<div class="file-upload-remove cursor-pointer d-flex align-items-center justify-content-center" onclick="removeImage(this)">' +
-							"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
-						'</div>' + 
-					"</div>"
+					$('.image-title').html(input.files[0].name);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+				$(".image-upload-wrap").append(
+					'<input class="file-upload-input" type="file" id="imagefasilitas[]" onchange="readURL(this);" accept="image/*" />'
 				);
-				$('.file-upload-content').show();
-
-				$('.image-title').html(input.files[0].name);
-			};
-
-			reader.readAsDataURL(input.files[0]);
-			$(".image-upload-wrap").append(
-				'<input class="file-upload-input" type="file" id="imagefasilitas[]" onchange="readURL(this);" accept="image/*" />'
-			);
-		} else {
-			removeUpload();
+			}
 		}
 	};
 
@@ -495,7 +542,14 @@
 	});
 
 	function removeImage(image){
-		$(image).parent().remove();
+		//menghapus element image
+		let index = $(image).index();
+
+		$(image).remove();
+
+		//menghapus element input file nya
+		//console.log($(".image-upload-wrap").find(".file-upload-input").eq(index - 1).prop('files')[0]);
+		$(".image-upload-wrap").find(".file-upload-input").get(index - 1).remove();
 	}
 
 	function resetInput(){
@@ -508,6 +562,34 @@
 		$("#carport").val('');
 		$("#fasilitas").val('');
 		$("#listimage").html('');
+		$("#rowfasilitas").html(
+			'<div class="row">' + 
+				'<div class="col-7">' + 
+					'<div class="form__group field mb-5" id="listnamafasilitas">' + 
+						'<label class="form__label">Fasilitas</label>' + 
+						'<input type="text" class="form__field" name="namafas[]" id="fasilitas" placeholder="Fasilitas">	' + 					
+					'</div>' + 
+				'</div>' + 
+				'<div class="col-5">' + 
+					'<div class="form__group mb-5" id="listjumlahfasilitas">' + 
+						'<label class="form__label">Jumlah</label>' + 
+						'<div class="d-flex justify-content-start align-items-center">' + 
+							'<input type="text" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah">' + 
+							'<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>' + 
+						'</div>' + 
+					'</div>' + 
+				'</div>' + 
+			'</div>'
+		);
+		$("#image-upload-wrapper").html(
+			'<div class="image-upload-wrap mx-1">' + 
+				'<input class="file-upload-input" type="file" id="imagefasilitas[]" onchange="readURL(this);" accept="image/*" />' + 
+				'<div class="drag-text">' + 
+					'<h3>Drag and drop or select an Image</h3>' + 
+				'</div>' + 
+			'</div>'
+		);
+		
 	}
 
 	function addFasilitas(){
@@ -537,7 +619,7 @@
 	function removeFasilitas(element){
 		//menghapus fasilitas di index tsb
 		let index = $(".btn-delete").index(element);
-		console.log(index);
+		//console.log(index);
 		$("#listnamafasilitas").find('.form__field')[index + 1].remove();
 		$("#listjumlahfasilitas").find('.d-flex')[index + 1].remove();
 	}

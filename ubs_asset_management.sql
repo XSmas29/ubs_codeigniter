@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Mar 2022 pada 12.32
--- Versi server: 10.4.17-MariaDB
--- Versi PHP: 8.0.1
+-- Generation Time: Mar 31, 2022 at 05:31 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,9 +26,10 @@ USE `ubs_asset_management`;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `asset`
+-- Table structure for table `asset`
 --
 
+DROP TABLE IF EXISTS `asset`;
 CREATE TABLE `asset` (
   `KODE_ASSET` varchar(50) NOT NULL,
   `FK_KATEGORI` int(11) NOT NULL,
@@ -46,7 +47,7 @@ CREATE TABLE `asset` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `asset`
+-- Dumping data for table `asset`
 --
 
 INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_1`, `INFO_2`, `INFO_3`, `INFO_4`, `INFO_5`, `INFO_6`, `INFO_7`, `TGL_PENGADAAN`, `IS_DELETED`) VALUES
@@ -69,9 +70,10 @@ INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `fasilitas`
+-- Table structure for table `fasilitas`
 --
 
+DROP TABLE IF EXISTS `fasilitas`;
 CREATE TABLE `fasilitas` (
   `KODE_FASILITAS` int(11) NOT NULL,
   `FK_ASSET` varchar(50) NOT NULL,
@@ -80,7 +82,7 @@ CREATE TABLE `fasilitas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `fasilitas`
+-- Dumping data for table `fasilitas`
 --
 
 INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
@@ -90,36 +92,38 @@ INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `gambar`
+-- Table structure for table `gambar`
 --
 
+DROP TABLE IF EXISTS `gambar`;
 CREATE TABLE `gambar` (
   `KODE_GAMBAR` varchar(50) NOT NULL,
   `FK_ASSET` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `gambar`
+-- Dumping data for table `gambar`
 --
 
 INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
-('19032022RUBS001_1.jpg', '19/03/2022/R/UBS/001'),
-('19032022RUBS001_2.jpg', '19/03/2022/R/UBS/001'),
-('19032022RUBS001_3.jpg', '19/03/2022/R/UBS/001');
+('RUMAH001_001.jpg', '19/03/2022/R/UBS/001'),
+('RUMAH001_002.jpg', '19/03/2022/R/UBS/001'),
+('RUMAH001_003.jpg', '19/03/2022/R/UBS/001');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
+DROP TABLE IF EXISTS `kategori`;
 CREATE TABLE `kategori` (
   `KODE_KATEGORI` int(11) NOT NULL,
   `NAMA_KATEGORI` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `kategori`
+-- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`KODE_KATEGORI`, `NAMA_KATEGORI`) VALUES
@@ -132,9 +136,10 @@ INSERT INTO `kategori` (`KODE_KATEGORI`, `NAMA_KATEGORI`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `meminjam`
+-- Table structure for table `meminjam`
 --
 
+DROP TABLE IF EXISTS `meminjam`;
 CREATE TABLE `meminjam` (
   `KODE_ASSET` varchar(50) NOT NULL,
   `NIK` varchar(50) NOT NULL
@@ -143,9 +148,10 @@ CREATE TABLE `meminjam` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi`
+-- Table structure for table `transaksi`
 --
 
+DROP TABLE IF EXISTS `transaksi`;
 CREATE TABLE `transaksi` (
   `KODE_TRANSAKSI` int(11) NOT NULL,
   `FK_ASSET` varchar(50) NOT NULL,
@@ -156,7 +162,7 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `transaksi`
+-- Dumping data for table `transaksi`
 --
 
 INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TRANSAKSI`, `AKTIVITAS_TRANSAKSI`, `KETERANGAN_TRANSAKSI`) VALUES
@@ -169,9 +175,10 @@ INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TR
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `NIK` varchar(50) NOT NULL,
   `FK_ASSET` varchar(50) DEFAULT NULL,
@@ -180,7 +187,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`NIK`, `FK_ASSET`, `NAMA`, `DEPARTEMEN`) VALUES
@@ -192,68 +199,68 @@ INSERT INTO `user` (`NIK`, `FK_ASSET`, `NAMA`, `DEPARTEMEN`) VALUES
 --
 
 --
--- Indeks untuk tabel `asset`
+-- Indexes for table `asset`
 --
 ALTER TABLE `asset`
   ADD PRIMARY KEY (`KODE_ASSET`);
 
 --
--- Indeks untuk tabel `fasilitas`
+-- Indexes for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
   ADD PRIMARY KEY (`KODE_FASILITAS`);
 
 --
--- Indeks untuk tabel `gambar`
+-- Indexes for table `gambar`
 --
 ALTER TABLE `gambar`
   ADD PRIMARY KEY (`KODE_GAMBAR`);
 
 --
--- Indeks untuk tabel `kategori`
+-- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`KODE_KATEGORI`);
 
 --
--- Indeks untuk tabel `meminjam`
+-- Indexes for table `meminjam`
 --
 ALTER TABLE `meminjam`
   ADD PRIMARY KEY (`KODE_ASSET`,`NIK`);
 
 --
--- Indeks untuk tabel `transaksi`
+-- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`KODE_TRANSAKSI`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`NIK`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `fasilitas`
+-- AUTO_INCREMENT for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
-  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `kategori`
+-- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `KODE_KATEGORI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `transaksi`
+-- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `KODE_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `KODE_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
