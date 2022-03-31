@@ -55,5 +55,50 @@ class Asset extends CI_Model
 		$query = $this->db->query("select * from user where fk_asset='$key'"); 
 		return $query->result();
 	}
+
+	public function getAssetCount($key) {
+		$query = $this->db->query("select count(fk_kategori) as jumlah from asset where fk_kategori='$key'"); 
+		return $query->result();
+	}
+
+	public function addRumah($data){
+		$this->db->trans_begin();
+			//insert data ke tabel asset
+			$values = array(
+				'KODE_ASSET' => $data['kode'],
+				'FK_KATEGORI' => 1,
+				'NAMA_ASSET' => $data['nama'],
+				'INFO_1' => $data['lokasi'],
+				'INFO_2' => $data['jenis'],
+				'INFO_3' => $data['kondisi'],
+				'INFO_4' => $data['kamar'],
+				'INFO_5' => $data['toilet'],
+				'INFO_6' => $data['carport'],
+				'TGL_PENGADAAN' => $data['tanggal'],
+			);
+			$this->db->insert('asset', $values);
+			//
+
+			//insert data ke tabel fasilitas
+
+			for ($i=0; $i < count($data["namafasilitas"]); $i++) { 
+				$values = array(
+					'FK_ASSET' => $data['kode'],
+					'NAMA' => $data["namafasilitas"][$i],
+					'JUMLAH' => $data["jumlahfasilitas"][$i],
+				);
+				$this->db->insert('fasilitas', $values);
+			}
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return "Terjadi kesalahan dalam memasukkan data rumah dinas!";
+		}
+		else{
+			$this->db->trans_commit();
+			return "Sukses menambah data rumah dinas!";
+		}
+	}
 }
 ?>

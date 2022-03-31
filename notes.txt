@@ -1,3 +1,5 @@
 permasalahan :
 1. Search datatable di bagian gedung
 2. tabel responsive masih error
+3. apakah admin bisa menambah data user???
+4. transaksi dipindah ke cordova

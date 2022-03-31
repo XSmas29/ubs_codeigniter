@@ -7,7 +7,6 @@ class Master extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('table');
-		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->helper('cookie');
@@ -61,6 +60,12 @@ class Master extends CI_Controller
 	}
 
 	public function masterRumah(){
+		if (!empty($this->session->flashdata('message'))) {
+			$data['message'] = $this->session->flashdata('message');
+		} elseif (!empty($this->session->flashdata('error'))) {
+			$data['error'] = $this->session->flashdata('error');
+		}
+
 		$data['listrumah'] = $this->Asset->getRumahDinas();
 		$this->load->view('master/rumahdinas', $data);
 	}
@@ -83,5 +88,45 @@ class Master extends CI_Controller
 	public function masterFasilitas(){
 		$data['listFasilitas'] = $this->Asset->getFasilitas();
 		$this->load->view('master/fasilitas', $data);
+	}
+	public function jumlahAsset(){
+		$key = $this->input->post('key');
+		$data['count'] = $this->Asset->getAssetCount($key);
+		echo json_encode($data);
+	}
+
+	public function addRumah(){
+		$this->form_validation->set_rules('nama', 'Nama Aset', 'required');
+		$this->form_validation->set_rules('kode', 'Kode Aset', 'required');
+		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis Aset', 'required');
+		$this->form_validation->set_rules('kondisi', 'Kondisi Awal', 'required');
+		$this->form_validation->set_rules('kamar', 'Kamar Tidur', 'required');
+		$this->form_validation->set_rules('toilet', 'Kamar Mandi', 'required');
+		$this->form_validation->set_rules('carport', 'Carport', 'required');
+
+		$data['nama'] = $this->input->post('nama');
+		$data['kode'] = $this->input->post('kode');
+		$data['lokasi'] = $this->input->post('lokasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['jenis'] = $this->input->post('jenis');
+		$data['kondisi'] = $this->input->post('kondisi');
+		$data['kamar'] = $this->input->post('kamar');
+		$data['toilet'] = $this->input->post('toilet');
+		$data['carport'] = $this->input->post('carport');
+		$data['namafasilitas'] = $this->input->post('namafasilitas');
+		$data['jumlahfasilitas'] = $this->input->post('jumlahfasilitas');
+
+		
+		if ($this->form_validation->run() == FALSE)
+		{	
+			echo validation_errors();
+		}
+		else
+		{
+			$response["message"] = $this->Asset->addRumah($data);
+			echo json_encode($response);
+		}
 	}
 }

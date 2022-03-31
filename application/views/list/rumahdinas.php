@@ -320,7 +320,6 @@
 						$('#indicator button:first-child').addClass('active');
 					}
 					else{
-						console.log("asd");
 						$("#listgambar").append(
 							'<div class="carousel-item active">' +
 								'<img src="<?php echo base_url(); ?>assets/img/placeholder.jpg" class="d-block w-100" alt="...">' +
