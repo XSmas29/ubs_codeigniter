@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2022 at 10:33 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.2
+-- Waktu pembuatan: 31 Mar 2022 pada 12.32
+-- Versi server: 10.4.17-MariaDB
+-- Versi PHP: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,10 +26,9 @@ USE `ubs_asset_management`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asset`
+-- Struktur dari tabel `asset`
 --
 
-DROP TABLE IF EXISTS `asset`;
 CREATE TABLE `asset` (
   `KODE_ASSET` varchar(50) NOT NULL,
   `FK_KATEGORI` int(11) NOT NULL,
@@ -47,7 +46,7 @@ CREATE TABLE `asset` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `asset`
+-- Dumping data untuk tabel `asset`
 --
 
 INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_1`, `INFO_2`, `INFO_3`, `INFO_4`, `INFO_5`, `INFO_6`, `INFO_7`, `TGL_PENGADAAN`, `IS_DELETED`) VALUES
@@ -58,6 +57,11 @@ INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_
 ('10/09/2022/F/UBS/002', 5, 'Epson Scanner', 0, 'Office HRD', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-10', 0),
 ('19/03/2022/R/UBS/001', 1, 'Rumah Dinas 8 x 12', 0, 'Lebak Jaya 2 No 20', 'tetap', 'baik', '4', '2', 'ada', NULL, '2022-02-03', 0),
 ('19/03/2022/R/UBS/002', 1, 'Rumah Dinas 8 x 15', 0, 'Lebak Timur No 20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-22', 0),
+('19/03/2022/R/UBS/003', 1, 'Rumah Dinas 6 x 10', 0, 'Anggur no 1A', 'tetap', 'baik', '1', '2', 'ada', NULL, '2022-02-03', 0),
+('19/03/2022/R/UBS/004', 1, 'Rumah Dinas 6 x 12', 0, 'Belimbing no 2B', 'tetap', 'baik', '2', '2', 'ada', NULL, '2022-03-03', 0),
+('19/03/2022/R/UBS/005', 1, 'Rumah Dinas 8 x 10', 0, 'Ceri no 3C', 'tetap', 'baik', '3', '2', 'ada', NULL, '2022-01-03', 0),
+('19/03/2022/R/UBS/006', 1, 'Rumah Dinas 12 x 8', 0, 'Delima no 4D', 'tetap', 'baik', '4', '3', 'ada', NULL, '2022-02-04', 0),
+('19/03/2022/R/UBS/007', 1, 'Rumah Dinas 9 x 10', 0, 'Edamame no 5E', 'tetap', 'baik', '3', '2', 'ada', NULL, '2022-02-03', 0),
 ('21/02/2022/K/UBS/001', 3, 'Toyota Alphard', 0, 'L 1054 BA', 'Mobil', NULL, NULL, NULL, NULL, NULL, '2022-02-21', 0),
 ('5385/IMB/e/2019', 2, 'Gedung C Lt. 1', 1, 'Material', 'Bahan', NULL, NULL, NULL, NULL, NULL, '2020-04-09', 0),
 ('6640/IMB/e/2021', 2, 'Gedung A Lt. 1', 1, 'Office', 'Marketing Lokal', NULL, NULL, NULL, NULL, NULL, '2021-08-17', 0);
@@ -65,10 +69,9 @@ INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fasilitas`
+-- Struktur dari tabel `fasilitas`
 --
 
-DROP TABLE IF EXISTS `fasilitas`;
 CREATE TABLE `fasilitas` (
   `KODE_FASILITAS` int(11) NOT NULL,
   `FK_ASSET` varchar(50) NOT NULL,
@@ -77,7 +80,7 @@ CREATE TABLE `fasilitas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `fasilitas`
+-- Dumping data untuk tabel `fasilitas`
 --
 
 INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
@@ -87,17 +90,16 @@ INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gambar`
+-- Struktur dari tabel `gambar`
 --
 
-DROP TABLE IF EXISTS `gambar`;
 CREATE TABLE `gambar` (
   `KODE_GAMBAR` varchar(50) NOT NULL,
   `FK_ASSET` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `gambar`
+-- Dumping data untuk tabel `gambar`
 --
 
 INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
@@ -108,17 +110,16 @@ INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori`
+-- Struktur dari tabel `kategori`
 --
 
-DROP TABLE IF EXISTS `kategori`;
 CREATE TABLE `kategori` (
   `KODE_KATEGORI` int(11) NOT NULL,
   `NAMA_KATEGORI` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `kategori`
+-- Dumping data untuk tabel `kategori`
 --
 
 INSERT INTO `kategori` (`KODE_KATEGORI`, `NAMA_KATEGORI`) VALUES
@@ -131,10 +132,9 @@ INSERT INTO `kategori` (`KODE_KATEGORI`, `NAMA_KATEGORI`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `meminjam`
+-- Struktur dari tabel `meminjam`
 --
 
-DROP TABLE IF EXISTS `meminjam`;
 CREATE TABLE `meminjam` (
   `KODE_ASSET` varchar(50) NOT NULL,
   `NIK` varchar(50) NOT NULL
@@ -143,10 +143,9 @@ CREATE TABLE `meminjam` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi`
+-- Struktur dari tabel `transaksi`
 --
 
-DROP TABLE IF EXISTS `transaksi`;
 CREATE TABLE `transaksi` (
   `KODE_TRANSAKSI` int(11) NOT NULL,
   `FK_ASSET` varchar(50) NOT NULL,
@@ -157,7 +156,7 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `transaksi`
+-- Dumping data untuk tabel `transaksi`
 --
 
 INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TRANSAKSI`, `AKTIVITAS_TRANSAKSI`, `KETERANGAN_TRANSAKSI`) VALUES
@@ -170,10 +169,9 @@ INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TR
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `NIK` varchar(50) NOT NULL,
   `FK_ASSET` varchar(50) DEFAULT NULL,
@@ -182,7 +180,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`NIK`, `FK_ASSET`, `NAMA`, `DEPARTEMEN`) VALUES
@@ -194,65 +192,65 @@ INSERT INTO `user` (`NIK`, `FK_ASSET`, `NAMA`, `DEPARTEMEN`) VALUES
 --
 
 --
--- Indexes for table `asset`
+-- Indeks untuk tabel `asset`
 --
 ALTER TABLE `asset`
   ADD PRIMARY KEY (`KODE_ASSET`);
 
 --
--- Indexes for table `fasilitas`
+-- Indeks untuk tabel `fasilitas`
 --
 ALTER TABLE `fasilitas`
   ADD PRIMARY KEY (`KODE_FASILITAS`);
 
 --
--- Indexes for table `gambar`
+-- Indeks untuk tabel `gambar`
 --
 ALTER TABLE `gambar`
   ADD PRIMARY KEY (`KODE_GAMBAR`);
 
 --
--- Indexes for table `kategori`
+-- Indeks untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`KODE_KATEGORI`);
 
 --
--- Indexes for table `meminjam`
+-- Indeks untuk tabel `meminjam`
 --
 ALTER TABLE `meminjam`
   ADD PRIMARY KEY (`KODE_ASSET`,`NIK`);
 
 --
--- Indexes for table `transaksi`
+-- Indeks untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`KODE_TRANSAKSI`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`NIK`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `fasilitas`
+-- AUTO_INCREMENT untuk tabel `fasilitas`
 --
 ALTER TABLE `fasilitas`
   MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `kategori`
+-- AUTO_INCREMENT untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `KODE_KATEGORI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `transaksi`
+-- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   MODIFY `KODE_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
