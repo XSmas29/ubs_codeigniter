@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 03:55 PM
+-- Generation Time: Mar 31, 2022 at 10:33 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -43,24 +43,24 @@ CREATE TABLE `asset` (
   `INFO_6` varchar(50) DEFAULT NULL,
   `INFO_7` varchar(50) DEFAULT NULL,
   `TGL_PENGADAAN` date NOT NULL,
-  `NO_DOC` varchar(50) DEFAULT NULL
+  `IS_DELETED` int(1) NOT NULL DEFAULT 0 COMMENT '0 = not deleted, 1 = deleted'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `asset`
 --
 
-INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_1`, `INFO_2`, `INFO_3`, `INFO_4`, `INFO_5`, `INFO_6`, `INFO_7`, `TGL_PENGADAAN`, `NO_DOC`) VALUES
-('01/03/2022/A/UBS/001/1/15', 4, 'Glory Lama', 0, '1', '15', '6', '0', NULL, NULL, NULL, '2019-03-01', NULL),
-('01/03/2022/K/UBS/002', 3, 'Honda Vario 125', 0, 'F 3089 QK', 'Motor', NULL, NULL, NULL, NULL, NULL, '2019-03-01', NULL),
-('02/03/2022/A/UBS/002/1/16', 4, 'Glory Lama', 0, '1', '16', '5', '0', NULL, NULL, NULL, '2019-03-02', NULL),
-('08/09/2022/F/UBS/001', 5, 'LCD Proyektor LG', 0, 'R.Meeting Anggrek', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-08', NULL),
-('10/09/2022/F/UBS/002', 5, 'Epson Scanner', 0, 'Office HRD', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-10', NULL),
-('19/03/2022/R/UBS/001', 1, 'Rumah Dinas 8 x 12', 0, 'Lebak Jaya 2 No 20', 'tetap', 'baik', '4', '2', 'ada', NULL, '2022-02-03', NULL),
-('19/03/2022/R/UBS/002', 1, 'Rumah Dinas 8 x 15', 0, 'Lebak Timur No 20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-22', NULL),
-('21/02/2022/K/UBS/001', 3, 'Toyota Alphard', 0, 'L 1054 BA', 'Mobil', NULL, NULL, NULL, NULL, NULL, '2022-02-21', NULL),
-('5385/IMB/e/2019', 2, 'Gedung C Lt. 1', 1, 'Material', 'Bahan', NULL, NULL, NULL, NULL, NULL, '2020-04-09', NULL),
-('6640/IMB/e/2021', 2, 'Gedung A Lt. 1', 1, 'Office', 'Marketing Lokal', NULL, NULL, NULL, NULL, NULL, '2021-08-17', NULL);
+INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_1`, `INFO_2`, `INFO_3`, `INFO_4`, `INFO_5`, `INFO_6`, `INFO_7`, `TGL_PENGADAAN`, `IS_DELETED`) VALUES
+('01/03/2022/A/UBS/001/1/15', 4, 'Glory Lama', 0, '1', '15', '6', '0', NULL, NULL, NULL, '2019-03-01', 0),
+('01/03/2022/K/UBS/002', 3, 'Honda Vario 125', 0, 'F 3089 QK', 'Motor', NULL, NULL, NULL, NULL, NULL, '2019-03-01', 0),
+('02/03/2022/A/UBS/002/1/16', 4, 'Glory Lama', 0, '1', '16', '5', '0', NULL, NULL, NULL, '2019-03-02', 0),
+('08/09/2022/F/UBS/001', 5, 'LCD Proyektor LG', 0, 'R.Meeting Anggrek', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-08', 0),
+('10/09/2022/F/UBS/002', 5, 'Epson Scanner', 0, 'Office HRD', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-10', 0),
+('19/03/2022/R/UBS/001', 1, 'Rumah Dinas 8 x 12', 0, 'Lebak Jaya 2 No 20', 'tetap', 'baik', '4', '2', 'ada', NULL, '2022-02-03', 0),
+('19/03/2022/R/UBS/002', 1, 'Rumah Dinas 8 x 15', 0, 'Lebak Timur No 20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-22', 0),
+('21/02/2022/K/UBS/001', 3, 'Toyota Alphard', 0, 'L 1054 BA', 'Mobil', NULL, NULL, NULL, NULL, NULL, '2022-02-21', 0),
+('5385/IMB/e/2019', 2, 'Gedung C Lt. 1', 1, 'Material', 'Bahan', NULL, NULL, NULL, NULL, NULL, '2020-04-09', 0),
+('6640/IMB/e/2021', 2, 'Gedung A Lt. 1', 1, 'Office', 'Marketing Lokal', NULL, NULL, NULL, NULL, NULL, '2021-08-17', 0);
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,9 @@ CREATE TABLE `transaksi` (
 INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TRANSAKSI`, `AKTIVITAS_TRANSAKSI`, `KETERANGAN_TRANSAKSI`) VALUES
 (1, '19/03/2022/R/UBS/001', '2022-03-03', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan rumah dinas 001'),
 (4, '6640/IMB/e/2021', '2022-02-16', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan gedung A lt. 1'),
-(5, '01/03/2022/A/UBS/001/1/15', '2022-03-08', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan asrama glory lama lantai 1 nomor 15');
+(5, '01/03/2022/A/UBS/001/1/15', '2022-03-08', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan asrama glory lama lantai 1 nomor 15'),
+(6, '21/02/2022/K/UBS/001', '2022-03-29', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan mobil toyota alphard'),
+(7, '10/09/2022/F/UBS/002', '2022-03-28', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan epson scanner');
 
 -- --------------------------------------------------------
 
@@ -241,7 +243,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
-  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -253,7 +255,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `KODE_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `KODE_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
