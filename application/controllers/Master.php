@@ -107,6 +107,8 @@ class Master extends CI_Controller
 		$this->form_validation->set_rules('carport', 'Carport', 'required');
 		// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
 
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
 		$data['nama'] = $this->input->post('nama');
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['lokasi'] = $this->input->post('lokasi');

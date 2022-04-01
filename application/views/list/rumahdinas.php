@@ -183,7 +183,7 @@
 									</div>
 									<div class="col-4">
 										Fasilitas
-										<div class="fw-bold" id="fasilitas"></div>
+										<ul class="fw-bold" id="fasilitas"></ul>
 									</div>
 								</div>
 							</div>
@@ -278,9 +278,9 @@
 
 					let arrfasilitas = [];
 					for (let i = 0; i < data["fasilitas"].length; i++) {
-						arrfasilitas.push(data["fasilitas"][i].NAMA);
+						$("#fasilitas").append("<li>" + data["fasilitas"][i].NAMA + " (" + data["fasilitas"][i].JUMLAH + ")</li>");
 					}
-					$("#fasilitas").text(arrfasilitas.join(", "));
+					
 
 					$('#tabelhistory').DataTable().clear().destroy();
 					

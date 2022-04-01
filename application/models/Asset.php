@@ -132,7 +132,6 @@ class Asset extends CI_Model
 					else  
 					{  
 						$imgdata = $this->upload->data();
-						echo '<img src="'.base_url().'upload/'.$imgdata["file_name"].'" width="300" height="225" class="img-thumbnail" />';  
 					}
 					//
 					
@@ -157,14 +156,14 @@ class Asset extends CI_Model
 
 			$values = array(
 				'FK_ASSET' => $data['kode'],
-				'TGL_TRANSAKSI' => $data['kode'],
+				'TGL_TRANSAKSI' => $data['tanggal'],
 				'USER_TRANSAKSI' => "SYSTEM ADMIN",
 				'AKTIVITAS_TRANSAKSI' => "pengadaan",
 				'KETERANGAN_TRANSAKSI' => "pengadaan rumah dinas ".substr($data['kode'], -3),
 			);
 			$this->db->insert('transaksi', $values);
 
-			return "Sukses menambah data rumah dinas!";
+			return 1;
 		}
 	}
 }

@@ -78,6 +78,10 @@
 		margin: auto;
 	}
 
+	#modalsuccess {
+		background: rgba(0,0,0,0.5);
+	}
+
 	.file-upload-remove {
 		opacity: 0;
 		background-color: #999999;
@@ -155,7 +159,7 @@
 		position: absolute;
 		top: 0;
 		display: block;
-		transition: 0.4s;
+		transition: 0.2s;
 		color: black;
 	}
 
@@ -169,7 +173,7 @@
 		position: absolute;
 		top: 0;
 		display: block;
-		transition: 0.4s;
+		transition: 0.2s;
 		color: black;
 	}
 
@@ -330,7 +334,6 @@
 							<div class="row" id="rowfasilitas">
 								<div class="col-7">
 									<div class="form__group field mb-5" id="listnamafasilitas">
-										<small class="form-error" id="error-namafas"></small>
 										<label class="form__label">Fasilitas</label>
 										<input type="text" class="form__field" name="namafas[]" id="fasilitas" placeholder="Fasilitas"/>
 										
@@ -338,7 +341,6 @@
 								</div>
 								<div class="col-5">
 									<div class="form__group mb-5" id="listjumlahfasilitas">
-										<small class="form-error" id="error-jumlahfas"></small>
 										<label class="form__label">Jumlah</label>
 										<div class="d-flex justify-content-start align-items-center">
 											<input type="text" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>
@@ -372,13 +374,29 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal" tabindex="1" id="modalsuccess">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header justify-content-center">
+					<h5 class="modal-title">Success</h5>
+				</div>
+				<div class="modal-body text-center">
+					<p id="modalsuccessbody">Modal body text goes here.</p>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
 	
 </body>
 
 </html>
 <script type="text/javascript">
-	var today = new Date();
-	var date = today.getDate() + "/" + (today.getMonth()+1)+"/" + today.getFullYear();
+	var now = new Date();
+	var day = ("0" + now.getDate()).slice(-2);
+	var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
 	$(document).ready( function () 
 	{
@@ -387,10 +405,8 @@
 				responsive: true
 			} 
 		);
-		var now = new Date();
-		var day = ("0" + now.getDate()).slice(-2);
-		var month = ("0" + (now.getMonth() + 1)).slice(-2);
-		var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+		
+		let today = now.getFullYear()+"-"+(month)+"-"+(day);
 
 		$('#tanggal').val(today);
 	});
@@ -405,8 +421,10 @@
 				let data = JSON.parse(response);
 
 				let jumlah = data["count"][0].jumlah;
+
+				let today = (day)+"/"+(month)+"/"+now.getFullYear();
 				let next = (parseInt(jumlah) + 1).toString();
-				kode = date + "/R/UBS/" + next.padStart(3, "0");
+				kode = today + "/R/UBS/" + next.padStart(3, "0");
 				$("#kodeaset").val(kode);
 				//console.log(kode);
 			}, error: function(){
@@ -416,9 +434,8 @@
 	});
 
 	$('#btnsubmit').click(function(){
-		
 		var form_data = new FormData();
-
+		
         for (var x = 0; x < $(".file-upload-input").length - 1; x++) {
 			//console.log($('.file-upload-input').eq(x).prop('files')[0]);
             form_data.append("files[]", $('.file-upload-input').eq(x).prop('files')[0]);
@@ -458,8 +475,16 @@
 			processData: false,
 			contentType: false,
 			success: function(response){
-				var errors = JSON.parse(response);
-				raiseErrors(errors);
+				console.log(response);
+				var message = JSON.parse(response);
+				if (message["message"] == 1){
+					$('#modalsuccessbody').html('Sukses menambah data rumah dinas!');
+					$('#modalsuccess').show();
+					setTimeout(function(){
+						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+					},1500);
+				}
+				raiseErrors(message);
 			}, error: function(xhr, status, error) {
 				console.log(xhr.responseText);
 			},
