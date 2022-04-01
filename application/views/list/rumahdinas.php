@@ -275,8 +275,10 @@
 					$("#jumlah_toilet").text(data["asset"][0].INFO_5);
 					$("#carport").text(data["asset"][0].INFO_6);
 					$("#tgl_pengadaan").text(data["asset"][0].TGL_PENGADAAN);
-
+					
+					$("#fasilitas").html('');
 					let arrfasilitas = [];
+					
 					for (let i = 0; i < data["fasilitas"].length; i++) {
 						$("#fasilitas").append("<li>" + data["fasilitas"][i].NAMA + " (" + data["fasilitas"][i].JUMLAH + ")</li>");
 					}

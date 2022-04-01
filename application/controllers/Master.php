@@ -141,4 +141,45 @@ class Master extends CI_Controller
 			echo json_encode($response);
 		}
 	}
+
+	public function editRumah(){
+		$this->form_validation->set_rules('nama', 'Nama Aset', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode Aset', 'required');
+		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis Aset', 'required');
+		$this->form_validation->set_rules('kondisi', 'Kondisi Awal', 'required');
+		$this->form_validation->set_rules('kamar', 'Kamar Tidur', 'required');
+		$this->form_validation->set_rules('toilet', 'Kamar Mandi', 'required');
+		$this->form_validation->set_rules('carport', 'Carport', 'required');
+		// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['nama'] = $this->input->post('nama');
+		$data['kode'] = $this->input->post('kodeaset');
+		$data['lokasi'] = $this->input->post('lokasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['jenis'] = $this->input->post('jenis');
+		$data['kondisi'] = $this->input->post('kondisi');
+		$data['kamar'] = $this->input->post('kamar');
+		$data['toilet'] = $this->input->post('toilet');
+		$data['carport'] = $this->input->post('carport');
+		$data['namafasilitas'] = explode(",",$this->input->post('namafasilitas'));
+		$data['jumlahfasilitas'] = explode(",",$this->input->post('jumlahfasilitas'));
+		$data['gambar'] = $this->input->post('gambar');
+		$data['currentimage'] = $this->input->post('currentimage');
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$key = $data["kode"];
+			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
+			$response["message"] = $this->Asset->editRumah($data, $ctr);
+			echo json_encode($response);
+		}
+	}
 }

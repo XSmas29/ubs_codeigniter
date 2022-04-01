@@ -19,12 +19,6 @@
 		padding: 20px;
 	}
 
-	.file-upload-content {
-		display: none;
-		text-align: center;
-	}
-
-
 	.file-upload-input {
 		opacity: 0; 
 		border: none;
@@ -39,7 +33,7 @@
 
 	.image-upload-wrap {
 		border-radius: 12px;
-		border: 3px dashed black;
+		border: 2px dashed black;
 		position: relative;
 		width: 150px;
 		height: 150px;
@@ -49,8 +43,12 @@
 	.image-upload-wrap:hover {
 		border-radius: 12px;
 		background-color: #222;
-		border: 3px dashed black;
+		border: 2px dashed black;
 		transition: 0.25s;
+	}
+
+	.image-upload-wrap:hover .drag-text h3{
+		color: white;
 	}
 
 	.image-title-wrap {
@@ -71,8 +69,8 @@
 	}
 
 	.file-upload-image {
-		max-width: 100%;
-		max-height: 100%;
+		max-width: 95%;
+		max-height: 95%;
 		top: 0;
 		bottom: 0;
 		margin: auto;
@@ -99,8 +97,9 @@
 		min-height : 100px;
 		min-width: 100px;
 		border-radius: 12px;
-		border: 3px solid black;
+		border: 2px solid black;
 		cursor: pointer;
+		background: #DFEBF6;
 	}
 
 	.form-error{
@@ -248,13 +247,13 @@
 															?>
 														</td>
 														<td>
-														<button type="button" class="btn btn-sm btn-info">
+														<button data-bs-toggle="modal" href="#exampleModalToggle" role="button" class="btn btn-sm btn-info btn-edit" value="<?= $listrumah[$i]->KODE_ASSET ?>">
 															<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
 														</button>
-														<button type="button" class="btn btn-sm btn-secondary">
+														<button type="button" class="btn btn-sm btn-secondary btn-repair" value="<?= $listrumah[$i]->KODE_ASSET ?>">
 															<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
 														</button>
-														<button type="button" class="btn btn-sm btn-danger">
+														<button type="button" class="btn btn-sm btn-danger btn-remove" value="<?= $listrumah[$i]->KODE_ASSET ?>">
 															<img src="<?php echo base_url(); ?>assets/img/icons/delete.png" width="16" height="16">
 														</button>
 														</td>
@@ -277,7 +276,7 @@
 		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<div class="modal-content">
 				<div class="modal-header">
-				<h4 class="modal-title">Form Pengadaan Asset</h4>
+				<h4 class="modal-title" id="modaltitle"></h4>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
@@ -326,8 +325,8 @@
 								
 								<select class="form__field" name="carport" id="carport" placeholder="Carport">
 									<option value="" selected></option>
-									<option value="true">Ada</option>
-									<option value="false">Tidak Ada</option>
+									<option value="ada">Ada</option>
+									<option value="tidak ada">Tidak Ada</option>
 								</select>
 								<label class="form__label">Carport<small class="form-error" id="error-carport"></small></label>
 							</div>
@@ -364,7 +363,7 @@
 						</div>
 						<div class="d-flex justify-content-end">
 							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
-							<button type="button" class="btn btn-dark px-5" id="btnsubmit">Save</button>
+							<button type="button" class="btn btn-dark px-5 btn-submit" id="btnsave">Save</button>
 						</div>
 					</div>
 				</div>
@@ -398,20 +397,24 @@
 	var day = ("0" + now.getDate()).slice(-2);
 	var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
-	$(document).ready( function () 
-	{
+	var listcurrentimage = [];
+
+	$(document).ready( function (){
 		$('#myTable').DataTable( 
 			{
 				responsive: true
 			} 
 		);
-		
-		let today = now.getFullYear()+"-"+(month)+"-"+(day);
-
-		$('#tanggal').val(today);
 	});
 
 	$('#btnadd').click(function(){
+		resetInput();
+		$('#btnsave').attr('onClick', 'addData()');
+		$("#modaltitle").html("Form Pengadaan Aset");
+		$('#btnsave').html('Save');
+
+		let today = now.getFullYear()+"-"+(month)+"-"+(day);
+		$('#tanggal').val(today);
 		$.ajax({
 			type: "POST",
 			url: "<?php echo site_url(); ?>"+"/Master/jumlahAsset",
@@ -433,10 +436,10 @@
 		});
 	});
 
-	$('#btnsubmit').click(function(){
-		var form_data = new FormData();
+	function addData(){
+		let form_data = new FormData();
 		
-        for (var x = 0; x < $(".file-upload-input").length - 1; x++) {
+        for (let x = 0; x < $(".file-upload-input").length - 1; x++) {
 			//console.log($('.file-upload-input').eq(x).prop('files')[0]);
             form_data.append("files[]", $('.file-upload-input').eq(x).prop('files')[0]);
         }
@@ -489,10 +492,66 @@
 				console.log(xhr.responseText);
 			},
 		});
+	};
 
+	function editData(){
+		let form_data = new FormData();
+
+        for (let x = 0; x < $(".file-upload-input").length - 1; x++) {
+			//console.log($('.file-upload-input').eq(x).prop('files')[0]);
+            form_data.append("files[]", $('.file-upload-input').eq(x).prop('files')[0]);
+        }
+
+		// for (var key of form_data.entries()) {
+		// 	console.log(key[0] + ', ' + key[1]);
+		// }
+
+		let listnama = [];
+		$('input[name="namafas[]"]').each( function() {
+			listnama.push(this.value);
+		});
+
+		let listjumlah = [];
+		$('input[name="jumlahfas[]"]').each( function() {
+			listjumlah.push(this.value);
+		});
+
+		form_data.append("nama", $("#nama").val());
+		form_data.append("kodeaset", $("#kodeaset").val());
+		form_data.append("lokasi", $("#lokasi").val());
+		form_data.append("tanggal", $("#tanggal").val());
+		form_data.append("jenis", $("#jenis").val());
+		form_data.append("kondisi", $("#kondisi").val());
+		form_data.append("kamar", $("#kamar").val());
+		form_data.append("toilet", $("#toilet").val());
+		form_data.append("carport", $("#carport").val());
+		form_data.append("namafasilitas", listnama);
+		form_data.append("jumlahfasilitas", listjumlah);
+		form_data.append("currentimage", listcurrentimage);
 		
-		
-	});
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/editrumah",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function(response){
+				console.log(response);
+				var message = JSON.parse(response);
+				if (message["message"] == 1){
+					$('#modalsuccessbody').html('Sukses mengubah data rumah dinas!');
+					$('#modalsuccess').show();
+					setTimeout(function(){
+						window.location.reload();
+					}, 1500);
+				}
+				raiseErrors(message);
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+	}
 
 	function raiseErrors(errors){
 		$("#error-nama").html("");
@@ -532,14 +591,13 @@
 
 				reader.onload = function(e) {
 					$("#image-upload-wrapper").append(
-						"<div class='file-upload-wrapper mx-1 mb-1 bg-light d-flex align-items-center' onclick='removeImage(this)'>" + 
+						"<div class='file-upload-wrapper mx-1 mb-1 d-flex align-items-center' onclick='removeImage(this)'>" + 
 							"<img class='file-upload-image' src='" + e.target.result + "'>" +
 							'<div class="file-upload-remove cursor-pointer d-flex align-items-center justify-content-center">' +
 								"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
 							'</div>' + 
 						"</div>"
 					);
-					$('.file-upload-content').show();
 
 					$('.image-title').html(input.files[0].name);
 				};
@@ -550,34 +608,35 @@
 				);
 			}
 		}
+		//console.log($('.file-upload-input').eq(0).prop('files')[0]);
 	};
-
-	$(function() {
-		$('.image-upload-wrap').hover(function() {
-			$('.drag-text h3').css('color', 'white');
-		}, function() {
-			$('.drag-text h3').css('color', 'black');
-		});
-
-		$('.file-upload-wrapper').hover(function() {
-			$('.file-upload-remove').css('opacity', 1);
-		}, function() {
-			$('.file-upload-remove').css('opacity', 0);
-		});
-	});
 
 	function removeImage(image){
 		//menghapus element image
-		let index = $(image).index();
-
+		let index = $(image).index() - listcurrentimage.length;
 		$(image).remove();
-
+		//
 		//menghapus element input file nya
 		//console.log($(".image-upload-wrap").find(".file-upload-input").eq(index - 1).prop('files')[0]);
-		$(".image-upload-wrap").find(".file-upload-input").get(index - 1).remove();
+		let children = $(image).find(".file-upload-image")[0];
+		if (!$(children).hasClass("current")) {
+			$(".image-upload-wrap").find(".file-upload-input").get(index - 1).remove();
+		}
+
+		//menghapus list current image
+		let imgsrc = $($(image).find(".file-upload-image")[0]).attr("src");
+		let imgname = imgsrc.substr(imgsrc.lastIndexOf("/")+1);
+
+		for (var i = 0; i < listcurrentimage.length; i++) {
+			if (listcurrentimage[i] == imgname) {
+				listcurrentimage.splice(i, 1);
+			}
+		}
 	}
 
 	function resetInput(){
+		$("#modaltitle").html('');
+		$(".form-error").text('');
 		$("#nama").val('');
 		$("#lokasi").val('');
 		$("#jenis").val('');
@@ -639,15 +698,75 @@
 		$($("#listjumlahfasilitas").find('.d-flex')[1]).append('<button type="button" class="btn btn-danger ms-3 btn-delete" onclick="removeFasilitas(this)"><strong>x</strong></button>');
 	}
 
-	
-
 	function removeFasilitas(element){
 		//menghapus fasilitas di index tsb
 		let index = $(".btn-delete").index(element);
-		//console.log(index);
+		console.log(index);
 		$("#listnamafasilitas").find('.form__field')[index + 1].remove();
 		$("#listjumlahfasilitas").find('.d-flex')[index + 1].remove();
 	}
+
+	$(".btn-edit").click(function(){
+		resetInput();
+
+		listcurrentimage = [];
+
+		let kode = $(this).attr('value');
+		$('#btnsave').attr('onClick', 'editData()');
+		$('#btnsave').html('Save Changes');
+		$("#modaltitle").html("Edit Aset");
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/detailAsset",
+			data: {key: kode},
+			cache: false,
+			success: function(response){
+
+				//mengambil data dari asset tsb
+				let data = JSON.parse(response);
+				//console.log(data);
+				$("#nama").val(data["asset"][0].NAMA_ASSET);
+				$("#kodeaset").val(data["asset"][0].KODE_ASSET);
+				$("#lokasi").val(data["asset"][0].INFO_1);
+				$("#jenis").val(data["asset"][0].INFO_2);
+				$("#kondisi").val(data["asset"][0].INFO_3);
+				$("#kamar").val(data["asset"][0].INFO_4);
+				$("#toilet").val(data["asset"][0].INFO_5);
+				$("#carport").val(data["asset"][0].INFO_6);
+				$("#tanggal").val(data["asset"][0].TGL_PENGADAAN);
+				//
+
+				//mengambil data fasilitas dari asset tsb
+				for (let i = 0; i < data["fasilitas"].length; i++) {
+					addFasilitas();
+					$($("#listnamafasilitas").find(".form__field")[1]).val(data["fasilitas"][i].NAMA);
+					$($("#listjumlahfasilitas").find(".d-flex").find(".form__field")[1]).val(data["fasilitas"][i].JUMLAH);
+				}
+				//
+
+				//mengambil data gambar dari asset tsb
+				data["gambar"].forEach(function(item){
+					$("#image-upload-wrapper").append(
+						"<div class='file-upload-wrapper mx-1 mb-1 d-flex align-items-center' onclick='removeImage(this)'>" + 
+							"<img class='file-upload-image current' src='<?php echo base_url() ?>assets/img/asset/" + item.KODE_GAMBAR + "'>" +
+							'<div class="file-upload-remove cursor-pointer d-flex align-items-center justify-content-center">' +
+								"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
+							'</div>' + 
+						"</div>"
+					);
+				});
+				//
+				$("#image-upload-wrapper").find(".file-upload-wrapper").find(".file-upload-image").each( function() {
+					let filename = $(this).attr('src').substr($(this).attr('src').lastIndexOf("/")+1);
+					listcurrentimage.push(filename);
+				});
+			}, error: function(){
+				alert("Error when loading asset!")
+			}
+		});
+
+		
+	});
 	
 </script>
 

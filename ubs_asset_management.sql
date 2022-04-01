@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2022 at 05:31 PM
+-- Generation Time: Apr 01, 2022 at 07:38 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -57,12 +57,12 @@ INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_
 ('08/09/2022/F/UBS/001', 5, 'LCD Proyektor LG', 0, 'R.Meeting Anggrek', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-08', 0),
 ('10/09/2022/F/UBS/002', 5, 'Epson Scanner', 0, 'Office HRD', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-10', 0),
 ('19/03/2022/R/UBS/001', 1, 'Rumah Dinas 8 x 12', 0, 'Lebak Jaya 2 No 20', 'tetap', 'baik', '4', '2', 'ada', NULL, '2022-02-03', 0),
-('19/03/2022/R/UBS/002', 1, 'Rumah Dinas 8 x 15', 0, 'Lebak Timur No 20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-22', 0),
+('19/03/2022/R/UBS/002', 1, 'Rumah Dinas 8 x 15', 0, 'Lebak Timur No 20', 'tetap', 'baik', '5', '3', 'tidak ada', NULL, '2022-01-22', 0),
 ('19/03/2022/R/UBS/003', 1, 'Rumah Dinas 6 x 10', 0, 'Anggur no 1A', 'tetap', 'baik', '1', '2', 'ada', NULL, '2022-02-03', 0),
-('19/03/2022/R/UBS/004', 1, 'Rumah Dinas 6 x 12', 0, 'Belimbing no 2B', 'tetap', 'baik', '2', '2', 'ada', NULL, '2022-03-03', 0),
+('19/03/2022/R/UBS/004', 1, 'Rumah Dinas 6 x 12', 0, 'Belimbing no 2B', 'tetap', 'baik', '2', '2', 'tidak ada', NULL, '2022-03-03', 0),
 ('19/03/2022/R/UBS/005', 1, 'Rumah Dinas 8 x 10', 0, 'Ceri no 3C', 'tetap', 'baik', '3', '2', 'ada', NULL, '2022-01-03', 0),
 ('19/03/2022/R/UBS/006', 1, 'Rumah Dinas 12 x 8', 0, 'Delima no 4D', 'tetap', 'baik', '4', '3', 'ada', NULL, '2022-02-04', 0),
-('19/03/2022/R/UBS/007', 1, 'Rumah Dinas 9 x 10', 0, 'Edamame no 5E', 'tetap', 'baik', '3', '2', 'ada', NULL, '2022-02-03', 0),
+('19/03/2022/R/UBS/007', 1, 'Rumah Dinas 9 x 10 update', 0, 'Edamame no 5E update', 'tetap', 'baik update', '3 update', '2 update', 'tidak ada', NULL, '2022-02-03', 0),
 ('21/02/2022/K/UBS/001', 3, 'Toyota Alphard', 0, 'L 1054 BA', 'Mobil', NULL, NULL, NULL, NULL, NULL, '2022-02-21', 0),
 ('5385/IMB/e/2019', 2, 'Gedung C Lt. 1', 1, 'Material', 'Bahan', NULL, NULL, NULL, NULL, NULL, '2020-04-09', 0),
 ('6640/IMB/e/2021', 2, 'Gedung A Lt. 1', 1, 'Office', 'Marketing Lokal', NULL, NULL, NULL, NULL, NULL, '2021-08-17', 0);
@@ -86,8 +86,14 @@ CREATE TABLE `fasilitas` (
 --
 
 INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
-(1, '19/03/2022/R/UBS/001', 'pompa air', 1),
-(2, '01/03/2022/A/UBS/001/1/15', 'Ranjang Susun', 3);
+(2, '01/03/2022/A/UBS/001/1/15', 'Ranjang Susun', 3),
+(22, '19/03/2022/R/UBS/007', 'fasilitas 5', 5),
+(23, '19/03/2022/R/UBS/007', 'fasilitas 3', 3),
+(24, '19/03/2022/R/UBS/007', 'fasilitas 1', 1),
+(51, '19/03/2022/R/UBS/001', 'mesin cuci', 1),
+(52, '19/03/2022/R/UBS/001', 'pompa air', 2),
+(53, '19/03/2022/R/UBS/004', 'air conditioner', 3),
+(54, '19/03/2022/R/UBS/004', 'bath tub', 2);
 
 -- --------------------------------------------------------
 
@@ -106,9 +112,9 @@ CREATE TABLE `gambar` (
 --
 
 INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
-('RUMAH001_001.jpg', '19/03/2022/R/UBS/001'),
-('RUMAH001_002.jpg', '19/03/2022/R/UBS/001'),
-('RUMAH001_003.jpg', '19/03/2022/R/UBS/001');
+('RUMAH004_001.jpg', '19/03/2022/R/UBS/004'),
+('RUMAH004_002.png', '19/03/2022/R/UBS/004'),
+('RUMAH004_003.jpeg', '19/03/2022/R/UBS/004');
 
 -- --------------------------------------------------------
 
@@ -248,7 +254,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
-  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -260,7 +266,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `KODE_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `KODE_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
