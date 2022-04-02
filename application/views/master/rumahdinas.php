@@ -7,238 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Master | Rumah Dinas</title>
 </head>
-<style>
-	select option{
-		zoom: 1.1;
-	}
-
-	.file-upload {
-		background-color: black;
-		width: 600px;
-		margin: 0 auto;
-		padding: 20px;
-	}
-
-	.file-upload-input {
-		opacity: 0; 
-		border: none;
-		border-radius: 3px;
-		position: absolute;
-		left: 0px;    
-		width: 100%;
-		top: 0px;
-		height: 100%;
-		cursor: pointer;
-	}
-
-	.image-upload-wrap {
-		border-radius: 12px;
-		border: 2px dashed black;
-		position: relative;
-		width: 150px;
-		height: 150px;
-	}
-
-	.image-upload-wrap-perbaikan {
-		border-radius: 12px;
-		border: 2px dashed black;
-		position: relative;
-		width: 360px;
-		height: 240px;
-	}
-
-	.image-dropping,
-	.image-upload-wrap:hover {
-		background-color: #222;
-		border: 2px dashed black;
-		transition: 0.25s;
-	}
-
-	.image-dropping,
-	.image-upload-wrap-perbaikan:hover {
-		background-color: #222;
-		border: 2px dashed black;
-		transition: 0.25s;
-	}
-
-	.image-upload-wrap:hover .drag-text h3{
-		color: white;
-	}
-
-	.image-upload-wrap-perbaikan:hover .drag-text h3{
-		color: white;
-	}
-
-	.image-title-wrap {
-		padding: 0 15px 15px 15px;
-		color: #222;
-	}
-
-	.drag-text {
-		text-align: center;
-	}
-
-	.drag-text h3 {
-		font-weight: 200;
-		text-transform: uppercase;
-		color: black;
-		font-size: 21px;
-		padding: 25px 0;
-	}
-
-	.image-upload-wrap-perbaikan .drag-text h3 {
-		font-size: 32px;
-		padding: 85px 0;
-	}
-
-	.file-upload-image {
-		max-width: 95%;
-		max-height: 95%;
-		top: 0;
-		bottom: 0;
-		margin: auto;
-	}
-
-	#modalsuccess {
-		background: rgba(0,0,0,0.5);
-	}
-
-	.file-upload-remove {
-		opacity: 0;
-		background-color: #999999;
-		position: absolute;
-		top: 45px;
-		left: 45px;
-		width: 56px;
-		height: 56px;
-		border-radius:20px;
-	}
-
-	.file-upload-remove-perbaikan {
-		opacity: 0;
-		background-color: #999999;
-		position: absolute;
-		top: 85px;
-		left: 145px;
-		width: 70px;
-		height: 70px;
-		border-radius:20px;
-	}
-
-	.file-upload-wrapper{
-		height : 150px;
-		width: 150px;
-		min-height : 100px;
-		min-width: 100px;
-		border-radius: 12px;
-		border: 2px solid black;
-		cursor: pointer;
-		background: #DFEBF6;
-	}
-
-	.file-upload-wrapper-perbaikan{
-		width: 360px;
-		height: 240px;
-		min-height : 240px;
-		min-width: 360px;
-		border-radius: 12px;
-		border: 2px solid black;
-		cursor: pointer;
-		background: #DFEBF6;
-	}
-
-	.form-error{
-		margin-left: 10px;
-		background: #FF4859;
-		border-radius: 12px;
-		color: white;
-		transition: 0.4s;
-		opacity: 0;
-	}
-
-	.file-upload-wrapper:hover{
-		filter: brightness(70%);
-		transition: 0.4s;
-	}
-
-	.file-upload-wrapper-perbaikan:hover{
-		filter: brightness(70%);
-		transition: 0.4s;
-	}
-
-
-	.file-upload-wrapper:hover .file-upload-remove{
-		transition: 0.4s;
-		opacity: 1;
-	}
-
-	.file-upload-wrapper-perbaikan:hover .file-upload-remove-perbaikan{
-		transition: 0.4s;
-		opacity: 1;
-	}
-
-	.form__group {
-		position: relative;
-		padding: 18px 0 0;
-		margin-top: 10px;
-		width: 100%;
-	}
-
-	.form__field {
-		font-family: inherit;
-		width: 100%;
-		border: 0;
-		border-bottom: 1px solid black;
-		outline: 0;
-		padding: 7px 0;
-		background: transparent;
-		transition: border-color 0.2s;
-		color: #999999;
-	}
-
-	.form__field2 {
-		width: 75%;
-	}
-
-	.form__field::placeholder {
-		color: transparent;
-		opacity: 0;
-		
-	}
-	.form__field:placeholder-shown ~ .form__label {
-		cursor: text;
-		top: 20px;
-	}
-
-	.form__label {
-		position: absolute;
-		top: 0;
-		display: block;
-		transition: 0.2s;
-		color: black;
-	}
-
-	.form__field:focus {
-		padding-bottom: 6px;
-		border-width: 2px;
-		border-image: black;
-		border-image-slice: 1;
-	}
-	.form__field:focus ~ .form__label {
-		position: absolute;
-		top: 0;
-		display: block;
-		transition: 0.2s;
-		color: black;
-	}
-
-	/* reset input */
-	.form__field:required, .form__field:invalid {
-		box-shadow: none;
-	}
-
-</style>
-
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/master-asset.css">
 <body>
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>
@@ -303,17 +72,17 @@
 															?>
 														</td>
 														<td>
-														<button data-bs-toggle="modal" href="#exampleModalToggle" role="button" class="btn btn-sm btn-info btn-edit" value="<?= $listrumah[$i]->KODE_ASSET ?>">
-															<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
-														</button>
-														<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value="<?= $listrumah[$i]->KODE_ASSET ?>">
-															<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
-														</button>
-														<button type="button" class="btn btn-sm btn-danger btn-remove" value="<?= $listrumah[$i]->KODE_ASSET ?>">
-															<img src="<?php echo base_url(); ?>assets/img/icons/delete.png" width="16" height="16">
-														</button>
+															<button data-bs-toggle="modal" href="#exampleModalToggle" role="button" class="btn btn-sm btn-info btn-edit" value="<?= $listrumah[$i]->KODE_ASSET ?>">
+																<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
+															</button>
+															<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value="<?= $listrumah[$i]->KODE_ASSET ?>">
+																<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
+															</button>
+															<button data-bs-toggle="modal" href="#modaldelete" role="button" class="btn btn-sm btn-danger btn-remove" value="<?= $listrumah[$i]->KODE_ASSET ?>">
+																<img src="<?php echo base_url(); ?>assets/img/icons/delete.png" width="16" height="16">
+															</button>
 														</td>
-														</tr>
+													</tr>
 												<?php
 													}
 												?>
@@ -434,7 +203,7 @@
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-				<h4 class="modal-title" id="modaltitle">Perbaikan Aset</h4>
+				<h4 class="modal-title">Perbaikan Aset</h4>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
@@ -496,6 +265,41 @@
 					<p id="modalsuccessbody">Modal body text goes here.</p>
 				</div>
 				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modaldelete" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h4 class="modal-title">Delete Aset</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body pt-0">
+					<div class="row text-center">
+						<div class="col-4">
+							<input type="text" name="kodedelete" id="kodedelete" hidden/>
+							<div class="form__group field mb-5">
+								<input type="date" class="form__field" name="tanggaldelete" id="tanggaldelete" placeholder="Tanggal Penghapusan"/>
+								<label class="form__label">Tanggal penghapusan<small class="form-error" id="error-tanggal-delete"></small></label>
+							</div>
+						</div>
+						<div class="col-8">
+						<div class="form__group field mb-5">
+								<input type="text" class="form__field" name="alasandelete" id="alasandelete" placeholder="Alasan penghapusan"/>
+								<label class="form__label">Alasan penghapusan<small class="form-error" id="error-alasan-delete"></small></label>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end">
+							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+							<button type="button" class="btn btn-dark px-5 btn-submit" id="btndelete">Delete</button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
 				</div>
 			</div>
 		</div>
@@ -706,6 +510,17 @@
 		$("#error-kondisi-perbaikan").html(errors["kondisirepair"]).css("opacity", 1);
 		$("#error-action-perbaikan").html(errors["actionrepair"]).css("opacity", 1);
 		$("#error-rab-perbaikan").html(errors["rabrepair"]).css("opacity", 1);
+		//
+
+
+		//bagian delete
+		$("#error-tanggal-delete").html("");
+		$("#error-alasan-delete").html("");
+
+		$("#error-tanggal-delete").html(errors["tanggaldelete"]).css("opacity", 1);
+		$("#error-alasan-delete").html(errors["alasandelete"]).css("opacity", 1);
+		//
+
 	}
 
 	function readURL(input) {
@@ -857,10 +672,13 @@
 				'</div>' + 
 			'</div>'
 		);
+
 		$("#kronologirepair").val('');
 		$("#kondisirepair").val('');
 		$("#actionrepair").val('');
 		$("#rabrepair").val('');
+
+		$("#alasandelete").val('');
 	}
 
 	function addFasilitas(){
@@ -985,6 +803,46 @@
 				var message = JSON.parse(response);
 				if (message["message"] == 1){
 					$('#modalsuccessbody').html('Sukses menambah data perbaikan rumah dinas!');
+					$('#modalsuccess').show();
+					setTimeout(function(){
+						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+					},1500);
+				}
+				raiseErrors(message);
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+	});
+
+	$(".btn-remove").click(function(){
+		resetInput();
+		let kode = $(this).attr('value');
+		let today = now.getFullYear()+"-"+(month)+"-"+(day);
+		$('#tanggaldelete').val(today);
+		$('#kodedelete').val(kode);
+		console.log($('#kodedelete').val());
+	});
+
+	$("#btndelete").click(function(){
+		let form_data = new FormData();
+
+		form_data.append("kodeaset", $("#kodedelete").val());
+		form_data.append("tanggaldelete", $("#tanggaldelete").val());
+		form_data.append("alasandelete", $("#alasandelete").val());
+		
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/deleteasset",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function(response){
+				console.log(response);
+				var message = JSON.parse(response);
+				if (message["message"] == 1){
+					$('#modalsuccessbody').html('Sukses menghapus data rumah dinas!');
 					$('#modalsuccess').show();
 					setTimeout(function(){
 						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server

@@ -47,17 +47,19 @@
 										<td><?= $listAsrama[$i]->INFO_1?></td>
 										<td><?= $listAsrama[$i]->INFO_2?></td>
 										<td><?= $listAsrama[$i]->INFO_3?></td>
-										<td><?= $listAsrama[$i]->INFO_4?></td>
+										<td><?= $listJumlahPenghuni[$i]?></td>
 										<td>
 											<?php 
-											if ($listAsrama[$i]->STATUS == 0){
-												echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
-											}
-											else if ($listAsrama[$i]->STATUS == 1){
-												echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+											if ($listAsrama[$i]->IS_DELETED == 1){
+												echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
 											}
 											else{
-												echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+												if ($listAsrama[$i]->STATUS == 0){
+													echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+												}
+												else if ($listAsrama[$i]->STATUS == 1){
+													echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+												}
 											}
 											?>
 										</td>
@@ -239,7 +241,7 @@
 							"<td>" + item.TGL_TRANSAKSI + "</td>" +
 							"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
 							"<td>" + item.USER_TRANSAKSI + "</td>" +
-							"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
+							"<td>" + item.KETERANGAN_1 + "</td>" +
 						"</tr>"
 						);
 						ctr += 1;

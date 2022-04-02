@@ -36,8 +36,8 @@
 									<th>Tanggal Pengadaan</th>
 									<th>User</th>
 									<th>Departemen</th>
-									<th>History</th>
 									<th>Status</th>
+									<th>History</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -52,20 +52,22 @@
 												<td><?= date('d F Y', strtotime($listkendaraan[$i]->TGL_PENGADAAN))?></td>
 												<td><!-- JIKA ADA YG PINJAM, AMBIL NAMA USER --></td>
 												<td><!-- JIKA ADA YG PINJAM, AMBIL DEPARTEMEN USER --></td>
-												<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listkendaraan[$i]->KODE_ASSET?>'>View</a></td>
 												<td>
 													<?php 
-													if ($listkendaraan[$i]->STATUS == 0){
-														echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
-													}
-													else if ($listkendaraan[$i]->STATUS == 1){
-														echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
-													}
-													else{
+													if ($listkendaraan[$i]->IS_DELETED == 1){
 														echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
 													}
-												?>
+													else{
+														if ($listkendaraan[$i]->STATUS == 0){
+															echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+														}
+														else if ($listkendaraan[$i]->STATUS == 1){
+															echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+														}
+													}
+													?>
 												</td>
+												<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listkendaraan[$i]->KODE_ASSET?>'>View</a></td>
 											</tr>
 									<?php
 										}
@@ -148,7 +150,7 @@
 						"<td>" + item.TGL_TRANSAKSI + "</td>" +
 						"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
 						"<td>" + item.USER_TRANSAKSI + "</td>" +
-						"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
+						"<td>" + item.KETERANGAN_1 + "</td>" +
 					"</tr>"
 					);
 					ctr += 1;

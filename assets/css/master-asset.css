@@ -1,0 +1,228 @@
+select option{
+	zoom: 1.1;
+}
+
+.file-upload {
+	background-color: black;
+	width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.file-upload-input {
+	opacity: 0; 
+	border: none;
+	border-radius: 3px;
+	position: absolute;
+	left: 0px;    
+	width: 100%;
+	top: 0px;
+	height: 100%;
+	cursor: pointer;
+}
+
+.image-upload-wrap {
+	border-radius: 12px;
+	border: 2px dashed black;
+	position: relative;
+	width: 150px;
+	height: 150px;
+}
+
+.image-upload-wrap-perbaikan {
+	border-radius: 12px;
+	border: 2px dashed black;
+	position: relative;
+	width: 360px;
+	height: 240px;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+	background-color: #222;
+	border: 2px dashed black;
+	transition: 0.25s;
+}
+
+.image-dropping,
+.image-upload-wrap-perbaikan:hover {
+	background-color: #222;
+	border: 2px dashed black;
+	transition: 0.25s;
+}
+
+.image-upload-wrap:hover .drag-text h3{
+	color: white;
+}
+
+.image-upload-wrap-perbaikan:hover .drag-text h3{
+	color: white;
+}
+
+.image-title-wrap {
+	padding: 0 15px 15px 15px;
+	color: #222;
+}
+
+.drag-text {
+	text-align: center;
+}
+
+.drag-text h3 {
+	font-weight: 200;
+	text-transform: uppercase;
+	color: black;
+	font-size: 21px;
+	padding: 25px 0;
+}
+
+.image-upload-wrap-perbaikan .drag-text h3 {
+	font-size: 32px;
+	padding: 85px 0;
+}
+
+.file-upload-image {
+	max-width: 95%;
+	max-height: 95%;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+#modalsuccess {
+	background: rgba(0,0,0,0.5);
+}
+
+.file-upload-remove {
+	opacity: 0;
+	background-color: #999999;
+	position: absolute;
+	top: 45px;
+	left: 45px;
+	width: 56px;
+	height: 56px;
+	border-radius:20px;
+}
+
+.file-upload-remove-perbaikan {
+	opacity: 0;
+	background-color: #999999;
+	position: absolute;
+	top: 85px;
+	left: 145px;
+	width: 70px;
+	height: 70px;
+	border-radius:20px;
+}
+
+.file-upload-wrapper{
+	height : 150px;
+	width: 150px;
+	min-height : 100px;
+	min-width: 100px;
+	border-radius: 12px;
+	border: 2px solid black;
+	cursor: pointer;
+	background: #DFEBF6;
+}
+
+.file-upload-wrapper-perbaikan{
+	width: 360px;
+	height: 240px;
+	min-height : 240px;
+	min-width: 360px;
+	border-radius: 12px;
+	border: 2px solid black;
+	cursor: pointer;
+	background: #DFEBF6;
+}
+
+.form-error{
+	margin-left: 10px;
+	background: #FF4859;
+	border-radius: 12px;
+	color: white;
+	transition: 0.4s;
+	opacity: 0;
+}
+
+.file-upload-wrapper:hover{
+	filter: brightness(70%);
+	transition: 0.4s;
+}
+
+.file-upload-wrapper-perbaikan:hover{
+	filter: brightness(70%);
+	transition: 0.4s;
+}
+
+
+.file-upload-wrapper:hover .file-upload-remove{
+	transition: 0.4s;
+	opacity: 1;
+}
+
+.file-upload-wrapper-perbaikan:hover .file-upload-remove-perbaikan{
+	transition: 0.4s;
+	opacity: 1;
+}
+
+.form__group {
+	position: relative;
+	padding: 18px 0 0;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.form__field {
+	font-family: inherit;
+	width: 100%;
+	border: 0;
+	border-bottom: 1px solid black;
+	outline: 0;
+	padding: 7px 0;
+	background: transparent;
+	transition: border-color 0.2s;
+	color: #999999;
+}
+
+.form__field2 {
+	width: 75%;
+}
+
+.form__field::placeholder {
+	color: transparent;
+	opacity: 0;
+	
+}
+.form__field:placeholder-shown ~ .form__label {
+	cursor: text;
+	top: 20px;
+}
+
+.form__label {
+	position: absolute;
+	top: 0;
+	display: block;
+	transition: 0.2s;
+	color: black;
+}
+
+.form__field:focus {
+	padding-bottom: 6px;
+	border-width: 2px;
+	border-image: black;
+	border-image-slice: 1;
+}
+.form__field:focus ~ .form__label {
+	position: absolute;
+	top: 0;
+	display: block;
+	transition: 0.2s;
+	color: black;
+}
+
+/* reset input */
+.form__field:required, .form__field:invalid {
+	box-shadow: none;
+}

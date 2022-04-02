@@ -37,6 +37,7 @@ class Master extends CI_Controller
 	public function listasrama()
 	{
 		$data['listAsrama'] = $this->Asset->getAsrama();
+		$data['listJumlahPenghuni'] = $this->Asset->getJumlahPenghuni($data['listAsrama']);
 		$this->load->view('list/asrama', $data);
 	}
 	public function listfasilitas()
@@ -211,6 +212,28 @@ class Master extends CI_Controller
 		else
 		{
 			$response["message"] = $this->Asset->fixAsset($data);
+			echo json_encode($response);
+		}
+	}
+
+	public function deleteAsset(){
+		$this->form_validation->set_rules('tanggaldelete', 'Tanggal penghapusan', 'required');
+		$this->form_validation->set_rules('alasandelete', 'Alasan penghapusan', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['kode'] = $this->input->post('kodeaset');
+		$data['tanggal'] = $this->input->post('tanggaldelete');
+		$data['alasan'] = $this->input->post('alasandelete');
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$response["message"] = $this->Asset->deleteAsset($data);
 			echo json_encode($response);
 		}
 	}

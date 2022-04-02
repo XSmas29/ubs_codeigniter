@@ -35,8 +35,8 @@
 									<th>Peruntukan</th>
 									<th>Lokasi</th>
 									<th>Tanggal Pengadaan</th>
-									<th>History</th>
 									<th>Status</th>
+									<th>History</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -49,20 +49,22 @@
 												<td><?= $listgedung[$i]->INFO_1?></td>
 												<td><?= $listgedung[$i]->INFO_2?></td>
 												<td><?= date('d F Y', strtotime($listgedung[$i]->TGL_PENGADAAN))?></td>
-												<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listgedung[$i]->KODE_ASSET?>'>View</a></td>
 												<td>
-													<?php 
-													if ($listgedung[$i]->STATUS == 0){
-														echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
-													}
-													else if ($listgedung[$i]->STATUS == 1){
-														echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+												<?php 
+													if ($listgedung[$i]->IS_DELETED == 1){
+														echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
 													}
 													else{
-														echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+														if ($listgedung[$i]->STATUS == 0){
+															echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+														}
+														else if ($listgedung[$i]->STATUS == 1){
+															echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+														}
 													}
 													?>
 												</td>
+												<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listgedung[$i]->KODE_ASSET?>'>View</a></td>
 											</tr>
 									<?php
 										}
@@ -149,7 +151,7 @@
 						"<td>" + item.TGL_TRANSAKSI + "</td>" +
 						"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
 						"<td>" + item.USER_TRANSAKSI + "</td>" +
-						"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
+						"<td>" + item.KETERANGAN_1 + "</td>" +
 					"</tr>"
 					);
 					ctr += 1;

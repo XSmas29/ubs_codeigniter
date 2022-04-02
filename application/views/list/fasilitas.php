@@ -35,8 +35,8 @@
 									<th>Tanggal Pengadaan</th>
 									<th>User</th>
 									<th>Departemen</th>
-									<th>History</th>
 									<th>Status</th>
+									<th>History</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -50,20 +50,22 @@
 										<td><?= date('d F Y', strtotime($listFasilitas[$i]->TGL_PENGADAAN)) ?></td>
 										<td><?= $listFasilitas[$i]->INFO_2?></td>
 										<td><?= $listFasilitas[$i]->INFO_3?></td>
-										<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listFasilitas[$i]->KODE_ASSET?>'>View</a></td>
 										<td>
 											<?php 
-											if ($listFasilitas[$i]->STATUS == 0){
-												echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
-											}
-											else if ($listFasilitas[$i]->STATUS == 1){
-												echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+											if ($listFasilitas[$i]->IS_DELETED == 1){
+												echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
 											}
 											else{
-												echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+												if ($listFasilitas[$i]->STATUS == 0){
+													echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+												}
+												else if ($listFasilitas[$i]->STATUS == 1){
+													echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+												}
 											}
 											?>
 										</td>
+										<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listFasilitas[$i]->KODE_ASSET?>'>View</a></td>
 										</tr>
 									<?php
 										}
@@ -144,7 +146,7 @@
 						"<td>" + item.TGL_TRANSAKSI + "</td>" +
 						"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
 						"<td>" + item.USER_TRANSAKSI + "</td>" +
-						"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
+						"<td>" + item.KETERANGAN_1 + "</td>" +
 					"</tr>"
 					);
 					ctr += 1;

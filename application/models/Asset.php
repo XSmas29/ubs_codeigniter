@@ -22,6 +22,16 @@ class Asset extends CI_Model
 		return $query;
 	}
 
+	public function getJumlahPenghuni($listkey) {
+		$listjumlah = [];
+		foreach($listkey as $key){
+			$keycode = $key->KODE_ASSET;
+			$query = $this->db->query("select count(fk_asset) as jumlah from user where fk_asset='$keycode'")->result();
+			array_push($listjumlah, $query[0]->jumlah);
+		}
+		return $listjumlah;
+	}
+
 	public function getGedung() {
 		$query = $this->db->query("select * from asset where fk_kategori=2"); 
 		return $query->result();
@@ -298,6 +308,7 @@ class Asset extends CI_Model
 			$query = $this->db->query("select max(kode_transaksi) as max from transaksi");
 			$newkode = intval(substr($query->result()[0]->max, -7)) + 1;
 			//
+
 			$date = date('Y-m-d');
 			//insert data ke tabel transaksi
 			$values = array(
@@ -355,6 +366,48 @@ class Asset extends CI_Model
 		{
 			$this->db->trans_rollback();
 			return "Terjadi kesalahan dalam input data perbaikan asset!";
+		}
+		else{
+			$this->db->trans_commit();
+			return 1;
+		}
+	}
+
+	public function deleteAsset($data){
+		$this->db->trans_begin();
+
+			//get max value dari transaksi
+			$query = $this->db->query("select max(kode_transaksi) as max from transaksi");
+			$newkode = intval(substr($query->result()[0]->max, -7)) + 1;
+			//
+
+			$date = date('Y-m-d');
+			//insert data ke tabel transaksi
+			$values = array(
+				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+				'FK_ASSET' => $data['kode'],
+				'TGL_TRANSAKSI' => $date,
+				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'AKTIVITAS_TRANSAKSI' => "penghapusan",
+				'KETERANGAN_1' => $data['alasan']
+			);
+			$this->db->insert('transaksi', $values);
+			//
+
+			//ubah data is_deleted di aset
+			$values = array(
+				'is_deleted' => 1,
+			);
+
+			$this->db->where('KODE_ASSET', $data['kode']);
+			$this->db->update('asset', $values);
+			//
+
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return "Terjadi kesalahan dalam penghapusan asset!";
 		}
 		else{
 			$this->db->trans_commit();
