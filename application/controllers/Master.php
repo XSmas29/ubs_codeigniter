@@ -77,6 +77,12 @@ class Master extends CI_Controller
 	}
 
 	public function masterKendaraan(){
+		if (!empty($this->session->flashdata('message'))) {
+			$data['message'] = $this->session->flashdata('message');
+		} elseif (!empty($this->session->flashdata('error'))) {
+			$data['error'] = $this->session->flashdata('error');
+		}
+
 		$data['listkendaraan'] = $this->Asset->getKendaraan();
 		$this->load->view('master/kendaraan', $data);
 	}
@@ -237,4 +243,56 @@ class Master extends CI_Controller
 			echo json_encode($response);
 		}
 	}
+
+	//MASIH TIDAK WORK
+	// public function addKendaraan(){
+	// 	$this->form_validation->set_rules('nama', 'Nama Aset', 'required');
+	// 	$this->form_validation->set_rules('kodeaset', 'Kode Aset', 'required');
+	// 	$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+	// 	$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
+	// 	$this->form_validation->set_rules('jenis', 'Jenis Aset', 'required');
+	// 	$this->form_validation->set_rules('kondisi', 'Kondisi Awal', 'required');
+	// 	$this->form_validation->set_rules('kategori', 'Kategori', 'required');
+	// 	$this->form_validation->set_rules('nopolisi', 'Nomor Polisi', 'required');
+	// 	$this->form_validation->set_rules('nomesin', 'Nomor Mesin', 'required');
+	// 	$this->form_validation->set_rules('mbpajak', 'Masa Berlaku Pajak', 'required');
+	// 	$this->form_validation->set_rules('mbplat', 'Masa Berlaku Plat', 'required');
+	// 	$this->form_validation->set_rules('bpkb', 'PIC BPKB', 'required');
+	// 	// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
+
+	// 	$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+	// 	$data['nama'] = $this->input->post('nama');
+	// 	$data['kode'] = $this->input->post('kodeaset');
+	// 	$data['lokasi'] = $this->input->post('lokasi');
+	// 	$data['tanggal'] = $this->input->post('tanggal');
+	// 	$data['jenis'] = $this->input->post('jenis');
+	// 	$data['kondisi'] = $this->input->post('kondisi');
+	// 	$data['kategori'] = $this->input->post('kategori');
+	// 	$data['nopolisi'] = $this->input->post('nopolisi');
+	// 	$data['nomesin'] = $this->input->post('nomesin');
+	// 	$data['mbpajak'] = $this->input->post('mbpajak');
+	// 	$data['mbplat'] = $this->input->post('mbplat');
+	// 	$data['bpkb'] = $this->input->post('bpkb');
+	// 	$data['gambar'] = $this->input->post('gambar');
+
+	// 	// if (isset($_FILES["files"])) {
+	// 	// 	print_r($_FILES["files"]);
+	// 	// }
+		
+	// 	//print_r('-'.$data['jumlahfasilitas'][0].'-');
+
+	// 	if ($this->form_validation->run() == FALSE)
+	// 	{	
+	// 		$json_response = $this->form_validation->error_array();
+	// 		echo json_encode($json_response);
+	// 	}
+	// 	else
+	// 	{
+	// 		$key = $data["kode"];
+	// 		$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
+	// 		$response["message"] = $this->Asset->addKendaraan($data, $ctr);
+	// 		echo json_encode($response);
+	// 	}
+	// }
 }
