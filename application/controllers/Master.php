@@ -143,14 +143,14 @@ class Master extends CI_Controller
 	}
 
 	public function editRumah(){
-		$this->form_validation->set_rules('nama', 'Nama Aset', 'required');
-		$this->form_validation->set_rules('kodeaset', 'Kode Aset', 'required');
+		$this->form_validation->set_rules('nama', 'Nama aset', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode aset', 'required');
 		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
-		$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
-		$this->form_validation->set_rules('jenis', 'Jenis Aset', 'required');
-		$this->form_validation->set_rules('kondisi', 'Kondisi Awal', 'required');
-		$this->form_validation->set_rules('kamar', 'Kamar Tidur', 'required');
-		$this->form_validation->set_rules('toilet', 'Kamar Mandi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal pengadaan', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis aset', 'required');
+		$this->form_validation->set_rules('kondisi', 'Kondisi awal', 'required');
+		$this->form_validation->set_rules('kamar', 'Kamar tidur', 'required');
+		$this->form_validation->set_rules('toilet', 'Kamar mandi', 'required');
 		$this->form_validation->set_rules('carport', 'Carport', 'required');
 		// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
 
@@ -179,6 +179,38 @@ class Master extends CI_Controller
 			$key = $data["kode"];
 			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
 			$response["message"] = $this->Asset->editRumah($data, $ctr);
+			echo json_encode($response);
+		}
+	}
+
+	public function fixAsset(){
+		$this->form_validation->set_rules('tanggalrepair', 'Tanggal perbaikan', 'required');
+		$this->form_validation->set_rules('kronologirepair', 'Kronologi', 'required');
+		$this->form_validation->set_rules('kondisirepair', 'Kondisi aset', 'required');
+		$this->form_validation->set_rules('actionrepair', 'Action plan', 'required');
+		$this->form_validation->set_rules('rabrepair', 'Jenis aset', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['kode'] = $this->input->post('kodeaset');
+		$data['tanggal'] = $this->input->post('tanggalrepair');
+		$data['kronologi'] = $this->input->post('kronologirepair');
+		$data['kondisi'] = $this->input->post('kondisirepair');
+		$data['action'] = $this->input->post('actionrepair');
+		$data['rab'] = $this->input->post('rabrepair');
+		$data['gambar'] = $this->input->post('gambar');
+
+		// var_dump($data['gambar']);
+		// die();
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$response["message"] = $this->Asset->fixAsset($data);
 			echo json_encode($response);
 		}
 	}

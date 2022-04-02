@@ -39,15 +39,33 @@
 		height: 150px;
 	}
 
+	.image-upload-wrap-perbaikan {
+		border-radius: 12px;
+		border: 2px dashed black;
+		position: relative;
+		width: 360px;
+		height: 240px;
+	}
+
 	.image-dropping,
 	.image-upload-wrap:hover {
-		border-radius: 12px;
+		background-color: #222;
+		border: 2px dashed black;
+		transition: 0.25s;
+	}
+
+	.image-dropping,
+	.image-upload-wrap-perbaikan:hover {
 		background-color: #222;
 		border: 2px dashed black;
 		transition: 0.25s;
 	}
 
 	.image-upload-wrap:hover .drag-text h3{
+		color: white;
+	}
+
+	.image-upload-wrap-perbaikan:hover .drag-text h3{
 		color: white;
 	}
 
@@ -66,6 +84,11 @@
 		color: black;
 		font-size: 21px;
 		padding: 25px 0;
+	}
+
+	.image-upload-wrap-perbaikan .drag-text h3 {
+		font-size: 32px;
+		padding: 85px 0;
 	}
 
 	.file-upload-image {
@@ -91,11 +114,33 @@
 		border-radius:20px;
 	}
 
+	.file-upload-remove-perbaikan {
+		opacity: 0;
+		background-color: #999999;
+		position: absolute;
+		top: 85px;
+		left: 145px;
+		width: 70px;
+		height: 70px;
+		border-radius:20px;
+	}
+
 	.file-upload-wrapper{
 		height : 150px;
 		width: 150px;
 		min-height : 100px;
 		min-width: 100px;
+		border-radius: 12px;
+		border: 2px solid black;
+		cursor: pointer;
+		background: #DFEBF6;
+	}
+
+	.file-upload-wrapper-perbaikan{
+		width: 360px;
+		height: 240px;
+		min-height : 240px;
+		min-width: 360px;
 		border-radius: 12px;
 		border: 2px solid black;
 		cursor: pointer;
@@ -116,7 +161,18 @@
 		transition: 0.4s;
 	}
 
+	.file-upload-wrapper-perbaikan:hover{
+		filter: brightness(70%);
+		transition: 0.4s;
+	}
+
+
 	.file-upload-wrapper:hover .file-upload-remove{
+		transition: 0.4s;
+		opacity: 1;
+	}
+
+	.file-upload-wrapper-perbaikan:hover .file-upload-remove-perbaikan{
 		transition: 0.4s;
 		opacity: 1;
 	}
@@ -250,7 +306,7 @@
 														<button data-bs-toggle="modal" href="#exampleModalToggle" role="button" class="btn btn-sm btn-info btn-edit" value="<?= $listrumah[$i]->KODE_ASSET ?>">
 															<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
 														</button>
-														<button type="button" class="btn btn-sm btn-secondary btn-repair" value="<?= $listrumah[$i]->KODE_ASSET ?>">
+														<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value="<?= $listrumah[$i]->KODE_ASSET ?>">
 															<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
 														</button>
 														<button type="button" class="btn btn-sm btn-danger btn-remove" value="<?= $listrumah[$i]->KODE_ASSET ?>">
@@ -364,6 +420,62 @@
 						<div class="d-flex justify-content-end">
 							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
 							<button type="button" class="btn btn-dark px-5 btn-submit" id="btnsave">Save</button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalperbaikan" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h4 class="modal-title" id="modaltitle">Perbaikan Aset</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
+					<div class="row text-center">
+						<div class="col-6">
+								<input type="text" name="koderepair" id="koderepair" hidden/>
+							<div class="form__group field mb-5">
+								<input type="date" class="form__field" name="tanggalrepair" id="tanggalrepair" placeholder="Tanggal Kejadian"/>
+								<label class="form__label">Tanggal kejadian<small class="form-error" id="error-tanggal-perbaikan"></small></label>
+							</div>
+							<div class="form__group field mb-5">
+								<textarea name="Text1" class="form__field" cols="40" rows="3" name="kronologirepair" id="kronologirepair" placeholder="Kronologi"></textarea>
+								<label class="form__label">Kronologi<small class="form-error" id="error-kronologi-perbaikan"></small></label>
+							</div>
+							<div class="form__group field mb-5">
+								<input type="text" class="form__field" name="kondisirepair" id="kondisirepair" placeholder="Kondisi Aset"/>
+								<label class="form__label">Kondisi aset<small class="form-error" id="error-kondisi-perbaikan"></small></label>
+							</div>
+							<div class="form__group field mb-5">
+								<input type="text" class="form__field" name="actionrepair" id="actionrepair" placeholder="Action plan"/>
+								<label class="form__label">Action plan<small class="form-error" id="error-action-perbaikan"></small></label>
+							</div>
+							<div class="form__group field mb-5">
+								<input type="text" class="form__field" name="rabrepair" id="rabrepair" placeholder="RAB"/>
+								<label class="form__label">RAB<small class="form-error" id="error-rab-perbaikan"></small></label>
+							</div>
+						</div>
+						<div class="col-6">
+							<h3 class="my-4">Upload Foto</h3>
+							<div class="d-flex flex-wrap justify-content-center" id="image-upload-wrapper-perbaikan">
+								<div class="image-upload-wrap-perbaikan mx-1">
+									<input class="file-upload-input" type='file' id='imageperbaikan' onchange="readURLperbaikan(this);" accept="image/*" />
+									<div class="drag-text">
+										<h3>Drag and drop or select an Image</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end">
+							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+							<button type="button" class="btn btn-dark px-5 btn-submit" id="btnfix">Fix</button>
 						</div>
 					</div>
 				</div>
@@ -554,6 +666,8 @@
 	}
 
 	function raiseErrors(errors){
+		console.log(errors);
+		//bagian add & edit
 		$("#error-nama").html("");
 		$("#error-kode").html("");
 		$("#error-lokasi").html("");
@@ -577,6 +691,21 @@
 		$("#error-carport").html(errors["carport"]).css("opacity", 1);
 		$("#error-namafas").html(errors["namafas"]).css("opacity", 1);
 		$("#error-jumlahfas").html(errors["jumlahfas"]).css("opacity", 1);
+		//
+
+
+		//bagian perbaikan
+		$("#error-tanggal-perbaikan").html("");
+		$("#error-kronologi-perbaikan").html("");
+		$("#error-kondisi-perbaikan").html("");
+		$("#error-action-perbaikan").html("");
+		$("#error-rab-perbaikan").html("");
+		
+		$("#error-tanggal-perbaikan").html(errors["tanggalrepair"]).css("opacity", 1);
+		$("#error-kronologi-perbaikan").html(errors["kronologirepair"]).css("opacity", 1);
+		$("#error-kondisi-perbaikan").html(errors["kondisirepair"]).css("opacity", 1);
+		$("#error-action-perbaikan").html(errors["actionrepair"]).css("opacity", 1);
+		$("#error-rab-perbaikan").html(errors["rabrepair"]).css("opacity", 1);
 	}
 
 	function readURL(input) {
@@ -611,6 +740,36 @@
 		//console.log($('.file-upload-input').eq(0).prop('files')[0]);
 	};
 
+	function readURLperbaikan(input){
+		if (input.files && input.files[0]) {
+			var fileExtension = ['jpeg', 'jpg', 'png'];
+			if ($.inArray($(input).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+				alert("Only formats are allowed : "+fileExtension.join(', '));
+			}
+			else{
+				$(".file-upload-input").hide();
+				$(".image-upload-wrap-perbaikan").hide();
+				
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$("#image-upload-wrapper-perbaikan").append(
+						"<div class='file-upload-wrapper-perbaikan mx-1 mb-1 d-flex align-items-center' onclick='removeImagePerbaikan(this)'>" + 
+							"<img class='file-upload-image' src='" + e.target.result + "'>" +
+							'<div class="file-upload-remove-perbaikan cursor-pointer d-flex align-items-center justify-content-center">' +
+								"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
+							'</div>' + 
+						"</div>"
+					);
+
+					$('.image-title').html(input.files[0].name);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	}
+
 	function removeImage(image){
 		//menghapus element image
 		let index = $(image).index() - listcurrentimage.length;
@@ -634,8 +793,24 @@
 		}
 	}
 
+	function removeImagePerbaikan(image){
+		//menghapus element image
+		let index = $(image).index();
+		$(image).remove();
+		//
+
+		$(".image-upload-wrap-perbaikan").html(
+			'<input class="file-upload-input" type="file" id="imageperbaikan" onchange="readURLperbaikan(this);" accept="image/*" />' +
+			'<div class="drag-text">' +
+				'<h3>Drag and drop or select an Image</h3>' +
+			'</div>'
+		);
+		
+		$(".image-upload-wrap-perbaikan").show();
+	}
+
 	function resetInput(){
-		$("#modaltitle").html('');
+		
 		$(".form-error").text('');
 		$("#nama").val('');
 		$("#lokasi").val('');
@@ -673,7 +848,19 @@
 				'</div>' + 
 			'</div>'
 		);
-		
+
+		$("#image-upload-wrapper-perbaikan").html(
+			'<div class="image-upload-wrap-perbaikan mx-1">' + 
+				'<input class="file-upload-input" type="file" id="imageperbaikan" onchange="readURLperbaikan(this);" accept="image/*" />' + 
+				'<div class="drag-text">' + 
+					'<h3>Drag and drop or select an Image</h3>' + 
+				'</div>' + 
+			'</div>'
+		);
+		$("#kronologirepair").val('');
+		$("#kondisirepair").val('');
+		$("#actionrepair").val('');
+		$("#rabrepair").val('');
 	}
 
 	function addFasilitas(){
@@ -768,5 +955,47 @@
 		
 	});
 	
+	$(".btn-repair").click(function(){
+		resetInput();
+		let kode = $(this).attr('value');
+		let today = now.getFullYear()+"-"+(month)+"-"+(day);
+		$('#tanggalrepair').val(today);
+		$('#koderepair').val(kode);
+	});
+
+	$("#btnfix").click(function(){
+		let form_data = new FormData();
+        form_data.append("gambar", $('#imageperbaikan').prop('files')[0]);
+		form_data.append("kodeaset", $("#koderepair").val());
+		form_data.append("tanggalrepair", $("#tanggalrepair").val());
+		form_data.append("kronologirepair", $("#kronologirepair").val());
+		form_data.append("kondisirepair", $("#kondisirepair").val());
+		form_data.append("actionrepair", $("#actionrepair").val());
+		form_data.append("rabrepair", $("#rabrepair").val());
+		
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/fixasset",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function(response){
+				console.log(response);
+				var message = JSON.parse(response);
+				if (message["message"] == 1){
+					$('#modalsuccessbody').html('Sukses menambah data perbaikan rumah dinas!');
+					$('#modalsuccess').show();
+					setTimeout(function(){
+						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+					},1500);
+				}
+				raiseErrors(message);
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+	});
+
 </script>
 

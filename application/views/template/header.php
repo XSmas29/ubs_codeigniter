@@ -29,6 +29,10 @@
 	.modal-xl{
 		min-width: 80% !important;
 	}
+
+	.modal-lg{
+		min-width: 50% !important;
+	}
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-4 d-block" data-navbar-on-scroll="data-navbar-on-scroll">

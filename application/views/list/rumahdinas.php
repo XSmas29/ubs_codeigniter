@@ -295,7 +295,7 @@
 							"<td>" + item.TGL_TRANSAKSI + "</td>" +
 							"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
 							"<td>" + item.USER_TRANSAKSI + "</td>" +
-							"<td>" + item.KETERANGAN_TRANSAKSI + "</td>" +
+							"<td>" + item.KETERANGAN_1 + "</td>" +
 						"</tr>"
 						);
 						ctr += 1;
