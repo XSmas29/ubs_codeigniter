@@ -42,6 +42,15 @@ class Asset extends CI_Model
 		return $query->result();
 	}
 
+	public function getDataKategori() {
+		$query = $this->db->query("select * from kategori")->result(); 
+		return $query;
+	}
+	public function getDataAktivitas() {
+		$query = $this->db->query("select * from transaksi")->result(); 
+		return $query;
+	}
+
 	public function getAssetbyKey($key) {
 		$query = $this->db->query("select * from asset where kode_asset='$key'"); 
 		return $query->result();
@@ -74,6 +83,25 @@ class Asset extends CI_Model
 	public function getAssetCount($key) {
 		$query = $this->db->query("select count(fk_kategori) as jumlah from asset where fk_kategori='$key'"); 
 		return $query->result();
+	}
+
+	public function getKodeAsrama($data){
+		$nama = $data["asrama"];
+		$query = $this->db->query("select kode_asset from asset where fk_kategori=4 and lower(nama_asset)=lower('$nama') limit 1");
+		
+		$newkode = date("d/m/Y", strtotime($data["tanggal"]));
+		
+		
+		if ($query->num_rows() == 1){
+			$arrkode = explode('/', $query->result()[0]->kode_asset);
+			$newkode = $newkode.'/A/UBS/'.$arrkode[5].'/'.$data["lantai"].'/'.$data["kamar"];
+		}
+		else{
+			//$newkode = $newkode.'/A/UBS/'.$query->result()[0].'/'.$data["lantai"].'/'.$data["kamar"];
+		}
+		var_dump($newkode);
+		die();
+		return $newkode;
 	}
 
 	public function addRumah($data, $key){

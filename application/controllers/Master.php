@@ -96,9 +96,31 @@ class Master extends CI_Controller
 		$data['listFasilitas'] = $this->Asset->getFasilitas();
 		$this->load->view('master/fasilitas', $data);
 	}
+
+	public function masterLaporan(){
+		$data['listDataKategori'] = $this->Asset->getDataKategori();
+		$data['listDataAktivitas'] = $this->Asset->getDataAktivitas();
+		$this->load->view('master/laporan', $data);
+	}
+	// public function masterDataKategori(){
+	// 	$data['listDataKategori'] = $this->Asset->getDataKategori();
+	// 	$this->load->view('master/laporan', $data);
+	// }
+	// public function masterDataAktivitas(){
+	// 	$data['listDataAktivitas'] = $this->Asset->getDataAktivitas();
+	// 	$this->load->view('master/laporan', $data);
+	// }
+
 	public function jumlahAsset(){
 		$key = $this->input->post('key');
 		$data['count'] = $this->Asset->getAssetCount($key);
+		echo json_encode($data);
+	}
+
+	public function jumlahAsrama(){
+		$fk = $this->input->post('key');
+		$nama = $this->input->post('nama');
+		$data['count'] = $this->Asset->getAssetCount($fk, $nama);
 		echo json_encode($data);
 	}
 
@@ -244,55 +266,33 @@ class Master extends CI_Controller
 		}
 	}
 
-	//MASIH TIDAK WORK
-	// public function addKendaraan(){
-	// 	$this->form_validation->set_rules('nama', 'Nama Aset', 'required');
-	// 	$this->form_validation->set_rules('kodeaset', 'Kode Aset', 'required');
-	// 	$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
-	// 	$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
-	// 	$this->form_validation->set_rules('jenis', 'Jenis Aset', 'required');
-	// 	$this->form_validation->set_rules('kondisi', 'Kondisi Awal', 'required');
-	// 	$this->form_validation->set_rules('kategori', 'Kategori', 'required');
-	// 	$this->form_validation->set_rules('nopolisi', 'Nomor Polisi', 'required');
-	// 	$this->form_validation->set_rules('nomesin', 'Nomor Mesin', 'required');
-	// 	$this->form_validation->set_rules('mbpajak', 'Masa Berlaku Pajak', 'required');
-	// 	$this->form_validation->set_rules('mbplat', 'Masa Berlaku Plat', 'required');
-	// 	$this->form_validation->set_rules('bpkb', 'PIC BPKB', 'required');
-	// 	// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
+	public function addAsrama(){
+		$this->form_validation->set_rules('asrama', 'Asrama', 'required');
+		$this->form_validation->set_rules('lantai', 'Lantai', 'required');
+		$this->form_validation->set_rules('kamar', 'Kamar', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
+		$this->form_validation->set_rules('kapasitas', 'Maksimal Penghuni', 'required');
 
-	// 	$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
-	// 	$data['nama'] = $this->input->post('nama');
-	// 	$data['kode'] = $this->input->post('kodeaset');
-	// 	$data['lokasi'] = $this->input->post('lokasi');
-	// 	$data['tanggal'] = $this->input->post('tanggal');
-	// 	$data['jenis'] = $this->input->post('jenis');
-	// 	$data['kondisi'] = $this->input->post('kondisi');
-	// 	$data['kategori'] = $this->input->post('kategori');
-	// 	$data['nopolisi'] = $this->input->post('nopolisi');
-	// 	$data['nomesin'] = $this->input->post('nomesin');
-	// 	$data['mbpajak'] = $this->input->post('mbpajak');
-	// 	$data['mbplat'] = $this->input->post('mbplat');
-	// 	$data['bpkb'] = $this->input->post('bpkb');
-	// 	$data['gambar'] = $this->input->post('gambar');
+		$data['asrama'] = $this->input->post('asrama');
+		$data['lantai'] = $this->input->post('lantai');
+		$data['kamar'] = $this->input->post('kamar');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['kapasitas'] = $this->input->post('kapasitas');
+		$data['namafasilitas'] = explode(",",$this->input->post('namafasilitas'));
+		$data['jumlahfasilitas'] = explode(",",$this->input->post('jumlahfasilitas'));
 
-	// 	// if (isset($_FILES["files"])) {
-	// 	// 	print_r($_FILES["files"]);
-	// 	// }
-		
-	// 	//print_r('-'.$data['jumlahfasilitas'][0].'-');
-
-	// 	if ($this->form_validation->run() == FALSE)
-	// 	{	
-	// 		$json_response = $this->form_validation->error_array();
-	// 		echo json_encode($json_response);
-	// 	}
-	// 	else
-	// 	{
-	// 		$key = $data["kode"];
-	// 		$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
-	// 		$response["message"] = $this->Asset->addKendaraan($data, $ctr);
-	// 		echo json_encode($response);
-	// 	}
-	// }
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$data['kode'] = $this->Asset->getKodeAsrama($data);
+			$response["message"] = $this->Asset->addAsrama($data);
+			echo json_encode($response);
+		}
+	}
 }

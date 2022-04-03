@@ -31,7 +31,7 @@
 	}
 
 	.modal-lg{
-		min-width: 50% !important;
+		min-width: 60% !important;
 	}
 </style>
 
