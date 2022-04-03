@@ -96,6 +96,13 @@ class Master extends CI_Controller
 		echo json_encode($data);
 	}
 
+	public function jumlahAsrama(){
+		$fk = $this->input->post('key');
+		$nama = $this->input->post('nama');
+		$data['count'] = $this->Asset->getAssetCount($fk, $nama);
+		echo json_encode($data);
+	}
+
 	public function addRumah(){
 		$this->form_validation->set_rules('nama', 'Nama Aset', 'required');
 		$this->form_validation->set_rules('kodeaset', 'Kode Aset', 'required');
@@ -234,6 +241,36 @@ class Master extends CI_Controller
 		else
 		{
 			$response["message"] = $this->Asset->deleteAsset($data);
+			echo json_encode($response);
+		}
+	}
+
+	public function addAsrama(){
+		$this->form_validation->set_rules('asrama', 'Asrama', 'required');
+		$this->form_validation->set_rules('lantai', 'Lantai', 'required');
+		$this->form_validation->set_rules('kamar', 'Kamar', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
+		$this->form_validation->set_rules('kapasitas', 'Maksimal Penghuni', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['asrama'] = $this->input->post('asrama');
+		$data['lantai'] = $this->input->post('lantai');
+		$data['kamar'] = $this->input->post('kamar');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['kapasitas'] = $this->input->post('kapasitas');
+		$data['namafasilitas'] = explode(",",$this->input->post('namafasilitas'));
+		$data['jumlahfasilitas'] = explode(",",$this->input->post('jumlahfasilitas'));
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$data['kode'] = $this->Asset->getKodeAsrama($data);
+			$response["message"] = $this->Asset->addAsrama($data);
 			echo json_encode($response);
 		}
 	}

@@ -76,6 +76,25 @@ class Asset extends CI_Model
 		return $query->result();
 	}
 
+	public function getKodeAsrama($data){
+		$nama = $data["asrama"];
+		$query = $this->db->query("select kode_asset from asset where fk_kategori=4 and lower(nama_asset)=lower('$nama') limit 1");
+		
+		$newkode = date("d/m/Y", strtotime($data["tanggal"]));
+		
+		
+		if ($query->num_rows() == 1){
+			$arrkode = explode('/', $query->result()[0]->kode_asset);
+			$newkode = $newkode.'/A/UBS/'.$arrkode[5].'/'.$data["lantai"].'/'.$data["kamar"];
+		}
+		else{
+			//$newkode = $newkode.'/A/UBS/'.$query->result()[0].'/'.$data["lantai"].'/'.$data["kamar"];
+		}
+		var_dump($newkode);
+		die();
+		return $newkode;
+	}
+
 	public function addRumah($data, $key){
 		$this->db->trans_begin();
 			//insert data ke tabel asset

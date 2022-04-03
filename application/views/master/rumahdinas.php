@@ -279,14 +279,14 @@
 				</div>
 				<div class="modal-body pt-0">
 					<div class="row text-center">
-						<div class="col-4">
+						<div class="col-5">
 							<input type="text" name="kodedelete" id="kodedelete" hidden/>
 							<div class="form__group field mb-5">
 								<input type="date" class="form__field" name="tanggaldelete" id="tanggaldelete" placeholder="Tanggal Penghapusan"/>
 								<label class="form__label">Tanggal penghapusan<small class="form-error" id="error-tanggal-delete"></small></label>
 							</div>
 						</div>
-						<div class="col-8">
+						<div class="col-7">
 						<div class="form__group field mb-5">
 								<input type="text" class="form__field" name="alasandelete" id="alasandelete" placeholder="Alasan penghapusan"/>
 								<label class="form__label">Alasan penghapusan<small class="form-error" id="error-alasan-delete"></small></label>
