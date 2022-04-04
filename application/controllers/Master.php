@@ -327,4 +327,74 @@ class Master extends CI_Controller
 			echo json_encode($response);
 		}
 	}
+
+	public function addFasilitas(){
+		$this->form_validation->set_rules('nama', 'Nama Aset', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode Aset', 'required');
+		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis Aset', 'required');
+		$this->form_validation->set_rules('kondisi', 'Kondisi Awal', 'required');
+		$this->form_validation->set_rules('garansi', 'Garansi', 'required');
+		// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['nama'] = $this->input->post('nama');
+		$data['kode'] = $this->input->post('kodeaset');
+		$data['lokasi'] = $this->input->post('lokasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['jenis'] = $this->input->post('jenis');
+		$data['kondisi'] = $this->input->post('kondisi');
+		$data['garansi'] = $this->input->post('garansi');
+		$data['gambar'] = $this->input->post('gambar');
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$key = $data["kode"];
+			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
+			$response["message"] = $this->Asset->addFasilitas($data, $ctr);
+			echo json_encode($response);
+		}
+	}
+
+	public function editFasilitas(){
+		$this->form_validation->set_rules('nama', 'Nama aset', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode aset', 'required');
+		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal pengadaan', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis aset', 'required');
+		$this->form_validation->set_rules('kondisi', 'Kondisi awal', 'required');
+		$this->form_validation->set_rules('garansi', 'Garansi', 'required');
+		// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['nama'] = $this->input->post('nama');
+		$data['kode'] = $this->input->post('kodeaset');
+		$data['lokasi'] = $this->input->post('lokasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['jenis'] = $this->input->post('jenis');
+		$data['kondisi'] = $this->input->post('kondisi');
+		$data['garansi'] = $this->input->post('garansi');
+		$data['gambar'] = $this->input->post('gambar');
+		$data['currentimage'] = $this->input->post('currentimage');
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$key = $data["kode"];
+			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
+			$response["message"] = $this->Asset->editFasilitas($data, $ctr);
+			echo json_encode($response);
+		}
+	}
 }

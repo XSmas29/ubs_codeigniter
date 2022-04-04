@@ -216,7 +216,6 @@ class Asset extends CI_Model
 			
 			//ganti data di tabel asset
 			$values = array(
-				'KODE_ASSET' => $data['kode'],
 				'FK_KATEGORI' => 1,
 				'NAMA_ASSET' => $data['nama'],
 				'INFO_1' => $data['lokasi'],
@@ -421,6 +420,7 @@ class Asset extends CI_Model
 			$this->db->insert('transaksi', $values);
 			//
 
+
 			//ubah data is_deleted di aset
 			$values = array(
 				'is_deleted' => 1,
@@ -429,7 +429,6 @@ class Asset extends CI_Model
 			$this->db->where('KODE_ASSET', $data['kode']);
 			$this->db->update('asset', $values);
 			//
-
 
 		if ($this->db->trans_status() === FALSE)
 		{
@@ -565,6 +564,196 @@ class Asset extends CI_Model
 		}
 		else {
 			return 2;
+		}
+	}
+
+	public function addFasilitas($data, $key){
+		$this->db->trans_begin();
+			//insert data ke tabel asset
+			$values = array(
+				'KODE_ASSET' => $data['kode'],
+				'FK_KATEGORI' => 5,
+				'NAMA_ASSET' => $data['nama'],
+				'INFO_1' => $data['lokasi'],
+				'INFO_2' => $data['jenis'],
+				'INFO_3' => $data['kondisi'],
+				'INFO_4' => $data['garansi'],
+				'TGL_PENGADAAN' => $data['tanggal'],
+			);
+			$this->db->insert('asset', $values);
+			//
+
+			// urusan gambar
+			//print_r($_FILES["files"]);
+			if (isset($_FILES["files"])){
+				
+				$ctr = intval($key);
+				for ($i=0; $i < count($_FILES["files"]["name"]); $i++) { 
+					$ctr += 1;
+					// upload gambar ke dalam folder CI nya
+					$_FILES['file']['name']       = $_FILES['files']['name'][$i];
+					$_FILES['file']['type']       = $_FILES['files']['type'][$i];
+					$_FILES['file']['tmp_name']   = $_FILES['files']['tmp_name'][$i];
+					$_FILES['file']['error']      = $_FILES['files']['error'][$i];
+					$_FILES['file']['size']       = $_FILES['files']['size'][$i];
+
+					$config['upload_path'] = './assets/img/asset';
+					$config['allowed_types'] = '*';
+	
+					$path = $_FILES['file']['name'];
+					$ext = pathinfo($path, PATHINFO_EXTENSION);
+					
+					//var_dump(str_pad($ctr, 3, "0", STR_PAD_LEFT)." - ".$ctr);
+
+					$filename = 'FASILITAS'.substr($data['kode'], -3).'_'.str_pad($ctr, 3, "0", STR_PAD_LEFT).'.'.$ext;
+					$config['file_name'] = $filename;
+		
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+					
+					if(!$this->upload->do_upload('file'))
+					{  
+						echo $this->upload->display_errors();  
+					}  
+					else  
+					{  
+						$imgdata = $this->upload->data();
+					}
+					//
+					
+					//insert data gambar ke database
+					$values = array(
+						'KODE_GAMBAR' => $filename,
+						'FK_ASSET' => $data['kode'],
+					);
+
+					$this->db->insert('gambar', $values);
+				}
+			}
+			// 
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return "Terjadi kesalahan dalam memasukkan data rumah dinas!";
+		}
+		else{
+			$this->db->trans_commit();
+
+			//get max value dari transaksi
+			$query = $this->db->query("select max(kode_transaksi) as max from transaksi");
+			$newkode = intval(substr($query->result()[0]->max, -7)) + 1;
+			//
+
+			$values = array(
+				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+				'FK_ASSET' => $data['kode'],
+				'TGL_TRANSAKSI' => $data['tanggal'],
+				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'AKTIVITAS_TRANSAKSI' => "pengadaan",
+				'KETERANGAN_1' => "pengadaan fasilitas ".substr($data['kode'], -3),
+			);
+			$this->db->insert('transaksi', $values);
+
+			return 1;
+		}
+	}
+
+	public function editFasilitas($data, $key){
+		$this->db->trans_begin();
+			
+			//ganti data di tabel asset
+			$values = array(
+				'FK_KATEGORI' => 5,
+				'NAMA_ASSET' => $data['nama'],
+				'INFO_1' => $data['lokasi'],
+				'INFO_2' => $data['jenis'],
+				'INFO_3' => $data['kondisi'],
+				'INFO_4' => $data['garansi'],
+			);
+			$this->db->where('KODE_ASSET', $data['kode']);
+			$this->db->update('asset', $values);
+			//
+
+
+			//hapus data gambar based on img object lalu add img baru
+			$array = explode(',', $data["currentimage"]);
+			$this->db->where_not_in('KODE_GAMBAR', $array);
+			$this->db->where('FK_ASSET',  $data['kode']);
+			$this->db->delete('gambar');
+
+			if (isset($_FILES["files"])){
+				$ctr = intval($key);
+				for ($i=0; $i < count($_FILES["files"]["name"]); $i++) { 
+					$ctr += 1;
+					// upload gambar ke dalam folder CI nya
+					$_FILES['file']['name']       = $_FILES['files']['name'][$i];
+					$_FILES['file']['type']       = $_FILES['files']['type'][$i];
+					$_FILES['file']['tmp_name']   = $_FILES['files']['tmp_name'][$i];
+					$_FILES['file']['error']      = $_FILES['files']['error'][$i];
+					$_FILES['file']['size']       = $_FILES['files']['size'][$i];
+
+					$config['upload_path'] = './assets/img/asset';
+					$config['allowed_types'] = '*';
+	
+					$path = $_FILES['file']['name'];
+					$ext = pathinfo($path, PATHINFO_EXTENSION);
+					
+					//var_dump(str_pad($ctr, 3, "0", STR_PAD_LEFT)." - ".$ctr);
+
+					$filename = 'FASILITAS'.substr($data['kode'], -3).'_'.str_pad($ctr, 3, "0", STR_PAD_LEFT).'.'.$ext;
+					$config['file_name'] = $filename;
+
+					if(file_exists($config['upload_path']."/".$config['file_name'])) unlink($config['upload_path']."/".$config['file_name']);
+
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+					
+					if(!$this->upload->do_upload('file'))
+					{  
+						echo $this->upload->display_errors();
+					}  
+					else  
+					{  
+						$imgdata = $this->upload->data();
+					}
+					//
+					
+
+					//insert data gambar ke database
+					$values = array(
+						'KODE_GAMBAR' => $filename,
+						'FK_ASSET' => $data['kode'],
+					);
+
+					$this->db->insert('gambar', $values);
+				}
+			}
+			//
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return "Terjadi kesalahan dalam mengupdate fasilitas!";
+		}
+		else{
+			$this->db->trans_commit();
+
+			//get max value dari transaksi
+			$query = $this->db->query("select max(kode_transaksi) as max from transaksi");
+			$newkode = intval(substr($query->result()[0]->max, -7)) + 1;
+			//
+			$date = date('Y-m-d');
+
+			$values = array(
+				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+				'FK_ASSET' => $data['kode'],
+				'TGL_TRANSAKSI' => $date,
+				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'AKTIVITAS_TRANSAKSI' => "perubahan",
+				'KETERANGAN_1' => "perubahan data fasilitas ".substr($data['kode'], -3),
+			);
+			$this->db->insert('transaksi', $values);
+			return 1;
 		}
 	}
 }

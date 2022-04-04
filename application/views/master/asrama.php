@@ -298,7 +298,7 @@
 	});
 
 	function resetInput(){
-		
+		//add & edit
 		$(".form-error").text('');
 		$("#asrama").val('');
 		$("#lantai").val('');
@@ -324,7 +324,9 @@
 				'</div>' + 
 			'</div>'
 		);
+		//
 
+		//perbaikan
 		$("#image-upload-wrapper-perbaikan").html(
 			'<div class="image-upload-wrap-perbaikan mx-1">' + 
 				'<input class="file-upload-input" type="file" id="imageperbaikan" onchange="readURLperbaikan(this);" accept="image/*" />' + 
@@ -338,7 +340,9 @@
 		$("#kondisirepair").val('');
 		$("#actionrepair").val('');
 		$("#rabrepair").val('');
+		//
 
+		//delete
 		$("#alasandelete").val('');
 	}
 

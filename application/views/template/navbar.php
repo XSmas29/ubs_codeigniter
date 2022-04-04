@@ -18,8 +18,3 @@
 	<li class="mb-3 link-admin"><a class='link-admin-fasilitas' href='<?php echo site_url("Master/masterfasilitas"); ?>' style="text-decoration: none; color: black">Fasilitas</a></li>
 	<li class="mb-3 link-admin"><a class='link-admin-laporan' href='<?php echo site_url("Master/masterlaporan"); ?>' style="text-decoration: none; color: black">Laporan Aset</a></li>
 </ul>
-
-
-
-
-

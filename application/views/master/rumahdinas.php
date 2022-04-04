@@ -407,7 +407,7 @@
 					$('#modalsuccessbody').html('Sukses menambah data rumah dinas!');
 					$('#modalsuccess').show();
 					setTimeout(function(){
-						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+						window.location.reload();
 					},1500);
 				}
 				raiseErrors(message);
@@ -776,8 +776,6 @@
 				alert("Error when loading asset!")
 			}
 		});
-
-		
 	});
 	
 	$(".btn-repair").click(function(){
