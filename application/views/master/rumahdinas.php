@@ -8,6 +8,13 @@
 	<title>Master | Rumah Dinas</title>
 </head>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/master-asset.css">
+<style>
+	.link-admin-rumah{
+		font-weight: bold;
+		font-size: 21px;
+		transition: 0.2s;
+	}
+</style>
 <body>
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>
@@ -167,7 +174,7 @@
 									<div class="form__group mb-5" id="listjumlahfasilitas">
 										<label class="form__label">Jumlah</label>
 										<div class="d-flex justify-content-start align-items-center">
-											<input type="text" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>
+											<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>
 											<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>
 										</div>
 									</div>
@@ -211,7 +218,7 @@
 						<div class="col-6">
 								<input type="text" name="koderepair" id="koderepair" hidden/>
 							<div class="form__group field mb-5">
-								<input type="date" class="form__field" name="tanggalrepair" id="tanggalrepair" placeholder="Tanggal Kejadian"/>
+								<input type="date" class="form__field" name="tanggalrepair" id="tanggalrepair" placeholder="Tanggal Kejadian" disabled/>
 								<label class="form__label">Tanggal kejadian<small class="form-error" id="error-tanggal-perbaikan"></small></label>
 							</div>
 							<div class="form__group field mb-5">
@@ -255,21 +262,6 @@
 		</div>
 	</div>
 
-	<div class="modal" tabindex="1" id="modalsuccess">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header justify-content-center">
-					<h5 class="modal-title">Success</h5>
-				</div>
-				<div class="modal-body text-center">
-					<p id="modalsuccessbody">Modal body text goes here.</p>
-				</div>
-				<div class="modal-footer">
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<div class="modal fade" id="modaldelete" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
@@ -282,7 +274,7 @@
 						<div class="col-5">
 							<input type="text" name="kodedelete" id="kodedelete" hidden/>
 							<div class="form__group field mb-5">
-								<input type="date" class="form__field" name="tanggaldelete" id="tanggaldelete" placeholder="Tanggal Penghapusan"/>
+								<input type="date" class="form__field" name="tanggaldelete" id="tanggaldelete" placeholder="Tanggal Penghapusan" disabled/>
 								<label class="form__label">Tanggal penghapusan<small class="form-error" id="error-tanggal-delete"></small></label>
 							</div>
 						</div>
@@ -300,6 +292,21 @@
 				</div>
 				<div class="modal-footer">
 					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" tabindex="1" id="modalsuccess">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header justify-content-center">
+					<h5 class="modal-title">Success</h5>
+				</div>
+				<div class="modal-body text-center">
+					<p id="modalsuccessbody">Modal body text goes here.</p>
+				</div>
+				<div class="modal-footer">
 				</div>
 			</div>
 		</div>
@@ -648,7 +655,7 @@
 					'<div class="form__group mb-5" id="listjumlahfasilitas">' + 
 						'<label class="form__label">Jumlah</label>' + 
 						'<div class="d-flex justify-content-start align-items-center">' + 
-							'<input type="text" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah">' + 
+							'<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah">' + 
 							'<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>' + 
 						'</div>' + 
 					'</div>' + 
@@ -693,7 +700,7 @@
 		//menambah field jumlah & button add fasilitas di paling atas
 		$("#listjumlahfasilitas").prepend(
 			'<div class="d-flex justify-content-start align-items-center mb-2">' + 
-				'<input type="text" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>' +
+				'<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>' +
 				'<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>' + 
 			'</div>'
 		);

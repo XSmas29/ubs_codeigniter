@@ -7,7 +7,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Asset | Fasilitas</title>
 </head>
-
+<style>
+	.link-list-fasilitas .nav-item{
+		color: white !important;
+		font-weight: bold;
+		transition: 0.2s;
+	}
+</style>
 <body>
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>

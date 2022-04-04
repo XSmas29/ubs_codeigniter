@@ -33,6 +33,12 @@
 	.modal-lg{
 		min-width: 60% !important;
 	}
+
+	.nav-link:hover .nav-item{
+		color: white !important;
+		font-weight: bold;
+		transition: 0.2s;
+	}
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-4 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
@@ -40,12 +46,12 @@
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
 		<div class="collapse navbar-collapse border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
 			<ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-				<a class="nav-link" href="<?php echo site_url('Master/listrumah') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Rumah Dinas</li></a>
-				<a class="nav-link" href="<?php echo site_url('Master/listgedung') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Gedung</li></a>
-				<a class="nav-link" href="<?php echo site_url('Master/listkendaraan') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Kendaraan</li></a>
-				<a class="nav-link" href="<?php echo site_url('Master/listasrama') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Asrama</li></a>
-				<a class="nav-link" href="<?php echo site_url('Master/listfasilitas') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Fasilitas</li></a>
-				<a class="nav-link" href="<?php echo site_url('Master/master') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Admin</li></a>
+				<a class="nav-link link-list-rumah" href="<?php echo site_url('Master/listrumah') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Rumah Dinas</li></a>
+				<a class="nav-link link-list-gedung" href="<?php echo site_url('Master/listgedung') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Gedung</li></a>
+				<a class="nav-link link-list-kendaraan" href="<?php echo site_url('Master/listkendaraan') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Kendaraan</li></a>
+				<a class="nav-link link-list-asrama" href="<?php echo site_url('Master/listasrama') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Asrama</li></a>
+				<a class="nav-link link-list-fasilitas" href="<?php echo site_url('Master/listfasilitas') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Fasilitas</li></a>
+				<a class="nav-link link-admin" href="<?php echo site_url('Master/master') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Admin</li></a>
 			</ul>
 		</div>
 	</div>

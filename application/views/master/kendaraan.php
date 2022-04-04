@@ -7,6 +7,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Master | Kendaraan</title>
 </head>
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/master-asset.css">
+<style>
+	.link-admin-kendaraan{
+		font-weight: bold;
+		font-size: 21px;
+		transition: 0.2s;
+	}
+</style>
 <style>
 	select option{
 		zoom: 1.1;

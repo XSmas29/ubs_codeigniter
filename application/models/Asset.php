@@ -91,16 +91,16 @@ class Asset extends CI_Model
 		
 		$newkode = date("d/m/Y", strtotime($data["tanggal"]));
 		
-		
 		if ($query->num_rows() == 1){
 			$arrkode = explode('/', $query->result()[0]->kode_asset);
 			$newkode = $newkode.'/A/UBS/'.$arrkode[5].'/'.$data["lantai"].'/'.$data["kamar"];
 		}
 		else{
-			//$newkode = $newkode.'/A/UBS/'.$query->result()[0].'/'.$data["lantai"].'/'.$data["kamar"];
+			$query = $this->db->query("select max(substring(kode_asset, 18, 3)) as kode_asset from asset where fk_kategori=4");
+			$maxkode = $query->result()[0]->kode_asset;
+			$indexkode = intval($maxkode);
+			$newkode = $newkode.'/A/UBS/'.str_pad(($indexkode + 1), 3, "0", STR_PAD_LEFT).'/'.$data["lantai"].'/'.$data["kamar"];
 		}
-		var_dump($newkode);
-		die();
 		return $newkode;
 	}
 
@@ -289,7 +289,6 @@ class Asset extends CI_Model
 						$imgdata = $this->upload->data();
 					}
 					//
-
 					
 
 					//insert data gambar ke database
@@ -440,6 +439,132 @@ class Asset extends CI_Model
 		else{
 			$this->db->trans_commit();
 			return 1;
+		}
+	}
+
+	function addAsrama($data){
+		$key = substr($data["kode"], 11);
+		$query = $this->db->query("select kode_asset from asset where substring(kode_asset, 12, 20)='$key'");
+		if ($query->num_rows() == 0){
+			$this->db->trans_begin();
+			//insert data ke tabel asset
+			$values = array(
+				'KODE_ASSET' => $data['kode'],
+				'FK_KATEGORI' => 4,
+				'NAMA_ASSET' => ucwords(strtolower($data['asrama'])),
+				'INFO_1' => $data['lantai'],
+				'INFO_2' => $data['kamar'],
+				'INFO_3' => $data['kapasitas'],
+				'TGL_PENGADAAN' => $data['tanggal'],
+			);
+			$this->db->insert('asset', $values);
+			//
+
+			//insert data ke tabel fasilitas
+			for ($i=0; $i < count($data["namafasilitas"]); $i++) { 
+				if ($data["namafasilitas"][$i] != "" && $data["jumlahfasilitas"][$i] != ""){
+					$values = array(
+						'FK_ASSET' => $data['kode'],
+						'NAMA' => $data["namafasilitas"][$i],
+						'JUMLAH' => $data["jumlahfasilitas"][$i],
+					);
+					$this->db->insert('fasilitas', $values);
+				}
+			}
+			//
+
+			if ($this->db->trans_status() === FALSE)
+			{
+				$this->db->trans_rollback();
+				return "Terjadi kesalahan dalam memasukkan data asrama!";
+			}
+			else{
+				$this->db->trans_commit();
+
+				//get max value dari transaksi
+				$query = $this->db->query("select max(kode_transaksi) as max from transaksi");
+				$newkode = intval(substr($query->result()[0]->max, -7)) + 1;
+				//
+
+				$values = array(
+					'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+					'FK_ASSET' => $data['kode'],
+					'TGL_TRANSAKSI' => $data['tanggal'],
+					'USER_TRANSAKSI' => "SYSTEM ADMIN",
+					'AKTIVITAS_TRANSAKSI' => "pengadaan",
+					'KETERANGAN_1' => "pengadaan asrama ".ucwords(strtolower($data['asrama']))." lantai ".$data["lantai"]." kamar no ".$data["kamar"],
+				);
+				$this->db->insert('transaksi', $values);
+
+				return 1;
+			}
+		}
+		else{
+			return 2;
+		}
+	}
+
+	function editAsrama($data){
+		$key = substr($data["kodebaru"], 11);
+		$oldkey = substr($data["kodelama"], 11);
+		$query = $this->db->query("select kode_asset from asset where substring(kode_asset, 12, 20)='$key'");
+		if ($query->num_rows() == 0 || $key == $oldkey){
+			$this->db->trans_begin();
+				//hapus data, lalu insert data ke tabel fasilitas
+				$this->db->delete('fasilitas', array('FK_ASSET' => $data['kodelama']));
+
+				for ($i=0; $i < count($data["namafasilitas"]); $i++) { 
+					if ($data["namafasilitas"][$i] != "" && $data["jumlahfasilitas"][$i] != ""){
+						$values = array(
+							'FK_ASSET' => $data['kodebaru'],
+							'NAMA' => $data["namafasilitas"][$i],
+							'JUMLAH' => $data["jumlahfasilitas"][$i],
+						);
+						$this->db->insert('fasilitas', $values);
+					}
+				}
+				//
+
+				$values = array(
+					'KODE_ASSET' => $data['kodebaru'],
+					'FK_KATEGORI' => 4,
+					'NAMA_ASSET' => ucwords(strtolower($data['asrama'])),
+					'INFO_1' => $data['lantai'],
+					'INFO_2' => $data['kamar'],
+					'INFO_3' => $data['kapasitas'],
+					'TGL_PENGADAAN' => $data['tanggal'],
+				);
+				$this->db->where('KODE_ASSET', $data['kodelama']);
+				$this->db->update('asset', $values);
+
+			if ($this->db->trans_status() === FALSE)
+			{
+				$this->db->trans_rollback();
+				return "Terjadi kesalahan dalam mengubah data asrama!";
+			}
+			else{
+				$this->db->trans_commit();
+
+				//get max value dari transaksi
+				$query = $this->db->query("select max(kode_transaksi) as max from transaksi");
+				$newkode = intval(substr($query->result()[0]->max, -7)) + 1;
+				//
+
+				$values = array(
+					'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+					'FK_ASSET' => $data['kodebaru'],
+					'TGL_TRANSAKSI' => $data['tanggal'],
+					'USER_TRANSAKSI' => "SYSTEM ADMIN",
+					'AKTIVITAS_TRANSAKSI' => "perubahan",
+					'KETERANGAN_1' => "perubahan asrama ".ucwords(strtolower($data['asrama']))." lantai ".$data["lantai"]." kamar no ".$data["kamar"],
+				);
+				$this->db->insert('transaksi', $values);
+
+				return 1;
+			}
+		}
+		else {
+			return 2;
 		}
 	}
 }

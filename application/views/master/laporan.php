@@ -8,6 +8,13 @@
 	<title>Master | Laporan Aset</title>
 </head>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/master-asset.css">
+<style>
+	.link-admin-laporan{
+		font-weight: bold;
+		font-size: 21px;
+		transition: 0.2s;
+	}
+</style>
 <body>
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>

@@ -8,6 +8,13 @@
 	<title>Master | Asrama</title>
 </head>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/master-asset.css">
+<style>
+	.link-admin-asrama{
+		font-weight: bold;
+		font-size: 21px;
+		transition: 0.2s;
+	}
+</style>
 <body>
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>
@@ -58,28 +65,30 @@
 													<td><?= $listAsrama[$i]->INFO_1?></td>
 													<td><?= $listAsrama[$i]->INFO_2?></td>
 													<td><?= $listAsrama[$i]->INFO_3?></td>
-													<td><?= $listAsrama[$i]->INFO_4?></td>
+													<td><?= $listJumlahPenghuni[$i]?></td>
 													<td>
 														<?php 
-														if ($listAsrama[$i]->STATUS == 0){
-															echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
-														}
-														else if ($listAsrama[$i]->STATUS == 1){
-															echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+														if ($listAsrama[$i]->IS_DELETED == 1){
+															echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
 														}
 														else{
-															echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+															if ($listAsrama[$i]->STATUS == 0){
+																echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+															}
+															else if ($listAsrama[$i]->STATUS == 1){
+																echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+															}
 														}
 														?>
 													</td>
 													<td>
-														<button type="button" class="btn btn-sm btn-info">
+														<button data-bs-toggle="modal" href="#modaladdasrama" role="button" class="btn btn-sm btn-info btn-edit" value='<?= $listAsrama[$i]->KODE_ASSET ?>'>
 															<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
 														</button>
-														<button type="button" class="btn btn-sm btn-secondary">
+														<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value='<?= $listAsrama[$i]->KODE_ASSET ?>'>
 															<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
 														</button>
-														<button type="button" class="btn btn-sm btn-danger">
+														<button data-bs-toggle="modal" href="#modaldelete" role="button" class="btn btn-sm btn-danger btn-remove" value='<?= $listAsrama[$i]->KODE_ASSET ?>'>
 															<img src="<?php echo base_url(); ?>assets/img/icons/delete.png" width="16" height="16">
 														</button>
 													</td>
@@ -108,16 +117,17 @@
 				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
 					<div class="row text-center">
 						<div class="col-6">
+							<input type="text" class="form__field" name="kode" id="kode" hidden/>
 							<div class="form__group field mb-5">
 								<input type="text" class="form__field" name="asrama" id="asrama" placeholder="Asrama"/>
 								<label class="form__label">Asrama<small class="form-error" id="error-asrama"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="lantai" id="lantai" placeholder="Lantai"/>
+								<input type="number" class="form__field" name="lantai" id="lantai" placeholder="Lantai"/>
 								<label class="form__label">Lantai<small class="form-error" id="error-lantai"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="kamar" id="kamar" placeholder="Kamar"/>
+								<input type="number" class="form__field" name="kamar" id="kamar" placeholder="Kamar"/>
 								<label class="form__label">Kamar<small class="form-error" id="error-kamar"></small></label>
 							</div>
 							<div class="form__group field mb-5">
@@ -125,7 +135,7 @@
 								<label class="form__label">Tanggal Pengadaan<small class="form-error" id="error-tanggal"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="kapasitas" id="kapasitas" placeholder="Maksimal penghuni"/>
+								<input type="number" class="form__field" name="kapasitas" id="kapasitas" placeholder="Maksimal penghuni"/>
 								<label class="form__label">Maksimal penghuni<small class="form-error" id="error-kapasitas"></small></label>
 							</div>
 						</div>
@@ -142,7 +152,7 @@
 									<div class="form__group mb-5" id="listjumlahfasilitas">
 										<label class="form__label">Jumlah</label>
 										<div class="d-flex justify-content-start align-items-center">
-											<input type="text" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>
+											<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>
 											<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>
 										</div>
 									</div>
@@ -162,6 +172,113 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="modalperbaikan" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h4 class="modal-title">Perbaikan Aset</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
+					<div class="row text-center">
+						<div class="col-6">
+								<input type="text" name="koderepair" id="koderepair" hidden/>
+							<div class="form__group field mb-5">
+								<input type="date" class="form__field" name="tanggalrepair" id="tanggalrepair" placeholder="Tanggal Kejadian" disabled/>
+								<label class="form__label">Tanggal kejadian<small class="form-error" id="error-tanggal-perbaikan"></small></label>
+							</div>
+							<div class="form__group field mb-5">
+								<textarea name="Text1" class="form__field" cols="40" rows="3" name="kronologirepair" id="kronologirepair" placeholder="Kronologi"></textarea>
+								<label class="form__label">Kronologi<small class="form-error" id="error-kronologi-perbaikan"></small></label>
+							</div>
+							<div class="form__group field mb-5">
+								<input type="text" class="form__field" name="kondisirepair" id="kondisirepair" placeholder="Kondisi Aset"/>
+								<label class="form__label">Kondisi aset<small class="form-error" id="error-kondisi-perbaikan"></small></label>
+							</div>
+							<div class="form__group field mb-5">
+								<input type="text" class="form__field" name="actionrepair" id="actionrepair" placeholder="Action plan"/>
+								<label class="form__label">Action plan<small class="form-error" id="error-action-perbaikan"></small></label>
+							</div>
+							<div class="form__group field mb-5">
+								<input type="text" class="form__field" name="rabrepair" id="rabrepair" placeholder="RAB"/>
+								<label class="form__label">RAB<small class="form-error" id="error-rab-perbaikan"></small></label>
+							</div>
+						</div>
+						<div class="col-6">
+							<h3 class="my-4">Upload Foto</h3>
+							<div class="d-flex flex-wrap justify-content-center" id="image-upload-wrapper-perbaikan">
+								<div class="image-upload-wrap-perbaikan mx-1">
+									<input class="file-upload-input" type='file' id='imageperbaikan' onchange="readURLperbaikan(this);" accept="image/*" />
+									<div class="drag-text">
+										<h3>Drag and drop or select an Image</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end">
+							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+							<button type="button" class="btn btn-dark px-5 btn-submit" id="btnfix">Fix</button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modaldelete" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h4 class="modal-title">Delete Aset</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body pt-0">
+					<div class="row text-center">
+						<div class="col-5">
+							<input type="text" name="kodedelete" id="kodedelete" hidden/>
+							<div class="form__group field mb-5">
+								<input type="date" class="form__field" name="tanggaldelete" id="tanggaldelete" placeholder="Tanggal Penghapusan" disabled/>
+								<label class="form__label">Tanggal penghapusan<small class="form-error" id="error-tanggal-delete"></small></label>
+							</div>
+						</div>
+						<div class="col-7">
+						<div class="form__group field mb-5">
+								<input type="text" class="form__field" name="alasandelete" id="alasandelete" placeholder="Alasan penghapusan"/>
+								<label class="form__label">Alasan penghapusan<small class="form-error" id="error-alasan-delete"></small></label>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end">
+							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+							<button type="button" class="btn btn-dark px-5 btn-submit" id="btndelete">Delete</button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" tabindex="1" id="modalsuccess">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header justify-content-center">
+					<h5 class="modal-title">Success</h5>
+				</div>
+				<div class="modal-body text-center">
+					<p id="modalsuccessbody">Modal body text goes here.</p>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 
 </html>
@@ -200,13 +317,29 @@
 					'<div class="form__group mb-5" id="listjumlahfasilitas">' + 
 						'<label class="form__label">Jumlah</label>' + 
 						'<div class="d-flex justify-content-start align-items-center">' + 
-							'<input type="text" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah">' + 
+							'<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah">' + 
 							'<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>' + 
 						'</div>' + 
 					'</div>' + 
 				'</div>' + 
 			'</div>'
 		);
+
+		$("#image-upload-wrapper-perbaikan").html(
+			'<div class="image-upload-wrap-perbaikan mx-1">' + 
+				'<input class="file-upload-input" type="file" id="imageperbaikan" onchange="readURLperbaikan(this);" accept="image/*" />' + 
+				'<div class="drag-text">' + 
+					'<h3>Drag and drop or select an Image</h3>' + 
+				'</div>' + 
+			'</div>'
+		);
+
+		$("#kronologirepair").val('');
+		$("#kondisirepair").val('');
+		$("#actionrepair").val('');
+		$("#rabrepair").val('');
+
+		$("#alasandelete").val('');
 	}
 
 	function addFasilitas(){
@@ -220,7 +353,7 @@
 		//menambah field jumlah & button add fasilitas di paling atas
 		$("#listjumlahfasilitas").prepend(
 			'<div class="d-flex justify-content-start align-items-center mb-2">' + 
-				'<input type="text" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>' +
+				'<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>' +
 				'<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>' + 
 			'</div>'
 		);
@@ -286,6 +419,11 @@
 						window.location.reload();
 					},1500);
 				}
+				else if (message["message"] == 2){
+					message["asrama"] = " Asrama Dengan lantai dan kamar tersebut sudah ada!&nbsp";
+					message["lantai"] = " Asrama Dengan lantai dan kamar tersebut sudah ada!&nbsp";
+					message["kamar"] = " Asrama Dengan lantai dan kamar tersebut sudah ada!&nbsp";
+				}
 				raiseErrors(message);
 			}, error: function(xhr, status, error) {
 				console.log(xhr.responseText);
@@ -332,6 +470,224 @@
 		$("#error-tanggal-delete").html(errors["tanggaldelete"]).css("opacity", 1);
 		$("#error-alasan-delete").html(errors["alasandelete"]).css("opacity", 1);
 		//
-
 	}
+
+	$(".btn-edit").click(function(){
+		resetInput();
+
+		let kode = $(this).attr('value');
+		$('#btnsave').attr('onClick', 'editData()');
+		$('#btnsave').html('Save Changes');
+		$("#modaltitle").html("Edit Aset");
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/detailAsset",
+			data: {key: kode},
+			cache: false,
+			success: function(response){
+
+				//mengambil data dari asset tsb
+				let data = JSON.parse(response);
+				//console.log(data);
+				$("#kode").val(data["asset"][0].KODE_ASSET);
+				$("#asrama").val(data["asset"][0].NAMA_ASSET);
+				$("#lantai").val(data["asset"][0].INFO_1);
+				$("#kamar").val(data["asset"][0].INFO_2);
+				$("#kapasitas").val(data["asset"][0].INFO_3);
+				$("#tanggal").val(data["asset"][0].TGL_PENGADAAN);
+				//
+
+				//mengambil data fasilitas dari asset tsb
+				for (let i = 0; i < data["fasilitas"].length; i++) {
+					addFasilitas();
+					$($("#listnamafasilitas").find(".form__field")[1]).val(data["fasilitas"][i].NAMA);
+					$($("#listjumlahfasilitas").find(".d-flex").find(".form__field")[1]).val(data["fasilitas"][i].JUMLAH);
+				}
+				//
+
+				//
+			}, error: function(){
+				alert("Error when loading asset!")
+			}
+		});
+	});
+
+	function editData(){
+		let form_data = new FormData();
+
+		let listnama = [];
+		$('input[name="namafas[]"]').each( function() {
+			listnama.push(this.value);
+		});
+
+		let listjumlah = [];
+		$('input[name="jumlahfas[]"]').each( function() {
+			listjumlah.push(this.value);
+		});
+
+		form_data.append("asrama", $("#asrama").val());
+		form_data.append("kodelama", $("#kode").val());
+		form_data.append("lantai", $("#lantai").val());
+		form_data.append("kamar", $("#kamar").val());
+		form_data.append("tanggal", $("#tanggal").val());
+		form_data.append("kapasitas", $("#kapasitas").val());
+		form_data.append("namafasilitas", listnama);
+		form_data.append("jumlahfasilitas", listjumlah);
+		
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/editasrama",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function(response){
+				console.log(response);
+				var message = JSON.parse(response);
+				if (message["message"] == 1){
+					$('#modalsuccessbody').html('Sukses mengubah data asrama!');
+					$('#modalsuccess').show();
+					setTimeout(function(){
+						window.location.reload();
+					},1500);
+				}
+				else if (message["message"] == 2){
+					message["asrama"] = " Asrama Dengan lantai dan kamar tersebut sudah ada!&nbsp";
+					message["lantai"] = " Asrama Dengan lantai dan kamar tersebut sudah ada!&nbsp";
+					message["kamar"] = " Asrama Dengan lantai dan kamar tersebut sudah ada!&nbsp";
+				}
+				raiseErrors(message);
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+	}
+
+	$(".btn-repair").click(function(){
+		resetInput();
+		let kode = $(this).attr('value');
+		let today = now.getFullYear()+"-"+(month)+"-"+(day);
+		$('#tanggalrepair').val(today);
+		$('#koderepair').val(kode);
+	});
+
+	$("#btnfix").click(function(){
+		let form_data = new FormData();
+        form_data.append("gambar", $('#imageperbaikan').prop('files')[0]);
+		form_data.append("kodeaset", $("#koderepair").val());
+		form_data.append("tanggalrepair", $("#tanggalrepair").val());
+		form_data.append("kronologirepair", $("#kronologirepair").val());
+		form_data.append("kondisirepair", $("#kondisirepair").val());
+		form_data.append("actionrepair", $("#actionrepair").val());
+		form_data.append("rabrepair", $("#rabrepair").val());
+		
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/fixasset",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function(response){
+				console.log(response);
+				var message = JSON.parse(response);
+				if (message["message"] == 1){
+					$('#modalsuccessbody').html('Sukses menambah data perbaikan asrama!');
+					$('#modalsuccess').show();
+					setTimeout(function(){
+						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+					},1500);
+				}
+				raiseErrors(message);
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+	});
+
+	function readURLperbaikan(input){
+		if (input.files && input.files[0]) {
+			var fileExtension = ['jpeg', 'jpg', 'png'];
+			if ($.inArray($(input).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+				alert("Only formats are allowed : "+fileExtension.join(', '));
+			}
+			else{
+				$(".file-upload-input").hide();
+				$(".image-upload-wrap-perbaikan").hide();
+				
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$("#image-upload-wrapper-perbaikan").append(
+						"<div class='file-upload-wrapper-perbaikan mx-1 mb-1 d-flex align-items-center' onclick='removeImagePerbaikan(this)'>" + 
+							"<img class='file-upload-image' src='" + e.target.result + "'>" +
+							'<div class="file-upload-remove-perbaikan cursor-pointer d-flex align-items-center justify-content-center">' +
+								"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
+							'</div>' + 
+						"</div>"
+					);
+
+					$('.image-title').html(input.files[0].name);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	}
+
+	function removeImagePerbaikan(image){
+		//menghapus element image
+		let index = $(image).index();
+		$(image).remove();
+		//
+
+		$(".image-upload-wrap-perbaikan").html(
+			'<input class="file-upload-input" type="file" id="imageperbaikan" onchange="readURLperbaikan(this);" accept="image/*" />' +
+			'<div class="drag-text">' +
+				'<h3>Drag and drop or select an Image</h3>' +
+			'</div>'
+		);
+		
+		$(".image-upload-wrap-perbaikan").show();
+	}
+
+	$(".btn-remove").click(function(){
+		resetInput();
+		let kode = $(this).attr('value');
+		let today = now.getFullYear()+"-"+(month)+"-"+(day);
+		$('#tanggaldelete').val(today);
+		$('#kodedelete').val(kode);
+		console.log($('#kodedelete').val());
+	});
+
+	$("#btndelete").click(function(){
+		let form_data = new FormData();
+
+		form_data.append("kodeaset", $("#kodedelete").val());
+		form_data.append("tanggaldelete", $("#tanggaldelete").val());
+		form_data.append("alasandelete", $("#alasandelete").val());
+		
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/deleteasset",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function(response){
+				console.log(response);
+				var message = JSON.parse(response);
+				if (message["message"] == 1){
+					$('#modalsuccessbody').html('Sukses menghapus data rumah dinas!');
+					$('#modalsuccess').show();
+					setTimeout(function(){
+						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+					},1500);
+				}
+				raiseErrors(message);
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+	});
 </script>

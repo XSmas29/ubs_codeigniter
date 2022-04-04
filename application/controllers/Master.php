@@ -89,6 +89,7 @@ class Master extends CI_Controller
 
 	public function masterAsrama(){
 		$data['listAsrama'] = $this->Asset->getAsrama();
+		$data['listJumlahPenghuni'] = $this->Asset->getJumlahPenghuni($data['listAsrama']);
 		$this->load->view('master/asrama', $data);
 	}
 
@@ -292,6 +293,37 @@ class Master extends CI_Controller
 		{
 			$data['kode'] = $this->Asset->getKodeAsrama($data);
 			$response["message"] = $this->Asset->addAsrama($data);
+			echo json_encode($response);
+		}
+	}
+
+	public function editAsrama(){
+		$this->form_validation->set_rules('asrama', 'Asrama', 'required');
+		$this->form_validation->set_rules('lantai', 'Lantai', 'required');
+		$this->form_validation->set_rules('kamar', 'Kamar', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
+		$this->form_validation->set_rules('kapasitas', 'Maksimal Penghuni', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['asrama'] = $this->input->post('asrama');
+		$data['kodelama'] = $this->input->post('kodelama');
+		$data['lantai'] = $this->input->post('lantai');
+		$data['kamar'] = $this->input->post('kamar');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['kapasitas'] = $this->input->post('kapasitas');
+		$data['namafasilitas'] = explode(",",$this->input->post('namafasilitas'));
+		$data['jumlahfasilitas'] = explode(",",$this->input->post('jumlahfasilitas'));
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$data['kodebaru'] = $this->Asset->getKodeAsrama($data);
+			$response["message"] = $this->Asset->editAsrama($data);
 			echo json_encode($response);
 		}
 	}
