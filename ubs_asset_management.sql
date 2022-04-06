@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2022 at 11:27 AM
+-- Generation Time: Apr 06, 2022 at 02:54 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -66,9 +66,12 @@ INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_
 ('03/04/2022/A/UBS/001/1/7', 4, 'Glory Lama', 0, '1', '7', '2', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
 ('03/04/2022/A/UBS/001/1/8', 4, 'Glory Lama', 0, '1', '8', '7', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
 ('03/04/2022/A/UBS/001/2/1', 4, 'Glory Lama', 0, '2', '1', '6', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('04/04/2022/F/UBS/003', 5, 'coba update', 0, 'jalan coba update', 'bergerak', 'masih baru', 'sampai tahun 2035', NULL, NULL, NULL, NULL, NULL, '2022-04-04', 0),
 ('04/04/2022/R/UBS/009', 1, 'rumah baru', 0, 'jalan baru', 'tetap', 'masih baru', '3', '2', 'ada', NULL, NULL, NULL, '2022-04-04', 0),
-('08/09/2022/F/UBS/001', 5, 'LCD Proyektor LG', 0, 'R.Meeting Anggrek', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-08', 0),
-('10/09/2022/F/UBS/002', 5, 'Epson Scanner', 0, 'Office HRD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-10', 0),
+('06/04/2022/G/UBS/003', 2, 'Gedung A Lt. 2', 0, 'Office', 'tetap', 'Marketing Lokal', 'Gedung A', '6640/IMB/E/2021', NULL, NULL, NULL, NULL, '2022-04-06', 0),
+('08/09/2022/F/UBS/001', 5, 'LCD Proyektor LG', 0, 'R.Meeting Anggrek', 'tetap', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-08', 0),
+('10/09/2022/F/UBS/002', 5, 'Epson Scanner', 0, 'Office HRD', 'tetap', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-10', 1),
+('19/03/2022/G/UBS/001', 2, 'Gedung C Lt. 1', 1, 'Material', 'tetap', 'Bahan', 'Gedung C', '5385/IMB/E/2019', NULL, NULL, NULL, NULL, '2020-04-09', 0),
 ('19/03/2022/R/UBS/001', 1, 'Rumah Dinas 8 x 12', 0, 'Lebak Jaya 2 No 20', 'tetap', 'baik', '4', '2', 'ada', NULL, NULL, NULL, '2022-02-03', 0),
 ('19/03/2022/R/UBS/002', 1, 'Rumah Dinas 8 x 15', 0, 'Lebak Timur No 20', 'tetap', 'baik', '5', '3', 'tidak ada', NULL, NULL, NULL, '2022-01-22', 0),
 ('19/03/2022/R/UBS/003', 1, 'Rumah Dinas 6 x 10', 0, 'Anggur no 1A', 'tetap', 'baik', '3', '2', 'ada', NULL, NULL, NULL, '2022-02-03', 0),
@@ -77,8 +80,7 @@ INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `INFO_
 ('19/03/2022/R/UBS/006', 1, 'Rumah Dinas 12 x 10', 0, 'Delima no 4D', 'tetap', 'baik', '5', '4', 'ada', NULL, NULL, NULL, '2022-02-04', 0),
 ('19/03/2022/R/UBS/007', 1, 'Rumah Dinas 9 x 10 update', 0, 'Edamame no 5E update', 'tetap', 'baik update', '3 update', '2 update', 'tidak ada', NULL, NULL, NULL, '2022-02-03', 1),
 ('21/02/2022/K/UBS/001', 3, 'Toyota Alphard', 0, 'L 1054 BA', 'Mobil', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-02-21', 0),
-('5385/IMB/e/2019', 2, 'Gedung C Lt. 1', 1, 'Material', 'Bahan', 'Gedung C', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-09', 0),
-('6640/IMB/e/2021', 2, 'Gedung A Lt. 1', 1, 'Office', 'Marketing Lokal', 'Gedung A', NULL, NULL, NULL, NULL, NULL, NULL, '2021-08-17', 0);
+('22/01/2022/G/UBS/002', 2, 'Gedung A Lt. 1', 1, 'Office', 'tetap', 'Marketing Lokal', 'Gedung A', '6640/IMB/E/2021', NULL, NULL, NULL, NULL, '2021-08-17', 0);
 
 -- --------------------------------------------------------
 
@@ -133,6 +135,8 @@ CREATE TABLE `gambar` (
 --
 
 INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
+('FASILITAS003_002.jpg', '04/04/2022/F/UBS/003'),
+('FASILITAS003_004.jpg', '04/04/2022/F/UBS/003'),
 ('RUMAH006_001.png', '19/03/2022/R/UBS/006'),
 ('RUMAH006_002.png', '19/03/2022/R/UBS/006'),
 ('RUMAH006_003.png', '19/03/2022/R/UBS/006'),
@@ -143,7 +147,9 @@ INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
 ('RUMAH009_003.jpg', '04/04/2022/R/UBS/009'),
 ('TRANS_0000009.png', 'TRANS_0000009'),
 ('TRANS_0000023.PNG', 'TRANS_0000023'),
-('TRANS_0000026.PNG', 'TRANS_0000026');
+('TRANS_0000026.PNG', 'TRANS_0000026'),
+('TRANS_0000028.PNG', 'TRANS_0000028'),
+('TRANS_0000034.png', 'TRANS_0000034');
 
 -- --------------------------------------------------------
 
@@ -229,7 +235,15 @@ INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TR
 ('TRANS_0000023', '01/03/2019/A/UBS/001/1/15', '2022-04-04', 'SYSTEM ADMIN', 'perbaikan', 'a', 'a', 'a', 'a'),
 ('TRANS_0000024', '04/04/2022/R/UBS/009', '2022-04-04', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan rumah dinas 009', NULL, NULL, NULL),
 ('TRANS_0000025', '04/04/2022/R/UBS/009', '2022-04-04', 'SYSTEM ADMIN', 'perubahan', 'perubahan data rumah dinas 009', NULL, NULL, NULL),
-('TRANS_0000026', '01/03/2019/A/UBS/001/1/15', '2022-04-04', 'SYSTEM ADMIN', 'perbaikan', 'kasur nya rusak', 'rusak', 'membeli kasur baru', 'ini RAB');
+('TRANS_0000026', '01/03/2019/A/UBS/001/1/15', '2022-04-04', 'SYSTEM ADMIN', 'perbaikan', 'kasur nya rusak', 'rusak', 'membeli kasur baru', 'ini RAB'),
+('TRANS_0000027', '10/09/2022/F/UBS/002', '2022-04-04', 'SYSTEM ADMIN', 'penghapusan', 'rusak', NULL, NULL, NULL),
+('TRANS_0000028', '08/09/2022/F/UBS/001', '2022-04-04', 'SYSTEM ADMIN', 'perbaikan', 'tidak sengaja jatuh', 'rusak', 'di service tukang', 'ini RAB'),
+('TRANS_0000029', '04/04/2022/F/UBS/003', '2022-04-04', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan fasilitas 003', NULL, NULL, NULL),
+('TRANS_0000030', '04/04/2022/F/UBS/003', '2022-04-04', 'SYSTEM ADMIN', 'perubahan', 'perubahan data fasilitas 003', NULL, NULL, NULL),
+('TRANS_0000031', '04/04/2022/F/UBS/003', '2022-04-04', 'SYSTEM ADMIN', 'perubahan', 'perubahan data fasilitas 003', NULL, NULL, NULL),
+('TRANS_0000032', '06/04/2022/G/UBS/003', '2022-04-06', 'SYSTEM ADMIN', 'pengadaan', 'pengadaan gedung 003', NULL, NULL, NULL),
+('TRANS_0000033', '06/04/2022/G/UBS/003', '2022-04-06', 'SYSTEM ADMIN', 'perubahan', 'perubahan gedung 003', NULL, NULL, NULL),
+('TRANS_0000034', '06/04/2022/G/UBS/003', '2022-04-06', 'SYSTEM ADMIN', 'perbaikan', 'bangunannya kena tsunami', 'hancur', 'membangun ulang', '1000000');
 
 -- --------------------------------------------------------
 

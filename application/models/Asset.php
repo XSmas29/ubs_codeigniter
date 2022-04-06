@@ -756,5 +756,94 @@ class Asset extends CI_Model
 			return 1;
 		}
 	}
+
+	public function addGedung($data){
+		$this->db->trans_begin();
+			//insert data ke tabel asset
+			$values = array(
+				'KODE_ASSET' => $data['kode'],
+				'FK_KATEGORI' => 2,
+				'NAMA_ASSET' => $data['nama'],
+				'INFO_1' => $data['lokasi'],
+				'INFO_2' => $data['jenis'],
+				'INFO_3' => $data['peruntukkan'],
+				'INFO_4' => ucwords(strtolower($data['gedung'])),
+				'INFO_5' => $data['imb'],
+				'TGL_PENGADAAN' => $data['tanggal'],
+			);
+			$this->db->insert('asset', $values);
+			//
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return "Terjadi kesalahan dalam memasukkan data gedung!";
+		}
+		else{
+			$this->db->trans_commit();
+
+			//get max value dari transaksi
+			$query = $this->db->query("select max(kode_transaksi) as max from transaksi");
+			$newkode = intval(substr($query->result()[0]->max, -7)) + 1;
+			//
+
+			$values = array(
+				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+				'FK_ASSET' => $data['kode'],
+				'TGL_TRANSAKSI' => $data['tanggal'],
+				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'AKTIVITAS_TRANSAKSI' => "pengadaan",
+				'KETERANGAN_1' => "pengadaan gedung ".substr($data['kode'], -3),
+			);
+			$this->db->insert('transaksi', $values);
+
+			return 1;
+		}
+	}
+
+	public function editGedung($data){
+		$this->db->trans_begin();
+			//insert data ke tabel asset
+			$values = array(
+				'KODE_ASSET' => $data['kode'],
+				'FK_KATEGORI' => 2,
+				'NAMA_ASSET' => $data['nama'],
+				'INFO_1' => $data['lokasi'],
+				'INFO_2' => $data['jenis'],
+				'INFO_3' => $data['peruntukkan'],
+				'INFO_4' => ucwords(strtolower($data['gedung'])),
+				'INFO_5' => $data['imb'],
+				'TGL_PENGADAAN' => $data['tanggal'],
+			);
+			$this->db->where('KODE_ASSET', $data['kode']);
+			$this->db->update('asset', $values);
+			//
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return "Terjadi kesalahan dalam mengupdate data gedung!";
+		}
+		else{
+			$this->db->trans_commit();
+
+			//get max value dari transaksi
+			$query = $this->db->query("select max(kode_transaksi) as max from transaksi");
+			$newkode = intval(substr($query->result()[0]->max, -7)) + 1;
+			//
+
+			$values = array(
+				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+				'FK_ASSET' => $data['kode'],
+				'TGL_TRANSAKSI' => $data['tanggal'],
+				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'AKTIVITAS_TRANSAKSI' => "perubahan",
+				'KETERANGAN_1' => "perubahan gedung ".substr($data['kode'], -3),
+			);
+			$this->db->insert('transaksi', $values);
+
+			return 1;
+		}
+	}
 }
 ?>

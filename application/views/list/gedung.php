@@ -38,6 +38,7 @@
 								<tr>
 									<th>Nama Aset</th>
 									<th>Kode Aset</th>
+									<th>No IMB</th>
 									<th>Peruntukan</th>
 									<th>Lokasi</th>
 									<th>Tanggal Pengadaan</th>
@@ -52,8 +53,9 @@
 									    	<tr>
 												<td><?= $listgedung[$i]->NAMA_ASSET?></td>
 												<td><?= $listgedung[$i]->KODE_ASSET?></td>
+												<td><?= $listgedung[$i]->INFO_5?></td>
 												<td><?= $listgedung[$i]->INFO_1?></td>
-												<td><?= $listgedung[$i]->INFO_2?></td>
+												<td><?= $listgedung[$i]->INFO_3?></td>
 												<td><?= date('d F Y', strtotime($listgedung[$i]->TGL_PENGADAAN))?></td>
 												<td>
 												<?php 

@@ -66,14 +66,16 @@
 														<td><?= $listrumah[$i]->TGL_PENGADAAN?></td>
 														<td>
 															<?php 
-															if ($listrumah[$i]->STATUS == 0){
-																echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
-															}
-															else if ($listrumah[$i]->STATUS == 1){
-																echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+															if ($listrumah[$i]->IS_DELETED == 1){
+																echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
 															}
 															else{
-																echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+																if ($listrumah[$i]->STATUS == 0){
+																	echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+																}
+																else if ($listrumah[$i]->STATUS == 1){
+																	echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+																}
 															}
 															//SATU LAGI KONDISI UNTUK YANG PENDING >>>> PPT PAGE KE-21
 															?>

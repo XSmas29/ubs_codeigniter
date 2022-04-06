@@ -243,14 +243,16 @@
 															<td><?= date('d F Y', strtotime($listkendaraan[$i]->TGL_PENGADAAN))?></td>
 															<td>
 																<?php 
-																if ($listkendaraan[$i]->STATUS == 0){
-																	echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
-																}
-																else if ($listkendaraan[$i]->STATUS == 1){
-																	echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+																if ($listkendaraan[$i]->IS_DELETED == 1){
+																	echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
 																}
 																else{
-																	echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+																	if ($listkendaraan[$i]->STATUS == 0){
+																		echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+																	}
+																	else if ($listkendaraan[$i]->STATUS == 1){
+																		echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+																	}
 																}
 															?>
 															</td>

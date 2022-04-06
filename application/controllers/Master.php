@@ -397,4 +397,70 @@ class Master extends CI_Controller
 			echo json_encode($response);
 		}
 	}
+
+	public function addGedung(){
+		$this->form_validation->set_rules('gedung', 'Gedung', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode aset', 'required');
+		$this->form_validation->set_rules('imb', 'No IMB', 'required');
+		$this->form_validation->set_rules('nama', 'Nama aset', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis aset', 'required');
+		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal pengadaan', 'required');
+		$this->form_validation->set_rules('peruntukkan', 'Peruntukkan', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['gedung'] = $this->input->post('gedung');
+		$data['kode'] = $this->input->post('kodeaset');
+		$data['imb'] = $this->input->post('imb');
+		$data['nama'] = $this->input->post('nama');
+		$data['jenis'] = $this->input->post('jenis');
+		$data['lokasi'] = $this->input->post('lokasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['peruntukkan'] = $this->input->post('peruntukkan');
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$response["message"] = $this->Asset->addGedung($data);
+			echo json_encode($response);
+		}
+	}
+
+	public function editGedung(){
+		$this->form_validation->set_rules('gedung', 'Gedung', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode aset', 'required');
+		$this->form_validation->set_rules('imb', 'No IMB', 'required');
+		$this->form_validation->set_rules('nama', 'Nama aset', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis aset', 'required');
+		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal pengadaan', 'required');
+		$this->form_validation->set_rules('peruntukkan', 'Peruntukkan', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['gedung'] = $this->input->post('gedung');
+		$data['kode'] = $this->input->post('kodeaset');
+		$data['imb'] = $this->input->post('imb');
+		$data['nama'] = $this->input->post('nama');
+		$data['jenis'] = $this->input->post('jenis');
+		$data['lokasi'] = $this->input->post('lokasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['peruntukkan'] = $this->input->post('peruntukkan');
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$response["message"] = $this->Asset->editGedung($data);
+			echo json_encode($response);
+		}
+	}
 }
