@@ -126,14 +126,14 @@ class Master extends CI_Controller
 	}
 
 	public function addRumah(){
-		$this->form_validation->set_rules('nama', 'Nama Aset', 'required');
-		$this->form_validation->set_rules('kodeaset', 'Kode Aset', 'required');
+		$this->form_validation->set_rules('nama', 'Nama aset', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode aset', 'required');
 		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
-		$this->form_validation->set_rules('tanggal', 'Tanggal Pengadaan', 'required');
-		$this->form_validation->set_rules('jenis', 'Jenis Aset', 'required');
-		$this->form_validation->set_rules('kondisi', 'Kondisi Awal', 'required');
-		$this->form_validation->set_rules('kamar', 'Kamar Tidur', 'required');
-		$this->form_validation->set_rules('toilet', 'Kamar Mandi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal pengadaan', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis aset', 'required');
+		$this->form_validation->set_rules('kondisi', 'Kondisi awal', 'required');
+		$this->form_validation->set_rules('kamar', 'Kamar tidur', 'required');
+		$this->form_validation->set_rules('toilet', 'Kamar mandi', 'required');
 		$this->form_validation->set_rules('carport', 'Carport', 'required');
 		// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
 
@@ -392,7 +392,7 @@ class Master extends CI_Controller
 		else
 		{
 			$key = $data["kode"];
-			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
+			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),13,3);
 			$response["message"] = $this->Asset->editFasilitas($data, $ctr);
 			echo json_encode($response);
 		}
@@ -460,6 +460,109 @@ class Master extends CI_Controller
 		else
 		{
 			$response["message"] = $this->Asset->editGedung($data);
+			echo json_encode($response);
+		}
+	}
+
+	public function addKendaraan(){
+		$this->form_validation->set_rules('nama', 'Nama aset', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode aset', 'required');
+		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal pengadaan', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis aset', 'required');
+		$this->form_validation->set_rules('kondisi', 'Kondisi awal', 'required');
+		$this->form_validation->set_rules('kategori', 'Kategori', 'required');
+		$this->form_validation->set_rules('nopolisi', 'No polisi', 'required');
+		$this->form_validation->set_rules('nomesin', 'No mesin', 'required');
+		$this->form_validation->set_rules('mbpajak', 'Masa berlaku pajak', 'required');
+		$this->form_validation->set_rules('mbplat', 'Masa berlaku plat', 'required');
+		$this->form_validation->set_rules('bpkb', 'BPKB', 'required');
+		// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['nama'] = $this->input->post('nama');
+		$data['kode'] = $this->input->post('kodeaset');
+		$data['lokasi'] = $this->input->post('lokasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['jenis'] = $this->input->post('jenis');
+		$data['kondisi'] = $this->input->post('kondisi');
+		$data['kategori'] = $this->input->post('kategori');
+		$data['nopolisi'] = $this->input->post('nopolisi');
+		$data['nomesin'] = $this->input->post('nomesin');
+		$data['mbpajak'] = $this->input->post('mbpajak');
+		$data['mbplat'] = $this->input->post('mbplat');
+		$data['bpkb'] = $this->input->post('bpkb');
+		$data['gambar'] = $this->input->post('gambar');
+
+		// if (isset($_FILES["files"])) {
+		// 	print_r($_FILES["files"]);
+		// }
+		
+		//print_r('-'.$data['jumlahfasilitas'][0].'-');
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$key = $data["kode"];
+			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
+			$response["message"] = $this->Asset->addKendaraan($data, $ctr);
+			echo json_encode($response);
+		}
+	}
+
+	public function editKendaraan(){
+		$this->form_validation->set_rules('nama', 'Nama aset', 'required');
+		$this->form_validation->set_rules('kodeaset', 'Kode aset', 'required');
+		$this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal pengadaan', 'required');
+		$this->form_validation->set_rules('jenis', 'Jenis aset', 'required');
+		$this->form_validation->set_rules('kondisi', 'Kondisi awal', 'required');
+		$this->form_validation->set_rules('kategori', 'Kategori', 'required');
+		$this->form_validation->set_rules('nopolisi', 'No polisi', 'required');
+		$this->form_validation->set_rules('nomesin', 'No mesin', 'required');
+		$this->form_validation->set_rules('mbpajak', 'Masa berlaku pajak', 'required');
+		$this->form_validation->set_rules('mbplat', 'Masa berlaku plat', 'required');
+		$this->form_validation->set_rules('bpkb', 'BPKB', 'required');
+		// $this->form_validation->set_rules('gambar', 'Gambar', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['nama'] = $this->input->post('nama');
+		$data['kode'] = $this->input->post('kodeaset');
+		$data['lokasi'] = $this->input->post('lokasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['jenis'] = $this->input->post('jenis');
+		$data['kondisi'] = $this->input->post('kondisi');
+		$data['kategori'] = $this->input->post('kategori');
+		$data['nopolisi'] = $this->input->post('nopolisi');
+		$data['nomesin'] = $this->input->post('nomesin');
+		$data['mbpajak'] = $this->input->post('mbpajak');
+		$data['mbplat'] = $this->input->post('mbplat');
+		$data['bpkb'] = $this->input->post('bpkb');
+		$data['gambar'] = $this->input->post('gambar');
+		$data['currentimage'] = $this->input->post('currentimage');
+
+		// if (isset($_FILES["files"])) {
+		// 	print_r($_FILES["files"]);
+		// }
+		
+		//print_r('-'.$data['jumlahfasilitas'][0].'-');
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$key = $data["kode"];
+			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),13,3);
+			$response["message"] = $this->Asset->editKendaraan($data, $ctr);
 			echo json_encode($response);
 		}
 	}

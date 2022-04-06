@@ -459,7 +459,7 @@
 				console.log(response);
 				var message = JSON.parse(response);
 				if (message["message"] == 1){
-					$('#modalsuccessbody').html('Sukses menambah data perbaikan rumah dinas!');
+					$('#modalsuccessbody').html('Sukses menambah data perbaikan gedung!');
 					$('#modalsuccess').show();
 					setTimeout(function(){
 						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
@@ -499,7 +499,7 @@
 				console.log(response);
 				var message = JSON.parse(response);
 				if (message["message"] == 1){
-					$('#modalsuccessbody').html('Sukses menghapus data rumah dinas!');
+					$('#modalsuccessbody').html('Sukses menghapus data gedung!');
 					$('#modalsuccess').show();
 					setTimeout(function(){
 						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
@@ -549,6 +549,7 @@
 		$("#error-nama").html('');
 		$("#error-jenis").html('');
 		$("#error-lokasi").html('');
+		$("#error-tanggal").html('');
 		$("#error-peruntukkan").html('');
 
 		$("#error-gedung").html(errors["gedung"]).css("opacity", 1);
@@ -557,6 +558,7 @@
 		$("#error-nama").html(errors["nama"]).css("opacity", 1);
 		$("#error-jenis").html(errors["jenis"]).css("opacity", 1);
 		$("#error-lokasi").html(errors["lokasi"]).css("opacity", 1);
+		$("#error-tanggal").html(errors["tanggal"]).css("opacity", 1);
 		$("#error-peruntukkan").html(errors["peruntukkan"]).css("opacity", 1);
 		//
 

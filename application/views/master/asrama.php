@@ -682,7 +682,7 @@
 				console.log(response);
 				var message = JSON.parse(response);
 				if (message["message"] == 1){
-					$('#modalsuccessbody').html('Sukses menghapus data rumah dinas!');
+					$('#modalsuccessbody').html('Sukses menghapus data asrama!');
 					$('#modalsuccess').show();
 					setTimeout(function(){
 						window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
