@@ -81,7 +81,7 @@
 
                                             </div>
                                             <div class="d-flex justify-content">
-                                                <button type="button" class="btn btn-primary px-5 btn-submit" id="btnsearch">SEARCH</button>
+                                                <button type="button" class="btn btn-primary px-5 btn-submit" id="btnsearch" onclick="searchData()">SEARCH</button>
                                             </div>
                                             <div>
                                                 <table id="myTable" class="table table-striped table-bordered rounded text-center">
@@ -95,14 +95,8 @@
                                                             <th>Keterangan</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                            <?php 
-                                                                for ($i=0; $i < count($listDataAktivitas); $i++) {
-                                                            ?>
-                                                                    
-                                                            <?php
-                                                                }
-                                                            ?>
+                                                    <tbody id="bodyLaporan">
+                                                            
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -129,7 +123,45 @@
 		);
 	});
 
-    $('#btnsearch').click(function(){
-		
-	});
+    function searchData(){
+        // console.log("LOL");
+        let form_data = new FormData();
+        form_data.append("dateFrom", $("#dateFrom").val());
+		form_data.append("dateTo", $("#dateTo").val());
+        form_data.append("kategori", $("#kategori").val());
+        form_data.append("aktivitas", $("#aktivitas").val());
+
+        $.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/searchDataAsset",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function(response){
+				console.log(response);
+                $('#myTable').DataTable().clear().destroy();
+				var message = JSON.parse(response);
+                // $("#bodyLaporan").html("");
+                message['message'].forEach(function(item){
+                    $('#bodyLaporan').append(
+                        '<tr>'+ item.TGL_TRANSAKSI + '</tr>' +
+                        '<tr>'+ "INI KATEGORI" + '</tr>' +
+                        '<tr>'+ item.AKTIVITAS_TRANSAKSI + '</tr>' + //yang ini first letter jadi kapital
+                        '<tr>'+ "INI ASSET NAME" + '</tr>' +
+                        '<tr>'+ "INI LOCATION" + '</tr>' +
+                        '<tr>'+ item.KETERANGAN_1 + '</tr>'
+                    );
+                });
+				// raiseErrors(message);
+                $('#myTable').DataTable( 
+                    {
+                        responsive: false
+                    } 
+                );
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+    }
 </script>

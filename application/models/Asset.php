@@ -1051,5 +1051,18 @@ class Asset extends CI_Model
 			return 1;
 		}
 	}
+
+	public function searchDataAsset($data){
+		//TARUH QUERY DISINI
+		$query = $this->db->query('SELECT * FROM transaksi where TRUE');
+		// if (isset($data['dateFrom'])) {
+		// 	$query += " AND TGL_TRANSAKSI > " .  $data['dateFrom'];
+		// }
+		// if (isset($data['dateTo'])) {
+		// 	$query += " AND TGL_TRANSAKSI < " .  $data['dateTo'];
+		// }
+
+		return $query->result();
+	}
 }
 ?>

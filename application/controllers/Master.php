@@ -574,4 +574,33 @@ class Master extends CI_Controller
 			echo json_encode($response);
 		}
 	}
+
+	//BAGIAN SEARCH DATA LAPORAN ASSET
+	public function searchDataAsset(){
+										//NM FIELD,	NM TAMPIL,
+		// $this->form_validation->set_rules('dateFrom', 'Date From', 'required');
+		// $this->form_validation->set_rules('dateTo', 'Date To', 'required');
+		
+		// $this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		//parameter
+		$data['dateFrom'] = $this->input->post('dateFrom');
+		$data['dateTo'] = $this->input->post('dateTo');
+		$data['kategori'] = $this->input->post('kategori');
+		$data['aktivitas'] = $this->input->post('aktivitas');
+
+		$response["message"] = $this->Asset->searchDataAsset($data);
+		echo json_encode($response);
+
+		// if ($this->form_validation->run() == FALSE)
+		// {	
+		// 	$json_response = $this->form_validation->error_array();
+		// 	echo json_encode($json_response);
+		// }
+		// else
+		// {
+		// 	var_dump("LALALA");
+		// 	$response["message"] = $this->Asset->searchDataAsset($data);
+		// }
+	}
 }
