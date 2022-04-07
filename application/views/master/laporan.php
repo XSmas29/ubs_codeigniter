@@ -138,27 +138,26 @@
 			cache: false,
 			processData: false,
 			contentType: false,
+            dataType: 'json',
 			success: function(response){
-				console.log(response);
-                $('#myTable').DataTable().clear().destroy();
-				var message = JSON.parse(response);
-                // $("#bodyLaporan").html("");
-                message['message'].forEach(function(item){
-                    $('#bodyLaporan').append(
-                        '<tr>'+ item.TGL_TRANSAKSI + '</tr>' +
-                        '<tr>'+ "INI KATEGORI" + '</tr>' +
-                        '<tr>'+ item.AKTIVITAS_TRANSAKSI + '</tr>' + //yang ini first letter jadi kapital
-                        '<tr>'+ "INI ASSET NAME" + '</tr>' +
-                        '<tr>'+ "INI LOCATION" + '</tr>' +
-                        '<tr>'+ item.KETERANGAN_1 + '</tr>'
-                    );
+				console.log(response.message);
+                let message = response;
+                $("#bodyLaporan").html("");
+                response.message.forEach(element => {
+                    const date = new Date(element['TGL_TRANSAKSI']);
+                    const formattedDate = date.toLocaleDateString('en-GB', {
+                    day: '2-digit', month: 'short', year: 'numeric'
+                    }).replace(/ /g, ' ');
+                    let tr = `<tr>
+                        <td> ${formattedDate} </td>
+                        <td> "INI KATEGORI" </td>
+                        <td> ${element['AKTIVITAS_TRANSAKSI']} </td>
+                        <td> "INI ASSET NAME" </td>
+                        <td> "INI LOCATION" </td>
+                        <td> ${element['KETERANGAN_1']} </td>
+                    </tr>`;
+                    $("#bodyLaporan").append(tr);
                 });
-				// raiseErrors(message);
-                $('#myTable').DataTable( 
-                    {
-                        responsive: false
-                    } 
-                );
 			}, error: function(xhr, status, error) {
 				console.log(xhr.responseText);
 			},

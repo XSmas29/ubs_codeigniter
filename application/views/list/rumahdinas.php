@@ -56,7 +56,7 @@
 											<td><?= $listrumah[$i]->NAMA_ASSET?></td>
 											<td><?= $listrumah[$i]->KODE_ASSET?></td>
 											<td><?= $listrumah[$i]->INFO_1?></td>
-											<td><?= $listrumah[$i]->TGL_PENGADAAN?></td>
+											<td><?= date('d F Y', strtotime($listrumah[$i]->TGL_PENGADAAN))?></td>
 											<td><!-- JIKA ADA YG PINJAM, AMBIL NAMA USER --></td>
 											<td><!-- JIKA ADA YG PINJAM, AMBIL DEPARTEMEN USER --></td>
 											<td>
