@@ -195,6 +195,23 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="detailtitle"></h4>
+					<button type="button" class="btn-close" data-bs-target='#exampleModalToggle2' data-bs-toggle="modal" data-bs-dismiss="modal" role="button" aria-label="Close"></button>
+				</div>
+				<div class="modal-body pt-0" id="bodymodaldetail">
+					
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
@@ -205,42 +222,54 @@
 
 	$('.btn-detail').click(function(){
 			
-			let kode = $(this).attr('value');
-			$.ajax({
-				type: "POST",
-				url: "<?php echo site_url(); ?>"+"/Master/detailAsset",
-				data: {key: kode},
-				cache: false,
-				success: function(response){
-					let data = JSON.parse(response);
-					console.log(data);
+		let kode = $(this).attr('value');
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/detailAsset",
+			data: {key: kode},
+			cache: false,
+			success: function(response){
+				let data = JSON.parse(response);
+				console.log(data);
 
-					$("#bodyfasilitas").html("");
-					data["fasilitas"].forEach(function(item){
-						$("#bodyfasilitas").append(
+				$("#bodyfasilitas").html("");
+				data["fasilitas"].forEach(function(item){
+					$("#bodyfasilitas").append(
+					"<tr>" +
+						"<td>" + item.NAMA + "</td>" +
+						"<td>" + item.JUMLAH + "</td>" +
+					"</tr>"
+					);
+				});
+
+				$("#bodyuser").html("");
+				data["user"].forEach(function(item){
+					$("#bodyuser").append(
+					"<tr>" +
+						"<td>" + item.NIK + "</td>" +
+						"<td>" + item.NAMA + "</td>" +
+						"<td>" + item.DEPARTEMEN + "</td>" +
+					"</tr>"
+					);
+				});
+
+				$('#tabelhistory').DataTable().clear().destroy();
+				
+				$("#bodyhistory").html("");
+				let ctr = 1;
+				data["transaksi"].forEach(function(item){
+					if (item.AKTIVITAS_TRANSAKSI.toLowerCase() == "perbaikan" || item.AKTIVITAS_TRANSAKSI.toLowerCase() == "penghapusan"){
+						$("#bodyhistory").append(
 						"<tr>" +
-							"<td>" + item.NAMA + "</td>" +
-							"<td>" + item.JUMLAH + "</td>" +
+							"<td>" + ctr + "</td>" +
+							"<td>" + item.TGL_TRANSAKSI + "</td>" +
+							"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
+							"<td>" + item.USER_TRANSAKSI + "</td>" +
+							"<td><button class='btn btn-sm btn-dark' data-bs-target='#exampleModalToggle3' data-bs-toggle='modal' data-bs-dismiss='modal' role='button' value='" + item.KODE_TRANSAKSI + "' onclick='getDetailHistory(this.value)'>Details</button></td>" +
 						"</tr>"
 						);
-					});
-
-					$("#bodyuser").html("");
-					data["user"].forEach(function(item){
-						$("#bodyuser").append(
-						"<tr>" +
-							"<td>" + item.NIK + "</td>" +
-							"<td>" + item.NAMA + "</td>" +
-							"<td>" + item.DEPARTEMEN + "</td>" +
-						"</tr>"
-						);
-					});
-
-					$('#tabelhistory').DataTable().clear().destroy();
-					
-					$("#bodyhistory").html("");
-					let ctr = 1;
-					data["transaksi"].forEach(function(item){
+					}
+					else{
 						$("#bodyhistory").append(
 						"<tr>" +
 							"<td>" + ctr + "</td>" +
@@ -250,46 +279,132 @@
 							"<td>" + item.KETERANGAN_1 + "</td>" +
 						"</tr>"
 						);
-						ctr += 1;
-					});
-				
-					$("#listgambar").html("");
-					$("#indicator").html("");
-					if (data["gambar"].length > 0){
-						let i = 0;
-
-						data["gambar"].forEach(function(item){
-							$("#listgambar").append(
-								'<div class="carousel-item">' +
-									'<img src="<?php echo base_url(); ?>assets/img/asset/' + item.KODE_GAMBAR + '" class="d-block w-100" alt="...">' +
-								'</div>'
-							);
-							$("#indicator").append(
-								'<button type="button" class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" aria-current="true" aria-label="Slide ' + i + '"></button>'
-							);
-
-							i += 1;
-						});
-						$('#listgambar div:first-child').addClass('active');
-						$('#indicator button:first-child').addClass('active');
-					}
-					else{
-						console.log("asd");
-						$("#listgambar").append(
-							'<div class="carousel-item active">' +
-								'<img src="<?php echo base_url(); ?>assets/img/placeholder.jpg" class="d-block w-100" alt="...">' +
-							'</div>'
-						);
 					}
 					
-					$('#tabelhistory').DataTable( 
-						{
-							responsive: false
-						} 
-					);
-				}, error: function(){
-					console.log("Error when loading asset!")
+					ctr += 1;
+				});
+			
+				$("#listgambar").html("");
+				$("#indicator").html("");
+				if (data["gambar"].length > 0){
+					let i = 0;
+
+					data["gambar"].forEach(function(item){
+						$("#listgambar").append(
+							'<div class="carousel-item">' +
+								'<img src="<?php echo base_url(); ?>assets/img/asset/' + item.KODE_GAMBAR + '" class="d-block w-100" alt="...">' +
+							'</div>'
+						);
+						$("#indicator").append(
+							'<button type="button" class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" aria-current="true" aria-label="Slide ' + i + '"></button>'
+						);
+
+						i += 1;
+					});
+					$('#listgambar div:first-child').addClass('active');
+					$('#indicator button:first-child').addClass('active');
 				}
-			});
+				else{
+					console.log("asd");
+					$("#listgambar").append(
+						'<div class="carousel-item active">' +
+							'<img src="<?php echo base_url(); ?>assets/img/placeholder.jpg" class="d-block w-100" alt="...">' +
+						'</div>'
+					);
+				}
+				
+				$('#tabelhistory').DataTable( 
+					{
+						responsive: false
+					} 
+				);
+			}, error: function(){
+				console.log("Error when loading asset!")
+			}
 		});
+	});
+
+	function getDetailHistory(key){
+		console.log(key);
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/detailhistory",
+			data: {key: key},
+			cache: false,
+			success: function(response){
+				let data = JSON.parse(response);
+				console.log(data);
+				if (data["transaksi"][0].AKTIVITAS_TRANSAKSI.toLowerCase() == "perbaikan"){
+					$("#detailtitle").html("Detail Perbaikan");
+					$("#bodymodaldetail").html(
+						"<div class='row mt-2'>" +
+							"<div class='col-7'>" +
+								"<div class='row'>" +
+									"<div class='col-6'>" +
+										"<div class='fw-bold fs-5 mt-3'>Tanggal Kejadian</div>" +
+									"</div>" +
+									"<div class='col-6'>" +
+										"<div class='fs-5 mt-3'>" + data["transaksi"][0].TGL_TRANSAKSI + "</div>" +
+									"</div>" +
+								"</div>" +
+								"<div class='row'>" +
+									"<div class='col-6'>" +
+										"<div class='fw-bold fs-5 mt-3'>Kronologi</div>" +
+									"</div>" +
+									"<div class='col-6'>" +
+										"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_1 + "</div>" +
+									"</div>" +
+								"</div>" +
+								"<div class='row'>" +
+									"<div class='col-6'>" +
+										"<div class='fw-bold fs-5 mt-3'>Kondisi Aset</div>" +
+									"</div>" +
+									"<div class='col-6'>" +
+										"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_2 + "</div>" +
+									"</div>" +
+								"</div>" +
+								"<div class='row'>" +
+									"<div class='col-6'>" +
+										"<div class='fw-bold fs-5 mt-3'>Action Plan</div>" +
+									"</div>" +
+									"<div class='col-6'>" +
+										"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_3 + "</div>" +
+									"</div>" +
+								"</div>" +
+								"<div class='row'>" +
+									"<div class='col-6'>" +
+										"<div class='fw-bold fs-5 mt-3'>RAB</div>" +
+									"</div>" +
+									"<div class='col-6'>" +
+										"<div class='fs-5 mt-3 mb-3'>" + data["transaksi"][0].KETERANGAN_4 + "</div>" +
+									"</div>" +
+								"</div>" +
+							"</div>" +
+							"<div class='col-5 d-flex align-items-center'>" +
+								"<img src='<?php echo base_url(); ?>assets/img/repair/" + data["gambar"][0].KODE_GAMBAR + "' width='100%'>" + 
+							"</div>" +
+						"</div>"
+						
+					);
+				}
+				else{
+					$("#detailtitle").html("Detail Penghapusan");
+					$("#bodymodaldetail").html(
+						"<div class='row my-2'>" +
+							"<div class='col-5'>" +
+								"<div class='fw-bold fs-5 mt-3'>Tanggal Kejadian</div>" +
+								"<div class='fw-bold fs-5 mt-3'>Alasan dihapus</div>" +
+							"</div>" +
+							"<div class='col-7'>" +
+								"<div class='fs-5 mt-3'>" + data["transaksi"][0].TGL_TRANSAKSI + "</div>" +
+								"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_1 + "</div>" +
+							"</div>" +
+						"</div>"
+					);
+				}
+			}, error: function(){
+				console.log("Error when getting details!");
+			}
+		});
+	};
 </script>

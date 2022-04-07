@@ -85,6 +85,11 @@ class Asset extends CI_Model
 		return $query->result();
 	}
 
+	public function getDetailHistory($key) {
+		$query = $this->db->query("select * from transaksi where KODE_TRANSAKSI='$key'"); 
+		return $query->result();
+	}
+
 	public function getKodeAsrama($data){
 		$nama = $data["asrama"];
 		$query = $this->db->query("select kode_asset from asset where fk_kategori=4 and lower(nama_asset)=lower('$nama') limit 1");

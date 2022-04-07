@@ -56,6 +56,14 @@ class Master extends CI_Controller
 		echo json_encode($data);
 	}
 
+	public function detailhistory()
+	{
+		$key = $this->input->post('key');
+		$data["transaksi"] = $this->Asset->getDetailHistory($key);
+		$data["gambar"] = $this->Asset->getImageAsset($key);
+		echo json_encode($data);
+	}
+
 	public function master(){
 		$this->load->view('master/home');
 	}
