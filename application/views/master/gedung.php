@@ -62,6 +62,8 @@
 										<tbody>
 												<?php 
 													for ($i=0; $i < count($listgedung); $i++) {
+														$status = '';
+														if ($listgedung[$i]->IS_DELETED == 1) $status = "disabled";
 												?>
 														<tr>
 															<td><?= $listgedung[$i]->INFO_4?></td>
@@ -87,13 +89,13 @@
 																?>
 															</td>
 															<td>
-																<button data-bs-toggle="modal" href="#modaladdgedung" role="button" class="btn btn-sm btn-info btn-edit" value='<?= $listgedung[$i]->KODE_ASSET ?>'>
+																<button data-bs-toggle="modal" href="#modaladdgedung" role="button" class="btn btn-sm btn-info btn-edit" value='<?= $listgedung[$i]->KODE_ASSET ?>' <?php echo $status?>>
 																	<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
 																</button>
-																<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value='<?= $listgedung[$i]->KODE_ASSET ?>'>
+																<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value='<?= $listgedung[$i]->KODE_ASSET ?>' <?php echo $status?>>
 																	<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
 																</button>
-																<button data-bs-toggle="modal" href="#modaldelete" role="button" class="btn btn-sm btn-danger btn-remove" value='<?= $listgedung[$i]->KODE_ASSET ?>'>
+																<button data-bs-toggle="modal" href="#modaldelete" role="button" class="btn btn-sm btn-danger btn-remove" value='<?= $listgedung[$i]->KODE_ASSET ?>' <?php echo $status?>>
 																	<img src="<?php echo base_url(); ?>assets/img/icons/delete.png" width="16" height="16">
 																</button>
 															</td>

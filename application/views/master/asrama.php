@@ -59,6 +59,8 @@
 										<tbody>
 												<?php 
 													for ($i=0; $i < count($listAsrama); $i++) {
+														$status = '';
+														if ($listAsrama[$i]->IS_DELETED == 1) $status = "disabled";
 												?>
 													<tr>
 													<td><?= $listAsrama[$i]->NAMA_ASSET?></td>
@@ -81,14 +83,14 @@
 														}
 														?>
 													</td>
-													<td>
-														<button data-bs-toggle="modal" href="#modaladdasrama" role="button" class="btn btn-sm btn-info btn-edit" value='<?= $listAsrama[$i]->KODE_ASSET ?>'>
+													<td <?php echo ($listAsrama[$i]->IS_DELETED == 1) ? 'disabled' : ''; ?>>
+														<button data-bs-toggle="modal" href="#modaladdasrama" role="button" class="btn btn-sm btn-info btn-edit" value='<?= $listAsrama[$i]->KODE_ASSET ?>' <?php echo $status?>>
 															<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
 														</button>
-														<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value='<?= $listAsrama[$i]->KODE_ASSET ?>'>
+														<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value='<?= $listAsrama[$i]->KODE_ASSET ?>' <?php echo $status?>>
 															<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
 														</button>
-														<button data-bs-toggle="modal" href="#modaldelete" role="button" class="btn btn-sm btn-danger btn-remove" value='<?= $listAsrama[$i]->KODE_ASSET ?>'>
+														<button data-bs-toggle="modal" href="#modaldelete" role="button" class="btn btn-sm btn-danger btn-remove" value='<?= $listAsrama[$i]->KODE_ASSET ?>' <?php echo $status?>>
 															<img src="<?php echo base_url(); ?>assets/img/icons/delete.png" width="16" height="16">
 														</button>
 													</td>
