@@ -380,7 +380,9 @@
 		$('#btnsave').attr('onClick', 'addData()');
 		$("#modaltitle").html("Form Pengadaan Aset");
 		$('#btnsave').html('Save');
-
+		$("#asrama").prop('disabled', false);
+		$("#lantai").prop('disabled', false);
+		$("#kamar").prop('disabled', false);
 		let today = now.getFullYear()+"-"+(month)+"-"+(day);
 		$('#tanggal').val(today);
 	});
@@ -483,6 +485,9 @@
 		$('#btnsave').attr('onClick', 'editData()');
 		$('#btnsave').html('Save Changes');
 		$("#modaltitle").html("Edit Aset");
+		$("#asrama").prop('disabled', true);
+		$("#lantai").prop('disabled', true);
+		$("#kamar").prop('disabled', true);
 		$.ajax({
 			type: "POST",
 			url: "<?php echo site_url(); ?>"+"/Master/detailAsset",

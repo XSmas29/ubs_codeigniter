@@ -59,7 +59,7 @@
                                                 <div class="form__group field mb-5">
                                                     <label class="form__label">Kategori<small class="form-error" id="error-kategori"></small></label>
                                                     <select class="form__field" name="kategori" id="kategori" placeholder="Kategori">
-                                                        <option value="" selected></option>
+                                                        <option value="" selected>All</option>
                                                         <?php 
                                                             for ($i=0; $i < count($listDataKategori); $i++) {
                                                         ?>
@@ -72,7 +72,7 @@
                                                 <div class="form__group field mb-5">
                                                     <label class="form__label">Aktivitas<small class="form-error" id="error-aktivitas"></small></label>
                                                     <select class="form__field" name="aktivitas" id="aktivitas" placeholder="Aktivitas">
-                                                        <option value="" selected></option>
+                                                        <option value="" selected>All</option>
                                                         <option value="Pengadaan">Pengadaan</option>
                                                         <option value="Perubahan">Perubahan</option>
                                                         <option value="Perbaikan">Perbaikan</option>
@@ -80,11 +80,11 @@
                                                 </div>
 
                                             </div>
-                                            <div class="d-flex justify-content">
+                                            <div class="d-flex justify-content mb-4">
                                                 <button type="button" class="btn btn-primary px-5 btn-submit" id="btnsearch" onclick="searchData()">SEARCH</button>
                                             </div>
                                             <div>
-                                                <table id="myTable" class="table table-striped table-bordered rounded text-center">
+                                                <table id="tabellaporan" class="table table-striped table-bordered rounded text-center" hidden>
                                                     <thead>
                                                         <tr>
                                                             <th>Date</th>
@@ -116,14 +116,11 @@
 <script type="text/javascript">
 	$(document).ready( function () 
 	{
-		$('#myTable').DataTable( 
-			{
-				responsive: true
-			} 
-		);
+
 	});
 
     function searchData(){
+		$("#tabellaporan").removeAttr('hidden');
         // console.log("LOL");
         let form_data = new FormData();
         form_data.append("dateFrom", $("#dateFrom").val());
@@ -131,6 +128,7 @@
         form_data.append("kategori", $("#kategori").val());
         form_data.append("aktivitas", $("#aktivitas").val());
 
+		$('#tabellaporan').DataTable().clear().destroy();
         $.ajax({
 			type: "POST",
 			url: "<?php echo site_url(); ?>"+"/Master/searchDataAsset",
@@ -144,20 +142,41 @@
                 let message = response;
                 $("#bodyLaporan").html("");
                 response.message.forEach(element => {
+					kategori = "";
+					if (element['FK_KATEGORI'] == 1){
+						kategori = "Rumah Dinas";
+					}
+					else if (element['FK_KATEGORI'] == 2){
+						kategori = "Gedung";
+					}
+					else if (element['FK_KATEGORI'] == 3){
+						kategori = "Kendaraan";
+					}
+					else if (element['FK_KATEGORI'] == 4){
+						kategori = "Asrama";
+					}
+					else if (element['FK_KATEGORI'] == 5){
+						kategori = "Fasilitas";
+					}
                     const date = new Date(element['TGL_TRANSAKSI']);
                     const formattedDate = date.toLocaleDateString('en-GB', {
                     day: '2-digit', month: 'short', year: 'numeric'
                     }).replace(/ /g, ' ');
                     let tr = `<tr>
                         <td> ${formattedDate} </td>
-                        <td> "INI KATEGORI" </td>
+                        <td> ${kategori} </td>
                         <td> ${element['AKTIVITAS_TRANSAKSI']} </td>
-                        <td> "INI ASSET NAME" </td>
-                        <td> "INI LOCATION" </td>
+                        <td> ${element['NAMA_ASSET']} </td>
+                        <td> ${element['INFO_1']} </td>
                         <td> ${element['KETERANGAN_1']} </td>
                     </tr>`;
                     $("#bodyLaporan").append(tr);
                 });
+				$('#tabellaporan').DataTable( 
+					{
+						responsive: false
+					} 
+				);
 			}, error: function(xhr, status, error) {
 				console.log(xhr.responseText);
 			},

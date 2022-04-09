@@ -1054,18 +1054,18 @@ class Asset extends CI_Model
 
 	public function searchDataAsset($data){
 		//TARUH QUERY DISINI
-		$query = 'SELECT * FROM transaksi where TRUE';
+		$query = 'SELECT * FROM transaksi, asset where transaksi.FK_ASSET=asset.KODE_ASSET';
 		if (!empty($data['dateFrom'])) {
-			$query .= " AND TGL_TRANSAKSI >= '" . $data['dateFrom'] . "'";
+			$query .= " AND transaksi.TGL_TRANSAKSI >= '" . $data['dateFrom'] . "'";
 		}
 		if (!empty($data['dateTo'])) {
-			$query .= " AND TGL_TRANSAKSI <= '" . $data['dateTo'] . "'";
+			$query .= " AND transaksi.TGL_TRANSAKSI <= '" . $data['dateTo'] . "'";
 		}
-		// if (isset($data['kategori'])) {
-		// 	# code...
-		// }
+		if (!empty($data['kategori'])) {
+			$query .= " AND asset.FK_KATEGORI <= '" . $data['kategori'] . "'";
+		}
 		if (!empty($data['aktivitas'])) {
-			$query .= " AND AKTIVITAS_TRANSAKSI = '" . $data['aktivitas'] . "'";
+			$query .= " AND transaksi.AKTIVITAS_TRANSAKSI = '" . $data['aktivitas'] . "'";
 		}
 		
 		$result = $this->db->query($query);
