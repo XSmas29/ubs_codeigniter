@@ -16,7 +16,12 @@ class Master extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('home');
+		$data['jumlahrumah'] = $this->Asset->getJumRumahDinas();
+		$data['jumlahgedung'] = $this->Asset->getJumGedung();
+		$data['jumlahkendaraan'] = $this->Asset->getJumKendaraan();
+		$data['jumlahasrama'] = $this->Asset->getJumAsrama();
+		$data['jumlahfasilitas'] = $this->Asset->getJumFasilitas();
+		$this->load->view('home', $data);
 	}
 
 	public function listrumah()

@@ -6,6 +6,41 @@ class Asset extends CI_Model
         parent::__construct();
         $this->load->database();
 	}
+
+	public function getJumRumahDinas() {
+		$jumlah['active'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=1 and is_deleted=0")->result()[0]->jumlah; 
+		$jumlah['available'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=1 and is_deleted=0 and status=0")->result()[0]->jumlah; 
+		$jumlah['deleted'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=1 and is_deleted=1")->result()[0]->jumlah; 
+		return $jumlah;
+	}
+
+	public function getJumGedung() {
+		$jumlah['active'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=2 and is_deleted=0")->result()[0]->jumlah; 
+		$jumlah['available'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=2 and is_deleted=0 and status=0")->result()[0]->jumlah; 
+		$jumlah['deleted'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=2 and is_deleted=1")->result()[0]->jumlah; 
+		return $jumlah;
+	}
+
+	public function getJumKendaraan() {
+		$jumlah['active'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=3 and is_deleted=0")->result()[0]->jumlah; 
+		$jumlah['available'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=3 and is_deleted=0 and status=0")->result()[0]->jumlah; 
+		$jumlah['deleted'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=3 and is_deleted=1")->result()[0]->jumlah; 
+		return $jumlah;
+	}
+
+	public function getJumAsrama() {
+		$jumlah['active'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=4 and is_deleted=0")->result()[0]->jumlah; 
+		$jumlah['available'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=4 and is_deleted=0 and status=0")->result()[0]->jumlah; 
+		$jumlah['deleted'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=4 and is_deleted=1")->result()[0]->jumlah; 
+		return $jumlah;
+	}
+
+	public function getJumFasilitas() {
+		$jumlah['active'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=5 and is_deleted=0")->result()[0]->jumlah; 
+		$jumlah['available'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=5 and is_deleted=0 and status=0")->result()[0]->jumlah; 
+		$jumlah['deleted'] = $this->db->query("select count(*) as jumlah from asset where fk_kategori=5 and is_deleted=1")->result()[0]->jumlah; 
+		return $jumlah;
+	}
 	
 	public function getRumahDinas() {
 		$query = $this->db->query("select * from asset where fk_kategori=1")->result(); 

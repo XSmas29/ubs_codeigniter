@@ -52,9 +52,9 @@
 								</div>
 								<div class="border-top bg-white text-center pt-3 pb-0">
 									<div class="justify-content-center">
-										<h5 class="fw-normal">Total Aktif: 60</h5>
-										<h5 class="fw-normal">Jumlah Tersedia : 12</h5>
-										<h5 class="fw-normal">Jumlah Terhapus : 8</h5>
+										<h5 class="fw-normal">Total Aktif: <?= $jumlahrumah["active"]?></h5>
+										<h5 class="fw-normal">Jumlah Tersedia : <?= $jumlahrumah["available"]?></h5>
+										<h5 class="fw-normal">Jumlah Terhapus : <?= $jumlahrumah["deleted"]?></h5>
 									</div>
 								</div>
 							</div>
@@ -71,9 +71,9 @@
 								</div>
 								<div class="border-top bg-white text-center pt-3 pb-0">
 									<div class="justify-content-center">
-										<h5 class="fw-normal">Total Aktif: 10</h5>
-										<h5 class="fw-normal">Jumlah Tersedia : 0</h5>
-										<h5 class="fw-normal">Jumlah Terhapus : 1</h5>
+										<h5 class="fw-normal">Total Aktif: <?= $jumlahgedung["active"]?></h5>
+										<h5 class="fw-normal">Jumlah Tersedia : <?= $jumlahgedung["available"]?></h5>
+										<h5 class="fw-normal">Jumlah Terhapus : <?= $jumlahgedung["deleted"]?></h5>
 									</div>
 								</div>
 							</div>
@@ -90,9 +90,9 @@
 								</div>
 								<div class="border-top bg-white text-center pt-3 pb-0">
 									<div class="justify-content-center">
-										<h5 class="fw-normal">Total Aktif: 124</h5>
-										<h5 class="fw-normal">Jumlah Tersedia : 61</h5>
-										<h5 class="fw-normal">Jumlah Terhapus : 23</h5>
+										<h5 class="fw-normal">Total Aktif: <?= $jumlahkendaraan["active"]?></h5>
+										<h5 class="fw-normal">Jumlah Tersedia : <?= $jumlahkendaraan["available"]?></h5>
+										<h5 class="fw-normal">Jumlah Terhapus : <?= $jumlahkendaraan["deleted"]?></h5>
 									</div>
 								</div>
 							</div>
@@ -109,9 +109,9 @@
 								</div>
 								<div class="border-top bg-white text-center pt-3 pb-0">
 									<div class="justify-content-center">
-										<h5 class="fw-normal">Total Aktif: 4</h5>
-										<h5 class="fw-normal">Jumlah Tersedia : 0</h5>
-										<h5 class="fw-normal">Jumlah Terhapus : 0</h5>
+										<h5 class="fw-normal">Total Aktif: <?= $jumlahasrama["active"]?></h5>
+										<h5 class="fw-normal">Jumlah Tersedia : <?= $jumlahasrama["available"]?></h5>
+										<h5 class="fw-normal">Jumlah Terhapus : <?= $jumlahasrama["deleted"]?></h5>
 									</div>
 								</div>
 							</div>
@@ -128,9 +128,9 @@
 								</div>
 								<div class="border-top bg-white text-center pt-3 pb-0">
 									<div class="justify-content-center">
-										<h5 class="fw-normal">Total Aktif: 167</h5>
-										<h5 class="fw-normal">Jumlah Tersedia : 69</h5>
-										<h5 class="fw-normal">Jumlah Terhapus : 22</h5>
+										<h5 class="fw-normal">Total Aktif: <?= $jumlahfasilitas["active"]?></h5>
+										<h5 class="fw-normal">Jumlah Tersedia : <?= $jumlahfasilitas["available"]?></h5>
+										<h5 class="fw-normal">Jumlah Terhapus : <?= $jumlahfasilitas["deleted"]?></h5>
 									</div>
 								</div>
 							</div>
