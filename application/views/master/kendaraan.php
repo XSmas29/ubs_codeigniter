@@ -236,12 +236,12 @@
 							</div>
 						</div>
 						<div class="col-6">
-							<h3 class="my-4">Upload Foto</h3>
+							<h3 class="my-4">Upload File</h3>
 							<div class="d-flex flex-wrap justify-content-center" id="image-upload-wrapper-perbaikan">
 								<div class="image-upload-wrap-perbaikan mx-1">
-									<input class="file-upload-input" type='file' id='imageperbaikan' onchange="readURLperbaikan(this);" accept="image/*" />
+									<input class="file-upload-input" type='file' id='imageperbaikan' onchange="readURLperbaikan(this);" accept="file/*" />
 									<div class="drag-text">
-										<h3>Drag and drop or select an Image</h3>
+										<h3>Drag and drop or select a File</h3>
 									</div>
 								</div>
 							</div>
@@ -578,7 +578,9 @@
 
 	function readURLperbaikan(input){
 		if (input.files && input.files[0]) {
-			var fileExtension = ['jpeg', 'jpg', 'png'];
+			var fileExtension = ['jpeg', 'jpg', 'png', 'pdf', 'doc', 'docx'];
+			var ext1 = ['jpeg', 'jpg', 'png'];
+			var ext2 = ['pdf', 'doc', 'docx'];
 			if ($.inArray($(input).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
 				alert("Only formats are allowed : "+fileExtension.join(', '));
 			}
@@ -589,14 +591,27 @@
 				var reader = new FileReader();
 
 				reader.onload = function(e) {
-					$("#image-upload-wrapper-perbaikan").append(
-						"<div class='file-upload-wrapper-perbaikan mx-1 mb-1 d-flex align-items-center' onclick='removeImagePerbaikan(this)'>" + 
-							"<img class='file-upload-image' src='" + e.target.result + "'>" +
-							'<div class="file-upload-remove-perbaikan cursor-pointer d-flex align-items-center justify-content-center">' +
-								"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
-							'</div>' + 
-						"</div>"
-					);
+					if ($.inArray($(input).val().split('.').pop().toLowerCase(), ext2) == -1) {
+						$("#image-upload-wrapper-perbaikan").append(
+							"<div class='file-upload-wrapper-perbaikan mx-1 mb-1 d-flex align-items-center' onclick='removeImagePerbaikan(this)'>" + 
+								"<img class='file-upload-image' src='" + e.target.result + "'>" +
+								'<div class="file-upload-remove-perbaikan cursor-pointer d-flex align-items-center justify-content-center">' +
+									"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
+								'</div>' + 
+							"</div>"
+						);
+					}
+					else{
+						$("#image-upload-wrapper-perbaikan").append(
+							"<div class='file-upload-wrapper-perbaikan mx-1 mb-1' d-flex align-items-center justify-content-center onclick='removeImagePerbaikan(this)'>" + 
+								"<img class='file-upload-image p-4' src='<?php echo base_url();?>assets/img/icons/document.png' height=80%>" +
+								"<div>" + input.files[0].name + "</div>" +
+								'<div class="file-upload-remove-perbaikan cursor-pointer d-flex align-items-center justify-content-center">' +
+									"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
+								'</div>' + 
+							"</div>"
+						);
+					}
 
 					$('.image-title').html(input.files[0].name);
 				};
@@ -693,9 +708,9 @@
 
 		$("#image-upload-wrapper-perbaikan").html(
 			'<div class="image-upload-wrap-perbaikan mx-1">' + 
-				'<input class="file-upload-input" type="file" id="imageperbaikan" onchange="readURLperbaikan(this);" accept="image/*" />' + 
+				'<input class="file-upload-input" type="file" id="imageperbaikan" onchange="readURLperbaikan(this);" accept="file/*" />' + 
 				'<div class="drag-text">' + 
-					'<h3>Drag and drop or select an Image</h3>' + 
+					'<h3>Drag and drop or select a File</h3>' + 
 				'</div>' + 
 			'</div>'
 		);
@@ -761,5 +776,21 @@
 		$("#error-tanggal-delete").html(errors["tanggaldelete"]).css("opacity", 1);
 		$("#error-alasan-delete").html(errors["alasandelete"]).css("opacity", 1);
 		//
+	}
+
+	function removeImagePerbaikan(image){
+		//menghapus element image
+		let index = $(image).index();
+		$(image).remove();
+		//
+
+		$(".image-upload-wrap-perbaikan").html(
+			'<input class="file-upload-input" type="file" id="imageperbaikan" onchange="readURLperbaikan(this);" accept="file/*" />' +
+			'<div class="drag-text">' +
+				'<h3>Drag and drop or select a File</h3>' +
+			'</div>'
+		);
+		
+		$(".image-upload-wrap-perbaikan").show();
 	}
 </script>

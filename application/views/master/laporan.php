@@ -18,8 +18,10 @@
 <body>
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>
-
+		<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
+		<script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
+		<script src="https://unpkg.com/jspdf-autotable@3.5.23/dist/jspdf.plugin.autotable.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/>
 
 		<section id="home">
@@ -82,16 +84,17 @@
                                             </div>
                                             <div class="d-flex justify-content mb-4">
                                                 <button type="button" class="btn btn-primary px-5 btn-submit" id="btnsearch" onclick="searchData()">SEARCH</button>
+                                                <button type="button" class="btn btn-success mx-2 btn-submit" id="btndownload" onclick="generateLaporan()" hidden>Download Laporan</button>
                                             </div>
                                             <div>
                                                 <table id="tabellaporan" class="table table-striped table-bordered rounded text-center" hidden>
                                                     <thead>
                                                         <tr>
-                                                            <th>Date</th>
+                                                            <th>Tanggal</th>
                                                             <th>Kategori</th>
                                                             <th>Aktivitas</th>
-                                                            <th>Asset Name</th>
-                                                            <th>Location</th>
+                                                            <th>Nama Aset</th>
+                                                            <th>Lokasi</th>
                                                             <th>Keterangan</th>
                                                         </tr>
                                                     </thead>
@@ -113,14 +116,91 @@
 </body>
 
 </html>
+
 <script type="text/javascript">
+	var datalaporan = [];
+	var headerlaporan = ['Tanggal', 'Kategori', 'Aktivitas', 'Nama Aset', 'Lokasi', 'Keterangan'];
+	function format_date(date){
+		let dateval = new Date(date);
+		let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dateval);
+		let month = new Intl.DateTimeFormat('en', { month: 'short' }).format(dateval);
+		let day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(dateval);
+		let formatted_date = day + " " + month + " " + year;
+		return formatted_date;
+	}
+
+	const addFooters = laporan => {
+		let marginfooter = 3;
+		let footerline = laporan.internal.pageSize.getHeight() - 26;
+		const pageCount = laporan.internal.getNumberOfPages()
+		for (var i = 1; i <= pageCount; i++) {
+			laporan.setPage(i)
+			laporan.setFontSize(12);
+			laporan.line(marginfooter, footerline, laporan.internal.pageSize.getWidth() - marginfooter, footerline);
+			laporan.text('Page ' + String(i) + ' of ' + String(pageCount), laporan.internal.pageSize.width / 2, laporan.internal.pageSize.getHeight() - 12, {
+				align: 'center'
+			})
+		}
+	}
+
+	const addHeaders = laporan => {
+		let marginheader = 3;
+		let headerline = 26;
+		const pageCount = laporan.internal.getNumberOfPages()
+		for (var i = 1; i <= pageCount; i++) {
+			laporan.setPage(i)
+			laporan.addImage('<?php echo base_url(); ?>assets/img/ubs-2.png', 'png', marginheader, marginheader, 30, 20, 'logo', 'NONE', 0);
+			laporan.line(marginheader, headerline, laporan.internal.pageSize.getWidth() - marginheader, headerline);
+			laporan.setFontSize(22);
+			laporan.setFont('helvetica', 'none', '1000')
+			laporan.text('PT. Untung Bersama Sejahtera', laporan.internal.pageSize.getWidth() / 2, 10, { align: 'center'} );
+			laporan.setFontSize(11);
+			laporan.text('Alamat: Jl. Kenjeran No.395-399, Surabaya, Jawa Timur 60134', laporan.internal.pageSize.getWidth() / 2, 16, { align: 'center'} );
+			laporan.text('Telp: (031) 3818432', laporan.internal.pageSize.getWidth() / 2, 21, { align: 'center'} );
+		}
+	}
+
+	function generateLaporan(){
+		let laporan = new jsPDF();
+		let margincontent = 6;
+
+		laporan.setFontSize(14);
+		laporan.text('Laporan Aset PT. UBS', laporan.internal.pageSize.getWidth() / 2, 33, { align: 'center'} );
+		laporan.text(format_date($("#dateFrom").val()) + " - " + format_date($("#dateTo").val()), laporan.internal.pageSize.getWidth() / 2, 39, { align: 'center'});
+
+		laporan.setFontSize(11);
+		laporan.text('Jenis Aset: ' + $("#kategori option:selected").text(), margincontent, 46);
+		laporan.text('Kegiatan: ' + $("#aktivitas option:selected").text(), margincontent, 51);
+
+		laporan.autoTable(headerlaporan, datalaporan, {
+			styles: { fontSize: 10 },
+			avoidPageSplit: true,
+			margin: { left: margincontent, right: margincontent, top: 55, bottom: 30},
+			didDrawPage: function (data)
+			{
+                data.settings.margin.top = 35;
+			}
+		});
+		addFooters(laporan);
+		addHeaders(laporan);
+
+		laporan.save("laporan_aset.pdf");
+	}
+
 	$(document).ready( function () 
 	{
-
+		window.jsPDF = window.jspdf.jsPDF;
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		let today = now.getFullYear()+"-"+(month)+"-"+(day);
+		$('#dateFrom').val(today);
+		$('#dateTo').val(today);
 	});
 
     function searchData(){
 		$("#tabellaporan").removeAttr('hidden');
+		$("#btndownload").removeAttr('hidden');
         // console.log("LOL");
         let form_data = new FormData();
         form_data.append("dateFrom", $("#dateFrom").val());
@@ -138,8 +218,8 @@
 			contentType: false,
             dataType: 'json',
 			success: function(response){
-				console.log(response.message);
                 let message = response;
+				datalaporan = [];
                 $("#bodyLaporan").html("");
                 response.message.forEach(element => {
 					kategori = "";
@@ -170,8 +250,11 @@
                         <td> ${element['INFO_1']} </td>
                         <td> ${element['KETERANGAN_1']} </td>
                     </tr>`;
+					let row = [formattedDate, kategori, element['AKTIVITAS_TRANSAKSI'], element['NAMA_ASSET'], element['INFO_1'], element['KETERANGAN_1']];
+					datalaporan.push(row);
                     $("#bodyLaporan").append(tr);
                 });
+				
 				$('#tabellaporan').DataTable( 
 					{
 						responsive: false
