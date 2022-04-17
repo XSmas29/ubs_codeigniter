@@ -11,38 +11,27 @@
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/>
-
 		<section id="home">
 			<div class="bg-holder" style="background-image:url(<?php echo base_url(); ?>assets/img/gallery/hero.png);background-position:center;background-size:cover;">
 			</div>
-
-			<div class="container-fluid">
+			<?php require_once(APPPATH . 'views\template\navbar.php') ?>
+			<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5" style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
 				<div class="row">
-					<div class="col-1"></div>
-					<div class="col-10">
-						<h3 class="text-light">Master Data</h3>
-						<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5">
-							<div class="row">
-								<div class="col-2">
-									<?php require_once(APPPATH . 'views\template\navbar.php') ?>
-								</div>
-								<div class="col-10">
-									<h2 class="d-flex justify-content-center align-self-center">
-										Welcome, Admin
-									</h2>
-								</div>
-							</div>
-							
-						</div>
+					<div class="col-2">
 						
 					</div>
-						
-					<div class="col-1"></div>
+					<div class="col-10">
+						<h2 class="d-flex justify-content-center align-self-center">
+							Welcome, Admin
+						</h2>
+					</div>
 				</div>
-				
 			</div>
+					
+					</div>
+				</div>
+			</div>
+			
 		</section>
 	</main>
 </body>

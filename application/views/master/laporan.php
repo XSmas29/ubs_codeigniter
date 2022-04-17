@@ -27,84 +27,74 @@
 		<section id="home">
 			<div class="bg-holder" style="background-image:url(<?php echo base_url(); ?>assets/img/gallery/hero.png);background-position:center;background-size:cover;">
 			</div>
-
+			<?php require_once(APPPATH . 'views\template\navbar.php') ?>
 			<div class="container-fluid">
-				<div class="row mx-5">
-					<div class="col-12">
-						<h3 class="text-light">Master Data</h3>
-						<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5">
-							<div class="row">
-								<div class="col-2">
-									<?php require_once(APPPATH . 'views\template\navbar.php') ?>
+				<div class="row">
+					<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5" style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+						<div class="row align-items-start">
+							<div>
+								<h3 class="text-dark">Laporan Aset</h3>
+							</div>
+						</div>
+						
+						<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
+							<div class="row text-center">
+								<div class="col-6">
+									<!-- <input type="text" name="koderepair" id="koderepair" hidden/> -->
+									<div class="form__group field mb-5">
+										<input type="date" class="form__field" name="dateFrom" id="dateFrom" placeholder="Date From"/>
+										<label class="form__label">Date From<small class="form-error" id="error-dateFrom"></small></label>
+									</div>
+									<div class="form__group field mb-5">
+										<input type="date" class="form__field" name="dateTo" id="dateTo" placeholder="Date To"/>
+										<label class="form__label">Date To<small class="form-error" id="error-dateTo"></small></label>
+									</div>
 								</div>
-								<div class="col-10">
-									<div class="row align-items-start">
-										<div>
-											<h3 class="text-dark">Laporan Aset</h3>
-										</div>
-                                    </div>
-                                    
-                                    <div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
-                                        <div class="row text-center">
-                                            <div class="col-6">
-                                                <!-- <input type="text" name="koderepair" id="koderepair" hidden/> -->
-                                                <div class="form__group field mb-5">
-                                                    <input type="date" class="form__field" name="dateFrom" id="dateFrom" placeholder="Date From"/>
-                                                    <label class="form__label">Date From<small class="form-error" id="error-dateFrom"></small></label>
-                                                </div>
-                                                <div class="form__group field mb-5">
-                                                    <input type="date" class="form__field" name="dateTo" id="dateTo" placeholder="Date To"/>
-                                                    <label class="form__label">Date To<small class="form-error" id="error-dateTo"></small></label>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form__group field mb-5">
-                                                    <label class="form__label">Kategori<small class="form-error" id="error-kategori"></small></label>
-                                                    <select class="form__field" name="kategori" id="kategori" placeholder="Kategori">
-                                                        <option value="" selected>All</option>
-                                                        <?php 
-                                                            for ($i=0; $i < count($listDataKategori); $i++) {
-                                                        ?>
-                                                            <option value='<?= $listDataKategori[$i]->KODE_KATEGORI ?>'> <?= $listDataKategori[$i]->NAMA_KATEGORI ?></option>
-                                                        <?php
-                                                            }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <div class="form__group field mb-5">
-                                                    <label class="form__label">Aktivitas<small class="form-error" id="error-aktivitas"></small></label>
-                                                    <select class="form__field" name="aktivitas" id="aktivitas" placeholder="Aktivitas">
-                                                        <option value="" selected>All</option>
-                                                        <option value="Pengadaan">Pengadaan</option>
-                                                        <option value="Perubahan">Perubahan</option>
-                                                        <option value="Perbaikan">Perbaikan</option>
-                                                    </select>
-                                                </div>
+								<div class="col-6">
+									<div class="form__group field mb-5">
+										<label class="form__label">Kategori<small class="form-error" id="error-kategori"></small></label>
+										<select class="form__field" name="kategori" id="kategori" placeholder="Kategori">
+											<option value="" selected>All</option>
+											<?php 
+												for ($i=0; $i < count($listDataKategori); $i++) {
+											?>
+												<option value='<?= $listDataKategori[$i]->KODE_KATEGORI ?>'> <?= $listDataKategori[$i]->NAMA_KATEGORI ?></option>
+											<?php
+												}
+											?>
+										</select>
+									</div>
+									<div class="form__group field mb-5">
+										<label class="form__label">Aktivitas<small class="form-error" id="error-aktivitas"></small></label>
+										<select class="form__field" name="aktivitas" id="aktivitas" placeholder="Aktivitas">
+											<option value="" selected>All</option>
+											<option value="Pengadaan">Pengadaan</option>
+											<option value="Perubahan">Perubahan</option>
+											<option value="Perbaikan">Perbaikan</option>
+										</select>
+									</div>
 
-                                            </div>
-                                            <div class="d-flex justify-content mb-4">
-                                                <button type="button" class="btn btn-primary px-5 btn-submit" id="btnsearch" onclick="searchData()">SEARCH</button>
-                                                <button type="button" class="btn btn-success mx-2 btn-submit" id="btndownload" onclick="generateLaporan()" hidden>Download Laporan</button>
-                                            </div>
-                                            <div>
-                                                <table id="tabellaporan" class="table table-striped table-bordered rounded text-center" hidden>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Tanggal</th>
-                                                            <th>Kategori</th>
-                                                            <th>Aktivitas</th>
-                                                            <th>Nama Aset</th>
-                                                            <th>Lokasi</th>
-                                                            <th>Keterangan</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="bodyLaporan">
-                                                            
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+								</div>
+								<div class="d-flex justify-content mb-4">
+									<button type="button" class="btn btn-primary px-5 btn-submit" id="btnsearch" onclick="searchData()">SEARCH</button>
+									<button type="button" class="btn btn-success mx-2 btn-submit" id="btndownload" onclick="generateLaporan()" hidden>Download Laporan</button>
+								</div>
+								<div>
+									<table id="tabellaporan" class="table table-striped table-bordered rounded text-center" hidden>
+										<thead>
+											<tr>
+												<th>Tanggal</th>
+												<th>Kategori</th>
+												<th>Aktivitas</th>
+												<th>Nama Aset</th>
+												<th>Lokasi</th>
+												<th>Keterangan</th>
+											</tr>
+										</thead>
+										<tbody id="bodyLaporan">
+												
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>

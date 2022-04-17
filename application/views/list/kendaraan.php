@@ -10,7 +10,7 @@
 <style>
 	.link-list-kendaraan .nav-item{
 		color: white !important;
-		font-weight: bold;
+		font-weight: 1000;
 		transition: 0.2s;
 	}
 </style>
@@ -20,8 +20,10 @@
 		
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/>
-
-		<section id="home">
+		<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css"/>
+		
+		<section id="home" class="mt-3">
 			<div class="bg-holder" style="background-image:url(<?php echo base_url(); ?>assets/img/gallery/hero.png);background-position:center;background-size:cover;">
 			</div>
 
@@ -31,7 +33,7 @@
 						<h3 class="text-light">Database Kendaraan</h3>
 					</div>
 				</div>
-				<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3">
+				<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3" style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
 						<table id="myTable" class="table table-striped table-bordered rounded text-center">
 							<thead>
 								<tr>

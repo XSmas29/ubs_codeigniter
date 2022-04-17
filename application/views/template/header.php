@@ -11,13 +11,16 @@
 <link rel="manifest" href="<?php echo base_url('assets/img/favicons/manifest.json') ?>">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&amp;display=swap" rel="stylesheet">
 <link href="<?php echo base_url('assets/css/theme.css') ?>" rel="stylesheet" />
- 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <!-- link datatables -->
 <script src="<?php echo base_url('assets/js/jquery-3.6.0.js') ?>"></script>
 <script src="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"></script>
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/r-2.2.9/datatables.min.js"></script>
+<script src="https://kit.fontawesome.com/cd18499543.js" crossorigin="anonymous"></script>
 
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -33,15 +36,24 @@
 	.modal-lg{
 		min-width: 60% !important;
 	}
+	
+	.nav-link .nav-item{
+		color: white !important;
+		transition: 0.2s;
+	}
 
 	.nav-link:hover .nav-item{
 		color: white !important;
-		font-weight: bold;
+		font-weight: 1000;
 		transition: 0.2s;
+	}
+
+	section{
+		padding-top: 5.75rem;
 	}
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light fixed-top py-4 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block shadow" style="background-color: #2F375F;">
 	<div class="container"><a class="navbar-brand" href="<?php echo site_url('Master/index') ?>"><img src="<?php echo base_url('assets/img/ubs.png') ?>" height="50" alt="..." /></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
 		<div class="collapse navbar-collapse border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">

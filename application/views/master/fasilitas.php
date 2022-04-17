@@ -25,82 +25,72 @@
 		<section id="home">
 			<div class="bg-holder" style="background-image:url(<?php echo base_url(); ?>assets/img/gallery/hero.png);background-position:center;background-size:cover;">
 			</div>
-
+			<?php require_once(APPPATH . 'views\template\navbar.php') ?>
 			<div class="container-fluid">
-				<div class="row mx-5">
-					<div class="col-12">
-						<h3 class="text-light">Master Data</h3>
-						<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5">
-							<div class="row">
-								<div class="col-2">
-									<?php require_once(APPPATH . 'views\template\navbar.php') ?>
-								</div>
-								<div class="col-10">
-									<div class="row align-items-start">
-										<div>
-											<h3 class="text-dark">Fasilitas</h3>
-										</div>
-									</div>
-									<div class="d-flex justify-content-end">
-										<button data-bs-toggle="modal" href="#modaladdfasilitas" role="button" class="btn btn-sm btn-primary my-2" id="btnadd">+ NEW ASSET</button>
-									</div>
-									<table id="myTable" class="table table-striped table-bordered rounded text-center">
-										<thead>
-											<tr>
-												<th>Nama Aset</th>
-												<th>Kode Aset</th>
-												<th>Lokasi</th>
-												<th>Date</th>
-												<th>Status</th>
-												<th>Action</th>
-											</tr>
-										</thead>
-										<tbody>
-												<?php 
-													for ($i=0; $i < count($listFasilitas); $i++) {
-														$status = '';
-														if ($listFasilitas[$i]->IS_DELETED == 1) $status = "disabled";
-												?>
-													<tr>
-													<td><?= $listFasilitas[$i]->NAMA_ASSET?></td>
-													<td><?= $listFasilitas[$i]->KODE_ASSET?></td>
-													<td><?= $listFasilitas[$i]->INFO_1?></td>
-													<td><?= date('d F Y', strtotime($listFasilitas[$i]->TGL_PENGADAAN)) ?></td>
-													<td>
-														<?php 
-														if ($listFasilitas[$i]->IS_DELETED == 1){
-															echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
-														}
-														else{
-															if ($listFasilitas[$i]->STATUS == 0){
-																echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
-															}
-															else if ($listFasilitas[$i]->STATUS == 1){
-																echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
-															}
-														}
-														?>
-													</td>
-													<td>
-														<button data-bs-toggle="modal" href="#modaladdfasilitas" role="button" class="btn btn-sm btn-info btn-edit" value='<?= $listFasilitas[$i]->KODE_ASSET ?>' <?php echo $status?>>
-															<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
-														</button>
-														<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value='<?= $listFasilitas[$i]->KODE_ASSET ?>' <?php echo $status?>>
-															<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
-														</button>
-														<button data-bs-toggle="modal" href="#modaldelete" role="button" class="btn btn-sm btn-danger btn-remove" value='<?= $listFasilitas[$i]->KODE_ASSET ?>' <?php echo $status?>>
-															<img src="<?php echo base_url(); ?>assets/img/icons/delete.png" width="16" height="16">
-														</button>
-													</td>
-													</tr>
-												<?php
-													}
-												?>
-										</tbody>
-									</table>
-								</div>
+				<div class="row">
+					<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5" style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+						<div class="row align-items-start">
+							<div>
+								<h3 class="text-dark">Fasilitas</h3>
 							</div>
 						</div>
+						<div class="d-flex justify-content-end">
+							<button data-bs-toggle="modal" href="#modaladdfasilitas" role="button" class="btn btn-sm btn-primary my-2" id="btnadd">+ NEW ASSET</button>
+						</div>
+						<table id="myTable" class="table table-striped table-bordered rounded text-center">
+							<thead>
+								<tr>
+									<th>Nama Aset</th>
+									<th>Kode Aset</th>
+									<th>Lokasi</th>
+									<th>Date</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+									<?php 
+										for ($i=0; $i < count($listFasilitas); $i++) {
+											$status = '';
+											if ($listFasilitas[$i]->IS_DELETED == 1) $status = "disabled";
+									?>
+										<tr>
+										<td><?= $listFasilitas[$i]->NAMA_ASSET?></td>
+										<td><?= $listFasilitas[$i]->KODE_ASSET?></td>
+										<td><?= $listFasilitas[$i]->INFO_1?></td>
+										<td><?= date('d F Y', strtotime($listFasilitas[$i]->TGL_PENGADAAN)) ?></td>
+										<td>
+											<?php 
+											if ($listFasilitas[$i]->IS_DELETED == 1){
+												echo "<button disabled class='btn btn-sm btn-danger'>Deleted</button>";
+											}
+											else{
+												if ($listFasilitas[$i]->STATUS == 0){
+													echo "<button disabled class='btn btn-sm btn-success'>Available</button>";
+												}
+												else if ($listFasilitas[$i]->STATUS == 1){
+													echo "<button disabled class='btn btn-sm btn-warning'>In Use</button>";
+												}
+											}
+											?>
+										</td>
+										<td>
+											<button data-bs-toggle="modal" href="#modaladdfasilitas" role="button" class="btn btn-sm btn-info btn-edit" value='<?= $listFasilitas[$i]->KODE_ASSET ?>' <?php echo $status?>>
+												<img src="<?php echo base_url(); ?>assets/img/icons/edit.png" width="16" height="16">
+											</button>
+											<button data-bs-toggle="modal" href="#modalperbaikan" role="button" class="btn btn-sm btn-secondary btn-repair" value='<?= $listFasilitas[$i]->KODE_ASSET ?>' <?php echo $status?>>
+												<img src="<?php echo base_url(); ?>assets/img/icons/repair.png" width="16" height="16">
+											</button>
+											<button data-bs-toggle="modal" href="#modaldelete" role="button" class="btn btn-sm btn-danger btn-remove" value='<?= $listFasilitas[$i]->KODE_ASSET ?>' <?php echo $status?>>
+												<img src="<?php echo base_url(); ?>assets/img/icons/delete.png" width="16" height="16">
+											</button>
+										</td>
+										</tr>
+									<?php
+										}
+									?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

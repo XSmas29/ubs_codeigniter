@@ -10,11 +10,70 @@
 		transition: 0.2s;
 	}
 </style>
-<ul class="navbar-nav ms-auto pt-2 pt-lg-0">
+<!-- <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
 	<li class="mb-3 link-admin"><a class='link-admin-rumah' href='<?php echo site_url("Master/masterrumah"); ?>' style="text-decoration: none; color: black">Rumah Dinas</a></li>
 	<li class="mb-3 link-admin"><a class='link-admin-gedung' href='<?php echo site_url("Master/mastergedung"); ?>' style="text-decoration: none; color: black">Gedung UBS</a></li>
 	<li class="mb-3 link-admin"><a class='link-admin-kendaraan' href='<?php echo site_url("Master/masterkendaraan"); ?>' style="text-decoration: none; color: black">Kendaraan</a></li>
 	<li class="mb-3 link-admin"><a class='link-admin-asrama' href='<?php echo site_url("Master/masterasrama"); ?>' style="text-decoration: none; color: black">Asrama UBS</a></li>
 	<li class="mb-3 link-admin"><a class='link-admin-fasilitas' href='<?php echo site_url("Master/masterfasilitas"); ?>' style="text-decoration: none; color: black">Fasilitas</a></li>
 	<li class="mb-3 link-admin"><a class='link-admin-laporan' href='<?php echo site_url("Master/masterlaporan"); ?>' style="text-decoration: none; color: black">Laporan Aset</a></li>
-</ul>
+</ul> -->
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-2 px-sm-2 p-2 shadow" style="position: fixed; background-color: #5B6AB4;">
+            <div class="fs-5 d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+				<a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-light text-decoration-none">
+					<span class="fs-4">Menu Admin</span>
+				</a>
+				<hr>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+					<li class="pb-4">
+						<a href="#submenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle link-light p-0">
+							<i class="fa-solid fa-landmark"></i> <span class="ms-1 d-none d-sm-inline">Master Aset</span>
+						</a>
+						<ul class="collapse flex-column ms-1 fs-6" id="submenu" data-bs-parent="#menu">
+							<li class="w-100 mt-2">
+								<a href="<?php echo site_url("Master/masterrumah"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Rumah Dinas</span></a>
+							</li>
+							<li class="w-100">
+								<a href="<?php echo site_url("Master/mastergedung"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Gedung</span></a>
+							</li>
+							<li class="w-100">
+								<a href="<?php echo site_url("Master/masterkendaraan"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Kendaraan</span></a>
+							</li>
+							<li class="w-100">
+								<a href="<?php echo site_url("Master/masterasrama"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Asrama</span></a>
+							</li>
+							<li class="w-100">
+								<a href="<?php echo site_url("Master/masterfasilitas"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Fasilitas</span></a>
+							</li>
+						</ul>
+					</li>
+                    <li class="nav-item pb-4">
+                        <a href="" class="nav-link align-middle p-0 link-light">
+							<i class="fa-solid fa-user-group"></i> <span class="ms-1 d-none d-sm-inline">Master User</span>
+                        </a>
+                    </li>
+					<li class="pb-4">
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle link-light p-0">
+							<i class="fa-solid fa-business-time"></i> <span class="ms-1 d-none d-sm-inline">Master Peminjaman</span>
+                        </a>
+                        <ul class="collapse flex-column ms-1 fs-6" id="submenu2" data-bs-parent="#menu">
+                            <li class="w-100 mt-2">
+                                <a href="" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Peminjaman Aset</span></a>
+                            </li>
+                            <li class="w-100">
+                                <a href="" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Pengembalian Aset</span></a>
+                            </li>
+                        </ul>
+                    </li>
+					<li class="nav-item pb-4">
+                        <a href="<?php echo site_url("Master/masterlaporan"); ?>" class="nav-link align-middle p-0 link-light">
+							<i class="fas fa-clipboard"></i> <span class="ms-1 d-none d-sm-inline">Laporan Aset</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+		<div class="col-2"></div>
+        <div class="col-10 py-3">
