@@ -57,16 +57,6 @@ class Asset extends CI_Model
 		return $query;
 	}
 
-	public function getJumlahPenghuni($listkey) {
-		$listjumlah = [];
-		foreach($listkey as $key){
-			$keycode = $key->KODE_ASSET;
-			$query = $this->db->query("select count(fk_asset) as jumlah from user where fk_asset='$keycode'")->result();
-			array_push($listjumlah, $query[0]->jumlah);
-		}
-		return $listjumlah;
-	}
-
 	public function getGedung() {
 		$query = $this->db->query("select * from asset where fk_kategori=2"); 
 		return $query->result();
@@ -107,11 +97,6 @@ class Asset extends CI_Model
 
 	public function getImageAsset($key) {
 		$query = $this->db->query("select * from gambar where fk_asset='$key'"); 
-		return $query->result();
-	}
-
-	public function getUserAsset($key) {
-		$query = $this->db->query("select * from user where fk_asset='$key'"); 
 		return $query->result();
 	}
 

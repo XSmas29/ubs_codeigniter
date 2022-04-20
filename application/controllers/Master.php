@@ -12,6 +12,7 @@ class Master extends CI_Controller
 		$this->load->helper('cookie');
 		$this->load->helper('url');
 		$this->load->model('Asset');
+		$this->load->model('User');
 	}
 
 	public function index()
@@ -42,7 +43,7 @@ class Master extends CI_Controller
 	public function listasrama()
 	{
 		$data['listAsrama'] = $this->Asset->getAsrama();
-		$data['listJumlahPenghuni'] = $this->Asset->getJumlahPenghuni($data['listAsrama']);
+		$data['listJumlahPenghuni'] = $this->User->getJumlahPenghuni($data['listAsrama']);
 		$this->load->view('list/asrama', $data);
 	}
 	public function listfasilitas()
@@ -57,7 +58,14 @@ class Master extends CI_Controller
 		$data["fasilitas"] = $this->Asset->getFasilitasAsset($key);
 		$data["transaksi"] = $this->Asset->getTransaksiAsset($key);
 		$data["gambar"] = $this->Asset->getImageAsset($key);
-		$data["user"] = $this->Asset->getUserAsset($key);
+		$data["user"] = $this->User->getUserAsset($key);
+		echo json_encode($data);
+	}
+
+	public function detailUser()
+	{
+		$key = $this->input->post('key');
+		$data["user"] = $this->User->getUserbyKey($key);
 		echo json_encode($data);
 	}
 
@@ -71,6 +79,11 @@ class Master extends CI_Controller
 
 	public function master(){
 		$this->load->view('master/home');
+	}
+
+	public function masterUser(){
+		$data['listuser'] = $this->User->getUser();
+		$this->load->view('master/user',$data);
 	}
 
 	public function masterRumah(){
@@ -102,7 +115,7 @@ class Master extends CI_Controller
 
 	public function masterAsrama(){
 		$data['listAsrama'] = $this->Asset->getAsrama();
-		$data['listJumlahPenghuni'] = $this->Asset->getJumlahPenghuni($data['listAsrama']);
+		$data['listJumlahPenghuni'] = $this->User->getJumlahPenghuni($data['listAsrama']);
 		$this->load->view('master/asrama', $data);
 	}
 
@@ -131,11 +144,96 @@ class Master extends CI_Controller
 		echo json_encode($data);
 	}
 
+	public function generateNIK(){
+		$data['count'] = str_pad(($this->User->getUserCount() + 1), 6, "0", STR_PAD_LEFT);;
+		echo json_encode($data);
+	}
+
 	public function jumlahAsrama(){
 		$fk = $this->input->post('key');
 		$nama = $this->input->post('nama');
 		$data['count'] = $this->Asset->getAssetCount($fk, $nama);
 		echo json_encode($data);
+	}
+
+	public function addUser(){
+		$this->form_validation->set_rules('nik', 'NIK', 'required');
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		$this->form_validation->set_rules('departemen', 'Departemen', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|alpha_dash');
+		$this->form_validation->set_rules('konfirmasi', 'Konfirmasi password', 'required|matches[password]');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+		$this->form_validation->set_message('min_length', ' {field} minimal 8 digit!&nbsp');
+		$this->form_validation->set_message('alpha_dash', ' {field} hanya boleh huruf, angka, underscore, dan dash!&nbsp');
+		$this->form_validation->set_message('matches', ' password & konfirmasi harus sama!&nbsp');
+
+		$data['nik'] = $this->input->post('nik');
+		$data['nama'] = $this->input->post('nama');
+		$data['departemen'] = $this->input->post('departemen');
+		$data['password'] = $this->input->post('password');
+		$data['masterrumah'] = $this->input->post('masterrumah');
+		$data['mastergedung'] = $this->input->post('mastergedung');
+		$data['masterkendaraan'] = $this->input->post('masterkendaraan');
+		$data['masterasrama'] = $this->input->post('masterasrama');
+		$data['masterfasilitas'] = $this->input->post('masterfasilitas');
+		$data['masteruser'] = $this->input->post('masteruser');
+		$data['masterlaporan'] = $this->input->post('masterlaporan');
+		$data['transaksi'] = $this->input->post('transaksi');
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$response["message"] = $this->User->addUser($data);
+			echo json_encode($response);
+		}
+	}
+
+	public function editUser(){
+		$this->form_validation->set_rules('nik', 'NIK', 'required');
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		$this->form_validation->set_rules('departemen', 'Departemen', 'required');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+
+		$data['nik'] = $this->input->post('nik');
+		$data['nama'] = $this->input->post('nama');
+		$data['departemen'] = $this->input->post('departemen');
+		$data['masterrumah'] = $this->input->post('masterrumah');
+		$data['mastergedung'] = $this->input->post('mastergedung');
+		$data['masterkendaraan'] = $this->input->post('masterkendaraan');
+		$data['masterasrama'] = $this->input->post('masterasrama');
+		$data['masterfasilitas'] = $this->input->post('masterfasilitas');
+		$data['masteruser'] = $this->input->post('masteruser');
+		$data['masterlaporan'] = $this->input->post('masterlaporan');
+		$data['transaksi'] = $this->input->post('transaksi');
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$response["message"] = $this->User->editUser($data);
+			echo json_encode($response);
+		}
+	}
+
+	public function banUser(){
+		$data['nik'] = $this->input->post('key');
+		$response["message"] = $this->User->banUser($data['nik']);
+		echo json_encode($response);
+	}
+
+	public function unbanUser(){
+		$data['nik'] = $this->input->post('key');
+		$response["message"] = $this->User->unbanUser($data['nik']);
+		echo json_encode($response);
 	}
 
 	public function addRumah(){

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
@@ -152,14 +153,11 @@
 							</div>
 							
 						</div>
-						<div class="d-flex justify-content-end">
-							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
-							<button type="button" class="btn btn-dark px-5 btn-submit" id="btnsave">Save</button>
-						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					
+					<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+					<button type="button" class="btn btn-dark px-5 btn-submit" id="btnsave">Save</button>
 				</div>
 			</div>
 		</div>
@@ -208,14 +206,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="d-flex justify-content-end">
-							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
-							<button type="button" class="btn btn-dark px-5 btn-submit" id="btnfix">Fix</button>
-						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					
+					<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+					<button type="button" class="btn btn-dark px-5 btn-submit" id="btnfix">Fix</button>
 				</div>
 			</div>
 		</div>
@@ -243,14 +238,11 @@
 								<label class="form__label">Alasan penghapusan<small class="form-error" id="error-alasan-delete"></small></label>
 							</div>
 						</div>
-						<div class="d-flex justify-content-end">
-							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
-							<button type="button" class="btn btn-dark px-5 btn-submit" id="btndelete">Delete</button>
-						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					
+					<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+					<button type="button" class="btn btn-dark px-5 btn-submit" id="btndelete">Delete</button>
 				</div>
 			</div>
 		</div>

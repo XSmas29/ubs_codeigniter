@@ -19,9 +19,6 @@
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/>
-
 		<section id="home">
 			<div class="bg-holder" style="background-image:url(<?php echo base_url(); ?>assets/img/gallery/hero.png);background-position:center;background-size:cover;">
 			</div>
@@ -187,14 +184,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="d-flex justify-content-end">
-							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
-							<button type="button" class="btn btn-dark px-5 btn-submit" id="btnsave">Save</button>
-						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					
+					<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+					<button type="button" class="btn btn-dark px-5 btn-submit" id="btnsave">Save</button>
 				</div>
 			</div>
 		</div>
@@ -243,14 +237,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="d-flex justify-content-end">
-							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
-							<button type="button" class="btn btn-dark px-5 btn-submit" id="btnfix">Fix</button>
-						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					
+					<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+					<button type="button" class="btn btn-dark px-5 btn-submit" id="btnfix">Fix</button>
 				</div>
 			</div>
 		</div>
@@ -278,14 +269,11 @@
 								<label class="form__label">Alasan penghapusan<small class="form-error" id="error-alasan-delete"></small></label>
 							</div>
 						</div>
-						<div class="d-flex justify-content-end">
-							<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
-							<button type="button" class="btn btn-dark px-5 btn-submit" id="btndelete">Delete</button>
-						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					
+					<button type="button" class="btn btn-outline-dark px-5 me-3" onclick="resetInput()">Reset</button>
+					<button type="button" class="btn btn-dark px-5 btn-submit" id="btndelete">Delete</button>
 				</div>
 			</div>
 		</div>

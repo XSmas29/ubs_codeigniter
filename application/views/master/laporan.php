@@ -19,10 +19,7 @@
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>
 		<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
-		<script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
 		<script src="https://unpkg.com/jspdf-autotable@3.5.23/dist/jspdf.plugin.autotable.js"></script>
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/>
 
 		<section id="home">
 			<div class="bg-holder" style="background-image:url(<?php echo base_url(); ?>assets/img/gallery/hero.png);background-position:center;background-size:cover;">

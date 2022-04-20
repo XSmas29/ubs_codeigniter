@@ -17,10 +17,7 @@
 			<?php require_once(APPPATH . 'views\template\navbar.php') ?>
 			<div class="bg-light min-vh-50 min-vh-sm-75 p-4 rounded-3 fs-5" style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
 				<div class="row">
-					<div class="col-2">
-						
-					</div>
-					<div class="col-10">
+					<div class="col-12">
 						<h2 class="d-flex justify-content-center align-self-center">
 							Welcome, Admin
 						</h2>

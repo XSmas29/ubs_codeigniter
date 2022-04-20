@@ -24,7 +24,7 @@
 			<div class="container">
 				<div class="row align-items-start min-vh-50 min-vh-sm-75">
 					<div class="text-center">
-						<h1 class="text-light fs-md-5 fs-lg-6">UBS Asset Management</h1>
+						<h1 class="text-light fs-md-5 fs-lg-6 mt-4">UBS Asset Management</h1>
 					</div>
 					<div class="text-center">
 						<img class="w-50" src="<?php echo base_url('assets/img/illustrations/hero-header.png'); ?>" alt="..." />

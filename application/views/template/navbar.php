@@ -10,14 +10,8 @@
 		transition: 0.2s;
 	}
 </style>
-<!-- <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-	<li class="mb-3 link-admin"><a class='link-admin-rumah' href='<?php echo site_url("Master/masterrumah"); ?>' style="text-decoration: none; color: black">Rumah Dinas</a></li>
-	<li class="mb-3 link-admin"><a class='link-admin-gedung' href='<?php echo site_url("Master/mastergedung"); ?>' style="text-decoration: none; color: black">Gedung UBS</a></li>
-	<li class="mb-3 link-admin"><a class='link-admin-kendaraan' href='<?php echo site_url("Master/masterkendaraan"); ?>' style="text-decoration: none; color: black">Kendaraan</a></li>
-	<li class="mb-3 link-admin"><a class='link-admin-asrama' href='<?php echo site_url("Master/masterasrama"); ?>' style="text-decoration: none; color: black">Asrama UBS</a></li>
-	<li class="mb-3 link-admin"><a class='link-admin-fasilitas' href='<?php echo site_url("Master/masterfasilitas"); ?>' style="text-decoration: none; color: black">Fasilitas</a></li>
-	<li class="mb-3 link-admin"><a class='link-admin-laporan' href='<?php echo site_url("Master/masterlaporan"); ?>' style="text-decoration: none; color: black">Laporan Aset</a></li>
-</ul> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-2 px-sm-2 p-2 shadow" style="position: fixed; background-color: #5B6AB4;">
@@ -50,7 +44,7 @@
 						</ul>
 					</li>
                     <li class="nav-item pb-4">
-                        <a href="" class="nav-link align-middle p-0 link-light">
+                        <a href="<?php echo site_url("Master/masteruser"); ?>" class="nav-link align-middle p-0 link-light">
 							<i class="fa-solid fa-user-group"></i> <span class="ms-1 d-none d-sm-inline">Master User</span>
                         </a>
                     </li>
