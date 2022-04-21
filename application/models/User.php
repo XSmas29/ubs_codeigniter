@@ -28,19 +28,25 @@ class User extends CI_Model
 	}
 
 	public function addUser($data){
+
+		$akses['rumah'] = $data["masterrumah"] + ($data["transrumah"] * 2);
+		$akses['gedung'] = $data["mastergedung"] + ($data["transgedung"] * 2);
+		$akses['kendaraan'] = $data["masterkendaraan"] + ($data["transkendaraan"] * 2);
+		$akses['asrama'] = $data["masterasrama"] + ($data["transasrama"] * 2);
+		$akses['fasilitas'] = $data["masterfasilitas"] + ($data["transfasilitas"] * 2);
+
 		$values = array(
 			'NIK' => $data['nik'],
 			'NAMA' => $data['nama'],
 			'DEPARTEMEN' => $data['departemen'],
 			'PASSWORD' => $data['password'],
-			'MASTER_RUMAH' => $data['masterrumah'],
-			'MASTER_GEDUNG' => $data['mastergedung'],
-			'MASTER_KENDARAAN' => $data['masterkendaraan'],
-			'MASTER_ASRAMA' => $data['masterasrama'],
-			'MASTER_FASILITAS' => $data['masterfasilitas'],
-			'MASTER_USER' => $data['masteruser'],
-			'MASTER_LAPORAN' => $data['masterlaporan'],
-			'MASTER_TRANSAKSI' => $data['transaksi'],
+			'AKSES_RUMAH' => $akses['rumah'] ,
+			'AKSES_GEDUNG' => $akses['gedung'] ,
+			'AKSES_KENDARAAN' => $akses['kendaraan'] ,
+			'AKSES_ASRAMA' => $akses['asrama'] ,
+			'AKSES_FASILITAS' => $akses['fasilitas'] ,
+			'AKSES_USER' => $data['masteruser'],
+			'AKSES_LAPORAN' => $data['masterlaporan'],
 		);
 
 		$this->db->insert('user', $values);
@@ -49,17 +55,23 @@ class User extends CI_Model
 	}
 
 	public function editUser($data){
+		$akses['rumah'] = $data["masterrumah"] + ($data["transrumah"] * 2);
+		$akses['gedung'] = $data["mastergedung"] + ($data["transgedung"] * 2);
+		$akses['kendaraan'] = $data["masterkendaraan"] + ($data["transkendaraan"] * 2);
+		$akses['asrama'] = $data["masterasrama"] + ($data["transasrama"] * 2);
+		$akses['fasilitas'] = $data["masterfasilitas"] + ($data["transfasilitas"] * 2);
+		
 		$values = array(
+			'NIK' => $data['nik'],
 			'NAMA' => $data['nama'],
 			'DEPARTEMEN' => $data['departemen'],
-			'MASTER_RUMAH' => $data['masterrumah'],
-			'MASTER_GEDUNG' => $data['mastergedung'],
-			'MASTER_KENDARAAN' => $data['masterkendaraan'],
-			'MASTER_ASRAMA' => $data['masterasrama'],
-			'MASTER_FASILITAS' => $data['masterfasilitas'],
-			'MASTER_USER' => $data['masteruser'],
-			'MASTER_LAPORAN' => $data['masterlaporan'],
-			'MASTER_TRANSAKSI' => $data['transaksi'],
+			'AKSES_RUMAH' => $akses['rumah'] ,
+			'AKSES_GEDUNG' => $akses['gedung'] ,
+			'AKSES_KENDARAAN' => $akses['kendaraan'] ,
+			'AKSES_ASRAMA' => $akses['asrama'] ,
+			'AKSES_FASILITAS' => $akses['fasilitas'] ,
+			'AKSES_USER' => $data['masteruser'],
+			'AKSES_LAPORAN' => $data['masterlaporan'],
 		);
 
 		$this->db->where('NIK', $data['nik']);

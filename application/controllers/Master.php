@@ -172,14 +172,20 @@ class Master extends CI_Controller
 		$data['nama'] = $this->input->post('nama');
 		$data['departemen'] = $this->input->post('departemen');
 		$data['password'] = $this->input->post('password');
+
 		$data['masterrumah'] = $this->input->post('masterrumah');
+		$data['transrumah'] = $this->input->post('transrumah');
 		$data['mastergedung'] = $this->input->post('mastergedung');
+		$data['transgedung'] = $this->input->post('transgedung');
 		$data['masterkendaraan'] = $this->input->post('masterkendaraan');
+		$data['transkendaraan'] = $this->input->post('transkendaraan');
 		$data['masterasrama'] = $this->input->post('masterasrama');
+		$data['transasrama'] = $this->input->post('transasrama');
 		$data['masterfasilitas'] = $this->input->post('masterfasilitas');
+		$data['transfasilitas'] = $this->input->post('transfasilitas');
+		
 		$data['masteruser'] = $this->input->post('masteruser');
 		$data['masterlaporan'] = $this->input->post('masterlaporan');
-		$data['transaksi'] = $this->input->post('transaksi');
 
 		if ($this->form_validation->run() == FALSE)
 		{	
@@ -203,14 +209,20 @@ class Master extends CI_Controller
 		$data['nik'] = $this->input->post('nik');
 		$data['nama'] = $this->input->post('nama');
 		$data['departemen'] = $this->input->post('departemen');
+		
 		$data['masterrumah'] = $this->input->post('masterrumah');
+		$data['transrumah'] = $this->input->post('transrumah');
 		$data['mastergedung'] = $this->input->post('mastergedung');
+		$data['transgedung'] = $this->input->post('transgedung');
 		$data['masterkendaraan'] = $this->input->post('masterkendaraan');
+		$data['transkendaraan'] = $this->input->post('transkendaraan');
 		$data['masterasrama'] = $this->input->post('masterasrama');
+		$data['transasrama'] = $this->input->post('transasrama');
 		$data['masterfasilitas'] = $this->input->post('masterfasilitas');
+		$data['transfasilitas'] = $this->input->post('transfasilitas');
+
 		$data['masteruser'] = $this->input->post('masteruser');
 		$data['masterlaporan'] = $this->input->post('masterlaporan');
-		$data['transaksi'] = $this->input->post('transaksi');
 
 		if ($this->form_validation->run() == FALSE)
 		{	

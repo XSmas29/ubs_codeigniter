@@ -1,3 +1,4 @@
+
 <script src="<?php echo base_url('vendors/@popperjs/popper.min.js') ?>"></script>
 <script src="<?php echo base_url('vendors/bootstrap/bootstrap.min.js') ?>"></script>
 <script src="<?php echo base_url('vendors/is/is.min.js') ?>"></script>
@@ -9,10 +10,11 @@
 <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets/img/favicons/favicon-16x16.png') ?>">
 <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('assets/img/favicons/favicon.ico') ?>">
 <link rel="manifest" href="<?php echo base_url('assets/img/favicons/manifest.json') ?>">
+
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&amp;display=swap" rel="stylesheet">
+
 <link href="<?php echo base_url('assets/css/theme.css') ?>" rel="stylesheet" />
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <!-- link datatables -->
 <script src="<?php echo base_url('assets/js/jquery-3.6.0.js') ?>"></script>
 <script src="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"></script>

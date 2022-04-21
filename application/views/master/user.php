@@ -123,83 +123,152 @@
 							</div>
 						</div>
 						<div class="col-6">
-							<label class="form_label mt-2 fs-5">Hak Akses</label>
+							<label class="form_label my-3 fs-5">Hak Akses</label>
 							<ul class="list-group rounded-3">
 								<li class="list-group-item">
-									<!-- master -->
-									<label class="form_label">Master</label>
-									<ul class="list-group mb-2">
-										<li class="list-group-item">
+									<div class="row">
+										<div class="col-4 my-1">
+											<p class="my-0">Rumah Dinas</p>
+										</div>
+										<div class="col-4 my-1">
 											<div class="form-check">
 												<input class="form-check-input" type="checkbox" value="" id="masterrumah">
 												<label class="form-check-label mb-0" for="flexCheckDefault">
-													Rumah Dinas
+													Master
 												</label>
 											</div>
-										</li>
-										<li class="list-group-item">
+										</div>
+										<div class="col-4 my-1">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="transrumah">
+												<label class="form-check-label mb-0" for="flexCheckDefault">
+													Transaksi
+												</label>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-4 my-1">
+											<p class="my-0">Gedung</p>
+										</div>
+										<div class="col-4 my-1">
 											<div class="form-check">
 												<input class="form-check-input" type="checkbox" value="" id="mastergedung">
 												<label class="form-check-label mb-0" for="flexCheckDefault">
-													Gedung
+													Master
 												</label>
 											</div>
-										</li>
-										<li class="list-group-item">
+										</div>
+										<div class="col-4 my-1">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="transgedung">
+												<label class="form-check-label mb-0" for="flexCheckDefault">
+													Transaksi
+												</label>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-4 my-1">
+											<p class="my-0">Kendaraan</p>
+										</div>
+										<div class="col-4 my-1">
 											<div class="form-check">
 												<input class="form-check-input" type="checkbox" value="" id="masterkendaraan">
 												<label class="form-check-label mb-0" for="flexCheckDefault">
-													Kendaraan
+													Master
 												</label>
 											</div>
-										</li>
-										<li class="list-group-item">
+										</div>
+										<div class="col-4 my-1">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="transkendaraan">
+												<label class="form-check-label mb-0" for="flexCheckDefault">
+													Transaksi
+												</label>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-4 my-1">
+											<p class="my-0">Asrama</p>
+										</div>
+										<div class="col-4 my-1">
 											<div class="form-check">
 												<input class="form-check-input" type="checkbox" value="" id="masterasrama">
 												<label class="form-check-label mb-0" for="flexCheckDefault">
-													Asrama
+													Master
 												</label>
 											</div>
-										</li>
-										<li class="list-group-item">
+										</div>
+										<div class="col-4 my-1">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="transasrama">
+												<label class="form-check-label mb-0" for="flexCheckDefault">
+													Transaksi
+												</label>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-4 my-1">
+											<p class="my-0">Fasilitas</p>
+										</div>
+										<div class="col-4 my-1">
 											<div class="form-check">
 												<input class="form-check-input" type="checkbox" value="" id="masterfasilitas">
 												<label class="form-check-label mb-0" for="flexCheckDefault">
-													Fasilitas
+													Master
 												</label>
 											</div>
-										</li>
-										<li class="list-group-item">
+										</div>
+										<div class="col-4 my-1">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="transfasilitas">
+												<label class="form-check-label mb-0" for="flexCheckDefault">
+													Transaksi
+												</label>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-4 my-1">
+											<p class="my-0">User</p>
+										</div>
+										<div class="col-4 my-1">
 											<div class="form-check">
 												<input class="form-check-input" type="checkbox" value="" id="masteruser">
 												<label class="form-check-label mb-0" for="flexCheckDefault">
-													User
+													Master
 												</label>
 											</div>
-										</li>
-										<li class="list-group-item">
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-4 my-1">
+											<p class="my-0">Laporan</p>
+										</div>
+										<div class="col-4 my-1">
 											<div class="form-check">
 												<input class="form-check-input" type="checkbox" value="" id="masterlaporan">
 												<label class="form-check-label mb-0" for="flexCheckDefault">
-													Laporan Aset
+													View
 												</label>
 											</div>
-										</li>
-									</ul>
-								</li>
-								<li class="list-group-item">
-									<!-- transaksi -->
-									<label class="form_label">Transaksi</label>
-									<ul class="list-group mb-2">
-										<li class="list-group-item">
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="transaksi">
-												<label class="form-check-label mb-0" for="flexCheckDefault">
-													Peminjaman & Pengembalian
-												</label>
-											</div>
-										</li>
-									</ul>
+										</div>
+									</div>
 								</li>
 							</ul>	
 						</div>
@@ -298,16 +367,23 @@
 		$(".form-error").text('');
 		$("#nama").val('');
 		$("#departemen").val('');
+		$("#password").val('');
+		$("#konfirmasi").val('');
 		
 
 		$("#masterrumah").prop('checked', false);
+		$("#transrumah").prop('checked', false);
 		$("#mastergedung").prop('checked', false);
+		$("#transgedung").prop('checked', false);
 		$("#masterkendaraan").prop('checked', false);
+		$("#transkendaraan").prop('checked', false);
 		$("#masterasrama").prop('checked', false);
+		$("#transasrama").prop('checked', false);
 		$("#masterfasilitas").prop('checked', false);
+		$("#transfasilitas").prop('checked', false);
+		
 		$("#masteruser").prop('checked', false);
 		$("#masterlaporan").prop('checked', false);
-		$("#transaksi").prop('checked', false);
 		//
 
 		$("#kodeban").val("");
@@ -347,14 +423,20 @@
 				$("#nik").val(data["user"][0].NIK);
 				$("#nama").val(data["user"][0].NAMA);
 				$("#departemen").val(data["user"][0].DEPARTEMEN);
-				$("#masterrumah").prop('checked', data["user"][0].MASTER_RUMAH == 1 ? true : false);
-				$("#mastergedung").prop('checked',data["user"][0].MASTER_GEDUNG == 1 ? true : false);
-				$("#masterkendaraan").prop('checked',data["user"][0].MASTER_KENDARAAN == 1 ? true : false);
-				$("#masterasrama").prop('checked',data["user"][0].MASTER_ASRAMA == 1 ? true : false);
-				$("#masterfasilitas").prop('checked',data["user"][0].MASTER_FASILITAS == 1 ? true : false);
-				$("#masteruser").prop('checked',data["user"][0].MASTER_USER == 1 ? true : false);
-				$("#masterlaporan").prop('checked',data["user"][0].MASTER_LAPORAN == 1 ? true : false);
-				$("#transaksi").prop('checked',data["user"][0].MASTER_TRANSAKSI == 1 ? true : false);
+
+				$("#masterrumah").prop('checked', data["user"][0].AKSES_RUMAH == 1 || data["user"][0].AKSES_RUMAH == 3 ? true : false);
+				$("#transrumah").prop('checked', data["user"][0].AKSES_RUMAH == 2 || data["user"][0].AKSES_RUMAH == 3 ? true : false);
+				$("#mastergedung").prop('checked',data["user"][0].AKSES_GEDUNG == 1 || data["user"][0].AKSES_GEDUNG == 3? true : false);
+				$("#transgedung").prop('checked',data["user"][0].AKSES_GEDUNG == 2 || data["user"][0].AKSES_GEDUNG == 3 ? true : false);
+				$("#masterkendaraan").prop('checked',data["user"][0].AKSES_KENDARAAN == 1 || data["user"][0].AKSES_KENDARAAN == 3 ? true : false);
+				$("#transkendaraan").prop('checked',data["user"][0].AKSES_KENDARAAN == 2 || data["user"][0].AKSES_KENDARAAN == 3 ? true : false);
+				$("#masterasrama").prop('checked',data["user"][0].AKSES_ASRAMA == 1 || data["user"][0].AKSES_ASRAMA == 3 ? true : false);
+				$("#transasrama").prop('checked',data["user"][0].AKSES_ASRAMA == 2 || data["user"][0].AKSES_ASRAMA == 3 ? true : false);
+				$("#masterfasilitas").prop('checked',data["user"][0].AKSES_FASILITAS == 1 || data["user"][0].AKSES_FASILITAS == 3 ? true : false);
+				$("#transfasilitas").prop('checked',data["user"][0].AKSES_FASILITAS == 2 || data["user"][0].AKSES_FASILITAS == 3 ? true : false);
+
+				$("#masteruser").prop('checked',data["user"][0].AKSES_USER == 1 ? true : false);
+				$("#masterlaporan").prop('checked',data["user"][0].AKSES_LAPORAN == 1 ? true : false);
 				//
 
 			}, error: function(){
@@ -382,14 +464,20 @@
 		form_data.append("departemen", $("#departemen").val());
 		form_data.append("password", $("#password").val());
 		form_data.append("konfirmasi", $("#konfirmasi").val());
+
 		form_data.append("masterrumah", $('#masterrumah').is(':checked') * 1);
+		form_data.append("transrumah", $('#transrumah').is(':checked') * 1);
 		form_data.append("mastergedung", $('#mastergedung').is(':checked') * 1);
+		form_data.append("transgedung", $('#transgedung').is(':checked') * 1);
 		form_data.append("masterkendaraan", $('#masterkendaraan').is(':checked') * 1);
+		form_data.append("transkendaraan", $('#transkendaraan').is(':checked') * 1);
 		form_data.append("masterasrama", $('#masterasrama').is(':checked') * 1);
+		form_data.append("transasrama", $('#transasrama').is(':checked') * 1);
 		form_data.append("masterfasilitas", $('#masterfasilitas').is(':checked') * 1);
+		form_data.append("transfasilitas", $('#transfasilitas').is(':checked') * 1);
+
 		form_data.append("masteruser", $('#masteruser').is(':checked') * 1);
 		form_data.append("masterlaporan", $('#masterlaporan').is(':checked') * 1);
-		form_data.append("transaksi", $('#transaksi').is(':checked') * 1);
 		
 		$.ajax({
 			type: "POST",
@@ -422,14 +510,20 @@
 		form_data.append("departemen", $("#departemen").val());
 		form_data.append("password", $("#password").val());
 		form_data.append("konfirmasi", $("#konfirmasi").val());
+		
 		form_data.append("masterrumah", $('#masterrumah').is(':checked') * 1);
+		form_data.append("transrumah", $('#transrumah').is(':checked') * 1);
 		form_data.append("mastergedung", $('#mastergedung').is(':checked') * 1);
+		form_data.append("transgedung", $('#transgedung').is(':checked') * 1);
 		form_data.append("masterkendaraan", $('#masterkendaraan').is(':checked') * 1);
+		form_data.append("transkendaraan", $('#transkendaraan').is(':checked') * 1);
 		form_data.append("masterasrama", $('#masterasrama').is(':checked') * 1);
+		form_data.append("transasrama", $('#transasrama').is(':checked') * 1);
 		form_data.append("masterfasilitas", $('#masterfasilitas').is(':checked') * 1);
+		form_data.append("transfasilitas", $('#transfasilitas').is(':checked') * 1);
+
 		form_data.append("masteruser", $('#masteruser').is(':checked') * 1);
 		form_data.append("masterlaporan", $('#masterlaporan').is(':checked') * 1);
-		form_data.append("transaksi", $('#transaksi').is(':checked') * 1);
 		
 		$.ajax({
 			type: "POST",

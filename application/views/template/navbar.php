@@ -27,38 +27,47 @@
 						</a>
 						<ul class="collapse flex-column ms-1 fs-6" id="submenu" data-bs-parent="#menu">
 							<li class="w-100 mt-2">
-								<a href="<?php echo site_url("Master/masterrumah"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Rumah Dinas</span></a>
+								<a href="<?php echo site_url("master/masterrumah"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Rumah Dinas</span></a>
 							</li>
 							<li class="w-100">
-								<a href="<?php echo site_url("Master/mastergedung"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Gedung</span></a>
+								<a href="<?php echo site_url("master/mastergedung"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Gedung</span></a>
 							</li>
 							<li class="w-100">
-								<a href="<?php echo site_url("Master/masterkendaraan"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Kendaraan</span></a>
+								<a href="<?php echo site_url("master/masterkendaraan"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Kendaraan</span></a>
 							</li>
 							<li class="w-100">
-								<a href="<?php echo site_url("Master/masterasrama"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Asrama</span></a>
+								<a href="<?php echo site_url("master/masterasrama"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Asrama</span></a>
 							</li>
 							<li class="w-100">
-								<a href="<?php echo site_url("Master/masterfasilitas"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Fasilitas</span></a>
+								<a href="<?php echo site_url("master/masterfasilitas"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Fasilitas</span></a>
 							</li>
 						</ul>
 					</li>
                     <li class="nav-item pb-4">
-                        <a href="<?php echo site_url("Master/masteruser"); ?>" class="nav-link align-middle p-0 link-light">
+                        <a href="<?php echo site_url("master/masteruser"); ?>" class="nav-link align-middle p-0 link-light">
 							<i class="fa-solid fa-user-group"></i> <span class="ms-1 d-none d-sm-inline">Master User</span>
                         </a>
                     </li>
 					<li class="pb-4">
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle link-light p-0">
-							<i class="fa-solid fa-business-time"></i> <span class="ms-1 d-none d-sm-inline">Master Peminjaman</span>
+							<i class="fa-solid fa-business-time"></i> <span class="ms-1 d-none d-sm-inline">Peminjaman</span>
                         </a>
                         <ul class="collapse flex-column ms-1 fs-6" id="submenu2" data-bs-parent="#menu">
-                            <li class="w-100 mt-2">
-                                <a href="" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Peminjaman Aset</span></a>
-                            </li>
-                            <li class="w-100">
-                                <a href="" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Pengembalian Aset</span></a>
-                            </li>
+							<li class="w-100 mt-2">
+								<a href="<?php echo site_url("transaksi/rumah"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Rumah Dinas</span></a>
+							</li>
+							<li class="w-100">
+								<a href="<?php echo site_url("transaksi/gedung"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Gedung</span></a>
+							</li>
+							<li class="w-100">
+								<a href="<?php echo site_url("transaksi/kendaraan"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Kendaraan</span></a>
+							</li>
+							<li class="w-100">
+								<a href="<?php echo site_url("transaksi/asrama"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Asrama</span></a>
+							</li>
+							<li class="w-100">
+								<a href="<?php echo site_url("transaksi/fasilitas"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Fasilitas</span></a>
+							</li>
                         </ul>
                     </li>
 					<li class="nav-item pb-4">

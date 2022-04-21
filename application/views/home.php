@@ -8,7 +8,6 @@
 	<title>UBS Asset Management</title>
 </head>
 
-
 <body>
 
 	<!-- ===============================================-->
@@ -16,6 +15,10 @@
 	<!-- ===============================================-->
 	<main class="main" id="top">
 		<?php require_once(APPPATH . 'views\template\header.php') ?>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/>
+		<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css"/>
 		<section id="home">
 			<div class="bg-holder" style="background-image:url(<?php echo base_url(); ?>assets/img/gallery/hero.png);background-position:center;background-size:cover;">
 			</div>
@@ -43,7 +46,7 @@
 				<div class="row h-100">
 					<div class="col-sm-6 col-xl-3 mb-3">
 						<a style="text-decoration: none;" href="<?php echo site_url('Master/listrumah') ?>">
-							<div class="card card-span shadow py-2 h-100 border-top border-4 border-primary">
+							<div class="rounded-3 shadow py-2 h-100 border-top border-4" style="border-color: #A1B0FC !important; border-radius: 0.6rem !important;">
 								<div class="card-body">
 									<div class="text-center">
 										<img class="w-50" src="<?php echo base_url("assets/img/rumah.png") ?> ">
@@ -62,7 +65,7 @@
 					</div>
 					<div class="col-sm-6 col-xl-3 mb-3">
 						<a style="text-decoration: none;" href="<?php echo site_url('Master/listgedung') ?>">
-							<div class="card card-span shadow py-2 h-100 border-top border-4 border-primary">
+							<div class="rounded-3 shadow py-2 h-100 border-top border-4" style="border-color: #A1B0FC !important; border-radius: 0.6rem !important;">
 								<div class="card-body">
 									<div class="text-center">
 										<img class="w-50" src="<?php echo base_url("assets/img/gedung.png") ?> ">
@@ -81,7 +84,7 @@
 					</div>
 					<div class="col-sm-6 col-xl-3 mb-3">
 						<a style="text-decoration: none;" href="<?php echo site_url('Master/listkendaraan') ?>">
-							<div class="card card-span shadow py-2 h-100 border-top border-4 border-primary">
+							<div class="rounded-3 shadow py-2 h-100 border-top border-4" style="border-color: #A1B0FC !important; border-radius: 0.6rem !important;">
 								<div class="card-body">
 									<div class="text-center">
 										<img class="w-50" src="<?php echo base_url("assets/img/kendaraan.png") ?> ">
@@ -100,7 +103,7 @@
 					</div>
 					<div class="col-sm-6 col-xl-3 mb-3">
 						<a style="text-decoration: none;" href="<?php echo site_url('Master/listasrama') ?>">
-							<div class="card card-span shadow py-2 h-100 border-top border-4 border-primary">
+							<div class="rounded-3 shadow py-2 h-100 border-top border-4" style="border-color: #A1B0FC !important; border-radius: 0.6rem !important;">
 								<div class="card-body">
 									<div class="text-center">
 										<img class="w-50" src="<?php echo base_url("assets/img/asrama.png") ?> ">
@@ -119,7 +122,7 @@
 					</div>
 					<div class="col-sm-6 col-xl-3 mb-3">
 						<a style="text-decoration: none;" href="<?php echo site_url('Master/listfasilitas') ?>">
-							<div class="card card-span shadow py-2 h-100 border-top border-4 border-primary">
+							<div class="rounded-3 shadow py-2 h-100 border-top border-4" style="border-color: #A1B0FC !important; border-radius: 0.6rem !important;">
 								<div class="card-body">
 									<div class="text-center">
 										<img class="w-50" src="<?php echo base_url("assets/img/fasilitas.png") ?> ">
