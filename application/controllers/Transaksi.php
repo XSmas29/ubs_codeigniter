@@ -16,6 +16,13 @@ class Transaksi extends CI_Controller
 	}
 
 	public function rumah(){
-		
+		if (!empty($this->session->flashdata('message'))) {
+			$data['message'] = $this->session->flashdata('message');
+		} elseif (!empty($this->session->flashdata('error'))) {
+			$data['error'] = $this->session->flashdata('error');
+		}
+
+		$data['listrumah'] = $this->Asset->getRumahDinas();
+		$this->load->view('master/rumahdinas', $data);
 	}
 }
