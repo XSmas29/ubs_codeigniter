@@ -1,15 +1,14 @@
 
 <script src="<?php echo base_url('vendors/@popperjs/popper.min.js') ?>"></script>
 <script src="<?php echo base_url('vendors/bootstrap/bootstrap.min.js') ?>"></script>
-<script src="<?php echo base_url('vendors/is/is.min.js') ?>"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-<script src="<?php echo base_url('vendors/fontawesome/all.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/theme.js') ?>"></script>
 <link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url('assets/img/favicons/apple-touch-icon.png') ?>">
 <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url('assets/img/favicons/favicon-32x32.png') ?>">
 <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets/img/favicons/favicon-16x16.png') ?>">
 <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('assets/img/favicons/favicon.ico') ?>">
 <link rel="manifest" href="<?php echo base_url('assets/img/favicons/manifest.json') ?>">
+
 
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&amp;display=swap" rel="stylesheet">
 
@@ -65,6 +64,17 @@
 				<a class="nav-link link-list-asrama" href="<?php echo site_url('Master/listasrama') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Asrama</li></a>
 				<a class="nav-link link-list-fasilitas" href="<?php echo site_url('Master/listfasilitas') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Fasilitas</li></a>
 				<a class="nav-link link-admin" href="<?php echo site_url('Master/master') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Admin</li></a>
+				<div class="dropdown ms-6">
+					<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+						<img src="<?php echo base_url();?>assets/img/user.png" alt="" width="40" height="40" class="rounded-circle me-3">
+						<strong><?= $this->session->userdata('login')["NAMA"]?></strong>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+						<li><a class="dropdown-item" href="#">Profile</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="<?php echo site_url('Auth/logout');?>">Sign out</a></li>
+					</ul>
+				</div>
 			</ul>
 		</div>
 	</div>

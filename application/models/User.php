@@ -111,4 +111,26 @@ class User extends CI_Model
 		}
 		return $listjumlah;
 	}
+
+	public function login($data){
+		$query = $this->db->query("select * from user")->result();
+		foreach($query as $user){
+			if ($data["nik"] == $user->NIK){
+				if ($data["password"] == $user->PASSWORD){
+					$this->session->set_userdata('login', $user->NIK);
+					if ($data['rememberme'] == "rememberme"){
+						set_cookie("login", $user->NIK, 2592000);
+					}
+					else{
+						delete_cookie("login");
+					}
+					return 1;
+				}
+				else{
+					return "Password Salah!";
+				}
+			}
+		}
+		return "User Tidak Ditemukan!";
+	}
 }

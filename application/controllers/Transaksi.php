@@ -6,6 +6,7 @@ class Transaksi extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('user_agent');
 		$this->load->library('table');
 		$this->load->library('form_validation');
 		$this->load->library('session');

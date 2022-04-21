@@ -6,6 +6,7 @@ class Master extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('user_agent');
 		$this->load->library('table');
 		$this->load->library('form_validation');
 		$this->load->library('session');
@@ -27,29 +28,70 @@ class Master extends CI_Controller
 
 	public function listrumah()
 	{
-		$data['listrumah'] = $this->Asset->getRumahDinas();
-		$this->load->view('list/rumahdinas', $data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+		}
+		if ($this->session->has_userdata('login')){
+			$data['listrumah'] = $this->Asset->getRumahDinas();
+			$this->load->view('list/rumahdinas', $data);
+		}
+		else{
+			redirect(site_url("auth/login"));
+		}
 	}
 	public function listgedung()
 	{
-		$data['listgedung'] = $this->Asset->getGedung();
-		$this->load->view('list/gedung', $data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+		}
+		if ($this->session->has_userdata('login')){
+			$data['listgedung'] = $this->Asset->getGedung();
+			$this->load->view('list/gedung', $data);
+		}
+		else{
+			redirect(site_url("auth/login"));
+		}
 	}
 	public function listkendaraan()
 	{
-		$data['listkendaraan'] = $this->Asset->getKendaraan();
-		$this->load->view('list/kendaraan', $data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+		}
+		if ($this->session->has_userdata('login')){
+			$data['listkendaraan'] = $this->Asset->getKendaraan();
+			$this->load->view('list/kendaraan', $data);
+		}
+		else{
+			redirect(site_url("auth/login"));
+		}
 	}
 	public function listasrama()
 	{
-		$data['listAsrama'] = $this->Asset->getAsrama();
-		$data['listJumlahPenghuni'] = $this->User->getJumlahPenghuni($data['listAsrama']);
-		$this->load->view('list/asrama', $data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+		}
+		if ($this->session->has_userdata('login')){
+			$data['listAsrama'] = $this->Asset->getAsrama();
+			$data['listJumlahPenghuni'] = $this->User->getJumlahPenghuni($data['listAsrama']);
+			$this->load->view('list/asrama', $data);
+		}
+		else{
+			redirect(site_url("auth/login"));
+		}
 	}
 	public function listfasilitas()
 	{
-		$data['listFasilitas'] = $this->Asset->getFasilitas();
-		$this->load->view('list/fasilitas', $data);
+		
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+		}
+		if ($this->session->has_userdata('login')){
+			$data['listFasilitas'] = $this->Asset->getFasilitas();
+			$this->load->view('list/fasilitas', $data);
+		}
+		else{
+			redirect(site_url("auth/login"));
+		}
 	}
 	public function detailAsset()
 	{
