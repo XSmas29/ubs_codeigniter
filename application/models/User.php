@@ -133,4 +133,9 @@ class User extends CI_Model
 		}
 		return "User Tidak Ditemukan!";
 	}
+
+	public function getUserLogin($key){
+		$query = $this->db->query("select * from user where NIK='$key'")->result()[0];
+		return $query;
+	}
 }

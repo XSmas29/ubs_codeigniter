@@ -18,12 +18,21 @@ class Master extends CI_Controller
 
 	public function index()
 	{
-		$data['jumlahrumah'] = $this->Asset->getJumRumahDinas();
-		$data['jumlahgedung'] = $this->Asset->getJumGedung();
-		$data['jumlahkendaraan'] = $this->Asset->getJumKendaraan();
-		$data['jumlahasrama'] = $this->Asset->getJumAsrama();
-		$data['jumlahfasilitas'] = $this->Asset->getJumFasilitas();
-		$this->load->view('home', $data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+		}
+		if ($this->session->has_userdata('login')){
+			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
+			$data['jumlahrumah'] = $this->Asset->getJumRumahDinas();
+			$data['jumlahgedung'] = $this->Asset->getJumGedung();
+			$data['jumlahkendaraan'] = $this->Asset->getJumKendaraan();
+			$data['jumlahasrama'] = $this->Asset->getJumAsrama();
+			$data['jumlahfasilitas'] = $this->Asset->getJumFasilitas();
+			$this->load->view('home', $data);
+		}
+		else{
+			redirect(site_url("auth/login"));
+		}
 	}
 
 	public function listrumah()
@@ -32,6 +41,7 @@ class Master extends CI_Controller
 			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
 		}
 		if ($this->session->has_userdata('login')){
+			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listrumah'] = $this->Asset->getRumahDinas();
 			$this->load->view('list/rumahdinas', $data);
 		}
@@ -45,6 +55,7 @@ class Master extends CI_Controller
 			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
 		}
 		if ($this->session->has_userdata('login')){
+			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listgedung'] = $this->Asset->getGedung();
 			$this->load->view('list/gedung', $data);
 		}
@@ -58,6 +69,7 @@ class Master extends CI_Controller
 			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
 		}
 		if ($this->session->has_userdata('login')){
+			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listkendaraan'] = $this->Asset->getKendaraan();
 			$this->load->view('list/kendaraan', $data);
 		}
@@ -71,6 +83,7 @@ class Master extends CI_Controller
 			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
 		}
 		if ($this->session->has_userdata('login')){
+			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listAsrama'] = $this->Asset->getAsrama();
 			$data['listJumlahPenghuni'] = $this->User->getJumlahPenghuni($data['listAsrama']);
 			$this->load->view('list/asrama', $data);
@@ -86,6 +99,7 @@ class Master extends CI_Controller
 			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
 		}
 		if ($this->session->has_userdata('login')){
+			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listFasilitas'] = $this->Asset->getFasilitas();
 			$this->load->view('list/fasilitas', $data);
 		}
@@ -120,65 +134,182 @@ class Master extends CI_Controller
 	}
 
 	public function master(){
-		$this->load->view('master/home');
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
+		}
+		if ($this->session->has_userdata('login')){
+			//sudah login
+			$user = $this->User->getUserLogin($this->session->userdata('login'));
+			$data["login"] = $user;
+			if ($user->AKSES_RUMAH + $user->AKSES_GEDUNG + $user->AKSES_KENDARAAN + $user->AKSES_ASRAMA + $user->AKSES_FASILITAS + $user->AKSES_USER + $user->AKSES_LAPORAN > 0){
+				$this->load->view('master/home', $data);
+			}
+			else{
+				redirect($this->agent->referrer());
+			}
+		}
+		else{
+			//belum login
+			redirect(site_url("auth/login"));
+		}
 	}
 
 	public function masterUser(){
-		$data['listuser'] = $this->User->getUser();
-		$this->load->view('master/user',$data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
+		}
+		if ($this->session->has_userdata('login')){
+			//sudah login
+			$user = $this->User->getUserLogin($this->session->userdata('login'));
+			if ($user->AKSES_USER == 1){
+				$data['listuser'] = $this->User->getUser();
+				$data["login"] = $user;
+				$this->load->view('master/user',$data);
+			}
+			else{
+				redirect($this->agent->referrer());
+			}
+		}
+		else{
+			//belum login
+			redirect(site_url("auth/login"));
+		}
 	}
 
 	public function masterRumah(){
-		if (!empty($this->session->flashdata('message'))) {
-			$data['message'] = $this->session->flashdata('message');
-		} elseif (!empty($this->session->flashdata('error'))) {
-			$data['error'] = $this->session->flashdata('error');
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
 		}
-
-		$data['listrumah'] = $this->Asset->getRumahDinas();
-		$this->load->view('master/rumahdinas', $data);
+		if ($this->session->has_userdata('login')){
+			//sudah login
+			$user = $this->User->getUserLogin($this->session->userdata('login'));
+			if ($user->AKSES_RUMAH == 1 || $user->AKSES_RUMAH == 3){
+				$data["login"] = $user;
+				$data['listrumah'] = $this->Asset->getRumahDinas();
+				$this->load->view('master/rumahdinas', $data);
+			}
+			else{
+				redirect($this->agent->referrer());
+			}
+		}
+		else{
+			//belum login
+			redirect(site_url("auth/login"));
+		}
 	}
 	
 	public function masterGedung(){
-		$data['listgedung'] = $this->Asset->getGedung();
-		$this->load->view('master/gedung',$data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
+		}
+		if ($this->session->has_userdata('login')){
+			//sudah login
+			$user = $this->User->getUserLogin($this->session->userdata('login'));
+			if ($user->AKSES_GEDUNG == 1 || $user->AKSES_GEDUNG == 3){
+				$data["login"] = $user;
+				$data['listgedung'] = $this->Asset->getGedung();
+				$this->load->view('master/gedung',$data);
+			}
+			else{
+				redirect($this->agent->referrer());
+			}
+		}
+		else{
+			//belum login
+			redirect(site_url("auth/login"));
+		}
 	}
 
 	public function masterKendaraan(){
-		if (!empty($this->session->flashdata('message'))) {
-			$data['message'] = $this->session->flashdata('message');
-		} elseif (!empty($this->session->flashdata('error'))) {
-			$data['error'] = $this->session->flashdata('error');
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
 		}
-
-		$data['listkendaraan'] = $this->Asset->getKendaraan();
-		$this->load->view('master/kendaraan', $data);
+		if ($this->session->has_userdata('login')){
+			//sudah login
+			$user = $this->User->getUserLogin($this->session->userdata('login'));
+			if ($user->AKSES_KENDARAAN == 1 || $user->AKSES_KENDARAAN == 3){
+				$data["login"] = $user;
+				$data['listkendaraan'] = $this->Asset->getKendaraan();
+				$this->load->view('master/kendaraan', $data);
+			}
+			else{
+				redirect($this->agent->referrer());
+			}
+		}
+		else{
+			//belum login
+			redirect(site_url("auth/login"));
+		}
 	}
 
 	public function masterAsrama(){
-		$data['listAsrama'] = $this->Asset->getAsrama();
-		$data['listJumlahPenghuni'] = $this->User->getJumlahPenghuni($data['listAsrama']);
-		$this->load->view('master/asrama', $data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
+		}
+		if ($this->session->has_userdata('login')){
+			//sudah login
+			$user = $this->User->getUserLogin($this->session->userdata('login'));
+			if ($user->AKSES_ASRAMA == 1 || $user->AKSES_ASRAMA == 3){
+				$data["login"] = $user;
+				$data['listAsrama'] = $this->Asset->getAsrama();
+				$data['listJumlahPenghuni'] = $this->User->getJumlahPenghuni($data['listAsrama']);
+				$this->load->view('master/asrama', $data);
+			}
+			else{
+				redirect($this->agent->referrer());
+			}
+		}
+		else{
+			//belum login
+			redirect(site_url("auth/login"));
+		}
 	}
 
 	public function masterFasilitas(){
-		$data['listFasilitas'] = $this->Asset->getFasilitas();
-		$this->load->view('master/fasilitas', $data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
+		}
+		if ($this->session->has_userdata('login')){
+			//sudah login
+			$user = $this->User->getUserLogin($this->session->userdata('login'));
+			if ($user->AKSES_FASILITAS == 1 || $user->AKSES_FASILITAS == 3){
+				$data["login"] = $user;
+				$data['listFasilitas'] = $this->Asset->getFasilitas();
+				$this->load->view('master/fasilitas', $data);
+			}
+			else{
+				redirect($this->agent->referrer());
+			}
+		}
+		else{
+			//belum login
+			redirect(site_url("auth/login"));
+		}
 	}
 
 	public function masterLaporan(){
-		$data['listDataKategori'] = $this->Asset->getDataKategori();
-		$data['listDataAktivitas'] = $this->Asset->getDataAktivitas();
-		$this->load->view('master/laporan', $data);
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
+		}
+		if ($this->session->has_userdata('login')){
+			//sudah login
+			$user = $this->User->getUserLogin($this->session->userdata('login'));
+			if ($user->AKSES_LAPORAN == 1){
+				$data["login"] = $user;
+				$data['listDataKategori'] = $this->Asset->getDataKategori();
+				$data['listDataAktivitas'] = $this->Asset->getDataAktivitas();
+				$this->load->view('master/laporan', $data);
+			}
+			else{
+				redirect($this->agent->referrer());
+			}
+		}
+		else{
+			//belum login
+			redirect(site_url("auth/login"));
+		}
+		
 	}
-	// public function masterDataKategori(){
-	// 	$data['listDataKategori'] = $this->Asset->getDataKategori();
-	// 	$this->load->view('master/laporan', $data);
-	// }
-	// public function masterDataAktivitas(){
-	// 	$data['listDataAktivitas'] = $this->Asset->getDataAktivitas();
-	// 	$this->load->view('master/laporan', $data);
-	// }
 
 	public function jumlahAsset(){
 		$key = $this->input->post('key');

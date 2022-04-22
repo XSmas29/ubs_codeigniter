@@ -52,7 +52,7 @@
 				$("#modalbody").html("Berhasil login!");
 				setTimeout(function(){
 					window.location.replace("<?php echo site_url(); ?>/master");
-				},1500);
+				},1000);
 			}
 			else{
 				$("#modaltitle").html("Login gagal!");

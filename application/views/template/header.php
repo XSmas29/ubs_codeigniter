@@ -67,7 +67,7 @@
 				<div class="dropdown ms-6">
 					<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 						<img src="<?php echo base_url();?>assets/img/user.png" alt="" width="40" height="40" class="rounded-circle me-3">
-						<strong><?= $this->session->userdata('login')["NAMA"]?></strong>
+						<strong><?= $login->NAMA ?></strong>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
 						<li><a class="dropdown-item" href="#">Profile</a></li>
