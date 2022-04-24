@@ -72,7 +72,7 @@
 											}
 											?>
 										</td>
-										<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listFasilitas[$i]->KODE_ASSET?>'>View</a></td>
+										<td><a class="btn btn-primary btn-sm btn-detail" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listFasilitas[$i]->KODE_ASSET?>'>View</a></td>
 										</tr>
 									<?php
 										}
@@ -83,7 +83,6 @@
 			</div>
 		</section>
 	</main>
-
 	<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<div class="modal-content">
@@ -92,10 +91,116 @@
 				</div>
 				<div class="modal-header py-0 mb-4 border-bottom-0">
 					<div class="row text-center w-100">
-						<div class="py-3 border-bottom border-2 border-dark">
-							<div class="text-dark" style="text-decoration: none">
-								<b>History</b>
+						<div class="col-6 py-3 border-bottom border-2 border-dark">
+							<a class="text-dark fw-bold" style="text-decoration: none" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								Details
+							</a>
+						</div>
+						<div class="col-6 py-3">
+							<a class="text-dark" style="text-decoration: none" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								History
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
+				
+					<div class="row">
+						<div class="col-6">
+
+							<!-- carousel start -->
+							<div class="card border" style="border-radius: 20px">
+								<div class="card-body">
+									<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+										<div class="carousel-indicators" id="indicator">
+											<!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
+										</div>
+										
+										<div class="carousel-inner" id="listgambar">
+											<!-- <div class="carousel-item active">
+												<img src="assets/img/gallery/hero.png" class="d-block w-100" alt="...">
+											</div>
+											<div class="carousel-item">
+												<img src="assets/img/gallery/hero.png" class="d-block w-100" alt="...">
+											</div>
+											<div class="carousel-item">
+												<img src="assets/img/gallery/hero.png" class="d-block w-100" alt="...">
+											</div> -->
+										</div>
+										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Previous</span>
+										</button>
+										<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+											<span class="carousel-control-next-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Next</span>
+										</button>
+									</div>
+								</div>
 							</div>
+							
+							<!-- carousel end -->
+
+						</div>
+						<div class="col-6">
+						<div class="card border" style="border-radius: 20px">
+						
+							<h5 class="card-header text-center fw-bold bg-dark text-light py-4" style="border-radius: 20px 20px 0 0" id="nama_asset"></h5>
+							<div class="card-body mx-3">
+								<div class="row mb-4">
+									<div class="col-4">
+										Kode Aset
+										<div class="fw-bold" id="kode_asset"></div>
+									</div>
+									<div class="col-4">
+										Jenis Aset
+										<div class="fw-bold" id="jenis_asset"></div>
+									</div>
+									<div class="col-4">
+										Lokasi
+										<div class="fw-bold" id="lokasi_asset"></div>
+									</div>
+								</div>
+								<div class="row mb-4">
+									<div class="col-4">
+										Kondisi Awal
+										<div class="fw-bold" id="kondisi_asset"></div>
+									</div>
+									<div class="col-4">
+										Tanggal Pengadaan
+										<div class="fw-bold" id="tgl_pengadaan"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-header py-0 mb-4 border-bottom-0">
+					<div class="row text-center w-100">
+						<div class="col-6 py-3">
+							<a class="text-dark" style="text-decoration: none" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								Details
+							</a>
+						</div>
+						<div class="col-6 py-3 border-bottom border-2 border-dark">
+							<a class="text-dark fw-bold" style="text-decoration: none" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								History
+							</a>
 						</div>
 					</div>
 				</div>
@@ -149,7 +254,7 @@
 		$('#myTable').DataTable();
 	} );
 
-	$('.btn-history').click(function(){
+	$('.btn-detail').click(function(){
 		let kode = $(this).attr('value');
 		$.ajax({
 			type: "POST",
@@ -158,6 +263,13 @@
 			cache: false,
 			success: function(response){
 				let data = JSON.parse(response);
+				
+				$("#kode_asset").text(data["asset"][0].KODE_ASSET);
+				$("#nama_asset").text(data["asset"][0].NAMA_ASSET);
+				$("#jenis_asset").text(data["asset"][0].INFO_2);
+				$("#lokasi_asset").text(data["asset"][0].INFO_1);
+				$("#kondisi_asset").text(data["asset"][0].INFO_3);
+				$("#tgl_pengadaan").text(data["asset"][0].TGL_PENGADAAN);
 
 				$('#tabelhistory').DataTable().clear().destroy();
 				$("#bodyhistory").html("");
@@ -195,6 +307,34 @@
 						responsive: false
 					} 
 				);
+
+				$("#listgambar").html("");
+				$("#indicator").html("");
+				if (data["gambar"].length > 0){
+					let i = 0;
+
+					data["gambar"].forEach(function(item){
+						$("#listgambar").append(
+							'<div class="carousel-item">' +
+								'<img src="<?php echo base_url(); ?>assets/img/asset/' + item.KODE_GAMBAR + '" class="d-block w-100" alt="...">' +
+							'</div>'
+						);
+						$("#indicator").append(
+							'<button type="button" class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" aria-current="true" aria-label="Slide ' + i + '"></button>'
+						);
+
+						i += 1;
+					});
+					$('#listgambar div:first-child').addClass('active');
+					$('#indicator button:first-child').addClass('active');
+				}
+				else{
+					$("#listgambar").append(
+						'<div class="carousel-item active">' +
+							'<img src="<?php echo base_url(); ?>assets/img/placeholder.jpg" class="d-block w-100" alt="...">' +
+						'</div>'
+					);
+				}
 			}, error: function(){
 				console.log("Error when loading asset!")
 			}

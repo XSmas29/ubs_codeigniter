@@ -289,6 +289,7 @@
 				cache: false,
 				success: function(response){
 					let data = JSON.parse(response);
+					
 					$("#kode_asset").text(data["asset"][0].KODE_ASSET);
 					$("#nama_asset").text(data["asset"][0].NAMA_ASSET);
 					$("#lokasi_asset").text(data["asset"][0].INFO_1);

@@ -84,6 +84,7 @@
 			
 		</section>
 	</main>
+
 	<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<div class="modal-content">
@@ -92,10 +93,97 @@
 				</div>
 				<div class="modal-header py-0 mb-4 border-bottom-0">
 					<div class="row text-center w-100">
-						<div class="py-3 border-bottom border-2 border-dark">
-							<div class="text-dark" style="text-decoration: none">
-								<b>History</b>
+						<div class="col-6 py-3 border-bottom border-2 border-dark">
+							<a class="text-dark fw-bold" style="text-decoration: none" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								Details
+							</a>
+						</div>
+						<div class="col-6 py-3">
+							<a class="text-dark" style="text-decoration: none" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								History
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
+				
+					<div class="row">
+						<div class="col-3">
+						</div>
+						<div class="col-6">
+							<div class="card border" style="border-radius: 20px">
+							
+								<h5 class="card-header text-center fw-bold bg-dark text-light py-4" style="border-radius: 20px 20px 0 0" id="nama_asset"></h5>
+								<div class="card-body mx-3">
+									<div class="row mb-4">
+										<div class="col-4">
+											Kode Aset
+											<div class="fw-bold" id="kode_asset"></div>
+										</div>
+										<div class="col-4">
+											Jenis Aset
+											<div class="fw-bold" id="jenis_asset"></div>
+										</div>
+										<div class="col-4">
+											Nama Gedung
+											<div class="fw-bold" id="gedung_asset"></div>
+										</div>
+									</div>
+									<div class="row mb-4">
+										<div class="col-4">
+											Lokasi
+											<div class="fw-bold" id="lokasi_asset"></div>
+										</div>
+										<div class="col-4">
+											Peruntukan
+											<div class="fw-bold" id="peruntukan_asset"></div>
+										</div>
+										<div class="col-4">
+											No IMB
+											<div class="fw-bold" id="imb_asset"></div>
+										</div>
+									</div>
+									<div class="row mb-4">
+										<div class="col-4">
+											Tanggal Pengadaan
+											<div class="fw-bold" id="tgl_pengadaan"></div>
+										</div>
+										
+										<div class="col-4">
+											Fasilitas
+											<ul class="fw-bold" id="fasilitas"></ul>
+										</div>
+									</div>
+								</div>
 							</div>
+						</div>
+						<div class="col-3">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-header py-0 mb-4 border-bottom-0">
+					<div class="row text-center w-100">
+						<div class="col-6 py-3">
+							<a class="text-dark" style="text-decoration: none" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								Details
+							</a>
+						</div>
+						<div class="col-6 py-3 border-bottom border-2 border-dark">
+							<a class="text-dark fw-bold" style="text-decoration: none" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" role="button">
+								History
+							</a>
 						</div>
 					</div>
 				</div>
@@ -165,8 +253,24 @@
 			success: function(response){
 				let data = JSON.parse(response);
 
+				$("#kode_asset").text(data["asset"][0].KODE_ASSET);
+				$("#nama_asset").text(data["asset"][0].NAMA_ASSET);
+				$("#lokasi_asset").text(data["asset"][0].INFO_1);
+				$("#jenis_asset").text(data["asset"][0].INFO_2);
+				$("#peruntukan_asset").text(data["asset"][0].INFO_3);
+				$("#gedung_asset").text(data["asset"][0].INFO_4);
+				$("#imb_asset").text(data["asset"][0].INFO_5);
+				$("#tgl_pengadaan").text(data["asset"][0].TGL_PENGADAAN);
+
 				$('#tabelhistory').DataTable().clear().destroy();
 				$("#bodyhistory").html("");
+
+				$("#fasilitas").html('');
+				let arrfasilitas = [];
+				
+				for (let i = 0; i < data["fasilitas"].length; i++) {
+					$("#fasilitas").append("<li>" + data["fasilitas"][i].NAMA + " (" + data["fasilitas"][i].JUMLAH + ")</li>");
+				}
 
 				let ctr = 1;
 				data["transaksi"].forEach(function(item){
