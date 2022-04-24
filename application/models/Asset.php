@@ -799,6 +799,19 @@ class Asset extends CI_Model
 			$this->db->insert('asset', $values);
 			//
 
+			//insert data ke tabel fasilitas
+			for ($i=0; $i < count($data["namafasilitas"]); $i++) { 
+				if ($data["namafasilitas"][$i] != "" && $data["jumlahfasilitas"][$i] != ""){
+					$values = array(
+						'FK_ASSET' => $data['kode'],
+						'NAMA' => $data["namafasilitas"][$i],
+						'JUMLAH' => $data["jumlahfasilitas"][$i],
+					);
+					$this->db->insert('fasilitas', $values);
+				}
+			}
+			//
+
 		if ($this->db->trans_status() === FALSE)
 		{
 			$this->db->trans_rollback();
@@ -828,6 +841,22 @@ class Asset extends CI_Model
 
 	public function editGedung($data){
 		$this->db->trans_begin();
+
+			//hapus data, lalu insert data ke tabel fasilitas
+			$this->db->delete('fasilitas', array('FK_ASSET' => $data['kode']));
+
+			for ($i=0; $i < count($data["namafasilitas"]); $i++) { 
+				if ($data["namafasilitas"][$i] != "" && $data["jumlahfasilitas"][$i] != ""){
+					$values = array(
+						'FK_ASSET' => $data['kode'],
+						'NAMA' => $data["namafasilitas"][$i],
+						'JUMLAH' => $data["jumlahfasilitas"][$i],
+					);
+					$this->db->insert('fasilitas', $values);
+				}
+			}
+			//
+
 			//insert data ke tabel asset
 			$values = array(
 				'KODE_ASSET' => $data['kode'],

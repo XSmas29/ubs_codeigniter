@@ -714,6 +714,8 @@ class Master extends CI_Controller
 		$data['lokasi'] = $this->input->post('lokasi');
 		$data['tanggal'] = $this->input->post('tanggal');
 		$data['peruntukkan'] = $this->input->post('peruntukkan');
+		$data['namafasilitas'] = explode(",",$this->input->post('namafasilitas'));
+		$data['jumlahfasilitas'] = explode(",",$this->input->post('jumlahfasilitas'));
 
 		if ($this->form_validation->run() == FALSE)
 		{	
@@ -747,6 +749,8 @@ class Master extends CI_Controller
 		$data['lokasi'] = $this->input->post('lokasi');
 		$data['tanggal'] = $this->input->post('tanggal');
 		$data['peruntukkan'] = $this->input->post('peruntukkan');
+		$data['namafasilitas'] = explode(",",$this->input->post('namafasilitas'));
+		$data['jumlahfasilitas'] = explode(",",$this->input->post('jumlahfasilitas'));
 
 		if ($this->form_validation->run() == FALSE)
 		{	

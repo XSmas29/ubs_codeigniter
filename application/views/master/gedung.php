@@ -148,6 +148,23 @@
 								<input type="text" class="form__field" name="peruntukkan" id="peruntukkan" placeholder="Peruntukkan"/>
 								<label class="form__label">Peruntukkan<small class="form-error" id="error-peruntukkan"></small></label>
 							</div>
+							<div class="row" id="rowfasilitas">
+								<div class="col-7">
+									<div class="form__group field mb-5" id="listnamafasilitas">
+										<label class="form__label">Fasilitas</label>
+										<input type="text" class="form__field" name="namafas[]" id="fasilitas" placeholder="Fasilitas"/>
+									</div>
+								</div>
+								<div class="col-5">
+									<div class="form__group mb-5" id="listjumlahfasilitas">
+										<label class="form__label">Jumlah</label>
+										<div class="d-flex justify-content-start align-items-center">
+											<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>
+											<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -308,6 +325,16 @@
 	function addData(){
 		let form_data = new FormData();
 
+		let listnama = [];
+		$('input[name="namafas[]"]').each( function() {
+			listnama.push(this.value);
+		});
+
+		let listjumlah = [];
+		$('input[name="jumlahfas[]"]').each( function() {
+			listjumlah.push(this.value);
+		});
+
 		form_data.append("gedung", $("#gedung").val());
 		form_data.append("kodeaset", $("#kodeaset").val());
 		form_data.append("imb", $("#imb").val());
@@ -316,7 +343,9 @@
 		form_data.append("lokasi", $("#lokasi").val());
 		form_data.append("tanggal", $("#tanggal").val());
 		form_data.append("peruntukkan", $("#peruntukkan").val());
-		
+		form_data.append("namafasilitas", listnama);
+		form_data.append("jumlahfasilitas", listjumlah);
+
 		$.ajax({
 			type: "POST",
 			url: "<?php echo site_url(); ?>"+"/Master/addgedung",
@@ -367,6 +396,14 @@
 				$("#peruntukkan").val(data["asset"][0].INFO_3);
 				//
 
+				//mengambil data fasilitas dari asset tsb
+				for (let i = 0; i < data["fasilitas"].length; i++) {
+					addFasilitas();
+					$($("#listnamafasilitas").find(".form__field")[1]).val(data["fasilitas"][i].NAMA);
+					$($("#listjumlahfasilitas").find(".d-flex").find(".form__field")[1]).val(data["fasilitas"][i].JUMLAH);
+				}
+				//
+
 			}, error: function(){
 				alert("Error when loading asset!")
 			}
@@ -376,6 +413,16 @@
 	function editData(){
 		let form_data = new FormData();
 
+		let listnama = [];
+		$('input[name="namafas[]"]').each( function() {
+			listnama.push(this.value);
+		});
+
+		let listjumlah = [];
+		$('input[name="jumlahfas[]"]').each( function() {
+			listjumlah.push(this.value);
+		});
+
 		form_data.append("gedung", $("#gedung").val());
 		form_data.append("kodeaset", $("#kodeaset").val());
 		form_data.append("imb", $("#imb").val());
@@ -384,7 +431,9 @@
 		form_data.append("lokasi", $("#lokasi").val());
 		form_data.append("tanggal", $("#tanggal").val());
 		form_data.append("peruntukkan", $("#peruntukkan").val());
-		
+		form_data.append("namafasilitas", listnama);
+		form_data.append("jumlahfasilitas", listjumlah);
+
 		$.ajax({
 			type: "POST",
 			url: "<?php echo site_url(); ?>"+"/Master/editgedung",
@@ -499,8 +548,28 @@
 		$("#nama").val('');
 		$("#jenis").val('');
 		$("#lokasi").val('');
+		$("#fasilitas").val('');
 		$("#peruntukkan").val('');
-		
+		$("#rowfasilitas").html(
+			'<div class="row">' + 
+				'<div class="col-7">' + 
+					'<div class="form__group field mb-5" id="listnamafasilitas">' + 
+						'<label class="form__label">Fasilitas</label>' + 
+						'<input type="text" class="form__field" name="namafas[]" id="fasilitas" placeholder="Fasilitas">	' + 					
+					'</div>' + 
+				'</div>' + 
+				'<div class="col-5">' + 
+					'<div class="form__group mb-5" id="listjumlahfasilitas">' + 
+						'<label class="form__label">Jumlah</label>' + 
+						'<div class="d-flex justify-content-start align-items-center">' + 
+							'<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah">' + 
+							'<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>' + 
+						'</div>' + 
+					'</div>' + 
+				'</div>' + 
+			'</div>'
+		);
+
 		//bagian perbaikan
 		$("#image-upload-wrapper-perbaikan").html(
 			'<div class="image-upload-wrap-perbaikan mx-1">' + 
@@ -530,6 +599,8 @@
 		$("#error-lokasi").html('');
 		$("#error-tanggal").html('');
 		$("#error-peruntukkan").html('');
+		$("#error-namafas").html("");
+		$("#error-jumlahfas").html("");
 
 		$("#error-gedung").html(errors["gedung"]).css("opacity", 1);
 		$("#error-kode").html(errors["kode"]).css("opacity", 1);
@@ -539,6 +610,8 @@
 		$("#error-lokasi").html(errors["lokasi"]).css("opacity", 1);
 		$("#error-tanggal").html(errors["tanggal"]).css("opacity", 1);
 		$("#error-peruntukkan").html(errors["peruntukkan"]).css("opacity", 1);
+		$("#error-namafas").html(errors["namafas"]).css("opacity", 1);
+		$("#error-jumlahfas").html(errors["jumlahfas"]).css("opacity", 1);
 		//
 
 
@@ -564,6 +637,35 @@
 		$("#error-tanggal-delete").html(errors["tanggaldelete"]).css("opacity", 1);
 		$("#error-alasan-delete").html(errors["alasandelete"]).css("opacity", 1);
 		//
+	}
+
+	function addFasilitas(){
+		//menambah field nama fasilitas di paling atas
+		$("#listnamafasilitas").find('.form__label').remove();
+		$("#listnamafasilitas").prepend(
+			'<label class="form__label">Fasilitas</label>' + 
+			'<input type="text" class="form__field mb-2" name="namafas[]" id="fasilitas" placeholder="Fasilitas"/>'
+		);
+
+		//menambah field jumlah & button add fasilitas di paling atas
+		$("#listjumlahfasilitas").prepend(
+			'<div class="d-flex justify-content-start align-items-center mb-2">' + 
+				'<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>' +
+				'<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>' + 
+			'</div>'
+		);
+
+		//replace button add dgn button remove
+		$($("#listjumlahfasilitas").find('.d-flex')[1]).children().last().remove();
+		$($("#listjumlahfasilitas").find('.d-flex')[1]).append('<button type="button" class="btn btn-danger ms-3 btn-delete" onclick="removeFasilitas(this)"><strong>x</strong></button>');
+	}
+
+	function removeFasilitas(element){
+		//menghapus fasilitas di index tsb
+		let index = $(".btn-delete").index(element);
+		console.log(index);
+		$("#listnamafasilitas").find('.form__field')[index + 1].remove();
+		$("#listjumlahfasilitas").find('.d-flex')[index + 1].remove();
 	}
 
 	function readURLperbaikan(input){
