@@ -177,6 +177,13 @@ class Master extends CI_Controller
 		echo json_encode($data);
 	}
 
+	public function searchAssetPeminjaman(){
+		$key = $this->input->post('kode');
+		$kategori = $this->input->post('kategori');
+		$data["aset"] = $this->Asset->getAssetbyKeyAndCategory($key, $kategori);
+		echo json_encode($data);
+	}
+
 	public function detailUser()
 	{
 		$key = $this->input->post('key');

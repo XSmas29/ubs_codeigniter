@@ -63,7 +63,10 @@
 				<a class="nav-link link-list-kendaraan" href="<?php echo site_url('Master/listkendaraan') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Kendaraan</li></a>
 				<a class="nav-link link-list-asrama" href="<?php echo site_url('Master/listasrama') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Asrama</li></a>
 				<a class="nav-link link-list-fasilitas" href="<?php echo site_url('Master/listfasilitas') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Fasilitas</li></a>
-				<a class="nav-link link-admin" href="<?php echo site_url('Master/master') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Admin</li></a>
+				<?php $akses = $login->AKSES_RUMAH + $login->AKSES_GEDUNG + $login->AKSES_KENDARAAN + $login->AKSES_ASRAMA + $login->AKSES_FASILITAS + $login->AKSES_USER + $login->AKSES_LAPORAN ?>
+				<?php if ($akses > 0){?>
+					<a class="nav-link link-admin" href="<?php echo site_url('Master/master') ?>"><li class="nav-item px-2" data-anchor="data-anchor">Admin</li></a>
+				<?php } ?>
 				<div class="dropdown ms-6">
 					<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 						<img src="<?php echo base_url();?>assets/img/user.png" alt="" width="40" height="40" class="rounded-circle me-3">

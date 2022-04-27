@@ -437,7 +437,7 @@
 								"</div>" +
 							"</div>" +
 							"<div class='col-5 d-flex align-items-center'>" +
-								"<img src='<?php echo base_url(); ?>assets/img/repair/" + data["gambar"][0].KODE_GAMBAR + "' width='100%'>" + 
+								"<img src='<?php echo base_url(); ?>assets/files/repair/" + data["gambar"][0].KODE_GAMBAR + "' width='100%'>" + 
 							"</div>" +
 						"</div>"
 						

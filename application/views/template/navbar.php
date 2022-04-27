@@ -21,60 +21,61 @@
 				</a>
 				<hr>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-					<li class="pb-4">
-						<a href="#submenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle link-light p-0">
-							<i class="fa-solid fa-landmark"></i> <span class="ms-1 d-none d-sm-inline">Master Aset</span>
-						</a>
-						<ul class="collapse flex-column ms-1 fs-6" id="submenu" data-bs-parent="#menu">
-							<li class="w-100 mt-2">
-								<a href="<?php echo site_url("master/masterrumah"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Rumah Dinas</span></a>
-							</li>
-							<li class="w-100">
-								<a href="<?php echo site_url("master/mastergedung"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Gedung</span></a>
-							</li>
-							<li class="w-100">
-								<a href="<?php echo site_url("master/masterkendaraan"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Kendaraan</span></a>
-							</li>
-							<li class="w-100">
-								<a href="<?php echo site_url("master/masterasrama"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Asrama</span></a>
-							</li>
-							<li class="w-100">
-								<a href="<?php echo site_url("master/masterfasilitas"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Fasilitas</span></a>
-							</li>
-						</ul>
-					</li>
-                    <li class="nav-item pb-4">
-                        <a href="<?php echo site_url("master/masteruser"); ?>" class="nav-link align-middle p-0 link-light">
-							<i class="fa-solid fa-user-group"></i> <span class="ms-1 d-none d-sm-inline">Master User</span>
-                        </a>
-                    </li>
-					<li class="pb-4">
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle link-light p-0">
-							<i class="fa-solid fa-business-time"></i> <span class="ms-1 d-none d-sm-inline">Peminjaman</span>
-                        </a>
-                        <ul class="collapse flex-column ms-1 fs-6" id="submenu2" data-bs-parent="#menu">
-							<li class="w-100 mt-2">
-								<a href="<?php echo site_url("transaksi/rumah"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Rumah Dinas</span></a>
-							</li>
-							<li class="w-100">
-								<a href="<?php echo site_url("transaksi/gedung"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Gedung</span></a>
-							</li>
-							<li class="w-100">
-								<a href="<?php echo site_url("transaksi/kendaraan"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Kendaraan</span></a>
-							</li>
-							<li class="w-100">
-								<a href="<?php echo site_url("transaksi/asrama"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Asrama</span></a>
-							</li>
-							<li class="w-100">
-								<a href="<?php echo site_url("transaksi/fasilitas"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Fasilitas</span></a>
-							</li>
-                        </ul>
-                    </li>
-					<li class="nav-item pb-4">
-                        <a href="<?php echo site_url("Master/masterlaporan"); ?>" class="nav-link align-middle p-0 link-light">
-							<i class="fas fa-clipboard"></i> <span class="ms-1 d-none d-sm-inline">Laporan Aset</span>
-                        </a>
-                    </li>
+					<?php if ($login->AKSES_RUMAH == 1 || $login->AKSES_RUMAH == 3 || $login->AKSES_GEDUNG == 1 || $login->AKSES_GEDUNG == 3 || $login->AKSES_KENDARAAN == 1 || $login->AKSES_KENDARAAN == 3 || $login->AKSES_ASRAMA == 1 || $login->AKSES_ASRAMA == 3 || $login->AKSES_FASILITAS == 1 || $login->AKSES_FASILITAS == 3) { ?>
+						<li class="pb-4">
+							<a href="#submenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle link-light p-0">
+								<i class="fa-solid fa-landmark"></i> <span class="ms-1 d-none d-sm-inline">Master Aset</span>
+							</a>
+							<ul class="collapse flex-column ms-1 fs-6" id="submenu" data-bs-parent="#menu">
+								<?php if ($login->AKSES_RUMAH == 1 || $login->AKSES_RUMAH == 3) {?>
+									<li class="w-100 mt-1">
+										<a href="<?php echo site_url("master/masterrumah"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Rumah Dinas</span></a>
+									</li>
+								<?php } ?>
+								<?php if ($login->AKSES_GEDUNG == 1 || $login->AKSES_GEDUNG == 3) {?>
+									<li class="w-100 mt-1">
+										<a href="<?php echo site_url("master/mastergedung"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Gedung</span></a>
+									</li>
+								<?php } ?>
+								<?php if ($login->AKSES_KENDARAAN == 1 || $login->AKSES_KENDARAAN == 3) {?>
+									<li class="w-100 mt-1">
+										<a href="<?php echo site_url("master/masterkendaraan"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Kendaraan</span></a>
+									</li>
+								<?php } ?>
+								<?php if ($login->AKSES_ASRAMA == 1 || $login->AKSES_ASRAMA == 3) {?>
+									<li class="w-100 mt-1">
+										<a href="<?php echo site_url("master/masterasrama"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Asrama</span></a>
+									</li>
+								<?php } ?>
+								<?php if ($login->AKSES_FASILITAS == 1 || $login->AKSES_FASILITAS == 3) {?>
+									<li class="w-100 mt-1">
+										<a href="<?php echo site_url("master/masterfasilitas"); ?>" class="nav-link px-0 link-light"> <span class="d-none d-sm-inline">Fasilitas</span></a>
+									</li>
+								<?php } ?>
+							</ul>
+						</li>
+					<?php } ?>
+					<?php if ($login->AKSES_USER == 1) {?>
+						<li class="nav-item pb-4">
+							<a href="<?php echo site_url("master/masteruser"); ?>" class="nav-link align-middle p-0 link-light">
+								<i class="fa-solid fa-user-group"></i> <span class="ms-1 d-none d-sm-inline">Master User</span>
+							</a>
+						</li>
+					<?php } ?>
+					<?php if ($login->AKSES_RUMAH >= 2 || $login->AKSES_GEDUNG >= 2 || $login->AKSES_KENDARAAN >= 2 || $login->AKSES_ASRAMA >= 2 || $login->AKSES_FASILITAS >= 2) {?>
+						<li class="nav-item pb-4">
+							<a href="<?php echo site_url("transaksi"); ?>" class="nav-link align-middle p-0 link-light">
+								<i class="fa-solid fa-business-time"></i> <span class="ms-1 d-none d-sm-inline">Transaksi</span>
+							</a>
+						</li>
+					<?php } ?>
+					<?php if ($login->AKSES_LAPORAN == 1) {?>
+						<li class="nav-item pb-4">
+							<a href="<?php echo site_url("master/masterlaporan"); ?>" class="nav-link align-middle p-0 link-light">
+								<i class="fas fa-clipboard"></i> <span class="ms-1 d-none d-sm-inline">Laporan Aset</span>
+							</a>
+						</li>
+					<?php } ?>
                 </ul>
             </div>
         </div>

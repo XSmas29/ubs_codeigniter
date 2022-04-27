@@ -183,7 +183,19 @@ select option{
 	padding: 7px 0;
 	background: transparent;
 	transition: border-color 0.2s;
-	color: #999999;
+	color: #868686;
+}
+
+.form__field:disabled {
+	font-family: inherit;
+	width: 100%;
+	border: 0;
+	border-bottom: 1px solid rgb(190, 190, 190);
+	outline: 0;
+	padding: 7px 0;
+	background: transparent;
+	transition: border-color 0.2s;
+	color: #868686;
 }
 
 .form__field2 {

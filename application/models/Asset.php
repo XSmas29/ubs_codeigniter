@@ -81,6 +81,11 @@ class Asset extends CI_Model
 		return $query->result();
 	}
 
+	public function getAssetbyKeyAndCategory($key, $kategori) {
+		$query = $this->db->query("select * from asset where kode_asset='$key' and fk_kategori='$kategori'"); 
+		return $query->result();
+	}
+
 	public function getMaxImageIndexbyKey($key) {
 		$query = $this->db->query("select max(kode_gambar) as max from gambar where fk_asset='$key'");
 		return $query->result()[0]->max;
@@ -379,7 +384,7 @@ class Asset extends CI_Model
 			if (isset($_FILES["gambar"])){
 				// upload gambar ke dalam folder CI nya
 
-				$config['upload_path'] = './assets/img/repair';
+				$config['upload_path'] = './assets/files/repair';
 				$config['allowed_types'] = '*';
 
 				$path = $_FILES['gambar']['name'];
@@ -1111,7 +1116,7 @@ class Asset extends CI_Model
 			$query .= " AND transaksi.TGL_TRANSAKSI <= '" . $data['dateTo'] . "'";
 		}
 		if (!empty($data['kategori'])) {
-			$query .= " AND asset.FK_KATEGORI <= '" . $data['kategori'] . "'";
+			$query .= " AND asset.FK_KATEGORI = '" . $data['kategori'] . "'";
 		}
 		if (!empty($data['aktivitas'])) {
 			$query .= " AND transaksi.AKTIVITAS_TRANSAKSI = '" . $data['aktivitas'] . "'";
@@ -1119,6 +1124,93 @@ class Asset extends CI_Model
 		
 		$result = $this->db->query($query);
 		return $result->result();
+	}
+
+	public function addPeminjaman($data){
+		$this->db->trans_begin();
+
+			//get max value dari transaksi
+			$query = $this->db->query("select max(kode_transaksi) as max from transaksi");
+			$newkode = intval(substr($query->result()[0]->max, -7)) + 1;
+			//
+			$now = date('Y-m-d');
+			//insert data ke tabel transaksi
+			$values = array(
+				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+				'FK_ASSET' => $data['kode'],
+				'TGL_TRANSAKSI' => $now,
+				'USER_TRANSAKSI' => $data["user"],
+				'AKTIVITAS_TRANSAKSI' => "peminjaman",
+				'KETERANGAN_1' => 0,
+				'TGL_PINJAM' => $data["tanggal"],
+			);
+
+			$this->db->insert('transaksi', $values);
+			//
+			if (isset($_FILES["file"])){
+				// upload gambar ke dalam folder CI nya
+
+				$config['upload_path'] = './assets/files/peminjaman';
+				$config['allowed_types'] = '*';
+
+				$path = $_FILES['gambar']['name'];
+				$ext = pathinfo($path, PATHINFO_EXTENSION);
+				
+				//var_dump(str_pad($ctr, 3, "0", STR_PAD_LEFT)." - ".$ctr);
+
+				$filename = "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT).'.'.$ext;
+				$config['file_name'] = $filename;
+	
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				
+				if(!$this->upload->do_upload('gambar'))
+				{  
+					echo $this->upload->display_errors();  
+				}  
+				else  
+				{  
+					$imgdata = $this->upload->data();
+				}
+				//
+
+
+				//insert data gambar ke database
+				$values = array(
+					'KODE_GAMBAR' => $filename,
+					'FK_ASSET' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+				);
+				$this->db->insert('gambar', $values);
+				//
+			}
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return "Terjadi kesalahan dalam input data peminjaman!";
+		}
+		else{
+			$this->db->trans_commit();
+			$kode = $data["kode"];
+			if ($data["kategori"] == 4){
+				$asrama = $this->db->query("select * from asset where kode_asset='$kode'")->result(); 
+				
+				//ganti data di tabel asset
+				$status = 0;
+				if ((int)$asrama[0]->INFO_3 == (int)$asrama[0]->INFO_4 + 1){
+					$status = 1;
+				}
+				$values = array(
+					'STATUS' => $status,
+					'INFO_4' => (int)$asrama[0]->INFO_4 + 1,
+				);
+				$this->db->where('KODE_ASSET', $data['kode']);
+				$this->db->update('asset', $values);
+				//
+			}
+			$this->db->insert('transaksi', $values);
+			return 1;
+		}
 	}
 }
 ?>

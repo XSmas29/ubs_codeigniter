@@ -68,14 +68,16 @@
 											<option value="Pengadaan">Pengadaan</option>
 											<option value="Perubahan">Perubahan</option>
 											<option value="Perbaikan">Perbaikan</option>
+											<option value="Peminjaman">Peminjaman</option>
+											<option value="Pengembalian">Pengembalian</option>
 										</select>
 									</div>
-
 								</div>
 								<div class="d-flex justify-content mb-4">
 									<button type="button" class="btn btn-primary px-5 btn-submit" id="btnsearch" onclick="searchData()">SEARCH</button>
 									<button type="button" class="btn btn-success mx-2 btn-submit" id="btndownload" onclick="generateLaporan()" hidden>Download Laporan</button>
 								</div>
+								<hr>
 								<div>
 									<table id="tabellaporan" class="table table-striped table-bordered rounded text-center" hidden>
 										<thead>
@@ -206,6 +208,7 @@
             dataType: 'json',
 			success: function(response){
                 let message = response;
+				console.log(message);
 				datalaporan = [];
                 $("#bodyLaporan").html("");
                 response.message.forEach(element => {
