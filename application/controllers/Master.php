@@ -19,7 +19,7 @@ class Master extends CI_Controller
 	public function index()
 	{
 		if (get_cookie("login") != NULL){
-			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+			$this->session->set_userdata('login', get_cookie("login"));
 		}
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
@@ -35,10 +35,69 @@ class Master extends CI_Controller
 		}
 	}
 
+	public function profil()
+	{
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
+		}
+		if ($this->session->has_userdata('login')){
+			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
+			$this->load->view('master/profil', $data);
+		}
+		else{
+			redirect(site_url("auth/login"));
+		}
+	}
+
+	public function ubahPassword(){
+		$this->form_validation->set_rules('passlama', 'Password lama', 'required|callback_checkpassword');
+		$this->form_validation->set_rules('passbaru', 'Password baru', 'required|min_length[8]|alpha_dash');
+		$this->form_validation->set_rules('konfirmasi', 'Konfirmasi password', 'required|matches[passbaru]');
+
+		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
+		$this->form_validation->set_message('min_length', ' {field} minimal 8 digit!&nbsp');
+		$this->form_validation->set_message('alpha_dash', ' {field} hanya boleh huruf, angka, underscore, dan dash!&nbsp');
+		$this->form_validation->set_message('matches', ' password & konfirmasi harus sama!&nbsp');
+
+		$data["passbaru"] = $this->input->post('passbaru');
+		$data["nik"] = $this->User->getUserLogin($this->session->userdata('login'))->NIK;
+
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$response["message"] = $this->User->ubahPassword($data);
+			echo json_encode($response);
+		}
+	}
+
+	public function checkPassword(){
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
+		}
+		if ($this->session->has_userdata('login')){
+			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
+			$passlama = $this->input->post('passlama');
+			if ($passlama == $data["login"]->PASSWORD){
+				return true;
+			}
+			else{
+				$this->form_validation->set_message('checkpassword',' Password salah!&nbsp');
+        		return false;
+			}
+		}
+		else{
+			redirect(site_url("auth/login"));
+		}
+	}
+
 	public function listrumah()
 	{
 		if (get_cookie("login") != NULL){
-			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+			$this->session->set_userdata('login', get_cookie("login"));
 		}
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
@@ -52,7 +111,7 @@ class Master extends CI_Controller
 	public function listgedung()
 	{
 		if (get_cookie("login") != NULL){
-			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+			$this->session->set_userdata('login', get_cookie("login"));
 		}
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
@@ -66,7 +125,7 @@ class Master extends CI_Controller
 	public function listkendaraan()
 	{
 		if (get_cookie("login") != NULL){
-			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+			$this->session->set_userdata('login', get_cookie("login"));
 		}
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
@@ -80,7 +139,7 @@ class Master extends CI_Controller
 	public function listasrama()
 	{
 		if (get_cookie("login") != NULL){
-			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+			$this->session->set_userdata('login', get_cookie("login"));
 		}
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
@@ -96,7 +155,7 @@ class Master extends CI_Controller
 	{
 		
 		if (get_cookie("login") != NULL){
-			$this->session->set_userdata('login', (array)json_decode(get_cookie("login")));
+			$this->session->set_userdata('login', get_cookie("login"));
 		}
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
@@ -342,7 +401,7 @@ class Master extends CI_Controller
 		$this->form_validation->set_message('matches', ' password & konfirmasi harus sama!&nbsp');
 
 		$data['nik'] = $this->input->post('nik');
-		$data['nama'] = $this->input->post('nama');
+		$data['nama'] = $this->input->post('nama');	
 		$data['departemen'] = $this->input->post('departemen');
 		$data['password'] = $this->input->post('password');
 

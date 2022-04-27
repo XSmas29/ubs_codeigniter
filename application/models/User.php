@@ -27,6 +27,17 @@ class User extends CI_Model
 		return $query->result();
 	}
 
+	public function ubahPassword($data){
+		$values = array(
+			'PASSWORD' => $data['passbaru'],
+		);
+
+		$this->db->where('NIK', $data["nik"]);
+		$this->db->update('user', $values);
+
+		return 1;
+	}
+
 	public function addUser($data){
 
 		$akses['rumah'] = $data["masterrumah"] + ($data["transrumah"] * 2);
