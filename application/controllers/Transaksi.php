@@ -47,7 +47,9 @@ class Transaksi extends CI_Controller
 		{
 			$this->form_validation->set_rules('hiddenfile', 'File', 'required');
 		}
-
+		if ($this->input->post('kategori') == 4){
+			$this->form_validation->set_rules('nik', 'NIK', 'required|callback_checkuser');
+		}
 
 		$this->form_validation->set_message('required', '&nbsp{field} harus diisi!&nbsp');
 
@@ -67,6 +69,26 @@ class Transaksi extends CI_Controller
 		{
 			$response["message"] = $this->Asset->addPeminjaman($data);
 			echo json_encode($response);
+		}
+	}
+
+	public function checkUser(){
+		if (get_cookie("login") != NULL){
+			$this->session->set_userdata('login', get_cookie("login"));
+		}
+		if ($this->session->has_userdata('login')){
+			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
+			if ($data["login"]->FK_ASSET == NULL){
+				return true;
+				
+			}
+			else{
+				$this->form_validation->set_message('checkuser','&nbspUser sudah menempati asrama!&nbsp');
+        		return false;
+			}
+		}
+		else{
+			redirect(site_url("auth/login"));
 		}
 	}
 

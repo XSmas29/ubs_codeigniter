@@ -49,14 +49,24 @@
 							<tbody>
 									<?php 
 										for ($i=0; $i < count($listFasilitas); $i++) {
+											$namapeminjam = "";
+											$departemenpeminjam = "";
+											if ($listFasilitas[$i]->FK_USER != NULL) { 
+												foreach ($user as $item){
+													if ($item->NIK == $listFasilitas[$i]->FK_USER){
+														$namapeminjam = $item->NAMA;
+														$departemenpeminjam = $item->DEPARTEMEN;
+													}
+												}
+								  			}
 									?>
 										<tr>
 										<td><?= $listFasilitas[$i]->NAMA_ASSET?></td>
 										<td><?= $listFasilitas[$i]->KODE_ASSET?></td>
 										<td><?= $listFasilitas[$i]->INFO_1?></td>
 										<td><?= date('d F Y', strtotime($listFasilitas[$i]->TGL_PENGADAAN)) ?></td>
-										<td><?= $listFasilitas[$i]->INFO_2?></td>
-										<td><?= $listFasilitas[$i]->INFO_3?></td>
+										<td><?= $namapeminjam ?></td>
+										<td><?= $departemenpeminjam ?></td>
 										<td>
 											<?php 
 											if ($listFasilitas[$i]->IS_DELETED == 1){

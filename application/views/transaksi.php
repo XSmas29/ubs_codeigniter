@@ -139,6 +139,7 @@
 			</div>
 		</section>
 	</main>
+	
 	<div class="modal fade" id="modalpeminjaman" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<div class="modal-content">
@@ -218,9 +219,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal" tabindex="-1" id="modalsuccess">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header justify-content-center">
+					<h5 class="modal-title">Success</h5>
+				</div>
+				<div class="modal-body text-center">
+					<p id="modalsuccessbody">Sukses meminjamkan barang!</p>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
-
-</html>
 
 </html>
 <script type="text/javascript">
@@ -305,7 +318,6 @@
 		let form_data = new FormData();
 		form_data.append("kategori", $("#kategoripeminjaman").val());
 		form_data.append("kode", $("#kodepeminjaman").val());
-
 		$.ajax({
 			type: "POST",
 			url: "<?php echo site_url(); ?>"+"/Master/searchAssetPeminjaman",
@@ -361,6 +373,13 @@
 			success: function(response){
 				let message = response;
 				console.log(message);
+				if (message["message"] == 1){
+					$('#modalsuccess').show();
+					setTimeout(function(){
+						window.location.reload();
+					},1000);
+				}
+				
 				raiseErrors(message);
 			}, error: function(xhr, status, error) {
 				console.log(xhr.responseText);
@@ -457,6 +476,10 @@
 
 	function resetInput(){
 		resetAset();
+		$("#error-kode-peminjaman").html("");
+		$("#error-nik-peminjaman").html("");
+		$("#error-tanggal-peminjaman").html('');
+		$("#error-image-peminjaman").html('');
 
 		$("#image-upload-wrapper-peminjaman").html(
 			'<div class="image-upload-wrap-perbaikan mx-1">' + 
@@ -485,4 +508,8 @@
 		$("#error-tanggal-peminjaman").html(errors["tanggal"]).css("opacity", 1);
 		$("#error-image-peminjaman").html(errors["hiddenfile"]).css("opacity", 1);
 	}
+
+	$("#btnadd").click(function(){
+		resetInput();
+	});
 </script>

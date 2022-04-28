@@ -82,7 +82,7 @@ class Asset extends CI_Model
 	}
 
 	public function getAssetbyKeyAndCategory($key, $kategori) {
-		$query = $this->db->query("select * from asset where kode_asset='$key' and fk_kategori='$kategori'"); 
+		$query = $this->db->query("select * from asset where kode_asset='$key' and fk_kategori='$kategori' and is_deleted=0"); 
 		return $query->result();
 	}
 
@@ -1135,17 +1135,7 @@ class Asset extends CI_Model
 			//
 			$now = date('Y-m-d');
 			//insert data ke tabel transaksi
-			$values = array(
-				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
-				'FK_ASSET' => $data['kode'],
-				'TGL_TRANSAKSI' => $now,
-				'USER_TRANSAKSI' => $data["user"],
-				'AKTIVITAS_TRANSAKSI' => "peminjaman",
-				'KETERANGAN_1' => 0,
-				'TGL_PINJAM' => $data["tanggal"],
-			);
-
-			$this->db->insert('transaksi', $values);
+			
 			//
 			if (isset($_FILES["file"])){
 				// upload gambar ke dalam folder CI nya
@@ -1153,18 +1143,18 @@ class Asset extends CI_Model
 				$config['upload_path'] = './assets/files/peminjaman';
 				$config['allowed_types'] = '*';
 
-				$path = $_FILES['gambar']['name'];
+				$path = $_FILES['file']['name'];
 				$ext = pathinfo($path, PATHINFO_EXTENSION);
 				
 				//var_dump(str_pad($ctr, 3, "0", STR_PAD_LEFT)." - ".$ctr);
 
-				$filename = "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT).'.'.$ext;
+				$filename = "PINJAM_".str_pad($newkode, 7, "0", STR_PAD_LEFT).'.'.$ext;
 				$config['file_name'] = $filename;
 	
 				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
 				
-				if(!$this->upload->do_upload('gambar'))
+				if(!$this->upload->do_upload('file'))
 				{  
 					echo $this->upload->display_errors();  
 				}  
@@ -1174,14 +1164,55 @@ class Asset extends CI_Model
 				}
 				//
 
-
-				//insert data gambar ke database
+				//insert data transaksi ke database
 				$values = array(
-					'KODE_GAMBAR' => $filename,
-					'FK_ASSET' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+					'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
+					'FK_ASSET' => $data['kode'],
+					'TGL_TRANSAKSI' => $now,
+					'USER_TRANSAKSI' => $data["user"],
+					'AKTIVITAS_TRANSAKSI' => 'peminjaman',
+					'KETERANGAN_1' => 'serah terima aset ke user '.$data["nik"],
+					'KETERANGAN_2' => $data['nik'],
+					'KETERANGAN_3' => $filename,
+					'TGL_PINJAM' => $data["tanggal"],
 				);
-				$this->db->insert('gambar', $values);
+	
+				$this->db->insert('transaksi', $values);
 				//
+			}
+
+			$kode = $data["kode"];
+			if ($data["kategori"] == 4){
+				$asrama = $this->db->query("select * from asset where kode_asset='$kode'")->result();
+				//mengganti status jika kapasitas sudah full
+				$status = 0;
+				if ((int)$asrama[0]->INFO_3 == (int)$asrama[0]->INFO_4 + 1){
+					$status = 1;
+				}
+				//menambah jumlah penghuni asrama
+				$values = array(
+					'STATUS' => $status,
+					'INFO_4' => (int)$asrama[0]->INFO_4 + 1,
+				);
+				$this->db->where('KODE_ASSET', $data['kode']);
+				$this->db->update('asset', $values);
+
+				//memasukkan fk_asrama di tabel user
+				$values = array(
+					'FK_ASSET' => $data["kode"],
+				);
+
+				$this->db->where('NIK', $data['nik']);
+				$this->db->update('user', $values);
+				//
+			}
+			else{
+				$values = array(
+					'STATUS' => 1,
+					'FK_USER' => $data['nik'],
+				);
+				$this->db->where('KODE_ASSET', $data['kode']);
+				$this->db->update('asset', $values);
 			}
 
 		if ($this->db->trans_status() === FALSE)
@@ -1191,24 +1222,7 @@ class Asset extends CI_Model
 		}
 		else{
 			$this->db->trans_commit();
-			$kode = $data["kode"];
-			if ($data["kategori"] == 4){
-				$asrama = $this->db->query("select * from asset where kode_asset='$kode'")->result(); 
-				
-				//ganti data di tabel asset
-				$status = 0;
-				if ((int)$asrama[0]->INFO_3 == (int)$asrama[0]->INFO_4 + 1){
-					$status = 1;
-				}
-				$values = array(
-					'STATUS' => $status,
-					'INFO_4' => (int)$asrama[0]->INFO_4 + 1,
-				);
-				$this->db->where('KODE_ASSET', $data['kode']);
-				$this->db->update('asset', $values);
-				//
-			}
-			$this->db->insert('transaksi', $values);
+			
 			return 1;
 		}
 	}

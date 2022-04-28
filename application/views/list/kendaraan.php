@@ -50,6 +50,16 @@
 							<tbody>
 									<?php 
 										for ($i=0; $i < count($listkendaraan); $i++) {
+											$namapeminjam = "";
+											$departemenpeminjam = "";
+											if ($listkendaraan[$i]->FK_USER != NULL) { 
+												foreach ($user as $item){
+													if ($item->NIK == $listkendaraan[$i]->FK_USER){
+														$namapeminjam = $item->NAMA;
+														$departemenpeminjam = $item->DEPARTEMEN;
+													}
+												}
+								  			}
 									?>
 									    	<tr>
 												<td><?= $listkendaraan[$i]->NAMA_ASSET?></td>
@@ -57,8 +67,8 @@
 												<td><?= $listkendaraan[$i]->INFO_1?></td>
 												<td><?= $listkendaraan[$i]->INFO_2?></td>
 												<td><?= date('d F Y', strtotime($listkendaraan[$i]->TGL_PENGADAAN))?></td>
-												<td><!-- JIKA ADA YG PINJAM, AMBIL NAMA USER --></td>
-												<td><!-- JIKA ADA YG PINJAM, AMBIL DEPARTEMEN USER --></td>
+												<td><?= $namapeminjam ?></td>
+												<td><?= $departemenpeminjam ?></td>
 												<td>
 													<?php 
 													if ($listkendaraan[$i]->IS_DELETED == 1){

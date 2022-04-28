@@ -102,6 +102,7 @@ class Master extends CI_Controller
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listrumah'] = $this->Asset->getRumahDinas();
+			$data['user'] = $this->User->getUser();
 			$this->load->view('list/rumahdinas', $data);
 		}
 		else{
@@ -116,6 +117,7 @@ class Master extends CI_Controller
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listgedung'] = $this->Asset->getGedung();
+			$data['user'] = $this->User->getUser();
 			$this->load->view('list/gedung', $data);
 		}
 		else{
@@ -130,6 +132,7 @@ class Master extends CI_Controller
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listkendaraan'] = $this->Asset->getKendaraan();
+			$data['user'] = $this->User->getUser();
 			$this->load->view('list/kendaraan', $data);
 		}
 		else{
@@ -145,6 +148,7 @@ class Master extends CI_Controller
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listAsrama'] = $this->Asset->getAsrama();
 			$data['listJumlahPenghuni'] = $this->User->getJumlahPenghuni($data['listAsrama']);
+			$data['user'] = $this->User->getUser();
 			$this->load->view('list/asrama', $data);
 		}
 		else{
@@ -160,6 +164,7 @@ class Master extends CI_Controller
 		if ($this->session->has_userdata('login')){
 			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
 			$data['listFasilitas'] = $this->Asset->getFasilitas();
+			$data['user'] = $this->User->getUser();
 			$this->load->view('list/fasilitas', $data);
 		}
 		else{

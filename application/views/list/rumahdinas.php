@@ -49,14 +49,25 @@
 							<tbody>
 									<?php 
 										for ($i=0; $i < count($listrumah); $i++) {
+											$namapeminjam = "";
+											$departemenpeminjam = "";
+											if ($listrumah[$i]->FK_USER != NULL) { 
+												foreach ($user as $item){
+													if ($item->NIK == $listrumah[$i]->FK_USER){
+														$namapeminjam = $item->NAMA;
+														$departemenpeminjam = $item->DEPARTEMEN;
+													}
+												}
+								  			}
 									?>
 									    	<tr>
 											<td><?= $listrumah[$i]->NAMA_ASSET?></td>
 											<td><?= $listrumah[$i]->KODE_ASSET?></td>
 											<td><?= $listrumah[$i]->INFO_1?></td>
 											<td><?= date('d F Y', strtotime($listrumah[$i]->TGL_PENGADAAN))?></td>
-											<td><!-- JIKA ADA YG PINJAM, AMBIL NAMA USER --></td>
-											<td><!-- JIKA ADA YG PINJAM, AMBIL DEPARTEMEN USER --></td>
+											
+											<td><?= $namapeminjam ?></td>
+											<td><?= $departemenpeminjam ?></td>
 											<td>
 												<?php 
 												if ($listrumah[$i]->IS_DELETED == 1){
