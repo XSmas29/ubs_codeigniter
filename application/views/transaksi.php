@@ -229,13 +229,33 @@
 					<h5 class="modal-title">Success</h5>
 				</div>
 				<div class="modal-body text-center">
-					<p id="modalsuccessbody">Sukses meminjamkan barang!</p>
+					<p id="modalsuccessbody"></p>
 				</div>
 				<div class="modal-footer">
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="modal" tabindex="-1" id="modalconfirm">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Konfirmasi</h5>
+					<input type="hidden" name="kodepengembalian" id="kodepengembalian">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Yakin ingin mengembalikan aset ini?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" onclick="PengembalianAset()">Confirm</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 
 </html>
@@ -377,6 +397,7 @@
 				let message = response;
 				console.log(message);
 				if (message["message"] == 1){
+					$("#modalsuccessbody").html("Sukses meminjamkan aset!");
 					$('#modalsuccess').show();
 					setTimeout(function(){
 						window.location.reload();
@@ -562,8 +583,8 @@
                         <td> ${element['NAMA_ASSET']} </td>
                         <td> ${element['KODE_ASSET']} </td>
                         <td> ${element['INFO_1']} </td>
-                        <td> ${element['KETERANGAN_3']} </td>
-                        <td><button class="btn btn-success">Kembalikan</button></td>
+                        <td><a href='<?php echo base_url(); ?>assets/files/peminjaman/${element['KETERANGAN_3']}'><img src='<?php echo base_url(); ?>assets/img/icons/document.png' width=50></a></td>
+                        <td><button data-bs-toggle="modal" href="#modalconfirm" class="btn btn-outline-dark" onclick="setKodePengembalian(this)" value="${element['KODE_TRANSAKSI']}">Kembalikan</button></td>
                     </tr>`;
                     $("#bodypeminjaman").append(tr);
 					let row = [element['NIK'], element['NAMA'], element['DEPARTEMEN'], kategori, element['NAMA_ASSET'], element['KODE_ASSET'], element['INFO_1'], element['KETERANGAN_3']];
@@ -575,6 +596,41 @@
 						responsive: false
 					} 
 				);
+				raiseErrors(message);
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+	}
+
+	function setKodePengembalian(btn){
+		let kode = $(btn).attr('value');
+		$('#kodepengembalian').val(kode);
+	}
+
+	function PengembalianAset(){
+		let form_data = new FormData();
+		form_data.append("kodetrans", $("#kodepengembalian").val());
+
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Transaksi/PengembalianAset",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			dataType: 'json',
+			success: function(response){
+				let message = response;
+				console.log(message);
+				if (message["message"] == 1){
+					$("#modalsuccessbody").html("Sukses mengembalikan aset!");
+					$('#modalsuccess').show();
+					setTimeout(function(){
+						window.location.reload();
+					},1000);
+				}
+				
 				raiseErrors(message);
 			}, error: function(xhr, status, error) {
 				console.log(xhr.responseText);

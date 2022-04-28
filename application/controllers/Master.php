@@ -515,6 +515,7 @@ class Master extends CI_Controller
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
 		$data['nama'] = $this->input->post('nama');
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['lokasi'] = $this->input->post('lokasi');
 		$data['tanggal'] = $this->input->post('tanggal');
@@ -562,6 +563,7 @@ class Master extends CI_Controller
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
 		$data['nama'] = $this->input->post('nama');
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['lokasi'] = $this->input->post('lokasi');
 		$data['tanggal'] = $this->input->post('tanggal');
@@ -597,6 +599,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['tanggal'] = $this->input->post('tanggalrepair');
 		$data['kronologi'] = $this->input->post('kronologirepair');
@@ -626,6 +629,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['tanggal'] = $this->input->post('tanggaldelete');
 		$data['alasan'] = $this->input->post('alasandelete');
@@ -651,6 +655,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['asrama'] = $this->input->post('asrama');
 		$data['lantai'] = $this->input->post('lantai');
 		$data['kamar'] = $this->input->post('kamar');
@@ -681,6 +686,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['asrama'] = $this->input->post('asrama');
 		$data['kodelama'] = $this->input->post('kodelama');
 		$data['lantai'] = $this->input->post('lantai');
@@ -715,6 +721,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['nama'] = $this->input->post('nama');
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['lokasi'] = $this->input->post('lokasi');
@@ -750,6 +757,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['nama'] = $this->input->post('nama');
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['lokasi'] = $this->input->post('lokasi');
@@ -785,6 +793,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['gedung'] = $this->input->post('gedung');
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['imb'] = $this->input->post('imb');
@@ -820,6 +829,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['gedung'] = $this->input->post('gedung');
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['imb'] = $this->input->post('imb');
@@ -860,6 +870,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['nama'] = $this->input->post('nama');
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['lokasi'] = $this->input->post('lokasi');
@@ -911,6 +922,7 @@ class Master extends CI_Controller
 
 		$this->form_validation->set_message('required', ' {field} harus diisi!&nbsp');
 
+		$data['user'] = $this->User->getUserLogin($this->session->userdata('login'))->NAMA;
 		$data['nama'] = $this->input->post('nama');
 		$data['kode'] = $this->input->post('kodeaset');
 		$data['lokasi'] = $this->input->post('lokasi');

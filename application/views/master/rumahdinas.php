@@ -137,11 +137,11 @@
 						</div>
 						<div class="col-4">
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="kamar" id="kamar" placeholder="Kamar Tidur"/>
+								<input type="number" class="form__field" name="kamar" id="kamar" placeholder="Kamar Tidur" min="0"/>
 								<label class="form__label">Kamar Tidur<small class="form-error" id="error-kamar"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="toilet" id="toilet" placeholder="Kamar Mandi"/>
+								<input type="number" class="form__field" name="toilet" id="toilet" placeholder="Kamar Mandi" min="0"/>
 								<label class="form__label">Kamar Mandi<small class="form-error" id="error-toilet"></small></label>
 							</div>
 							<div class="form__group field mb-5">

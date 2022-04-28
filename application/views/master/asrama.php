@@ -116,11 +116,11 @@
 								<label class="form__label">Asrama<small class="form-error" id="error-asrama"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="number" class="form__field" name="lantai" id="lantai" placeholder="Lantai"/>
+								<input type="number" class="form__field" name="lantai" id="lantai" placeholder="Lantai" min="1"/>
 								<label class="form__label">Lantai<small class="form-error" id="error-lantai"></small></label>
 							</div>
 							<div class="form__group field mb-5">
-								<input type="number" class="form__field" name="kamar" id="kamar" placeholder="Kamar"/>
+								<input type="number" class="form__field" name="kamar" id="kamar" placeholder="Kamar" min="1"/>
 								<label class="form__label">Kamar<small class="form-error" id="error-kamar"></small></label>
 							</div>
 							<div class="form__group field mb-5">

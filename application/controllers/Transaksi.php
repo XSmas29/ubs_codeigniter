@@ -48,7 +48,7 @@ class Transaksi extends CI_Controller
 			$this->form_validation->set_rules('hiddenfile', 'File', 'required');
 		}
 		if ($this->input->post('kategori') == 4){
-			$this->form_validation->set_rules('nik', 'NIK', 'required|callback_checkuser');
+			$this->form_validation->set_rules('nik', 'NIK', 'required|callback_checkuser['.$this->input->post('nik').']');
 		}
 
 		$this->form_validation->set_message('required', '&nbsp{field} harus diisi!&nbsp');
@@ -72,13 +72,13 @@ class Transaksi extends CI_Controller
 		}
 	}
 
-	public function checkUser(){
+	public function checkUser($nik){
 		if (get_cookie("login") != NULL){
 			$this->session->set_userdata('login', get_cookie("login"));
 		}
 		if ($this->session->has_userdata('login')){
-			$data["login"] = $this->User->getUserLogin($this->session->userdata('login'));
-			if ($data["login"]->FK_ASSET == NULL){
+			$data["user"] = $this->User->getUserbyKey($nik)[0];
+			if ($data["user"]->FK_ASSET == NULL){
 				return true;
 				
 			}
@@ -89,6 +89,25 @@ class Transaksi extends CI_Controller
 		}
 		else{
 			redirect(site_url("auth/login"));
+		}
+	}
+
+	public function PengembalianAset(){
+		$this->form_validation->set_rules('kodetrans', 'Kode transaksi', 'required');
+
+		$this->form_validation->set_message('required', '&nbsp{field} harus diisi!&nbsp');
+
+		$data['kode'] = $this->input->post('kodetrans');
+		
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$json_response = $this->form_validation->error_array();
+			echo json_encode($json_response);
+		}
+		else
+		{
+			$response["message"] = $this->Asset->PengembalianAset($data);
+			echo json_encode($response);
 		}
 	}
 

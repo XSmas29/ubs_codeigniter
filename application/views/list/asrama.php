@@ -337,56 +337,109 @@
 				console.log(data);
 				if (data["transaksi"][0].AKTIVITAS_TRANSAKSI.toLowerCase() == "perbaikan"){
 					$("#detailtitle").html("Detail Perbaikan");
-					$("#bodymodaldetail").html(
-						"<div class='row mt-2'>" +
-							"<div class='col-7'>" +
-								"<div class='row'>" +
-									"<div class='col-6'>" +
-										"<div class='fw-bold fs-5 mt-3'>Tanggal Kejadian</div>" +
+					var fileExt = data["gambar"][0].KODE_GAMBAR.split('.').pop();
+					if (fileExt == "pdf" || fileExt == "docx" || fileExt == "doc"){
+						$("#bodymodaldetail").html(
+							"<div class='row mt-2'>" +
+								"<div class='col-7'>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>Tanggal Kejadian</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3'>" + data["transaksi"][0].TGL_TRANSAKSI + "</div>" +
+										"</div>" +
 									"</div>" +
-									"<div class='col-6'>" +
-										"<div class='fs-5 mt-3'>" + data["transaksi"][0].TGL_TRANSAKSI + "</div>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>Kronologi</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_1 + "</div>" +
+										"</div>" +
+									"</div>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>Kondisi Aset</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_2 + "</div>" +
+										"</div>" +
+									"</div>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>Action Plan</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_3 + "</div>" +
+										"</div>" +
+									"</div>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>RAB</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3 mb-3'>" + data["transaksi"][0].KETERANGAN_4 + "</div>" +
+										"</div>" +
 									"</div>" +
 								"</div>" +
-								"<div class='row'>" +
-									"<div class='col-6'>" +
-										"<div class='fw-bold fs-5 mt-3'>Kronologi</div>" +
+								"<div class='col-5 d-flex align-items-center'>" +
+									"<a class='text-center' href='<?php echo base_url();?>assets/files/repair/" + data["gambar"][0].KODE_GAMBAR + "'><img src='<?php echo base_url(); ?>assets/img/icons/document.png' width='50%'></a>" + 
+								"</div>" +
+							"</div>"
+						);
+					}
+					else{
+						$("#bodymodaldetail").html(
+							"<div class='row mt-2'>" +
+								"<div class='col-7'>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>Tanggal Kejadian</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3'>" + data["transaksi"][0].TGL_TRANSAKSI + "</div>" +
+										"</div>" +
 									"</div>" +
-									"<div class='col-6'>" +
-										"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_1 + "</div>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>Kronologi</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_1 + "</div>" +
+										"</div>" +
+									"</div>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>Kondisi Aset</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_2 + "</div>" +
+										"</div>" +
+									"</div>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>Action Plan</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_3 + "</div>" +
+										"</div>" +
+									"</div>" +
+									"<div class='row'>" +
+										"<div class='col-6'>" +
+											"<div class='fw-bold fs-5 mt-3'>RAB</div>" +
+										"</div>" +
+										"<div class='col-6'>" +
+											"<div class='fs-5 mt-3 mb-3'>" + data["transaksi"][0].KETERANGAN_4 + "</div>" +
+										"</div>" +
 									"</div>" +
 								"</div>" +
-								"<div class='row'>" +
-									"<div class='col-6'>" +
-										"<div class='fw-bold fs-5 mt-3'>Kondisi Aset</div>" +
-									"</div>" +
-									"<div class='col-6'>" +
-										"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_2 + "</div>" +
-									"</div>" +
+								"<div class='col-5 d-flex align-items-center'>" +
+									"<img src='<?php echo base_url(); ?>assets/files/repair/" + data["gambar"][0].KODE_GAMBAR + "' width='100%'>" + 
 								"</div>" +
-								"<div class='row'>" +
-									"<div class='col-6'>" +
-										"<div class='fw-bold fs-5 mt-3'>Action Plan</div>" +
-									"</div>" +
-									"<div class='col-6'>" +
-										"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_3 + "</div>" +
-									"</div>" +
-								"</div>" +
-								"<div class='row'>" +
-									"<div class='col-6'>" +
-										"<div class='fw-bold fs-5 mt-3'>RAB</div>" +
-									"</div>" +
-									"<div class='col-6'>" +
-										"<div class='fs-5 mt-3 mb-3'>" + data["transaksi"][0].KETERANGAN_4 + "</div>" +
-									"</div>" +
-								"</div>" +
-							"</div>" +
-							"<div class='col-5 d-flex align-items-center'>" +
-								"<img src='<?php echo base_url(); ?>assets/files/repair/" + data["gambar"][0].KODE_GAMBAR + "' width='100%'>" + 
-							"</div>" +
-						"</div>"
-						
-					);
+							"</div>"
+						);
+					}
 				}
 				else{
 					$("#detailtitle").html("Detail Penghapusan");

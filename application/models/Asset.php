@@ -231,7 +231,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $data['tanggal'],
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "pengadaan",
 				'KETERANGAN_1' => "pengadaan rumah dinas ".substr($data['kode'], -3),
 			);
@@ -348,7 +348,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $date,
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "perubahan",
 				'KETERANGAN_1' => "perubahan data rumah dinas ".substr($data['kode'], -3),
 			);
@@ -371,7 +371,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $date,
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "perbaikan",
 				'KETERANGAN_1' => $data['kronologi'],
 				'KETERANGAN_2' => $data['kondisi'],
@@ -443,7 +443,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $date,
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "penghapusan",
 				'KETERANGAN_1' => $data['alasan']
 			);
@@ -519,7 +519,7 @@ class Asset extends CI_Model
 					'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 					'FK_ASSET' => $data['kode'],
 					'TGL_TRANSAKSI' => $data['tanggal'],
-					'USER_TRANSAKSI' => "SYSTEM ADMIN",
+					'USER_TRANSAKSI' => $data['user'],
 					'AKTIVITAS_TRANSAKSI' => "pengadaan",
 					'KETERANGAN_1' => "pengadaan asrama ".ucwords(strtolower($data['asrama']))." lantai ".$data["lantai"]." kamar no ".$data["kamar"],
 				);
@@ -583,7 +583,7 @@ class Asset extends CI_Model
 					'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 					'FK_ASSET' => $data['kodebaru'],
 					'TGL_TRANSAKSI' => $data['tanggal'],
-					'USER_TRANSAKSI' => "SYSTEM ADMIN",
+					'USER_TRANSAKSI' => $data['user'],
 					'AKTIVITAS_TRANSAKSI' => "perubahan",
 					'KETERANGAN_1' => "perubahan asrama ".ucwords(strtolower($data['asrama']))." lantai ".$data["lantai"]." kamar no ".$data["kamar"],
 				);
@@ -679,7 +679,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $data['tanggal'],
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "pengadaan",
 				'KETERANGAN_1' => "pengadaan fasilitas ".substr($data['kode'], -3),
 			);
@@ -778,7 +778,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $date,
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "perubahan",
 				'KETERANGAN_1' => "perubahan data fasilitas ".substr($data['kode'], -3),
 			);
@@ -834,7 +834,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $data['tanggal'],
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "pengadaan",
 				'KETERANGAN_1' => "pengadaan gedung ".substr($data['kode'], -3),
 			);
@@ -895,7 +895,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $data['tanggal'],
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "perubahan",
 				'KETERANGAN_1' => "perubahan gedung ".substr($data['kode'], -3),
 			);
@@ -992,7 +992,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $data['tanggal'],
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "pengadaan",
 				'KETERANGAN_1' => "pengadaan kendaraan ".substr($data['kode'], -3),
 			);
@@ -1097,7 +1097,7 @@ class Asset extends CI_Model
 				'KODE_TRANSAKSI' => "TRANS_".str_pad($newkode, 7, "0", STR_PAD_LEFT),
 				'FK_ASSET' => $data['kode'],
 				'TGL_TRANSAKSI' => $date,
-				'USER_TRANSAKSI' => "SYSTEM ADMIN",
+				'USER_TRANSAKSI' => $data['user'],
 				'AKTIVITAS_TRANSAKSI' => "perubahan",
 				'KETERANGAN_1' => "perubahan data kendaraan ".substr($data['kode'], -3),
 			);
@@ -1228,7 +1228,7 @@ class Asset extends CI_Model
 	}
 
 	function searchPenggunaAset($data){
-		$query = 'SELECT * FROM transaksi, asset, user where transaksi.FK_ASSET=asset.KODE_ASSET AND user.NIK=transaksi.KETERANGAN_2 AND transaksi.AKTIVITAS_TRANSAKSI="peminjaman"';
+		$query = 'SELECT * FROM transaksi, asset, user where transaksi.FK_ASSET=asset.KODE_ASSET AND user.NIK=transaksi.KETERANGAN_2 AND transaksi.AKTIVITAS_TRANSAKSI="peminjaman" AND transaksi.TGL_KEMBALI IS NULL';
 		if (!empty($data['nik'])) {
 			$query .= " AND transaksi.KETERANGAN_2 = '" . $data['nik'] . "'";
 		}
@@ -1241,6 +1241,48 @@ class Asset extends CI_Model
 		
 		$result = $this->db->query($query);
 		return $result->result();
+	}
+
+	function pengembalianAset($data){
+		$trans = $this->db->query("select * from transaksi where kode_transaksi='".$data["kode"]."'")->result()[0];
+
+		$values = array(
+			'TGL_KEMBALI' => date('Y-m-d'),
+		);
+
+		$this->db->where('KODE_TRANSAKSI', $data['kode']);
+		$this->db->update('transaksi', $values);
+
+		$asset = $this->db->query("select * from asset where kode_asset='".$trans->FK_ASSET."'")->result()[0];
+
+		if ($asset->FK_KATEGORI == 4){
+			$values = array(
+				'STATUS' => 0,
+				'INFO_4' => (int)$asset->INFO_4 - 1,
+			);
+	
+			$this->db->where('KODE_ASSET', $trans->FK_ASSET);
+			$this->db->update('asset', $values);
+
+			$user = $this->db->query("select * from user where NIK='".$trans->KETERANGAN_2."'")->result()[0];
+
+			$values = array(
+				'FK_ASSET' => NULL,
+			);
+	
+			$this->db->where('NIK', $trans->KETERANGAN_2);
+			$this->db->update('user', $values);
+		}
+		else{
+			$values = array(
+				'STATUS' => 0,
+				'FK_USER' => NULL,
+			);
+	
+			$this->db->where('KODE_ASSET', $trans->FK_ASSET);
+			$this->db->update('asset', $values);
+		}
+		return 1;
 	}
 }
 ?>
