@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Master | Laporan Aset</title>
+	<title>Master | Peminjaman Aset</title>
 </head>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/master-asset.css">
 <style>
@@ -116,18 +116,21 @@
 								</div>
 								<hr>
 								<div>
-									<table id="tabellaporan" class="table table-striped table-bordered rounded text-center" hidden>
+									<table id="tabelpeminjaman" class="table table-striped table-bordered rounded text-center" hidden>
 										<thead>
 											<tr>
-												<th>Tanggal</th>
+												<th>NIK</th>
+												<th>Nama</th>
+												<th>Departemen</th>
 												<th>Kategori</th>
-												<th>Aktivitas</th>
 												<th>Nama Aset</th>
+												<th>Kode Aset</th>
 												<th>Lokasi</th>
-												<th>Keterangan</th>
+												<th>File</th>
+												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody id="bodyLaporan">
+										<tbody id="bodypeminjaman">
 												
 										</tbody>
 									</table>
@@ -512,4 +515,70 @@
 	$("#btnadd").click(function(){
 		resetInput();
 	});
+
+	function searchPenggunaAset(){
+		$("#tabelpeminjaman").removeAttr('hidden');
+		$('#tabelpeminjaman').DataTable().clear().destroy();
+		let form_data = new FormData();
+		form_data.append("nik", $("#penggunanik").val());
+		form_data.append("kategori", $("#penggunakategori").val());
+		form_data.append("aset", $("#penggunaaset").val());
+
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/searchPenggunaAset",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			dataType: 'json',
+			success: function(response){
+				let message = response;
+				console.log(message);
+				datapeminjaman = [];
+				$("#bodypeminjaman").html("");
+				response.peminjaman.forEach(element => {
+					kategori = "";
+					if (element['FK_KATEGORI'] == 1){
+						kategori = "Rumah Dinas";
+					}
+					else if (element['FK_KATEGORI'] == 2){
+						kategori = "Gedung";
+					}
+					else if (element['FK_KATEGORI'] == 3){
+						kategori = "Kendaraan";
+					}
+					else if (element['FK_KATEGORI'] == 4){
+						kategori = "Asrama";
+					}
+					else if (element['FK_KATEGORI'] == 5){
+						kategori = "Fasilitas";
+					}
+                    let tr = `<tr>
+                        <td> ${element['NIK']} </td>
+                        <td> ${element['NAMA']} </td>
+                        <td> ${element['DEPARTEMEN']} </td>
+                        <td> ${kategori} </td>
+                        <td> ${element['NAMA_ASSET']} </td>
+                        <td> ${element['KODE_ASSET']} </td>
+                        <td> ${element['INFO_1']} </td>
+                        <td> ${element['KETERANGAN_3']} </td>
+                        <td><button class="btn btn-success">Kembalikan</button></td>
+                    </tr>`;
+                    $("#bodypeminjaman").append(tr);
+					let row = [element['NIK'], element['NAMA'], element['DEPARTEMEN'], kategori, element['NAMA_ASSET'], element['KODE_ASSET'], element['INFO_1'], element['KETERANGAN_3']];
+					datapeminjaman.push(row);
+                });
+				
+				$('#tabelpeminjaman').DataTable( 
+					{
+						responsive: false
+					} 
+				);
+				raiseErrors(message);
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+	}
 </script>

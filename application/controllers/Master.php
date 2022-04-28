@@ -189,6 +189,14 @@ class Master extends CI_Controller
 		echo json_encode($data);
 	}
 
+	public function searchPenggunaAset(){
+		$filter["nik"] = $this->input->post('nik');
+		$filter["kategori"] = $this->input->post('kategori');
+		$filter["aset"] = $this->input->post('aset');
+		$data["peminjaman"] = $this->Asset->searchPenggunaAset($filter);
+		echo json_encode($data);
+	}
+
 	public function detailUser()
 	{
 		$key = $this->input->post('key');

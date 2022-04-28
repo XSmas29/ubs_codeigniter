@@ -69,7 +69,6 @@
 											<option value="Perubahan">Perubahan</option>
 											<option value="Perbaikan">Perbaikan</option>
 											<option value="Peminjaman">Peminjaman</option>
-											<option value="Pengembalian">Pengembalian</option>
 										</select>
 									</div>
 								</div>

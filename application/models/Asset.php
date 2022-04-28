@@ -1226,5 +1226,21 @@ class Asset extends CI_Model
 			return 1;
 		}
 	}
+
+	function searchPenggunaAset($data){
+		$query = 'SELECT * FROM transaksi, asset, user where transaksi.FK_ASSET=asset.KODE_ASSET AND user.NIK=transaksi.KETERANGAN_2 AND transaksi.AKTIVITAS_TRANSAKSI="peminjaman"';
+		if (!empty($data['nik'])) {
+			$query .= " AND transaksi.KETERANGAN_2 = '" . $data['nik'] . "'";
+		}
+		if (!empty($data['kategori'])) {
+			$query .= " AND asset.FK_KATEGORI = '" . $data['kategori'] . "'";
+		}
+		if (!empty($data['aset'])) {
+			$query .= " AND asset.NAMA_ASSET LIKE '%" . $data['aset'] . "%'";
+		}
+		
+		$result = $this->db->query($query);
+		return $result->result();
+	}
 }
 ?>
