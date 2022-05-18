@@ -157,13 +157,10 @@
 								<select class="form__field" name="kategoripeminjaman" id="kategoripeminjaman" placeholder="Kategori">
 									<option value="" selected></option>
 									<?php 
-										$akses = [$login->AKSES_RUMAH, $login->AKSES_GEDUNG, $login->AKSES_KENDARAAN, $login->AKSES_ASRAMA, $login->AKSES_FASILITAS];
 										for ($i=0; $i < count($listDataKategori); $i++) {
-											if ($akses[$i] >= 2){
 									?>
 										<option value='<?= $listDataKategori[$i]->KODE_KATEGORI ?>'> <?= $listDataKategori[$i]->NAMA_KATEGORI ?></option>
 									<?php
-											}
 										}
 									?>
 								</select>
@@ -637,4 +634,34 @@
 			},
 		});
 	}
+
+	$('#kategoripeminjaman').on('change', function() {
+		$("#error-kategoripeminjaman").html("");
+		if (this.value != ""){
+			let form_data = new FormData();
+			form_data.append("kategori", this.value);
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url(); ?>"+"/Transaksi/CekHakAkses",
+				data: form_data,
+				cache: false,
+				processData: false,
+				contentType: false,
+				dataType: 'json',
+				success: function(response){
+					let message = response;
+					console.log(message);
+					if (message["message"] == -1){
+						$("#error-kategoripeminjaman").html("");
+						$("#error-kategoripeminjaman").html("&nbspAkses ditolak!&nbsp").css("opacity", 1);
+						$('#kategoripeminjaman').val("");
+					}
+				}, error: function(xhr, status, error) {
+					console.log(xhr.responseText);
+				},
+			});
+		}
+		
+	});
+
 </script>

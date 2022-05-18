@@ -18,11 +18,6 @@ class Auth extends CI_Controller
 
 
 	public function login(){
-
-		// delete_cookie("login");
-		// unset($_SESSION['login']);
-		// var_dump($this->session->has_userdata('login'));
-		// die();
 		$this->form_validation->set_rules('nik', 'NIK', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 

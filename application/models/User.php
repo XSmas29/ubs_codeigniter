@@ -149,4 +149,20 @@ class User extends CI_Model
 		$query = $this->db->query("select * from user where NIK='$key'")->result()[0];
 		return $query;
 	}
+
+	public function cekHakAkses($key, $data){
+		$query = $this->db->query("select akses_rumah, akses_gedung, akses_kendaraan, akses_asrama, akses_fasilitas from user where NIK='$key'")->result()[0];
+		$hak = [];
+		$kategori = (int)$data["kategori"] - 1;
+		foreach ($query as $attr){
+			$hak[] = $attr;
+		}
+		if ($hak[(int)$kategori] < 2){
+			return -1;
+		}
+		else{
+			return 1;
+		}
+		return $query;
+	}
 }

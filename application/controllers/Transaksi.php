@@ -111,6 +111,12 @@ class Transaksi extends CI_Controller
 		}
 	}
 
+	public function cekHakAkses(){
+		$data['kategori'] = $this->input->post('kategori');
+		$response["message"] = $this->User->cekHakAkses($this->session->userdata('login'), $data);
+		echo json_encode($response);
+	}
+
 	// public function searchPenggunaAset(){
 	// 	$data['nik'] = $this->input->post('nama');
 	// 	$response["message"] = $this->Asset->searchPenggunaAset($data);
