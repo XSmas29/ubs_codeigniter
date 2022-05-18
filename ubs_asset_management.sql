@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2022 at 06:47 AM
+-- Generation Time: May 18, 2022 at 06:49 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -54,12 +54,12 @@ CREATE TABLE `asset` (
 --
 
 INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `FK_USER`, `INFO_1`, `INFO_2`, `INFO_3`, `INFO_4`, `INFO_5`, `INFO_6`, `INFO_7`, `INFO_8`, `INFO_9`, `TGL_PENGADAAN`, `IS_DELETED`) VALUES
-('01/03/2019/A/UBS/001/1/15', 4, 'Glory Lama', 0, NULL, '1', '15', '6', '5', NULL, NULL, NULL, NULL, NULL, '2019-03-01', 0),
+('01/03/2019/A/UBS/001/1/15', 4, 'Glory Lama', 0, NULL, '1', '15', '6', '4', NULL, NULL, NULL, NULL, NULL, '2019-03-01', 0),
 ('01/03/2022/K/UBS/002', 3, 'Honda Vario 125', 0, NULL, 'Material', 'bergerak', 'bekas', 'Motor', 'L 3845 GD', 'MH21896433', NULL, NULL, NULL, '2019-03-01', 0),
 ('02/03/2022/A/UBS/001/1/16', 4, 'Glory Lama', 0, NULL, '1', '16', '5', '0', NULL, NULL, NULL, NULL, NULL, '2019-03-02', 0),
 ('02/04/2022/R/UBS/008', 1, 'rumah dinas 10 X 20', 0, NULL, 'jalan baru no 2', 'tetap', 'masih baru', '10', '20', 'ada', NULL, NULL, NULL, '2022-04-02', 0),
 ('03/04/2022/A/UBS/001/1/12', 4, 'Glory Lama', 0, NULL, '1', '12', '2', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
-('03/04/2022/A/UBS/001/1/2', 4, 'Glory Lama', 0, NULL, '1', '2', '3', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/1/2', 4, 'Glory Lama', 0, NULL, '1', '2', '3', '1', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
 ('03/04/2022/A/UBS/001/1/3', 4, 'Glory Lama', 0, NULL, '1', '3', '4', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
 ('03/04/2022/A/UBS/001/1/4', 4, 'Glory Lama', 0, NULL, '1', '4', '4', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
 ('03/04/2022/A/UBS/001/1/5', 4, 'Glory Lama', 0, NULL, '1', '5', '2', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
@@ -88,7 +88,7 @@ INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `FK_US
 ('28/04/2022/A/UBS/003/1/1', 4, 'A', 0, NULL, '1', '1', '6', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-28', 0),
 ('28/04/2022/F/UBS/004', 5, 'Kamera Nikon', 0, NULL, 'Office', 'bergerak', 'bekas', 'sampai 2023', NULL, NULL, NULL, NULL, NULL, '2022-04-28', 0),
 ('28/04/2022/G/UBS/004', 2, 'Gedung A Lt. 3', 0, NULL, 'Office', 'tetap', 'Kantor', 'Gedung A', '9572/IMB/E/2017', NULL, NULL, NULL, NULL, '2022-04-28', 0),
-('28/04/2022/K/UBS/004', 3, 'Yamaha Fazzio', 0, NULL, 'Office HRD', 'bergerak', 'Baru', 'Motor', 'L 2424 BD', '2HXK4USHF', '2023-06-28', '2024-06-08', '123123', '2022-04-28', 0),
+('28/04/2022/K/UBS/004', 3, 'Yamaha Fazzio', 1, '000001', 'Office HRD', 'bergerak', 'Baru', 'Motor', 'L 2424 BD', '2HXK4USHF', '2023-06-28', '2024-06-08', '123123', '2022-04-28', 0),
 ('28/04/2022/R/UBS/011', 1, 'Rumah Dinas 20 x 20', 0, NULL, 'jalan semangka no 20', 'tetap', 'baru', '5', '5', 'ada', NULL, NULL, NULL, '2022-04-28', 0);
 
 -- --------------------------------------------------------
@@ -284,7 +284,7 @@ INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TR
 ('TRANS_0000052', '04/04/2022/R/UBS/009', '2022-04-28', 'SYSTEM ADMIN', 'perubahan', 'perubahan data rumah dinas 009', NULL, NULL, NULL, NULL, NULL),
 ('TRANS_0000053', '19/03/2022/R/UBS/006', '2022-04-28', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000053.pdf', NULL, '2022-04-07', '2022-04-28'),
 ('TRANS_0000054', '06/04/2022/G/UBS/003', '2022-04-28', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000054.pdf', NULL, '2022-04-06', '2022-04-28'),
-('TRANS_0000055', '01/03/2019/A/UBS/001/1/15', '2022-04-28', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000055.pdf', NULL, '2022-04-14', NULL),
+('TRANS_0000055', '01/03/2019/A/UBS/001/1/15', '2022-04-28', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000055.pdf', NULL, '2022-04-14', '2022-05-12'),
 ('TRANS_0000056', '01/03/2019/A/UBS/001/1/15', '2022-04-28', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000002', '000002', 'PINJAM_0000056.pdf', NULL, '2022-04-06', NULL),
 ('TRANS_0000057', '01/03/2019/A/UBS/001/1/15', '2022-04-28', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000003', '000003', 'PINJAM_0000057.pdf', NULL, '2022-03-31', '2022-04-28'),
 ('TRANS_0000058', '01/03/2019/A/UBS/001/1/15', '2022-04-28', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000004', '000004', 'PINJAM_0000058.pdf', NULL, '2022-04-02', NULL),
@@ -304,7 +304,9 @@ INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TR
 ('TRANS_0000072', '28/04/2022/G/UBS/004', '2022-04-28', 'Surya Bumantara2', 'pengadaan', 'pengadaan gedung 004', NULL, NULL, NULL, NULL, NULL),
 ('TRANS_0000073', '28/04/2022/G/UBS/004', '2022-04-28', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 004', NULL, NULL, NULL, NULL, NULL),
 ('TRANS_0000074', '28/04/2022/K/UBS/004', '2022-04-28', 'Surya Bumantara2', 'pengadaan', 'pengadaan kendaraan 004', NULL, NULL, NULL, NULL, NULL),
-('TRANS_0000075', '28/04/2022/K/UBS/004', '2022-04-28', 'Surya Bumantara2', 'perubahan', 'perubahan data kendaraan 004', NULL, NULL, NULL, NULL, NULL);
+('TRANS_0000075', '28/04/2022/K/UBS/004', '2022-04-28', 'Surya Bumantara2', 'perubahan', 'perubahan data kendaraan 004', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000076', '28/04/2022/K/UBS/004', '2022-05-12', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000076.pdf', NULL, '2022-05-05', NULL),
+('TRANS_0000077', '03/04/2022/A/UBS/001/1/2', '2022-05-12', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000077.pdf', NULL, '2022-05-11', NULL);
 
 -- --------------------------------------------------------
 
@@ -334,7 +336,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`NIK`, `PASSWORD`, `FK_ASSET`, `NAMA`, `DEPARTEMEN`, `AKSES_RUMAH`, `AKSES_GEDUNG`, `AKSES_KENDARAAN`, `AKSES_ASRAMA`, `AKSES_FASILITAS`, `AKSES_USER`, `AKSES_LAPORAN`, `IS_DELETED`) VALUES
-('000001', 'suryasurya', '01/03/2019/A/UBS/001/1/15', 'Surya Bumantara2', 'FCK', 3, 3, 3, 3, 3, 1, 1, 0),
+('000001', 'suryasurya', '03/04/2022/A/UBS/001/1/2', 'Surya Bumantara2', 'FCK', 3, 3, 3, 3, 3, 1, 1, 0),
 ('000002', 'edseledsel', '01/03/2019/A/UBS/001/1/15', 'Edsel Hans Wijaya', 'Hollow', 3, 3, 0, 3, 0, 0, 0, 0),
 ('000003', 'budibudi', NULL, 'Budi', 'HRD', 0, 2, 0, 0, 0, 0, 0, 0),
 ('000004', 'antonanton', '01/03/2019/A/UBS/001/1/15', 'Anton', 'HRD', 1, 0, 3, 2, 1, 0, 1, 0),
