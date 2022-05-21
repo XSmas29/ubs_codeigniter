@@ -14,6 +14,18 @@
 		font-size: 21px;
 		transition: 0.2s;
 	}
+
+	.link-master{
+		font-weight: bold;
+		font-size: 20px;
+		transition: 0.2s;
+	}
+
+	.link-master-gedung{
+		font-weight: bold;
+		font-size: 16px;
+		transition: 0.2s;
+	}
 </style>
 <body>
 	<main class="main" id="top">
