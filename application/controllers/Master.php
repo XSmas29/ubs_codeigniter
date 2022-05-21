@@ -804,6 +804,7 @@ class Master extends CI_Controller
 		$data['peruntukkan'] = $this->input->post('peruntukkan');
 		$data['namafasilitas'] = explode(",",$this->input->post('namafasilitas'));
 		$data['jumlahfasilitas'] = explode(",",$this->input->post('jumlahfasilitas'));
+		$data['gambar'] = $this->input->post('gambar');
 
 		if ($this->form_validation->run() == FALSE)
 		{	
@@ -811,8 +812,10 @@ class Master extends CI_Controller
 			echo json_encode($json_response);
 		}
 		else
-		{
-			$response["message"] = $this->Asset->addGedung($data);
+		{	
+			$key = $data["kode"];
+			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),9,3);
+			$response["message"] = $this->Asset->addGedung($data, $ctr);
 			echo json_encode($response);
 		}
 	}
@@ -840,6 +843,7 @@ class Master extends CI_Controller
 		$data['peruntukkan'] = $this->input->post('peruntukkan');
 		$data['namafasilitas'] = explode(",",$this->input->post('namafasilitas'));
 		$data['jumlahfasilitas'] = explode(",",$this->input->post('jumlahfasilitas'));
+		$data['currentimage'] = $this->input->post('currentimage');
 
 		if ($this->form_validation->run() == FALSE)
 		{	
@@ -848,7 +852,9 @@ class Master extends CI_Controller
 		}
 		else
 		{
-			$response["message"] = $this->Asset->editGedung($data);
+			$key = $data["kode"];
+			$ctr = substr($this->Asset->getMaxImageIndexbyKey($key),13,3);
+			$response["message"] = $this->Asset->editGedung($data, $ctr);
 			echo json_encode($response);
 		}
 	}

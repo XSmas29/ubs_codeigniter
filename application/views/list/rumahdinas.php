@@ -13,6 +13,11 @@
 		font-weight: 1000;
 		transition: 0.2s;
 	}
+
+	.carousel-control-next-icon, .carousel-control-prev-icon {
+  		background-color: gray;
+		border-radius: 50%;
+	}
 </style>
 <body>
 	<main class="main" id="top">
@@ -123,7 +128,7 @@
 							<!-- carousel start -->
 							<div class="card border" style="border-radius: 20px">
 								<div class="card-body">
-									<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+									<div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
 										<div class="carousel-indicators" id="indicator">
 											<!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
 											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>

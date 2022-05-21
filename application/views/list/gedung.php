@@ -13,6 +13,11 @@
 		font-weight: 1000;
 		transition: 0.2s;
 	}
+
+	.carousel-control-next-icon, .carousel-control-prev-icon {
+  		background-color: gray;
+		border-radius: 50%;
+	}
 </style>
 <body>
 	<main class="main" id="top">
@@ -43,7 +48,7 @@
 									<th>Lokasi</th>
 									<th>Tanggal Pengadaan</th>
 									<th>Status</th>
-									<th>History</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -72,7 +77,7 @@
 													}
 													?>
 												</td>
-												<td><a class="btn btn-primary btn-sm btn-history" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listgedung[$i]->KODE_ASSET?>'>View</a></td>
+												<td><a class="btn btn-primary btn-sm btn-action" data-bs-toggle="modal" href="#exampleModalToggle" role="button" value='<?= $listgedung[$i]->KODE_ASSET?>'>View</a></td>
 											</tr>
 									<?php
 										}
@@ -108,7 +113,41 @@
 				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
 				
 					<div class="row">
-						<div class="col-3">
+						<div class="col-6">
+							<!-- carousel start -->
+							<div class="card border" style="border-radius: 20px">
+								<div class="card-body">
+									<div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
+										<div class="carousel-indicators" id="indicator">
+											<!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
+										</div>
+										
+										<div class="carousel-inner" id="listgambar">
+											<!-- <div class="carousel-item active">
+												<img src="assets/img/gallery/hero.png" class="d-block w-100" alt="...">
+											</div>
+											<div class="carousel-item">
+												<img src="assets/img/gallery/hero.png" class="d-block w-100" alt="...">
+											</div>
+											<div class="carousel-item">
+												<img src="assets/img/gallery/hero.png" class="d-block w-100" alt="...">
+											</div> -->
+										</div>
+										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Previous</span>
+										</button>
+										<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+											<span class="carousel-control-next-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Next</span>
+										</button>
+									</div>
+								</div>
+							</div>
+							
+							<!-- carousel end -->
 						</div>
 						<div class="col-6">
 							<div class="card border" style="border-radius: 20px">
@@ -156,8 +195,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-3">
 						</div>
 					</div>
 				</div>
@@ -242,7 +279,7 @@
 		);
 	} );
 
-	$('.btn-history').click(function(){
+	$('.btn-action').click(function(){
 			
 		let kode = $(this).attr('value');
 		$.ajax({
@@ -300,6 +337,34 @@
 					ctr += 1;
 				});
 
+				$("#listgambar").html("");
+				$("#indicator").html("");
+				if (data["gambar"].length > 0){
+					let i = 0;
+
+					data["gambar"].forEach(function(item){
+						$("#listgambar").append(
+							'<div class="carousel-item">' +
+								'<img src="<?php echo base_url(); ?>assets/img/asset/' + item.KODE_GAMBAR + '" class="d-block w-100" alt="...">' +
+							'</div>'
+						);
+						$("#indicator").append(
+							'<button type="button" class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" aria-current="true" aria-label="Slide ' + i + '"></button>'
+						);
+
+						i += 1;
+					});
+					$('#listgambar div:first-child').addClass('active');
+					$('#indicator button:first-child').addClass('active');
+				}
+				else{
+					$("#listgambar").append(
+						'<div class="carousel-item active">' +
+							'<img src="<?php echo base_url(); ?>assets/img/placeholder.jpg" class="d-block w-100" alt="...">' +
+						'</div>'
+					);
+				}
+				
 				$('#tabelhistory').DataTable( 
 					{
 						responsive: false

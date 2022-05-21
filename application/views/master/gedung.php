@@ -113,7 +113,7 @@
 	</main>
 
 	<div class="modal fade" id="modaladdgedung" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<div class="modal-content">
 				<div class="modal-header">
 				<h4 class="modal-title" id="modaltitle"></h4>
@@ -121,7 +121,7 @@
 				</div>
 				<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
 					<div class="row text-center">
-						<div class="col-6">
+						<div class="col-4">
 							<div class="form__group field mb-5">
 								<input type="text" class="form__field" name="gedung" id="gedung" placeholder="Gedung"/>
 								<label class="form__label">Gedung<small class="form-error" id="error-gedung"></small></label>
@@ -151,7 +151,7 @@
 								<label class="form__label">Jenis Aset<small class="form-error" id="error-jenis"></small></label>
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-4">
 							<div class="form__group field mb-5">
 								<input type="text" class="form__field" name="lokasi" id="lokasi" placeholder="Lokasi"/>
 								<label class="form__label">Lokasi<small class="form-error" id="error-lokasi"></small></label>
@@ -174,6 +174,17 @@
 											<input type="number" class="form__field form__field2" name="jumlahfas[]" id="fasilitas" placeholder="Jumlah"/>
 											<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>
 										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-4">
+							<h3 class="my-4">Upload Foto</h3>
+							<div class="d-flex flex-wrap justify-content-center" id="image-upload-wrapper">
+								<div class="image-upload-wrap mx-1">
+									<input class="file-upload-input" type='file' id='imagefasilitas[]' onchange="readURL(this);" accept="image/*" />
+									<div class="drag-text">
+										<h3>Drag and drop or select an Image</h3>
 									</div>
 								</div>
 							</div>
@@ -296,6 +307,8 @@
 	var day = ("0" + now.getDate()).slice(-2);
 	var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
+	var listcurrentimage = [];
+
 	$(document).ready( function () 
 	{
 		$('#myTable').DataTable( 
@@ -336,7 +349,10 @@
 
 	function addData(){
 		let form_data = new FormData();
-
+		for (let x = 0; x < $(".file-upload-input").length - 1; x++) {
+            form_data.append("files[]", $('.file-upload-input').eq(x).prop('files')[0]);
+        }
+		
 		let listnama = [];
 		$('input[name="namafas[]"]').each( function() {
 			listnama.push(this.value);
@@ -384,6 +400,9 @@
 
 	$(".btn-edit").click(function(){
 		resetInput();
+
+		listcurrentimage = [];
+
 		let kode = $(this).attr('value');
 		$('#btnsave').attr('onClick', 'editData()');
 		$('#btnsave').html('Save Changes');
@@ -408,6 +427,19 @@
 				$("#peruntukkan").val(data["asset"][0].INFO_3);
 				//
 
+				//mengambil data gambar dari asset tsb
+				data["gambar"].forEach(function(item){
+					$("#image-upload-wrapper").append(
+						"<div class='file-upload-wrapper mx-1 mb-1 d-flex align-items-center' onclick='removeImage(this)'>" + 
+							"<img class='file-upload-image current' src='<?php echo base_url() ?>assets/img/asset/" + item.KODE_GAMBAR + "'>" +
+							'<div class="file-upload-remove cursor-pointer d-flex align-items-center justify-content-center">' +
+								"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
+							'</div>' + 
+						"</div>"
+					);
+				});
+				//
+
 				//mengambil data fasilitas dari asset tsb
 				for (let i = 0; i < data["fasilitas"].length; i++) {
 					addFasilitas();
@@ -416,6 +448,10 @@
 				}
 				//
 
+				$("#image-upload-wrapper").find(".file-upload-wrapper").find(".file-upload-image").each( function() {
+					let filename = $(this).attr('src').substr($(this).attr('src').lastIndexOf("/")+1);
+					listcurrentimage.push(filename);
+				});
 			}, error: function(){
 				alert("Error when loading asset!")
 			}
@@ -424,6 +460,11 @@
 
 	function editData(){
 		let form_data = new FormData();
+
+		for (let x = 0; x < $(".file-upload-input").length - 1; x++) {
+			//console.log($('.file-upload-input').eq(x).prop('files')[0]);
+            form_data.append("files[]", $('.file-upload-input').eq(x).prop('files')[0]);
+        }
 
 		let listnama = [];
 		$('input[name="namafas[]"]').each( function() {
@@ -445,6 +486,7 @@
 		form_data.append("peruntukkan", $("#peruntukkan").val());
 		form_data.append("namafasilitas", listnama);
 		form_data.append("jumlahfasilitas", listjumlah);
+		form_data.append("currentimage", listcurrentimage);
 
 		$.ajax({
 			type: "POST",
@@ -552,6 +594,61 @@
 		});
 	});
 
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var fileExtension = ['jpeg', 'jpg', 'png'];
+			if ($.inArray($(input).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+				alert("Only formats are allowed : "+fileExtension.join(', '));
+			}
+			else{
+				$(".file-upload-input").hide();
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$("#image-upload-wrapper").append(
+						"<div class='file-upload-wrapper mx-1 mb-1 d-flex align-items-center' onclick='removeImage(this)'>" + 
+							"<img class='file-upload-image' src='" + e.target.result + "'>" +
+							'<div class="file-upload-remove cursor-pointer d-flex align-items-center justify-content-center">' +
+								"<img src='<?php echo base_url(); ?>assets/img/icons/remove.png'" + "' width=24px>" +
+							'</div>' + 
+						"</div>"
+					);
+
+					$('.image-title').html(input.files[0].name);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+				$(".image-upload-wrap").append(
+					'<input class="file-upload-input" type="file" id="imagefasilitas[]" onchange="readURL(this);" accept="image/*" />'
+				);
+			}
+		}
+		//console.log($('.file-upload-input').eq(0).prop('files')[0]);
+	};
+
+	function removeImage(image){
+		//menghapus element image
+		let index = $(image).index() - listcurrentimage.length;
+		$(image).remove();
+		//
+		//menghapus element input file nya
+		//console.log($(".image-upload-wrap").find(".file-upload-input").eq(index - 1).prop('files')[0]);
+		let children = $(image).find(".file-upload-image")[0];
+		if (!$(children).hasClass("current")) {
+			$(".image-upload-wrap").find(".file-upload-input").get(index - 1).remove();
+		}
+
+		//menghapus list current image
+		let imgsrc = $($(image).find(".file-upload-image")[0]).attr("src");
+		let imgname = imgsrc.substr(imgsrc.lastIndexOf("/")+1);
+
+		for (var i = 0; i < listcurrentimage.length; i++) {
+			if (listcurrentimage[i] == imgname) {
+				listcurrentimage.splice(i, 1);
+			}
+		}
+	}
+
 	function resetInput(){
 		//bagian add & edit
 		$(".form-error").text('');
@@ -578,6 +675,15 @@
 							'<button type="button" class="btn btn-dark ms-3" onclick="addFasilitas()"><strong>+</strong></button>' + 
 						'</div>' + 
 					'</div>' + 
+				'</div>' + 
+			'</div>'
+		);
+
+		$("#image-upload-wrapper").html(
+			'<div class="image-upload-wrap mx-1">' + 
+				'<input class="file-upload-input" type="file" id="imagefasilitas[]" onchange="readURL(this);" accept="image/*" />' + 
+				'<div class="drag-text">' + 
+					'<h3>Drag and drop or select an Image</h3>' + 
 				'</div>' + 
 			'</div>'
 		);

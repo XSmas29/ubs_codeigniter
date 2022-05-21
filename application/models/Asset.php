@@ -787,7 +787,7 @@ class Asset extends CI_Model
 		}
 	}
 
-	public function addGedung($data){
+	public function addGedung($data, $key){
 		$this->db->trans_begin();
 			//insert data ke tabel asset
 			$values = array(
@@ -803,6 +803,55 @@ class Asset extends CI_Model
 			);
 			$this->db->insert('asset', $values);
 			//
+
+			// urusan gambar
+			//print_r($_FILES["files"]);
+			if (isset($_FILES["files"])){
+				
+				$ctr = intval($key);
+				for ($i=0; $i < count($_FILES["files"]["name"]); $i++) { 
+					$ctr += 1;
+					// upload gambar ke dalam folder CI nya
+					$_FILES['file']['name']       = $_FILES['files']['name'][$i];
+					$_FILES['file']['type']       = $_FILES['files']['type'][$i];
+					$_FILES['file']['tmp_name']   = $_FILES['files']['tmp_name'][$i];
+					$_FILES['file']['error']      = $_FILES['files']['error'][$i];
+					$_FILES['file']['size']       = $_FILES['files']['size'][$i];
+
+					$config['upload_path'] = './assets/img/asset';
+					$config['allowed_types'] = '*';
+	
+					$path = $_FILES['file']['name'];
+					$ext = pathinfo($path, PATHINFO_EXTENSION);
+					
+					//var_dump(str_pad($ctr, 3, "0", STR_PAD_LEFT)." - ".$ctr);
+
+					$filename = 'GEDUNG'.substr($data['kode'], -3).'_'.str_pad($ctr, 3, "0", STR_PAD_LEFT).'.'.$ext;
+					$config['file_name'] = $filename;
+		
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+					
+					if(!$this->upload->do_upload('file'))
+					{  
+						echo $this->upload->display_errors();  
+					}  
+					else  
+					{  
+						$imgdata = $this->upload->data();
+					}
+					//
+					
+					//insert data gambar ke database
+					$values = array(
+						'KODE_GAMBAR' => $filename,
+						'FK_ASSET' => $data['kode'],
+					);
+
+					$this->db->insert('gambar', $values);
+				}
+			}
+			// 
 
 			//insert data ke tabel fasilitas
 			for ($i=0; $i < count($data["namafasilitas"]); $i++) { 
@@ -844,7 +893,7 @@ class Asset extends CI_Model
 		}
 	}
 
-	public function editGedung($data){
+	public function editGedung($data, $key){
 		$this->db->trans_begin();
 
 			//hapus data, lalu insert data ke tabel fasilitas
@@ -858,6 +907,60 @@ class Asset extends CI_Model
 						'JUMLAH' => $data["jumlahfasilitas"][$i],
 					);
 					$this->db->insert('fasilitas', $values);
+				}
+			}
+			//
+
+			//hapus data gambar based on img object lalu add img baru
+			$array = explode(',', $data["currentimage"]);
+			$this->db->where_not_in('KODE_GAMBAR', $array);
+			$this->db->where('FK_ASSET',  $data['kode']);
+			$this->db->delete('gambar');
+
+			if (isset($_FILES["files"])){
+				$ctr = intval($key);
+				for ($i=0; $i < count($_FILES["files"]["name"]); $i++) { 
+					$ctr += 1;
+					// upload gambar ke dalam folder CI nya
+					$_FILES['file']['name']       = $_FILES['files']['name'][$i];
+					$_FILES['file']['type']       = $_FILES['files']['type'][$i];
+					$_FILES['file']['tmp_name']   = $_FILES['files']['tmp_name'][$i];
+					$_FILES['file']['error']      = $_FILES['files']['error'][$i];
+					$_FILES['file']['size']       = $_FILES['files']['size'][$i];
+
+					$config['upload_path'] = './assets/img/asset';
+					$config['allowed_types'] = '*';
+	
+					$path = $_FILES['file']['name'];
+					$ext = pathinfo($path, PATHINFO_EXTENSION);
+					
+					//var_dump(str_pad($ctr, 3, "0", STR_PAD_LEFT)." - ".$ctr);
+
+					$filename = 'GEDUNG'.substr($data['kode'], -3).'_'.str_pad($ctr, 3, "0", STR_PAD_LEFT).'.'.$ext;
+					$config['file_name'] = $filename;
+
+					if(file_exists($config['upload_path']."/".$config['file_name'])) unlink($config['upload_path']."/".$config['file_name']);
+
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+					
+					if(!$this->upload->do_upload('file'))
+					{  
+						echo $this->upload->display_errors();
+					}  
+					else  
+					{  
+						$imgdata = $this->upload->data();
+					}
+					//
+					
+					//insert data gambar ke database
+					$values = array(
+						'KODE_GAMBAR' => $filename,
+						'FK_ASSET' => $data['kode'],
+					);
+
+					$this->db->insert('gambar', $values);
 				}
 			}
 			//

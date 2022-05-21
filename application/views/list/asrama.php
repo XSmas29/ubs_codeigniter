@@ -13,6 +13,11 @@
 		font-weight: 1000;
 		transition: 0.2s;
 	}
+
+	.carousel-control-next-icon, .carousel-control-prev-icon {
+  		background-color: gray;
+		border-radius: 50%;
+	}
 </style>
 <body>
 	<main class="main" id="top">
