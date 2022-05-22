@@ -279,6 +279,7 @@
 	});
 
 	function searchUser(){
+		$("#error-pengguna-nik").html("").css("opacity", 0);
 		let form_data = new FormData();
 		form_data.append("key", $("#penggunanik").val());
 
@@ -541,69 +542,74 @@
 	});
 
 	function searchPenggunaAset(){
-		$("#tabelpeminjaman").removeAttr('hidden');
-		$('#tabelpeminjaman').DataTable().clear().destroy();
-		let form_data = new FormData();
-		form_data.append("nik", $("#penggunanik").val());
-		form_data.append("kategori", $("#penggunakategori").val());
-		form_data.append("aset", $("#penggunaaset").val());
+		if ($("#penggunanik").val() == ""){
+			$("#error-pengguna-nik").html("&nbspUser harus diisi!&nbsp").css("opacity", 1);
+		}
+		else{
+			$("#tabelpeminjaman").removeAttr('hidden');
+			$('#tabelpeminjaman').DataTable().clear().destroy();
+			let form_data = new FormData();
+			form_data.append("nik", $("#penggunanik").val());
+			form_data.append("kategori", $("#penggunakategori").val());
+			form_data.append("aset", $("#penggunaaset").val());
 
-		$.ajax({
-			type: "POST",
-			url: "<?php echo site_url(); ?>"+"/Master/searchPenggunaAset",
-			data: form_data,
-			cache: false,
-			processData: false,
-			contentType: false,
-			dataType: 'json',
-			success: function(response){
-				let message = response;
-				console.log(message);
-				datapeminjaman = [];
-				$("#bodypeminjaman").html("");
-				response.peminjaman.forEach(element => {
-					kategori = "";
-					if (element['FK_KATEGORI'] == 1){
-						kategori = "Rumah Dinas";
-					}
-					else if (element['FK_KATEGORI'] == 2){
-						kategori = "Gedung";
-					}
-					else if (element['FK_KATEGORI'] == 3){
-						kategori = "Kendaraan";
-					}
-					else if (element['FK_KATEGORI'] == 4){
-						kategori = "Asrama";
-					}
-					else if (element['FK_KATEGORI'] == 5){
-						kategori = "Fasilitas";
-					}
-                    let tr = `<tr>
-                        <td> ${element['NIK']} </td>
-                        <td> ${element['NAMA']} </td>
-                        <td> ${element['DEPARTEMEN']} </td>
-                        <td> ${kategori} </td>
-                        <td> ${element['NAMA_ASSET']} </td>
-                        <td> ${element['KODE_ASSET']} </td>
-                        <td> ${element['INFO_1']} </td>
-                        <td><a href='<?php echo base_url(); ?>assets/files/peminjaman/${element['KETERANGAN_3']}'><img src='<?php echo base_url(); ?>assets/img/icons/document.png' width=50></a></td>
-                        <td><button data-bs-toggle="modal" href="#modalconfirm" class="btn btn-outline-dark" onclick="setKodePengembalian(this)" value="${element['KODE_TRANSAKSI']}">Kembalikan</button></td>
-                    </tr>`;
-                    $("#bodypeminjaman").append(tr);
-					let row = [element['NIK'], element['NAMA'], element['DEPARTEMEN'], kategori, element['NAMA_ASSET'], element['KODE_ASSET'], element['INFO_1'], element['KETERANGAN_3']];
-					datapeminjaman.push(row);
-                });
-				
-				$('#tabelpeminjaman').DataTable( 
-					{
-						responsive: false
-					} 
-				);
-				raiseErrors(message);
-			}, error: function(xhr, status, error) {
-				console.log(xhr.responseText);
-			},
-		});
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url(); ?>"+"/Master/searchPenggunaAset",
+				data: form_data,
+				cache: false,
+				processData: false,
+				contentType: false,
+				dataType: 'json',
+				success: function(response){
+					let message = response;
+					console.log(message);
+					datapeminjaman = [];
+					$("#bodypeminjaman").html("");
+					response.peminjaman.forEach(element => {
+						kategori = "";
+						if (element['FK_KATEGORI'] == 1){
+							kategori = "Rumah Dinas";
+						}
+						else if (element['FK_KATEGORI'] == 2){
+							kategori = "Gedung";
+						}
+						else if (element['FK_KATEGORI'] == 3){
+							kategori = "Kendaraan";
+						}
+						else if (element['FK_KATEGORI'] == 4){
+							kategori = "Asrama";
+						}
+						else if (element['FK_KATEGORI'] == 5){
+							kategori = "Fasilitas";
+						}
+						let tr = `<tr>
+							<td> ${element['NIK']} </td>
+							<td> ${element['NAMA']} </td>
+							<td> ${element['DEPARTEMEN']} </td>
+							<td> ${kategori} </td>
+							<td> ${element['NAMA_ASSET']} </td>
+							<td> ${element['KODE_ASSET']} </td>
+							<td> ${element['INFO_1']} </td>
+							<td><a href='<?php echo base_url(); ?>assets/files/peminjaman/${element['KETERANGAN_3']}'><img src='<?php echo base_url(); ?>assets/img/icons/document.png' width=50></a></td>
+							<td><button data-bs-toggle="modal" href="#modalconfirm" class="btn btn-outline-dark" onclick="setKodePengembalian(this)" value="${element['KODE_TRANSAKSI']}">Kembalikan</button></td>
+						</tr>`;
+						$("#bodypeminjaman").append(tr);
+						let row = [element['NIK'], element['NAMA'], element['DEPARTEMEN'], kategori, element['NAMA_ASSET'], element['KODE_ASSET'], element['INFO_1'], element['KETERANGAN_3']];
+						datapeminjaman.push(row);
+					});
+					
+					$('#tabelpeminjaman').DataTable( 
+						{
+							responsive: false
+						} 
+					);
+					raiseErrors(message);
+				}, error: function(xhr, status, error) {
+					console.log(xhr.responseText);
+				},
+			});
+		}
 	}
 
 	function setKodePengembalian(btn){
