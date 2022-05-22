@@ -41,44 +41,68 @@
 						</div>
 						
 						<div class="modal-body pt-0 min-vh-25 min-vh-sm-50">
-							<div class="row text-center">
+							<div class="row text-center mt-4">
 								<div class="col-6">
-									<!-- <input type="text" name="koderepair" id="koderepair" hidden/> -->
-									<div class="form__group field mb-5">
-										<input type="date" class="form__field" name="dateFrom" id="dateFrom" placeholder="Date From"/>
-										<label class="form__label">Date From<small class="form-error" id="error-dateFrom"></small></label>
+									<div class="row">
+										<div class="col-2 d-flex align-items-center">
+											<label>Date From<small class="form-error" id="error-dateFrom"></small></label>
+										</div>
+										<div class="col-9">
+											<div class="form-group field mb-3">
+												<input type="date" class="form-control" name="dateFrom" id="dateFrom" placeholder="Date From"/>
+											</div>
+										</div>
 									</div>
-									<div class="form__group field mb-5">
-										<input type="date" class="form__field" name="dateTo" id="dateTo" placeholder="Date To"/>
-										<label class="form__label">Date To<small class="form-error" id="error-dateTo"></small></label>
+									<div class="row">
+										<div class="col-2 d-flex align-items-center">
+											<label>Date To<small class="form-error" id="error-dateTo"></small></label>
+										</div>
+										<div class="col-9">
+											<div class="form-group field mb-3">
+												<input type="date" class="form-control" name="dateTo" id="dateTo" placeholder="Date To"/>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="col-6">
-									<div class="form__group field mb-5">
-										<label class="form__label">Kategori<small class="form-error" id="error-kategori"></small></label>
-										<select class="form__field" name="kategori" id="kategori" placeholder="Kategori">
-											<option value="" selected>All</option>
-											<?php 
-												for ($i=0; $i < count($listDataKategori); $i++) {
-											?>
-												<option value='<?= $listDataKategori[$i]->KODE_KATEGORI ?>'> <?= $listDataKategori[$i]->NAMA_KATEGORI ?></option>
-											<?php
-												}
-											?>
-										</select>
+									<div class="row">
+										<div class="col-2 d-flex align-items-center">
+											<label>Kategori<small class="form-error" id="error-kategori"></small></label>
+										</div>
+										<div class="col-9">
+											<div class="form-group field mb-3">
+												<select class="form-control" name="kategori" id="kategori" placeholder="Kategori">
+													<option value="" selected>All</option>
+													<?php 
+														for ($i=0; $i < count($listDataKategori); $i++) {
+													?>
+														<option value='<?= $listDataKategori[$i]->KODE_KATEGORI ?>'> <?= $listDataKategori[$i]->NAMA_KATEGORI ?></option>
+													<?php
+														}
+													?>
+												</select>
+											</div>
+										</div>
 									</div>
-									<div class="form__group field mb-5">
-										<label class="form__label">Aktivitas<small class="form-error" id="error-aktivitas"></small></label>
-										<select class="form__field" name="aktivitas" id="aktivitas" placeholder="Aktivitas">
-											<option value="" selected>All</option>
-											<option value="Pengadaan">Pengadaan</option>
-											<option value="Perubahan">Perubahan</option>
-											<option value="Perbaikan">Perbaikan</option>
-											<option value="Peminjaman">Peminjaman</option>
-										</select>
+									<div class="row">
+										<div class="col-2 d-flex align-items-center">
+											<label>Aktivitas<small class="form-error" id="error-aktivitas"></small></label>
+										</div>
+										<div class="col-9">
+											<div class="form-group field mb-3">
+												<select class="form-control" name="aktivitas" id="aktivitas" placeholder="Aktivitas">
+													<option value="" selected>All</option>
+													<option value="Pengadaan">Pengadaan</option>
+													<option value="Perubahan">Perubahan</option>
+													<option value="Perbaikan">Perbaikan</option>
+													<option value="Peminjaman">Peminjaman</option>
+													<option value="Penghapusan">Penghapusan</option>
+												</select>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="d-flex justify-content mb-4">
+								<div class="d-flex justify-content my-4">
 									<button type="button" class="btn btn-primary px-5 btn-submit" id="btnsearch" onclick="searchData()">SEARCH</button>
 									<button type="button" class="btn btn-success mx-2 btn-submit" id="btndownload" onclick="generateLaporan()" hidden>Download Laporan</button>
 								</div>
