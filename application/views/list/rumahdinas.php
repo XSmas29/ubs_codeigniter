@@ -329,8 +329,7 @@
 					$("#bodyhistory").html("");
 					let ctr = 1;
 					data["transaksi"].forEach(function(item){
-						if (item.AKTIVITAS_TRANSAKSI.toLowerCase() == "perbaikan" || item.AKTIVITAS_TRANSAKSI.toLowerCase() == "penghapusan"){
-							$("#bodyhistory").append(
+						$("#bodyhistory").append(
 							"<tr>" +
 								"<td>" + ctr + "</td>" +
 								"<td>" + item.TGL_TRANSAKSI + "</td>" +
@@ -338,19 +337,7 @@
 								"<td>" + item.USER_TRANSAKSI + "</td>" +
 								"<td><button class='btn btn-sm btn-dark' data-bs-target='#exampleModalToggle3' data-bs-toggle='modal' data-bs-dismiss='modal' role='button' value='" + item.KODE_TRANSAKSI + "' onclick='getDetailHistory(this.value)'>Details</button></td>" +
 							"</tr>"
-							);
-						}
-						else{
-							$("#bodyhistory").append(
-							"<tr>" +
-								"<td>" + ctr + "</td>" +
-								"<td>" + item.TGL_TRANSAKSI + "</td>" +
-								"<td>" + item.AKTIVITAS_TRANSAKSI + "</td>" +
-								"<td>" + item.USER_TRANSAKSI + "</td>" +
-								"<td>" + item.KETERANGAN_1 + "</td>" +
-							"</tr>"
-							);
-						}
+						);
 						
 						ctr += 1;
 					});
@@ -511,7 +498,7 @@
 						);
 					}
 				}
-				else{
+				else if(data["transaksi"][0].AKTIVITAS_TRANSAKSI.toLowerCase() == "penghapusan"){
 					$("#detailtitle").html("Detail Penghapusan");
 					$("#bodymodaldetail").html(
 						"<div class='row my-2'>" +
@@ -521,6 +508,65 @@
 							"</div>" +
 							"<div class='col-7'>" +
 								"<div class='fs-5 mt-3'>" + data["transaksi"][0].TGL_TRANSAKSI + "</div>" +
+								"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_1 + "</div>" +
+							"</div>" +
+						"</div>"
+					);
+				}
+				else if(data["transaksi"][0].AKTIVITAS_TRANSAKSI.toLowerCase() == "pengadaan"){
+					$("#detailtitle").html("Detail Pengadaan");
+					$("#bodymodaldetail").html(
+						"<div class='row my-2'>" +
+							"<div class='col-5'>" +
+								"<div class='fw-bold fs-5 mt-3'>Tanggal Pengadaan</div>" +
+								"<div class='fw-bold fs-5 mt-3'>Keterangan</div>" +
+							"</div>" +
+							"<div class='col-7'>" +
+								"<div class='fs-5 mt-3'>" + data["transaksi"][0].TGL_TRANSAKSI + "</div>" +
+								"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_1 + "</div>" +
+							"</div>" +
+						"</div>"
+					);
+				}
+				else if(data["transaksi"][0].AKTIVITAS_TRANSAKSI.toLowerCase() == "perubahan"){
+					$("#detailtitle").html("Detail Perubahan");
+					$("#bodymodaldetail").html(
+						"<div class='row my-2'>" +
+							"<div class='col-5'>" +
+								"<div class='fw-bold fs-5 mt-3'>Tanggal Perubahan</div>" +
+								"<div class='fw-bold fs-5 mt-3'>Keterangan</div>" +
+							"</div>" +
+							"<div class='col-7'>" +
+								"<div class='fs-5 mt-3'>" + data["transaksi"][0].TGL_TRANSAKSI + "</div>" +
+								"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_1 + "</div>" +
+							"</div>" +
+						"</div>"
+					);
+				}
+				else if(data["transaksi"][0].AKTIVITAS_TRANSAKSI.toLowerCase() == "peminjaman"){
+					let status = "";
+					let tglkembali = "";
+					if (data["transaksi"][0].TGL_KEMBALI == null){
+						status = "Sedang dipinjam";
+						tglkembali = "-";
+					}
+					else{
+						status = "Sudah dikembalikan";
+						tglkembali = data["transaksi"][0].TGL_KEMBALI;
+					}
+					$("#detailtitle").html("Detail Peminjaman");
+					$("#bodymodaldetail").html(
+						"<div class='row my-2'>" +
+							"<div class='col-5'>" +
+								"<div class='fw-bold fs-5 mt-3'>Tanggal Peminjaman</div>" +
+								"<div class='fw-bold fs-5 mt-3'>Status Peminjaman</div>" +
+								"<div class='fw-bold fs-5 mt-3'>Tanggal Kembali</div>" +
+								"<div class='fw-bold fs-5 mt-3'>Keterangan</div>" +
+							"</div>" +
+							"<div class='col-7'>" +
+								"<div class='fs-5 mt-3'>" + data["transaksi"][0].TGL_TRANSAKSI + "</div>" +
+								"<div class='fs-5 mt-3'>" + status + "</div>" +
+								"<div class='fs-5 mt-3'>" + tglkembali + "</div>" +
 								"<div class='fs-5 mt-3'>" + data["transaksi"][0].KETERANGAN_1 + "</div>" +
 							"</div>" +
 						"</div>"
