@@ -174,7 +174,8 @@
 							</div>
 							
 							<div class="form__group field mb-5">
-								<input type="text" class="form__field" name="kodepeminjaman" id="kodepeminjaman" placeholder="Kode aset" disabled/>
+								<select class="form__field" name="kodepeminjaman" id="kodepeminjaman" placeholder="Kode aset" disabled>
+								</select>
 								<label class="form__label">Kode aset<small class="form-error" id="error-kode-peminjaman"></small></label>
 							</div>
 							<div class="form__group field mb-5">
@@ -342,9 +343,11 @@
 	}
 
 	function searchAsetPeminjaman(){
+		$('#kodepeminjaman').html('');
 		let form_data = new FormData();
 		form_data.append("kategori", $("#kategoripeminjaman").val());
-		form_data.append("kode", $("#kodepeminjaman").val());
+		form_data.append("nama", $("#asetpeminjaman").val());
+		form_data.append("lokasi", $("#lokasipeminjaman").val());
 		$.ajax({
 			type: "POST",
 			url: "<?php echo site_url(); ?>"+"/Master/searchAssetPeminjaman",
@@ -356,24 +359,10 @@
 			success: function(response){
 				let message = response;
 				$("#error-kode-peminjaman").html("");
-				if (message["aset"].length == 0){
-					$("#error-kode-peminjaman").html("&nbsp" + $("#kategoripeminjaman option:selected").text() + " tidak ditemukan!&nbsp").css("opacity", 1);
-					$("#kodepeminjaman").val("");
-					$("#asetpeminjaman").val("");
-					$("#lokasipeminjaman").val("");
-				}
-				else{
-					if (message["aset"][0].STATUS == 0){
-						$("#kodepeminjaman").val(message["aset"][0].KODE_ASSET);
-						$("#asetpeminjaman").val(message["aset"][0].NAMA_ASSET);
-						$("#lokasipeminjaman").val(message["aset"][0].INFO_1);
-					}
-					else{
-						$("#error-kode-peminjaman").html("&nbsp" + $("#kategoripeminjaman option:selected").text() + " sedang tidak tersedia!&nbsp").css("opacity", 1);
-						$("#kodepeminjaman").val("");
-						$("#asetpeminjaman").val("");
-						$("#lokasipeminjaman").val("");
-					}
+				$("#kodepeminjaman").append("<option value='' selected></option>");
+				
+				for (i = 0; i < message["aset"].length; i++){
+					$("#kodepeminjaman").append($("<option></option>").attr("value", message["aset"][i].KODE_ASSET).text(message["aset"][i].KODE_ASSET)); 
 				}
 			}, error: function(xhr, status, error) {
 				console.log(xhr.responseText);
@@ -419,18 +408,45 @@
 		searchUserPeminjaman();
 	});
 
-	$("#kodepeminjaman").focusout(function(){
-		searchAsetPeminjaman();
-	});
-
 	$('#kategoripeminjaman').on('change', function() {
+		$("#error-kategoripeminjaman").html("");
 		resetAset();
 		if ($('#kategoripeminjaman').val() != ""){
-			
 			$('#kodepeminjaman').prop('disabled', false);
+			$('#asetpeminjaman').prop('disabled', false);
+			$('#lokasipeminjaman').prop('disabled', false);
+			let form_data = new FormData();
+			form_data.append("kategori", this.value);
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url(); ?>"+"/Transaksi/CekHakAkses",
+				data: form_data,
+				cache: false,
+				processData: false,
+				contentType: false,
+				dataType: 'json',
+				success: function(response){
+					$('#kodepeminjaman').html('');
+					let message = response;
+					console.log(message);
+					if (message["message"] == -1){
+						$("#error-kategoripeminjaman").html("");
+						$("#error-kategoripeminjaman").html("&nbspAkses ditolak!&nbsp").css("opacity", 1);
+						$('#kategoripeminjaman').val("");
+					}
+					else{
+						searchAsetPeminjaman();
+					}
+				}, error: function(xhr, status, error) {
+					console.log(xhr.responseText);
+				},
+			});
 		}
 		else{
 			$('#kodepeminjaman').prop('disabled', true);
+			$('#kodepeminjaman').html('');
+			$('#asetpeminjaman').prop('disabled', true);
+			$('#lokasipeminjaman').prop('disabled', true);
 		}
 	});
 
@@ -496,7 +512,7 @@
 	}
 
 	function resetAset(){
-		$('#kodepeminjaman').val("");
+		$('#kodepeminjaman').html('');
 		$('#asetpeminjaman').val("");
 		$('#lokasipeminjaman').val("");
 		$("#error-kode-peminjaman").html("");
@@ -539,6 +555,10 @@
 
 	$("#btnadd").click(function(){
 		resetInput();
+		$('#kodepeminjaman').prop('disabled', true);
+		$('#kodepeminjaman').html('');
+		$('#asetpeminjaman').prop('disabled', true);
+		$('#lokasipeminjaman').prop('disabled', true);
 	});
 
 	function searchPenggunaAset(){
@@ -647,33 +667,45 @@
 		});
 	}
 
-	$('#kategoripeminjaman').on('change', function() {
-		$("#error-kategoripeminjaman").html("");
-		if (this.value != ""){
-			let form_data = new FormData();
-			form_data.append("kategori", this.value);
-			$.ajax({
-				type: "POST",
-				url: "<?php echo site_url(); ?>"+"/Transaksi/CekHakAkses",
-				data: form_data,
-				cache: false,
-				processData: false,
-				contentType: false,
-				dataType: 'json',
-				success: function(response){
-					let message = response;
-					console.log(message);
-					if (message["message"] == -1){
-						$("#error-kategoripeminjaman").html("");
-						$("#error-kategoripeminjaman").html("&nbspAkses ditolak!&nbsp").css("opacity", 1);
-						$('#kategoripeminjaman').val("");
-					}
-				}, error: function(xhr, status, error) {
-					console.log(xhr.responseText);
-				},
-			});
-		}
-		
+	$("#asetpeminjaman").focusout(function(){
+		searchAsetPeminjaman();
 	});
 
+	$("#lokasipeminjaman").focusout(function(){
+		searchAsetPeminjaman();
+	});
+
+	$("#kodepeminjaman").on("change", function(){
+		selectAsetPeminjaman();
+	})
+
+	function selectAsetPeminjaman(){
+		let form_data = new FormData();
+		form_data.append("kode", $("#kodepeminjaman").val());
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url(); ?>"+"/Master/selectAssetPeminjaman",
+			data: form_data,
+			cache: false,
+			processData: false,
+			contentType: false,
+			dataType: 'json',
+			success: function(response){
+				let message = response;
+				$("#error-kode-peminjaman").html("");
+				if (message["aset"][0].STATUS == 0){
+					$("#kodepeminjaman").val(message["aset"][0].KODE_ASSET);
+					$("#asetpeminjaman").val(message["aset"][0].NAMA_ASSET);
+					$("#lokasipeminjaman").val(message["aset"][0].INFO_1);
+				}
+				else{
+					$("#error-kode-peminjaman").html("&nbsp" + $("#kategoripeminjaman option:selected").text() + " sedang tidak tersedia!&nbsp").css("opacity", 1);
+					$("#kodepeminjaman").val("");
+				}
+			}, error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			},
+		});
+		
+	}
 </script>

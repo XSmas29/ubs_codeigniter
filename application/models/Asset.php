@@ -81,8 +81,8 @@ class Asset extends CI_Model
 		return $query->result();
 	}
 
-	public function getAssetbyKeyAndCategory($key, $kategori) {
-		$query = $this->db->query("select * from asset where kode_asset='$key' and fk_kategori='$kategori' and is_deleted=0"); 
+	public function getAssetbyFilterAndCategory($data) {
+		$query = $this->db->query("select * from asset where fk_kategori='".$data["kategori"]."' and nama_asset like '%".$data["nama"]."%' and info_1 like '%".$data["lokasi"]."%' and is_deleted=0"); 
 		return $query->result();
 	}
 

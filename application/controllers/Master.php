@@ -183,9 +183,10 @@ class Master extends CI_Controller
 	}
 
 	public function searchAssetPeminjaman(){
-		$key = $this->input->post('kode');
-		$kategori = $this->input->post('kategori');
-		$data["aset"] = $this->Asset->getAssetbyKeyAndCategory($key, $kategori);
+		$data["nama"] = $this->input->post('nama');
+		$data["lokasi"] = $this->input->post('lokasi');
+		$data["kategori"] = $this->input->post('kategori');
+		$data["aset"] = $this->Asset->getAssetbyFilterAndCategory($data);
 		echo json_encode($data);
 	}
 
@@ -991,5 +992,11 @@ class Master extends CI_Controller
 		// 	var_dump("LALALA");
 		// 	$response["message"] = $this->Asset->searchDataAsset($data);
 		// }
+	}
+
+	public function selectAssetPeminjaman(){
+		$key = $this->input->post('kode');
+		$response["aset"] = $this->Asset->getAssetbyKey($key);
+		echo json_encode($response);
 	}
 }

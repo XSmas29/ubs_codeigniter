@@ -67,7 +67,7 @@
 					<?php if ($login->AKSES_RUMAH >= 2 || $login->AKSES_GEDUNG >= 2 || $login->AKSES_KENDARAAN >= 2 || $login->AKSES_ASRAMA >= 2 || $login->AKSES_FASILITAS >= 2) {?>
 						<li class="nav-item pb-4">
 							<a href="<?php echo site_url("transaksi"); ?>" class="nav-link align-middle p-0 link-light">
-								<i class="fa-solid fa-business-time"></i> <span class="ms-1 d-none d-sm-inline link-master-transaksi">Transaksi</span>
+								<i class="fa-solid fa-business-time"></i> <span class="ms-1 d-none d-sm-inline link-master-transaksi">Peminjaman</span>
 							</a>
 						</li>
 					<?php } ?>
