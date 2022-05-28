@@ -42,8 +42,8 @@
 							<thead>
 								<tr>
 									<th>Asrama</th>
-									<th>Lantai</th>
-									<th>No Kamar</th>
+									<th>Kode aset</th>
+									<th>Lokasi</th>
 									<th>Kapasitas</th>
 									<th>Penghuni</th>
 									<th>Status</th>
@@ -56,8 +56,8 @@
 									?>
 										<tr>
 										<td><?= $listAsrama[$i]->NAMA_ASSET?></td>
+										<td><?= $listAsrama[$i]->KODE_ASSET?></td>
 										<td><?= $listAsrama[$i]->INFO_1?></td>
-										<td><?= $listAsrama[$i]->INFO_2?></td>
 										<td><?= $listAsrama[$i]->INFO_3?></td>
 										<td><?= $listJumlahPenghuni[$i]?></td>
 										<td>
