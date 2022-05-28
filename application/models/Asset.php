@@ -481,7 +481,7 @@ class Asset extends CI_Model
 				'KODE_ASSET' => $data['kode'],
 				'FK_KATEGORI' => 4,
 				'NAMA_ASSET' => ucwords(strtolower($data['asrama'])),
-				'INFO_1' => $data['lantai'],
+				'INFO_1' => "Lt. ".$data['lantai']." No. ".$data['kamar'],
 				'INFO_2' => $data['kamar'],
 				'INFO_3' => $data['kapasitas'],
 				'TGL_PENGADAAN' => $data['tanggal'],
