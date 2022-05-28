@@ -43,7 +43,7 @@
 								<tr>
 									<th>Asrama</th>
 									<th>Lantai</th>
-									<th>Kamar</th>
+									<th>No Kamar</th>
 									<th>Kapasitas</th>
 									<th>Penghuni</th>
 									<th>Status</th>
