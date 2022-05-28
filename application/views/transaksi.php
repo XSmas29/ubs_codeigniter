@@ -118,7 +118,7 @@
 								</div>
 								<div class="d-flex justify-content mb-4">
 									<button type="button" class="btn btn-primary mt-4 px-5 btn-submit" id="btnsearch" onclick="searchPenggunaAset()">SEARCH</button>
-									<button type="button" class="btn btn-success mx-2 btn-submit" id="btndownload" onclick="generateLaporan()" hidden>Download Laporan</button>
+									<button type="button" class="btn btn-success mt-4 mx-2 btn-submit" id="btndownload" onclick="generateLaporan()" hidden>Download Laporan</button>
 								</div>
 								<hr>
 								<div>
@@ -267,13 +267,85 @@
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
 	var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	var today;
+	var datalaporan = [];
+	var headerlaporan = ['No', 'Tanggal Pinjam', 'Kategori', 'Nama Aset', 'Kode Aset', 'Lokasi'];
+
+	function format_date(date){
+		let dateval = new Date(date);
+		let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dateval);
+		let month = new Intl.DateTimeFormat('en', { month: 'short' }).format(dateval);
+		let day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(dateval);
+		let formatted_date = day + " " + month + " " + year;
+		return formatted_date;
+	}
+
+	const addFooters = laporan => {
+		let marginfooter = 3;
+		let footerline = laporan.internal.pageSize.getHeight() - 26;
+		const pageCount = laporan.internal.getNumberOfPages()
+		for (var i = 1; i <= pageCount; i++) {
+			laporan.setPage(i)
+			laporan.setFontSize(12);
+			laporan.line(marginfooter, footerline, laporan.internal.pageSize.getWidth() - marginfooter, footerline);
+			laporan.text('Page ' + String(i) + ' of ' + String(pageCount), laporan.internal.pageSize.width / 2, laporan.internal.pageSize.getHeight() - 12, {
+				align: 'center'
+			})
+		}
+	}
+
+	const addHeaders = laporan => {
+		let marginheader = 3;
+		let headerline = 26;
+		const pageCount = laporan.internal.getNumberOfPages()
+		for (var i = 1; i <= pageCount; i++) {
+			laporan.setPage(i)
+			laporan.addImage('<?php echo base_url(); ?>assets/img/ubs-2.png', 'png', marginheader, marginheader, 30, 20, 'logo', 'NONE', 0);
+			laporan.line(marginheader, headerline, laporan.internal.pageSize.getWidth() - marginheader, headerline);
+			laporan.setFontSize(22);
+			laporan.setFont('helvetica', 'none', '1000')
+			laporan.text('PT. Untung Bersama Sejahtera', laporan.internal.pageSize.getWidth() / 2, 10, { align: 'center'} );
+			laporan.setFontSize(11);
+			laporan.text('Alamat: Jl. Kenjeran No.395-399, Surabaya, Jawa Timur 60134', laporan.internal.pageSize.getWidth() / 2, 16, { align: 'center'} );
+			laporan.text('Telp: (031) 3818432', laporan.internal.pageSize.getWidth() / 2, 21, { align: 'center'} );
+		}
+	}
+
+	function generateLaporan(){
+		let laporan = new jsPDF();
+		let margincontent = 6;
+
+		laporan.setFontSize(14);
+		laporan.text('Laporan Penggunaan Aset PT. UBS', laporan.internal.pageSize.getWidth() / 2, 33, { align: 'center'} );
+		laporan.text("Per " + format_date(today), laporan.internal.pageSize.getWidth() / 2, 39, { align: 'center'});
+
+		laporan.setFontSize(11);
+		laporan.text('NIK User: ' + $("#penggunanik").val(), margincontent, 46);
+		laporan.text('Nama User: ' + $("#penggunanama").val(), margincontent, 51);
+
+		laporan.autoTable(headerlaporan, datalaporan, {
+			styles: { fontSize: 10 },
+			avoidPageSplit: true,
+			margin: { left: margincontent, right: margincontent, top: 55, bottom: 30},
+			didDrawPage: function (data)
+			{
+                data.settings.margin.top = 35;
+			}
+		});
+		addFooters(laporan);
+		addHeaders(laporan);
+
+		laporan.save("laporan_aset.pdf");
+	}
 
 	$(document).ready( function (){
+		window.jsPDF = window.jspdf.jsPDF;
 		$('#myTable').DataTable( 
 			{
 				responsive: true
 			} 
 		);
+		today = now.getFullYear()+"-"+(month)+"-"+(day);
 	});
 	$("#penggunanik").focusout(function(){
 		searchUser();
@@ -566,6 +638,7 @@
 			$("#error-pengguna-nik").html("&nbspUser harus diisi!&nbsp").css("opacity", 1);
 		}
 		else{
+			$("#btndownload").removeAttr('hidden');
 			$("#tabelpeminjaman").removeAttr('hidden');
 			$('#tabelpeminjaman').DataTable().clear().destroy();
 			let form_data = new FormData();
@@ -586,6 +659,7 @@
 					console.log(message);
 					datapeminjaman = [];
 					$("#bodypeminjaman").html("");
+					let idxlaporan = 1;
 					response.peminjaman.forEach(element => {
 						kategori = "";
 						if (element['FK_KATEGORI'] == 1){
@@ -603,6 +677,10 @@
 						else if (element['FK_KATEGORI'] == 5){
 							kategori = "Fasilitas";
 						}
+						const date = new Date(element['TGL_TRANSAKSI']);
+						const formattedDate = date.toLocaleDateString('en-GB', {
+						day: '2-digit', month: 'short', year: 'numeric'
+						}).replace(/ /g, ' ');
 						let tr = `<tr>
 							<td> ${element['NIK']} </td>
 							<td> ${element['NAMA']} </td>
@@ -617,6 +695,9 @@
 						$("#bodypeminjaman").append(tr);
 						let row = [element['NIK'], element['NAMA'], element['DEPARTEMEN'], kategori, element['NAMA_ASSET'], element['KODE_ASSET'], element['INFO_1'], element['KETERANGAN_3']];
 						datapeminjaman.push(row);
+						let rowlaporan = [idxlaporan, formattedDate, kategori, element['NAMA_ASSET'], element['KODE_ASSET'], element['INFO_1']];
+						datalaporan.push(rowlaporan);
+						idxlaporan++;
 					});
 					
 					$('#tabelpeminjaman').DataTable( 
