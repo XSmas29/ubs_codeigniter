@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2022 at 06:49 AM
+-- Generation Time: May 28, 2022 at 08:29 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -54,19 +54,19 @@ CREATE TABLE `asset` (
 --
 
 INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `FK_USER`, `INFO_1`, `INFO_2`, `INFO_3`, `INFO_4`, `INFO_5`, `INFO_6`, `INFO_7`, `INFO_8`, `INFO_9`, `TGL_PENGADAAN`, `IS_DELETED`) VALUES
-('01/03/2019/A/UBS/001/1/15', 4, 'Glory Lama', 0, NULL, '1', '15', '6', '4', NULL, NULL, NULL, NULL, NULL, '2019-03-01', 0),
+('01/03/2019/A/UBS/001/1/15', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 15', '15', '6', '5', NULL, NULL, NULL, NULL, NULL, '2019-03-01', 0),
 ('01/03/2022/K/UBS/002', 3, 'Honda Vario 125', 0, NULL, 'Material', 'bergerak', 'bekas', 'Motor', 'L 3845 GD', 'MH21896433', NULL, NULL, NULL, '2019-03-01', 0),
-('02/03/2022/A/UBS/001/1/16', 4, 'Glory Lama', 0, NULL, '1', '16', '5', '0', NULL, NULL, NULL, NULL, NULL, '2019-03-02', 0),
+('02/03/2022/A/UBS/001/1/16', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 16', '16', '5', '0', NULL, NULL, NULL, NULL, NULL, '2019-03-02', 0),
 ('02/04/2022/R/UBS/008', 1, 'rumah dinas 10 X 20', 0, NULL, 'jalan baru no 2', 'tetap', 'masih baru', '10', '20', 'ada', NULL, NULL, NULL, '2022-04-02', 0),
-('03/04/2022/A/UBS/001/1/12', 4, 'Glory Lama', 0, NULL, '1', '12', '2', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
-('03/04/2022/A/UBS/001/1/2', 4, 'Glory Lama', 0, NULL, '1', '2', '3', '1', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
-('03/04/2022/A/UBS/001/1/3', 4, 'Glory Lama', 0, NULL, '1', '3', '4', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
-('03/04/2022/A/UBS/001/1/4', 4, 'Glory Lama', 0, NULL, '1', '4', '4', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
-('03/04/2022/A/UBS/001/1/5', 4, 'Glory Lama', 0, NULL, '1', '5', '2', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
-('03/04/2022/A/UBS/001/1/6', 4, 'Glory Lama', 0, NULL, '1', '6', '1', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
-('03/04/2022/A/UBS/001/1/7', 4, 'Glory Lama', 0, NULL, '1', '7', '2', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
-('03/04/2022/A/UBS/001/1/8', 4, 'Glory Lama', 0, NULL, '1', '8', '7', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
-('03/04/2022/A/UBS/001/2/1', 4, 'Glory Lama', 0, NULL, '2', '1', '6', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/1/12', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 12', '12', '2', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/1/2', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 2', '2', '3', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/1/3', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 3', '3', '4', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/1/4', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 4', '4', '4', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/1/5', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 5', '5', '2', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/1/6', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 6', '6', '1', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/1/7', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 7', '7', '2', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/1/8', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 8', '8', '7', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
+('03/04/2022/A/UBS/001/2/1', 4, 'Glory Lama', 0, NULL, 'Lt. 2 No. 1', '1', '6', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-03', 0),
 ('04/04/2022/F/UBS/003', 5, 'Kipas Angin', 0, NULL, 'jalan coba update', 'bergerak', 'masih baru', 'sampai tahun 2035', NULL, NULL, NULL, NULL, NULL, '2022-04-04', 0),
 ('04/04/2022/R/UBS/009', 1, 'rumah baru', 0, NULL, 'jalan baru', 'tetap', 'masih baru', '3', '2', 'ada', NULL, NULL, NULL, '2022-04-04', 1),
 ('06/04/2022/G/UBS/003', 2, 'Gedung A Lt. 2', 0, NULL, 'Office', 'tetap', 'Marketing Lokal', 'Gedung A', '6640/IMB/E/2021', NULL, NULL, NULL, NULL, '2022-04-06', 0),
@@ -74,22 +74,26 @@ INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `FK_US
 ('08/09/2022/F/UBS/001', 5, 'LCD Proyektor LG', 1, '000002', 'R.Meeting Anggrek', 'tetap', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-08', 0),
 ('10/09/2022/F/UBS/002', 5, 'Epson Scanner', 0, NULL, 'Office HRD', 'tetap', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-10', 1),
 ('13/04/2022/R/UBS/010', 1, 'coba update', 0, NULL, 'jalan coba update', 'tetap', 'masih baru', '3', '3', 'ada', NULL, NULL, NULL, '2022-04-13', 1),
-('15/04/2022/A/UBS/002/1/1', 4, 'Glory Baru', 0, NULL, '1', '1', '3', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-15', 0),
+('15/04/2022/A/UBS/002/1/1', 4, 'Glory Baru', 0, NULL, 'Lt. 1 No. 4', '1', '3', '0', NULL, NULL, NULL, NULL, NULL, '2022-04-15', 0),
 ('19/03/2022/G/UBS/001', 2, 'Gedung C Lt. 1', 0, NULL, 'Material', 'tetap', 'Bahan', 'Gedung C', '5385/IMB/E/2019', NULL, NULL, NULL, NULL, '2020-04-09', 0),
-('19/03/2022/R/UBS/001', 1, 'Rumah Dinas 8 x 12', 0, NULL, 'Lebak Jaya 2 No 20', 'tetap', 'baik', '4', '2', 'ada', NULL, NULL, NULL, '2022-02-03', 0),
+('19/03/2022/R/UBS/001', 1, 'Rumah Dinas 8 x 12', 1, '000001', 'Lebak Jaya 2 No 20', 'tetap', 'baik', '4', '2', 'ada', NULL, NULL, NULL, '2022-02-03', 0),
 ('19/03/2022/R/UBS/002', 1, 'Rumah Dinas 8 x 15', 0, NULL, 'Lebak Timur No 20', 'tetap', 'baik', '5', '3', 'tidak ada', NULL, NULL, NULL, '2022-01-22', 0),
 ('19/03/2022/R/UBS/003', 1, 'Rumah Dinas 6 x 10', 0, NULL, 'Anggur no 1A', 'tetap', 'baik', '3', '2', 'ada', NULL, NULL, NULL, '2022-02-03', 0),
 ('19/03/2022/R/UBS/004', 1, 'Rumah Dinas 6 x 12', 0, NULL, 'Belimbing no 2B', 'tetap', 'baik', '2', '2', 'tidak ada', NULL, NULL, NULL, '2022-03-03', 0),
 ('19/03/2022/R/UBS/005', 1, 'Rumah Dinas 8 x 10', 0, NULL, 'Ceri no 3C', 'tetap', 'baik', '3', '2', 'ada', NULL, NULL, NULL, '2022-01-03', 0),
-('19/03/2022/R/UBS/006', 1, 'Rumah Dinas 12 x 10', 0, NULL, 'Delima no 4D', 'tetap', 'baik', '5', '4', 'ada', NULL, NULL, NULL, '2022-02-04', 0),
+('19/03/2022/R/UBS/006', 1, 'Rumah Dinas 12 x 10', 1, '000001', 'Delima no 4D', 'tetap', 'baik', '5', '4', 'ada', NULL, NULL, NULL, '2022-02-04', 0),
 ('19/03/2022/R/UBS/007', 1, 'Rumah Dinas 9 x 10 update', 0, NULL, 'Edamame no 5E update', 'tetap', 'baik update', '3 update', '2 update', 'tidak ada', NULL, NULL, NULL, '2022-02-03', 1),
+('20/05/2022/R/UBS/012', 1, 'rumah demo update', 0, NULL, 'jalan update', 'tetap', 'baru', '3', '3', 'ada', NULL, NULL, NULL, '2022-05-20', 1),
+('20/05/2022/R/UBS/013', 1, 'abc', 0, NULL, 'abc', 'tetap', 'masih baru', '1', '1', 'ada', NULL, NULL, NULL, '2022-05-20', 0),
 ('21/02/2022/K/UBS/001', 3, 'Toyota Alphard', 1, '000004', 'Office HRD', 'bergerak', 'baru', 'Mobil', 'L 1504 NC', 'MH12347813', NULL, NULL, NULL, '2022-02-21', 0),
+('21/05/2022/G/UBS/005', 2, 'a', 0, NULL, 'a', 'tetap', 'a', 'A', 'a', NULL, NULL, NULL, NULL, '2022-05-21', 0),
 ('22/01/2022/G/UBS/002', 2, 'Gedung A Lt. 1', 0, NULL, 'Office', 'tetap', 'Marketing Lokal', 'Gedung A', '6640/IMB/E/2021', NULL, NULL, NULL, NULL, '2021-08-17', 0),
-('28/04/2022/A/UBS/003/1/1', 4, 'A', 0, NULL, '1', '1', '6', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-28', 0),
+('28/04/2022/A/UBS/003/1/1', 4, 'A', 0, NULL, 'Lt. 1 No. 1', '1', '6', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-28', 0),
 ('28/04/2022/F/UBS/004', 5, 'Kamera Nikon', 0, NULL, 'Office', 'bergerak', 'bekas', 'sampai 2023', NULL, NULL, NULL, NULL, NULL, '2022-04-28', 0),
 ('28/04/2022/G/UBS/004', 2, 'Gedung A Lt. 3', 0, NULL, 'Office', 'tetap', 'Kantor', 'Gedung A', '9572/IMB/E/2017', NULL, NULL, NULL, NULL, '2022-04-28', 0),
 ('28/04/2022/K/UBS/004', 3, 'Yamaha Fazzio', 1, '000001', 'Office HRD', 'bergerak', 'Baru', 'Motor', 'L 2424 BD', '2HXK4USHF', '2023-06-28', '2024-06-08', '123123', '2022-04-28', 0),
-('28/04/2022/R/UBS/011', 1, 'Rumah Dinas 20 x 20', 0, NULL, 'jalan semangka no 20', 'tetap', 'baru', '5', '5', 'ada', NULL, NULL, NULL, '2022-04-28', 0);
+('28/04/2022/R/UBS/011', 1, 'Rumah Dinas 20 x 20', 0, NULL, 'jalan semangka no 20', 'tetap', 'baru', '5', '5', 'ada', NULL, NULL, NULL, '2022-04-28', 0),
+('28/05/2022/A/UBS/001/1/20', 4, 'Glory Lama', 0, NULL, 'Lt. 1 No. 20', '20', '10', NULL, NULL, NULL, NULL, NULL, NULL, '2022-05-28', 0);
 
 -- --------------------------------------------------------
 
@@ -132,7 +136,11 @@ INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
 (84, '28/04/2022/R/UBS/011', 'AC', 5),
 (85, '28/04/2022/R/UBS/011', 'Bath Tub', 5),
 (88, '28/04/2022/G/UBS/004', 'AC', 3),
-(89, '28/04/2022/G/UBS/004', 'Projector', 2);
+(89, '28/04/2022/G/UBS/004', 'Projector', 2),
+(92, '20/05/2022/R/UBS/012', 'demo 1', 1),
+(93, '20/05/2022/R/UBS/012', 'demo 2', 2),
+(95, '20/05/2022/R/UBS/013', 'a', 1),
+(106, '21/05/2022/G/UBS/005', 'a', 1);
 
 -- --------------------------------------------------------
 
@@ -168,6 +176,8 @@ INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
 ('RUMAH010_003.png', '13/04/2022/R/UBS/010'),
 ('RUMAH011_001.jpg', '28/04/2022/R/UBS/011'),
 ('RUMAH011_002.jpg', '28/04/2022/R/UBS/011'),
+('RUMAH012_001.jpg', '20/05/2022/R/UBS/012'),
+('RUMAH013_001.jpg', '20/05/2022/R/UBS/013'),
 ('TRANS_0000009.png', 'TRANS_0000009'),
 ('TRANS_0000023.PNG', 'TRANS_0000023'),
 ('TRANS_0000026.PNG', 'TRANS_0000026'),
@@ -179,7 +189,9 @@ INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
 ('TRANS_0000049.pdf', 'TRANS_0000049'),
 ('TRANS_0000050.jpg', 'TRANS_0000050'),
 ('TRANS_0000052.', 'TRANS_0000052'),
-('TRANS_0000066.pdf', 'TRANS_0000066');
+('TRANS_0000066.pdf', 'TRANS_0000066'),
+('TRANS_0000080.pdf', 'TRANS_0000080'),
+('TRANS_0000087.pdf', 'TRANS_0000087');
 
 -- --------------------------------------------------------
 
@@ -306,7 +318,30 @@ INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TR
 ('TRANS_0000074', '28/04/2022/K/UBS/004', '2022-04-28', 'Surya Bumantara2', 'pengadaan', 'pengadaan kendaraan 004', NULL, NULL, NULL, NULL, NULL),
 ('TRANS_0000075', '28/04/2022/K/UBS/004', '2022-04-28', 'Surya Bumantara2', 'perubahan', 'perubahan data kendaraan 004', NULL, NULL, NULL, NULL, NULL),
 ('TRANS_0000076', '28/04/2022/K/UBS/004', '2022-05-12', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000076.pdf', NULL, '2022-05-05', NULL),
-('TRANS_0000077', '03/04/2022/A/UBS/001/1/2', '2022-05-12', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000077.pdf', NULL, '2022-05-11', NULL);
+('TRANS_0000077', '03/04/2022/A/UBS/001/1/2', '2022-05-12', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000077.pdf', NULL, '2022-05-11', '2022-05-20'),
+('TRANS_0000078', '20/05/2022/R/UBS/012', '2022-05-20', 'Surya Bumantara2', 'pengadaan', 'pengadaan rumah dinas 012', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000079', '20/05/2022/R/UBS/012', '2022-05-20', 'Surya Bumantara2', 'perubahan', 'perubahan data rumah dinas 012', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000080', '20/05/2022/R/UBS/012', '2022-05-20', 'Surya Bumantara2', 'perbaikan', 'rumah nya terkena tornado', 'rusak total', 'pembangunan ulang', '0001', NULL, NULL),
+('TRANS_0000081', '20/05/2022/R/UBS/012', '2022-05-20', 'Surya Bumantara2', 'penghapusan', 'rumahnya dijual', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000082', '19/03/2022/R/UBS/006', '2022-05-20', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000082.pdf', NULL, '2022-05-12', NULL),
+('TRANS_0000083', '01/03/2019/A/UBS/001/1/15', '2022-05-20', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000083.pdf', NULL, '2022-05-06', NULL),
+('TRANS_0000084', '19/03/2022/R/UBS/001', '2022-05-20', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000084.pdf', NULL, '2022-05-11', '2022-05-20'),
+('TRANS_0000085', '20/05/2022/R/UBS/013', '2022-05-20', 'Surya Bumantara2', 'pengadaan', 'pengadaan rumah dinas 013', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000086', '20/05/2022/R/UBS/013', '2022-05-20', 'Surya Bumantara2', 'perubahan', 'perubahan data rumah dinas 013', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000087', '20/05/2022/R/UBS/013', '2022-05-20', 'Surya Bumantara2', 'perbaikan', 'rusak', 'rusak', 'memperbaiki kerusakan', '0001', NULL, NULL),
+('TRANS_0000088', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'pengadaan', 'pengadaan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000089', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000090', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000091', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000092', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000093', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000094', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000095', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000096', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000097', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000098', '21/05/2022/G/UBS/005', '2022-05-21', 'Surya Bumantara2', 'perubahan', 'perubahan gedung 005', NULL, NULL, NULL, NULL, NULL),
+('TRANS_0000099', '19/03/2022/R/UBS/001', '2022-05-23', 'Surya Bumantara2', 'peminjaman', 'serah terima aset ke user 000001', '000001', 'PINJAM_0000099.pdf', NULL, '2022-05-19', NULL),
+('TRANS_0000100', '28/05/2022/A/UBS/001/1/20', '2022-05-28', 'Surya Bumantara2', 'pengadaan', 'pengadaan asrama Glory Lama lantai 1 kamar no 20', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -336,13 +371,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`NIK`, `PASSWORD`, `FK_ASSET`, `NAMA`, `DEPARTEMEN`, `AKSES_RUMAH`, `AKSES_GEDUNG`, `AKSES_KENDARAAN`, `AKSES_ASRAMA`, `AKSES_FASILITAS`, `AKSES_USER`, `AKSES_LAPORAN`, `IS_DELETED`) VALUES
-('000001', 'suryasurya', '03/04/2022/A/UBS/001/1/2', 'Surya Bumantara2', 'FCK', 3, 3, 3, 3, 3, 1, 1, 0),
+('000001', 'suryasurya', '01/03/2019/A/UBS/001/1/15', 'Surya Bumantara2', 'FCK', 3, 3, 3, 3, 3, 1, 1, 0),
 ('000002', 'edseledsel', '01/03/2019/A/UBS/001/1/15', 'Edsel Hans Wijaya', 'Hollow', 3, 3, 0, 3, 0, 0, 0, 0),
 ('000003', 'budibudi', NULL, 'Budi', 'HRD', 0, 2, 0, 0, 0, 0, 0, 0),
 ('000004', 'antonanton', '01/03/2019/A/UBS/001/1/15', 'Anton', 'HRD', 1, 0, 3, 2, 1, 0, 1, 0),
 ('000005', 'michaelmichael', '01/03/2019/A/UBS/001/1/15', 'Michael', 'Media', 1, 1, 1, 1, 1, 1, 1, 0),
 ('000006', 'hanshans', '01/03/2019/A/UBS/001/1/15', 'Hans', 'Marketing', 3, 0, 3, 0, 3, 0, 0, 0),
-('000007', 'firmanfirman', NULL, 'Firman', 'Marketing', 0, 0, 0, 0, 0, 0, 0, 0);
+('000007', 'firmanfirman', NULL, 'Firman', 'Marketing', 0, 0, 0, 0, 0, 0, 0, 0),
+('000008', 'userbaru', NULL, 'userbaruupdate', 'BARU', 3, 3, 0, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -392,7 +428,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
-  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `kategori`
