@@ -335,7 +335,7 @@
 		addFooters(laporan);
 		addHeaders(laporan);
 
-		laporan.save("laporan_aset.pdf");
+		laporan.save("Laporan pengguna aset - " + $("#penggunanama").val() + ".pdf");
 	}
 
 	$(document).ready( function (){
