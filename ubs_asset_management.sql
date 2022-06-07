@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2022 at 08:29 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.2
+-- Waktu pembuatan: 07 Jun 2022 pada 15.59
+-- Versi server: 10.4.17-MariaDB
+-- Versi PHP: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `ubs_asset_management`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asset`
+-- Struktur dari tabel `asset`
 --
 
 DROP TABLE IF EXISTS `asset`;
@@ -50,7 +50,7 @@ CREATE TABLE `asset` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `asset`
+-- Dumping data untuk tabel `asset`
 --
 
 INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `FK_USER`, `INFO_1`, `INFO_2`, `INFO_3`, `INFO_4`, `INFO_5`, `INFO_6`, `INFO_7`, `INFO_8`, `INFO_9`, `TGL_PENGADAAN`, `IS_DELETED`) VALUES
@@ -98,7 +98,7 @@ INSERT INTO `asset` (`KODE_ASSET`, `FK_KATEGORI`, `NAMA_ASSET`, `STATUS`, `FK_US
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fasilitas`
+-- Struktur dari tabel `fasilitas`
 --
 
 DROP TABLE IF EXISTS `fasilitas`;
@@ -110,7 +110,7 @@ CREATE TABLE `fasilitas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `fasilitas`
+-- Dumping data untuk tabel `fasilitas`
 --
 
 INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
@@ -145,7 +145,7 @@ INSERT INTO `fasilitas` (`KODE_FASILITAS`, `FK_ASSET`, `NAMA`, `JUMLAH`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gambar`
+-- Struktur dari tabel `gambar`
 --
 
 DROP TABLE IF EXISTS `gambar`;
@@ -155,7 +155,7 @@ CREATE TABLE `gambar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `gambar`
+-- Dumping data untuk tabel `gambar`
 --
 
 INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
@@ -196,7 +196,7 @@ INSERT INTO `gambar` (`KODE_GAMBAR`, `FK_ASSET`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori`
+-- Struktur dari tabel `kategori`
 --
 
 DROP TABLE IF EXISTS `kategori`;
@@ -206,7 +206,7 @@ CREATE TABLE `kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `kategori`
+-- Dumping data untuk tabel `kategori`
 --
 
 INSERT INTO `kategori` (`KODE_KATEGORI`, `NAMA_KATEGORI`) VALUES
@@ -219,7 +219,7 @@ INSERT INTO `kategori` (`KODE_KATEGORI`, `NAMA_KATEGORI`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi`
+-- Struktur dari tabel `transaksi`
 --
 
 DROP TABLE IF EXISTS `transaksi`;
@@ -238,7 +238,7 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `transaksi`
+-- Dumping data untuk tabel `transaksi`
 --
 
 INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TRANSAKSI`, `AKTIVITAS_TRANSAKSI`, `KETERANGAN_1`, `KETERANGAN_2`, `KETERANGAN_3`, `KETERANGAN_4`, `TGL_PINJAM`, `TGL_KEMBALI`) VALUES
@@ -346,7 +346,7 @@ INSERT INTO `transaksi` (`KODE_TRANSAKSI`, `FK_ASSET`, `TGL_TRANSAKSI`, `USER_TR
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -367,7 +367,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`NIK`, `PASSWORD`, `FK_ASSET`, `NAMA`, `DEPARTEMEN`, `AKSES_RUMAH`, `AKSES_GEDUNG`, `AKSES_KENDARAAN`, `AKSES_ASRAMA`, `AKSES_FASILITAS`, `AKSES_USER`, `AKSES_LAPORAN`, `IS_DELETED`) VALUES
@@ -385,53 +385,53 @@ INSERT INTO `user` (`NIK`, `PASSWORD`, `FK_ASSET`, `NAMA`, `DEPARTEMEN`, `AKSES_
 --
 
 --
--- Indexes for table `asset`
+-- Indeks untuk tabel `asset`
 --
 ALTER TABLE `asset`
   ADD PRIMARY KEY (`KODE_ASSET`);
 
 --
--- Indexes for table `fasilitas`
+-- Indeks untuk tabel `fasilitas`
 --
 ALTER TABLE `fasilitas`
   ADD PRIMARY KEY (`KODE_FASILITAS`);
 
 --
--- Indexes for table `gambar`
+-- Indeks untuk tabel `gambar`
 --
 ALTER TABLE `gambar`
   ADD PRIMARY KEY (`KODE_GAMBAR`);
 
 --
--- Indexes for table `kategori`
+-- Indeks untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`KODE_KATEGORI`);
 
 --
--- Indexes for table `transaksi`
+-- Indeks untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`KODE_TRANSAKSI`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`NIK`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `fasilitas`
+-- AUTO_INCREMENT untuk tabel `fasilitas`
 --
 ALTER TABLE `fasilitas`
   MODIFY `KODE_FASILITAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
--- AUTO_INCREMENT for table `kategori`
+-- AUTO_INCREMENT untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `KODE_KATEGORI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
